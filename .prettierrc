@@ -2,5 +2,6 @@
     "singleQuote": true,
     "parser": "typescript",
     "semi": true,
-    "useTabs": true
+    "useTabs": true,
+    "trailingComma": "all"
 }

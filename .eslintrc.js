@@ -25,5 +25,22 @@ module.exports = {
 		],
 		'react/jsx-one-expression-per-line': 'off',
 		'react/react-in-jsx-scope': 'off',
+		'import/extensions': [
+			'error',
+			'ignorePackages',
+			{
+				js: 'never',
+				jsx: 'never',
+				ts: 'never',
+				tsx: 'never',
+			},
+		],
+	},
+	settings: {
+		'import/resolver': {
+			node: {
+				extensions: ['.js', '.jsx', '.ts', '.tsx'],
+			},
+		},
 	},
 };
