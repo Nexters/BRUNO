@@ -7,6 +7,14 @@ const GlobalStyle = createGlobalStyle`
   html,
   body {
     overflow: hidden;
+    background-color: #EBEBEB;
+  }
+  #root {
+    display: flex;
+    max-width: 700px;
+    min-height: 100vh;
+    margin: 0 auto;
+    background-color: white;
   }
 
   * {
