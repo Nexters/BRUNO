@@ -3,7 +3,7 @@ import normalize from 'styled-normalize';
 
 import { MEDIA_QUERY } from './mixin';
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
   ${normalize}
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
 
@@ -36,5 +36,3 @@ const GlobalStyle = createGlobalStyle`
     /* width < 360px */
   }
 `;
-
-export default GlobalStyle;
