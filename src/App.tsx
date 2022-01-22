@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Button = styled.button`
-  background: ${(props) => props.theme.colors.main};
+  background: ${(props) => props.theme.colors.gray70};
   border-radius: 3px;
   border: 2px solid palevioletred;
   color: palevioletred;
