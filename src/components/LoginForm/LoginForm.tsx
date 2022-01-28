@@ -1,6 +1,5 @@
 import { ChangeEvent, useCallback, useState } from 'react';
 
-import { isValidPrivateKey } from '@src/utils/crypto';
 import caver from '@src/klaytn/caver';
 
 function LoginForm() {
@@ -10,10 +9,9 @@ function LoginForm() {
     setPrivateKey(e.target.value);
   }, []);
 
-  const handleClickLogin = useCallback(() => {
-    if (!isValidPrivateKey(privateKey)) return null;
-    const walletInstance = caver.klay.accounts.privateKeyToAccount(privateKey);
-    console.log(walletInstance);
+  const handleClickLogin = useCallback(async () => {
+    if (!privateKey) return null;
+    await caver.kas.wallet.getAccount(privateKey);
   }, []);
 
   return (
