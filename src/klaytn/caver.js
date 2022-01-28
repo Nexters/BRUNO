@@ -8,4 +8,6 @@ const caver = new CaverExtKAS(
   config.secretAccessKey,
 );
 
+caver.initWalletAPI(config.chainId, config.accessKeyId, config.secretAccessKey);
+
 export default caver;
