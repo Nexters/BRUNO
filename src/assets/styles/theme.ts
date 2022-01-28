@@ -1,6 +1,4 @@
-import { DefaultTheme } from 'styled-components';
-
-export const theme: DefaultTheme = {
+export const theme = {
   colors: {
     gray00: '#000000',
     gray10: '#292A2C',
@@ -14,4 +12,9 @@ export const theme: DefaultTheme = {
     gray90: '#F2F2F4',
     gray100: '#FFFFFF',
   },
-};
+  background: {
+    main: 'linear-gradient(180deg, #00011C 0%, #000002 97.4%)',
+  },
+} as const;
+
+export type ThemeType = typeof theme;

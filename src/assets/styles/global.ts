@@ -1,9 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 import normalize from 'styled-normalize';
 
+import { ThemeType } from './theme';
 import { MEDIA_QUERY } from './mixin';
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
   ${normalize}
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
 
@@ -19,7 +20,7 @@ export const GlobalStyle = createGlobalStyle`
     max-width: 700px;
     min-height: 100vh;
     margin: 0 auto;
-    background-color: white;
+    background: ${(props) => props.theme.background.main};
   }
 
   * {

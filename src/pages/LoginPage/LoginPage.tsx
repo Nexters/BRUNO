@@ -1,14 +1,23 @@
-import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 
+import OtherWalletPage from '@src/pages/OtherWalletPage';
 import LoginForm from '@src/components/LoginForm';
 import PageLayout from '@src/components/shared/PageLayout';
 
-function LoginPage() {
+function SelectPage() {
   return (
     <PageLayout>
-      로그인
       <LoginForm />
     </PageLayout>
+  );
+}
+
+function LoginPage() {
+  return (
+    <Routes>
+      <Route path="/" element={<SelectPage />} />
+      <Route path="/other" element={<OtherWalletPage />} />
+    </Routes>
   );
 }
 
