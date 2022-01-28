@@ -14,6 +14,7 @@ export const theme = {
   },
   background: {
     main: 'linear-gradient(180deg, #00011C 0%, #000002 97.4%)',
+    button00: 'linear-gradient(90deg, #E44AEB -2.24%, #142BFC 100%);',
   },
 } as const;
 
