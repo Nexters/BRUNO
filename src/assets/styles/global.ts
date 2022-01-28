@@ -26,6 +26,10 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  button {
+    border: none;
+  }
+
   ${MEDIA_QUERY.large} {
     /* width > 700px */
   }
