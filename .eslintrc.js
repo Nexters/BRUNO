@@ -20,10 +20,12 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
+    'no-shadow': 'off',
     'consistent-return': 'off',
     'no-restricted-exports': 'off',
     'import/no-extraneous-dependencies': 'off',
     '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-unused-vars': [2, { args: 'none' }],
     'react/jsx-filename-extension': [
       2,
       { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
