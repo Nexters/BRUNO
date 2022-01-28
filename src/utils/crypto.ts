@@ -1,4 +1,4 @@
-import caver from 'klaytn/caver';
+import caver from '@src/klaytn/caver';
 
 export const isValidAddress = (address: string) =>
   caver.utils.isAddress(address);

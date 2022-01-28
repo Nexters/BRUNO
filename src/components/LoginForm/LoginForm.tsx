@@ -1,5 +1,6 @@
 import { ChangeEvent, useCallback, useState } from 'react';
-import { isValidPrivateKey } from 'utils/crypto';
+
+import { isValidPrivateKey } from '@src/utils/crypto';
 
 function LoginForm() {
   const [privateKey, setPrivateKey] = useState('');

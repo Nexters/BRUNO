@@ -1,7 +1,7 @@
 import { RecoilRoot } from 'recoil';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import LoginPage from './pages/LoginPage';
+import LoginPage from '@src/pages/LoginPage';
 
 function App() {
   return (
