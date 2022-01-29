@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import LoginInput from '@src/components/LoginInput';
 import MainButton from '@src/components/shared/MainButton';
 
-import { LoginFormType } from './type';
+import { LoginType } from './type';
 import { LOGIN_FORM_TEXT_MAP } from './const';
 
 const Wrapper = styled.div`
@@ -35,7 +35,7 @@ const GuideLink = styled.a`
 `;
 
 interface Props {
-  type: LoginFormType;
+  type: LoginType;
   onClickLoginButton: () => void;
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
 }

@@ -2,7 +2,7 @@ import { ChangeEvent, useCallback, useState } from 'react';
 
 import LoginForm from '@src/components/LoginForm';
 import PageLayout from '@src/components/shared/PageLayout';
-import { LoginFormType } from '@src/components/LoginForm/type';
+import { LoginType } from '@src/components/LoginForm/type';
 
 function KlipLoginPage() {
   const [profileId, setProfileId] = useState('');
@@ -19,7 +19,7 @@ function KlipLoginPage() {
   return (
     <PageLayout padding="20px">
       <LoginForm
-        type={LoginFormType.KLIP}
+        type={LoginType.KLIP}
         onClickLoginButton={handleClickLogin}
         onChangeInput={handleChange}
       />

@@ -6,7 +6,7 @@ const ButtonWrapper = styled.div`
   justify-content: center;
 `;
 
-const Button = styled.button`
+const Button = styled.button<{ buttonStyle?: string }>`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -18,17 +18,21 @@ const Button = styled.button`
   background: ${(props) => props.theme.background.button00};
   font-weight: bold;
   color: ${(props) => props.theme.colors.gray100};
+  ${(props) => props.buttonStyle};
 `;
 
 interface MainButtonProps {
   value: string;
   onClick: () => void;
+  buttonStyle?: any;
 }
 
-function MainButton({ value, onClick }: MainButtonProps) {
+function MainButton({ value, onClick, buttonStyle }: MainButtonProps) {
   return (
     <ButtonWrapper>
-      <Button onClick={() => onClick?.()}>{value}</Button>
+      <Button buttonStyle={buttonStyle} onClick={() => onClick?.()}>
+        {value}
+      </Button>
     </ButtonWrapper>
   );
 }

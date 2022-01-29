@@ -3,7 +3,7 @@ import { ChangeEvent, useCallback, useState } from 'react';
 import caver from '@src/klaytn/caver';
 import LoginForm from '@src/components/LoginForm';
 import PageLayout from '@src/components/shared/PageLayout';
-import { LoginFormType } from '@src/components/LoginForm/type';
+import { LoginType } from '@src/components/LoginForm/type';
 
 function OtherWalletLoginPage() {
   const [privateKey, setPrivateKey] = useState('');
@@ -20,7 +20,7 @@ function OtherWalletLoginPage() {
   return (
     <PageLayout padding="20px">
       <LoginForm
-        type={LoginFormType.OTHER_WALLET}
+        type={LoginType.OTHER_WALLET}
         onClickLoginButton={handleClickLogin}
         onChangeInput={handleChange}
       />
