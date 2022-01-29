@@ -21,6 +21,8 @@ export const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
     min-height: 100vh;
     margin: 0 auto;
     background: ${(props) => props.theme.background.main};
+    line-height: 160%;
+    letter-spacing: 0.002em;
   }
 
   * {

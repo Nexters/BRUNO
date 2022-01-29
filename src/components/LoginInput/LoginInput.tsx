@@ -1,16 +1,14 @@
 import { ChangeEvent, HTMLInputTypeAttribute, useCallback } from 'react';
 import styled from 'styled-components';
 
+const Wrapper = styled.div`
+  margin: 24px 6px 0 6px;
+`;
+
 const Label = styled.span`
   font-size: 13px;
   font-weight: 700;
-  line-height: 21px;
-  letter-spacing: 0.002em;
   color: ${(props) => props.theme.colors.gray90}; ;
-`;
-
-const Wrapper = styled.div`
-  margin: 0 6px;
 `;
 
 const Input = styled.input`
