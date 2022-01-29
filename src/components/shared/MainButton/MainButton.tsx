@@ -12,7 +12,7 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 20px 16px;
+  margin: 20px 0;
   padding: 13px;
   border-radius: 44px;
   background: ${(props) => props.theme.background.button00};

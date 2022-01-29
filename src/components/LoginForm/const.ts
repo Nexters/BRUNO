@@ -3,9 +3,9 @@ import { LoginFormType } from './type';
 export const LOGIN_FORM_TEXT_MAP = {
   [LoginFormType.OTHER_WALLET]: {
     title: 'Your Wallet Address',
-    inputLabel: 'Wallet Adress',
+    inputLabel: 'Wallet Address',
     placeholder: '0x...',
-    button: 'Connet With My Wallet',
+    button: 'Connect With My Wallet',
     guide: 'How To Connect My Wallet',
   },
   [LoginFormType.KLIP]: {

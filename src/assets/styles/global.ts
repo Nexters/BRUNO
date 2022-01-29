@@ -23,6 +23,7 @@ export const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
     background: ${(props) => props.theme.background.main};
     line-height: 160%;
     letter-spacing: 0.002em;
+    font-size: 14px;
   }
 
   * {
