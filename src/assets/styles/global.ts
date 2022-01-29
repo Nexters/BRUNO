@@ -30,12 +30,10 @@ export const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
     box-sizing: border-box;
   }
 
-  button {
+  button, input, textarea {
     border: none;
-  }
-
-  input {
-    border: none;
+    resize: none;
+    outline: none;
   }
 
   ${MEDIA_QUERY.large} {
