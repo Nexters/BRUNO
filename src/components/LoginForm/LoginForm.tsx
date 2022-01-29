@@ -1,6 +1,7 @@
 import { ChangeEvent, useCallback, useState } from 'react';
 
 import caver from '@src/klaytn/caver';
+import MainButton from '@src/components/shared/MainButton';
 
 function LoginForm() {
   const [privateKey, setPrivateKey] = useState('');
@@ -15,7 +16,7 @@ function LoginForm() {
   }, []);
 
   return (
-    <div className="LoginForm">
+    <div>
       <input
         className="LoginForm__input"
         type="password"
@@ -24,13 +25,7 @@ function LoginForm() {
         placeholder="0x2c4078447..."
         onChange={handleChange}
       />
-      <button
-        type="button"
-        className="LoginForm__button"
-        onClick={handleClickLogin}
-      >
-        Login
-      </button>
+      <MainButton value="로그인" onClick={handleClickLogin} />
     </div>
   );
 }
