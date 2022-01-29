@@ -62,10 +62,12 @@ export const HammerControlButton = styled.button`
 
 export const HammperPrice = styled.div`
   margin: 0 16px;
-  padding: 11px 46px;
+  width: 100px;
+  padding: 11px 0;
   border-radius: 10px;
   border: 1px solid #f2f2f4;
   font-size: 16px;
+  text-align: center;
 `;
 
 export const CategoryWrapper = styled.div`
