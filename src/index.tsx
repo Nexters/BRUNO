@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'styled-components';
 
-import { GlobalStyle, theme } from 'assets/styles';
+import { GlobalStyle, theme } from '@src/assets/styles';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';

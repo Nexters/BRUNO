@@ -1,20 +1,17 @@
-import React from 'react';
-import styled from 'styled-components';
+import { RecoilRoot } from 'recoil';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-const Button = styled.button`
-  background: ${(props) => props.theme.colors.gray70};
-  border-radius: 3px;
-  border: 2px solid palevioletred;
-  color: palevioletred;
-  margin: 0 1em;
-  padding: 0.25em 1em;
-`;
+import LoginPage from '@src/pages/LoginPage';
 
 function App() {
   return (
-    <div className="App">
-      <Button>Hello, BRUNO!</Button>
-    </div>
+    <RecoilRoot>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
+      </BrowserRouter>
+    </RecoilRoot>
   );
 }
 
