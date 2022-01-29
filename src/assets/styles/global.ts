@@ -36,6 +36,10 @@ export const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
     outline: none;
   }
 
+  hr {
+    border: none;
+  }
+
   ${MEDIA_QUERY.large} {
     /* width > 700px */
   }
