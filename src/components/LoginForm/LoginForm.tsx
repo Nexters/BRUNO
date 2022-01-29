@@ -17,10 +17,9 @@ const Wrapper = styled.div`
 const Title = styled.div`
   font-size: 24px;
   font-weight: 700;
+  white-space: pre-wrap;
+  line-height: 160%;
   color: ${(props) => props.theme.colors.gray90};
-  & + & {
-    margin-top: 19px;
-  }
 `;
 
 const BottomWrapper = styled.div`
@@ -46,7 +45,6 @@ function LoginForm({ type, onClickLoginButton, onChangeInput }: Props) {
 
   return (
     <Wrapper>
-      <Title>Input</Title>
       <Title>{TEXT.title}</Title>
       <LoginInput
         placeholder={TEXT.placeholder}

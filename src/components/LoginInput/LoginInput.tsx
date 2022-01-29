@@ -2,7 +2,7 @@ import { ChangeEvent, HTMLInputTypeAttribute, useCallback } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  margin: 24px 6px 0 6px;
+  margin-top: 24px;
 `;
 
 const Label = styled.span`
