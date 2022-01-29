@@ -84,7 +84,6 @@ export const CategoryButton = styled.button<{ isSelected: boolean }>`
     isSelected ? theme.colors.gray10 : theme.colors.gray90};
   color: ${({ theme, isSelected }) =>
     isSelected ? theme.colors.gray100 : theme.colors.gray50};
-  line-height: 160%;
 `;
 
 export const CreateButtonStyle = {
