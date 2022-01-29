@@ -5,7 +5,7 @@ import LoginForm from '@src/components/LoginForm';
 import PageLayout from '@src/components/shared/PageLayout';
 import { LoginFormType } from '@src/components/LoginForm/type';
 
-function OtherWalletPage() {
+function OtherWalletLoginPage() {
   const [privateKey, setPrivateKey] = useState('');
 
   const handleClickLogin = useCallback(async () => {
@@ -28,4 +28,4 @@ function OtherWalletPage() {
   );
 }
 
-export default OtherWalletPage;
+export default OtherWalletLoginPage;
