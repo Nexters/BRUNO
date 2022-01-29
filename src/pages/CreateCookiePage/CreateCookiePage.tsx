@@ -44,6 +44,14 @@ function CreateCookiePage() {
     setCookieInfo({ ...cookieInfo, [key]: e.target.value });
   };
 
+  const handleHammerPrice = (add: boolean) => {
+    if (!add && cookieInfo.hammer === 1) return null;
+    setCookieInfo(({ hammer, ...rest }) => ({
+      ...rest,
+      hammer: add ? hammer + 1 : hammer - 1,
+    }));
+  };
+
   const handleClickCategory = (value: string) => {
     setCookieInfo({ ...cookieInfo, category: value });
   };
@@ -72,9 +80,13 @@ function CreateCookiePage() {
       <Section>
         <Label>망치 가격</Label>
         <HammerPriceWrapper>
-          <HammerControlButton>-</HammerControlButton>
+          <HammerControlButton onClick={() => handleHammerPrice(false)}>
+            -
+          </HammerControlButton>
           <HammperPrice>{cookieInfo.hammer}</HammperPrice>
-          <HammerControlButton>+</HammerControlButton>
+          <HammerControlButton onClick={() => handleHammerPrice(true)}>
+            +
+          </HammerControlButton>
         </HammerPriceWrapper>
       </Section>
       <Section>
