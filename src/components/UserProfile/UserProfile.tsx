@@ -1,8 +1,14 @@
+import UserPhoto from '@src/components/UserPhoto';
 import BioSection from './BioSection';
 
-function UserProfile() {
+interface Props {
+  isMy: boolean;
+}
+
+function UserProfile({ isMy }: Props) {
   return (
     <div>
+      <UserPhoto isMy={isMy} />
       <BioSection />
     </div>
   );

@@ -7,14 +7,13 @@ interface Props {
   isMy?: boolean;
 }
 
-function OtherWalletLoginPage({ isMy }: Props) {
+function UserPage({ isMy = false }: Props) {
   return (
     <PageLayout backgroundColor={theme.colors.gray100}>
-      <UserProfile />
+      <UserProfile isMy={isMy} />
       <UserHomeTab />
-      {isMy && <div>isMy</div>}
     </PageLayout>
   );
 }
 
-export default OtherWalletLoginPage;
+export default UserPage;

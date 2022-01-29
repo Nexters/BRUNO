@@ -6,7 +6,7 @@ const ButtonWrapper = styled.div`
   justify-content: center;
 `;
 
-const Button = styled.button<{ buttonStyle?: string }>`
+export const Button = styled.button<{ buttonStyle?: string }>`
   display: flex;
   flex-direction: row;
   justify-content: center;
