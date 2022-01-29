@@ -7,7 +7,6 @@ const Tab = styled.div<{ isActive?: boolean }>`
   flex: 1;
   margin-bottom: -2px;
   padding-top: 10px;
-  line-height: 160%;
   color: ${({ isActive, theme }) =>
     isActive ? theme.colors.gray10 : theme.colors.gray70};
 `;
