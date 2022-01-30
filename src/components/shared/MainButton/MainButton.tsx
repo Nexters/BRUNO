@@ -6,30 +6,33 @@ const ButtonWrapper = styled.div`
   justify-content: center;
 `;
 
-const Button = styled.button`
+const Button = styled.button<{ buttonStyle?: string }>`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 20px 16px;
+  margin: 20px 0;
   padding: 13px;
   border-radius: 44px;
-  line-height: 160%;
-  background-color: ${(props) => props.theme.colors.gray20};
+  background: ${(props) => props.theme.background.button00};
   font-weight: bold;
   color: ${(props) => props.theme.colors.gray100};
+  ${(props) => props.buttonStyle};
 `;
 
 interface MainButtonProps {
   value: string;
   onClick: () => void;
+  buttonStyle?: any;
 }
 
-function MainButton({ value, onClick }: MainButtonProps) {
+function MainButton({ value, onClick, buttonStyle }: MainButtonProps) {
   return (
     <ButtonWrapper>
-      <Button onClick={() => onClick?.()}>{value}</Button>
+      <Button buttonStyle={buttonStyle} onClick={() => onClick?.()}>
+        {value}
+      </Button>
     </ButtonWrapper>
   );
 }
