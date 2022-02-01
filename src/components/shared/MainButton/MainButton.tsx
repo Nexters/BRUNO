@@ -16,6 +16,7 @@ const Button = styled.button<{ buttonStyle?: string }>`
   padding: 13px;
   border-radius: 44px;
   background: ${(props) => props.theme.background.button00};
+  line-height: 160%;
   font-weight: bold;
   color: ${(props) => props.theme.colors.gray100};
   ${(props) => props.buttonStyle};
@@ -23,7 +24,7 @@ const Button = styled.button<{ buttonStyle?: string }>`
 
 interface MainButtonProps {
   value: string;
-  onClick: () => void;
+  onClick?: () => void;
   buttonStyle?: any;
 }
 
