@@ -6,13 +6,17 @@ import IconButton from '../shared/IconButton';
 const Wrapper = styled.nav`
   bottom: 0;
   position: absolute;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   width: 100%;
   height: 48px;
-  background-color: ${(props) => props.theme.colors.gray80};
+  background-color: ${(props) => props.theme.colors.gray10};
+`;
+
+const ButtonWrapper = styled.div`
+  align-items: center;
+  justify-content: center;
+  display: flex;
 `;
 
 const WriteButton = styled.button`
@@ -39,24 +43,30 @@ export default function Navigation() {
   };
 
   return (
-    <Wrapper>
-      <IconButton onClick={handleClickHome}>
-        <Icon color={theme.colors.gray100}>
-          <Home24 />
-        </Icon>
-      </IconButton>
+    <>
+      <Wrapper>
+        <ButtonWrapper>
+          <IconButton onClick={handleClickHome}>
+            <Icon color={theme.colors.gray100}>
+              <Home24 />
+            </Icon>
+          </IconButton>
+        </ButtonWrapper>
+
+        <ButtonWrapper>
+          <IconButton onClick={handleClickProfile}>
+            <Icon color={theme.colors.gray100}>
+              <Profile24 />
+            </Icon>
+          </IconButton>
+        </ButtonWrapper>
+      </Wrapper>
 
       <WriteButton onClick={handleClickWrite}>
         <Icon color={theme.colors.gray100}>
           <Edit24 />
         </Icon>
       </WriteButton>
-
-      <IconButton onClick={handleClickProfile}>
-        <Icon color={theme.colors.gray100}>
-          <Profile24 />
-        </Icon>
-      </IconButton>
-    </Wrapper>
+    </>
   );
 }
