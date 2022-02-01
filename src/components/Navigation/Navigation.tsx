@@ -5,25 +5,25 @@ import IconButton from '../shared/IconButton';
 
 const Wrapper = styled.nav`
   bottom: 0;
-  width: 100%;
-  height: 48px;
   position: absolute;
-  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  display: flex;
+  width: 100%;
+  height: 48px;
   background-color: ${(props) => props.theme.colors.gray80};
 `;
 
 const WriteButton = styled.button`
-  cursor: pointer;
   position: absolute;
   bottom: 4px;
   left: calc(50% - 28px);
   width: 56px;
   height: 56px;
-  background: linear-gradient(90deg, #e44aeb -2.24%, #142bfc 100%);
   border-radius: 100px;
+  background: linear-gradient(90deg, #e44aeb -2.24%, #142bfc 100%);
+  cursor: pointer;
 `;
 
 export default function Navigation() {
