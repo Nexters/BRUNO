@@ -16,6 +16,7 @@ const Button = styled.button<{ buttonStyle?: string }>`
   padding: 13px;
   border-radius: 44px;
   background: ${(props) => props.theme.background.button00};
+  font-size: ${(props) => props.theme.fontSize.body02};
   line-height: 160%;
   font-weight: bold;
   color: ${(props) => props.theme.colors.gray100};

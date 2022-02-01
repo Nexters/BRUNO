@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 24px;
+  font-size: ${(props) => props.theme.fontSize.head02};
   font-weight: 700;
   white-space: pre-wrap;
   line-height: 160%;
