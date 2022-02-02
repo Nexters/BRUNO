@@ -6,13 +6,13 @@ const Wrapper = styled.div`
 `;
 
 const Nickname = styled.div`
-  font-size: 20px;
+  font-size: ${(props) => props.theme.fontSize.title02};
   font-weight: 700;
 `;
 
 const Bio = styled.div`
   margin-top: 4px;
-  font-size: 16px;
+  font-size: ${(props) => props.theme.fontSize.body01};
 `;
 
 function BioSection() {
