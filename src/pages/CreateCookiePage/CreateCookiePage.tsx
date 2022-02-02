@@ -1,7 +1,6 @@
 import { useState, ChangeEvent } from 'react';
 
 import PageLayout from '@src/components/shared/PageLayout';
-import { theme } from '@src/assets/styles';
 import MainButton from '@src/components/shared/MainButton';
 import {
   Label,
@@ -57,7 +56,7 @@ function CreateCookiePage() {
   };
 
   return (
-    <PageLayout backgroundColor={theme.colors.gray100}>
+    <PageLayout>
       <Section>
         <Label>질문</Label>
         <QuestionInput
