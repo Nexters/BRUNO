@@ -15,6 +15,7 @@ export const theme = {
   background: {
     main: 'linear-gradient(180deg, #00011C 0%, #000002 97.4%)',
     button00: 'linear-gradient(90deg, #E44AEB -2.24%, #142BFC 100%);',
+    button01: 'linear-gradient(90deg, #336FFF -2.24%, #E44AEB 100%);',
   },
   fontSize: {
     head01: '32px',

@@ -36,8 +36,7 @@ const RequestButton = styled(Button)`
   height: 48px;
   margin-bottom: 5px;
   line-height: 120%;
-  background: none;
-  background-color: ${(props) => props.theme.colors.gray20};
+  background: ${(props) => props.theme.background.button01};
 `;
 
 interface Props {
