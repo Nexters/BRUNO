@@ -1,5 +1,6 @@
 export const theme = {
   colors: {
+    blank: '#010115',
     gray00: '#000000',
     gray10: '#292A2C',
     gray20: '#1C1F26',
@@ -31,6 +32,10 @@ export const theme = {
     body01: '16px',
     body02: '14px',
     caption: '12px',
+  },
+  height: {
+    header: '69px',
+    nav: '48px',
   },
 } as const;
 
