@@ -18,7 +18,7 @@ const Input = styled.input`
   background: none;
   border-radius: 10px;
   border: 1px solid #292a2c;
-  font-size: 16px;
+  font-size: ${(props) => props.theme.fontSize.body01};
   color: ${(props) => props.theme.colors.gray100};
   ::placeholder {
     color: ${(props) => props.theme.colors.gray40};

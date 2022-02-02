@@ -13,6 +13,7 @@ interface LayoutProps {
 }
 
 const Layout = styled.div<LayoutProps>`
+  position: relative;
   width: 100%;
   padding: ${(props) => props.padding || ''};
   background-color: ${(props) => props.backgroundColor || ''}; ;

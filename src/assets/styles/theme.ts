@@ -16,6 +16,16 @@ export const theme = {
     main: 'linear-gradient(180deg, #00011C 0%, #000002 97.4%)',
     button00: 'linear-gradient(90deg, #E44AEB -2.24%, #142BFC 100%);',
   },
+  fontSize: {
+    head01: '32px',
+    head02: '24px',
+    title01: '22px',
+    title02: '20px',
+    large: '18px',
+    body01: '16px',
+    body02: '14px',
+    caption: '12px',
+  },
 } as const;
 
 export type ThemeType = typeof theme;
