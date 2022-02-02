@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 
-const Tab = styled.div<{ isActive?: boolean }>`
+const Tab = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   flex: 1;
   margin-bottom: -2px;
   padding-top: 10px;
-  color: ${({ isActive, theme }) =>
-    isActive ? theme.colors.gray10 : theme.colors.gray70};
+  color: ${({ theme }) => theme.colors.gray70};
 `;
 
 const Line = styled.hr<{ isActive?: boolean }>`
@@ -16,7 +15,7 @@ const Line = styled.hr<{ isActive?: boolean }>`
   margin: 10px 0 0 0;
   border-radius: 4px 4px 4px 4px;
   border-bottom: ${({ isActive, theme }) =>
-    isActive && `2px solid ${theme.colors.gray70}`}; ;
+    isActive && `2px solid ${theme.colors.purple00}`}; ;
 `;
 
 const Number = styled.div`
@@ -33,7 +32,7 @@ interface Props {
 
 function TabItem({ isActive, onClick, name, count }: Props) {
   return (
-    <Tab onClick={() => onClick?.()} isActive={isActive}>
+    <Tab onClick={() => onClick?.()}>
       <Number>{count}</Number>
       <div>{name}</div>
       <Line isActive={isActive} />

@@ -13,7 +13,6 @@ const PhotoWrapper = styled.div`
   position: relative;
   width: 100px;
   height: 100px;
-  margin-right: 20px;
   border: 4px solid #ffffff;
   border-radius: 100%;
   background-color: #9d9d9d;
@@ -24,7 +23,6 @@ const Photo = styled.img``;
 const AddButton = styled.button`
   position: absolute;
   right: -4px;
-  bottom: -4px;
   width: 32px;
   height: 32px;
   border-radius: 100%;
@@ -32,8 +30,8 @@ const AddButton = styled.button`
 `;
 
 const RequestButton = styled(Button)`
-  width: 200px;
-  height: 48px;
+  width: 160px;
+  height: 40px;
   margin-bottom: 5px;
   line-height: 120%;
   background: ${(props) => props.theme.background.button01};
@@ -50,7 +48,7 @@ function UserPhoto({ isMy }: Props) {
         <Photo />
         {isMy && <AddButton>+</AddButton>}
       </PhotoWrapper>
-      {!isMy && <RequestButton>질문 요청하기</RequestButton>}
+      {!isMy && <RequestButton>Ask Me</RequestButton>}
     </Wrapper>
   );
 }

@@ -1,18 +1,18 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  padding: 16px 20px;
-  color: ${(props) => props.theme.colors.gray00};
+  padding: 12px 16px;
 `;
 
 const Nickname = styled.div`
   font-size: ${(props) => props.theme.fontSize.title02};
   font-weight: 700;
+  color: ${(props) => props.theme.colors.gray90};
 `;
 
 const Bio = styled.div`
-  margin-top: 4px;
   font-size: ${(props) => props.theme.fontSize.body01};
+  color: ${(props) => props.theme.colors.gray60};
 `;
 
 function BioSection() {

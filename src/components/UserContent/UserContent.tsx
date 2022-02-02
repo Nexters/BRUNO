@@ -7,6 +7,8 @@ import RequestContent from '@src/components/RequestContent';
 
 const Container = styled.div`
   padding-top: 20px;
+  overflow-y: scroll;
+  height: calc(100vh - 270px);
 `;
 
 interface Props {

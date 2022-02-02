@@ -1,7 +1,5 @@
-// import { useEffect } from 'react';
-// import styled from 'styled-components';
-
 import RequestItem from './RequestItem';
+import ResponseButton from './ResponseButton';
 
 const TEMP_REQUEST = [
   '세원이는 남자친구가 있을까요?',
@@ -15,12 +13,14 @@ interface Props {
 
 function RequestContent({ isMy = false }: Props) {
   return (
-    <div>
-      {isMy && <div>my</div>}
+    <>
       {TEMP_REQUEST.map((question) => (
-        <RequestItem question={question} />
+        <>
+          <RequestItem question={question} />
+          {isMy && <ResponseButton />}
+        </>
       ))}
-    </div>
+    </>
   );
 }
 
