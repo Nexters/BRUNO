@@ -1,5 +1,6 @@
 import { ProfileImage01 } from '@src/assets/images';
 import styled from 'styled-components';
+import { UserType } from './type';
 
 const Wrapper = styled.div`
   display: flex;
@@ -33,12 +34,12 @@ const Time = styled.p`
   color: ${(props) => props.theme.colors.gray60};
 `;
 
-export default function UserInfo() {
+export default function UserInfo({ profile, name }: UserType) {
   return (
     <Wrapper>
-      <Profile src={ProfileImage01} />
+      <Profile src={profile || ProfileImage01} />
       <InfoWrapper>
-        <UserName>Username</UserName>
+        <UserName>{name}</UserName>
         <Time>32 min age</Time>
       </InfoWrapper>
     </Wrapper>

@@ -2,6 +2,7 @@ import Icon, { ArrowElbowDownRight, Hammer24, View24 } from '@src/assets/Icon';
 import { NFTImage01 } from '@src/assets/images';
 import { theme } from '@src/assets/styles';
 import styled from 'styled-components';
+import { FeedProps } from './type';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -50,11 +51,11 @@ const InfoText = styled.span`
   margin-right: 8px;
 `;
 
-type Props = {
-  question: string;
-};
-
-export default function FeedContent({ question }: Props) {
+export default function FeedContent({
+  question,
+  viewCount,
+  hammer,
+}: FeedProps) {
   return (
     <Wrapper>
       <QuestionWrapper>
@@ -74,12 +75,12 @@ export default function FeedContent({ question }: Props) {
         <Icon color={theme.colors.gray60}>
           <View24 />
         </Icon>
-        <InfoText>235</InfoText>
+        <InfoText>{viewCount}</InfoText>
 
         <Icon color={theme.colors.gray60}>
           <Hammer24 />
         </Icon>
-        <InfoText>235</InfoText>
+        <InfoText>{hammer}</InfoText>
       </InfoWrapper>
     </Wrapper>
   );

@@ -22,13 +22,54 @@ const ContentsWrapper = styled.main`
 `;
 
 function HomePage() {
+  const Feeds = [
+    {
+      question:
+        'My real secret is real real real rel xxxxxxxsssssssssssssssss?',
+      user: {
+        profile: null,
+        name: 'John Doe',
+      },
+      viewCount: 235,
+      hammer: 52434,
+    },
+    {
+      question: 'My real secret',
+      user: {
+        profile: null,
+        name: 'John Doe',
+      },
+      viewCount: 235,
+      hammer: 54535,
+    },
+    {
+      question: 'My real secret',
+      user: {
+        profile: null,
+        name: 'John Doe',
+      },
+      viewCount: 235,
+      hammer: 5422,
+    },
+  ];
+
   return (
     <PageLayout>
       <Header />
       <Container>
         <ContentsWrapper>
           <HomeTab />
-          <Feed />
+          {Feeds.map((data) => {
+            const { question, user, viewCount, hammer } = data;
+            return (
+              <Feed
+                question={question}
+                user={user}
+                viewCount={viewCount}
+                hammer={hammer}
+              />
+            );
+          })}
         </ContentsWrapper>
       </Container>
 
