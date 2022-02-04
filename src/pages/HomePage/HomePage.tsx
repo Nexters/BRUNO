@@ -24,6 +24,7 @@ const ContentsWrapper = styled.main`
 function HomePage() {
   const Feeds = [
     {
+      id: 1,
       question:
         'My real secret is real real real rel xxxxxxxsssssssssssssssss?',
       user: {
@@ -34,6 +35,7 @@ function HomePage() {
       hammer: 52434,
     },
     {
+      id: 2,
       question: 'My real secret',
       user: {
         profile: null,
@@ -43,6 +45,7 @@ function HomePage() {
       hammer: 54535,
     },
     {
+      id: 3,
       question: 'My real secret',
       user: {
         profile: null,
@@ -60,9 +63,10 @@ function HomePage() {
         <ContentsWrapper>
           <HomeTab />
           {Feeds.map((data) => {
-            const { question, user, viewCount, hammer } = data;
+            const { id, question, user, viewCount, hammer } = data;
             return (
               <Feed
+                key={id}
                 question={question}
                 user={user}
                 viewCount={viewCount}
