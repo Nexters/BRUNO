@@ -14,6 +14,13 @@ const Container = styled.header`
   color: white;
 `;
 
+const AppTitle = styled.div`
+  font-family: 'Sansita Swashed', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+`;
+
 const ButtonWrapper = styled.div`
   display: flex;
   gap: 18px;
@@ -30,7 +37,7 @@ function Header() {
 
   return (
     <Container>
-      <div>CookiePang</div>
+      <AppTitle>Cookie Pang</AppTitle>
 
       <ButtonWrapper>
         <IconButton onClick={handleClickAlarm}>

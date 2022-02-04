@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'styled-components';
 
 import { GlobalStyle, theme } from '@src/assets/styles';
+import GlobalFonts from '@src/assets/fonts';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -12,6 +13,7 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <App />
       <GlobalStyle />
+      <GlobalFonts />
     </ThemeProvider>
   </React.StrictMode>,
 
