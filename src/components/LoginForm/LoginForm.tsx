@@ -18,7 +18,6 @@ const Title = styled.div`
   font-size: ${(props) => props.theme.fontSize.head02};
   font-weight: 700;
   white-space: pre-wrap;
-  line-height: 160%;
   color: ${(props) => props.theme.colors.gray90};
 `;
 
