@@ -1,6 +1,8 @@
-import Header from '@src/components/Header';
-import Navigation from '@src/components/Navigation';
 import PageLayout from '@src/components/shared/PageLayout';
+import Header from '@src/components/Header/Header';
+import Navigation from '@src/components/Navigation';
+import HomeTab from '@src/components/HomeTab';
+
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -13,7 +15,6 @@ const ContentsWrapper = styled.main`
   height: calc(100% - 56px);
   padding-bottom: 68px;
   overflow-y: scroll;
-  background-color: ${(props) => props.theme.colors.gray100};
 `;
 
 function HomePage() {
@@ -22,7 +23,8 @@ function HomePage() {
       <Container>
         <Header />
         <ContentsWrapper>
-          <p>내용</p>
+          <HomeTab />
+          내용
         </ContentsWrapper>
       </Container>
 
