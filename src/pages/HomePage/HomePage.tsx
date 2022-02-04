@@ -4,27 +4,31 @@ import Navigation from '@src/components/Navigation';
 import HomeTab from '@src/components/HomeTab';
 
 import styled from 'styled-components';
+import Feed from '@src/components/Feed';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  width: 100%;
+  height: calc(100vh - 71px);
 `;
 
 const ContentsWrapper = styled.main`
-  height: calc(100% - 56px);
+  height: 100%;
+  padding: 16px;
   padding-bottom: 68px;
+  overflow-x: hidden;
   overflow-y: scroll;
 `;
 
 function HomePage() {
   return (
-    <PageLayout padding="0">
+    <PageLayout>
+      <Header />
       <Container>
-        <Header />
         <ContentsWrapper>
           <HomeTab />
-          내용
+          <Feed />
         </ContentsWrapper>
       </Container>
 

@@ -11,3 +11,6 @@ export { ReactComponent as Right24 } from './24px-right.svg';
 export { ReactComponent as Cancel24 } from './24px-cancel.svg';
 export { ReactComponent as Link24 } from './24px-link.svg';
 export { ReactComponent as Favorite24 } from './24px-favorite.svg';
+export { ReactComponent as View24 } from './24px-view.svg';
+export { ReactComponent as Hammer24 } from './24px-hammer.svg';
+export { ReactComponent as ArrowElbowDownRight } from './ArrowElbowDownRight.svg';
