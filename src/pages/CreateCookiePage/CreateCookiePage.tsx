@@ -2,6 +2,8 @@ import { useState, ChangeEvent } from 'react';
 
 import PageLayout from '@src/components/shared/PageLayout';
 import MainButton from '@src/components/shared/MainButton';
+import Header from '@src/components/Header';
+import Navigation from '@src/components/Navigation';
 import {
   Label,
   Section,
@@ -57,6 +59,8 @@ function CreateCookiePage() {
 
   return (
     <PageLayout>
+      <Header />
+      <Navigation />
       <Section>
         <Label>질문</Label>
         <QuestionInput
