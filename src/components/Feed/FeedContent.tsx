@@ -7,7 +7,7 @@ import { FeedProps } from './type';
 const Wrapper = styled.div`
   width: 100%;
   margin-top: 16px;
-  padding: 10px 16px;
+  padding: 8px 16px;
   background-color: #1a1c2c;
   border-radius: 8px;
 `;
@@ -25,7 +25,7 @@ const QuestionWrapper = styled.div`
 const AnswerWrapper = styled.div`
   display: flex;
   justify-contents: flex-start;
-  margin-top: 16px;
+  margin-top: 14px;
   margin-left: 20px;
 `;
 
