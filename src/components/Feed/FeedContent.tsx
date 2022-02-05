@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import Icon, { ArrowElbowDownRight, Hammer24, View24 } from '@src/assets/Icon';
 import { NFTImage01 } from '@src/assets/images';
 import { theme } from '@src/assets/styles';
@@ -51,10 +52,17 @@ const InfoText = styled.span`
 `;
 
 export default function FeedContent({
+  id,
   question,
   viewCount,
   hammer,
 }: FeedProps) {
+  const navigate = useNavigate();
+
+  const handleAnswerClick = () => {
+    navigate(`/cookie/${id}`);
+  };
+
   return (
     <Wrapper>
       <QuestionWrapper>
@@ -67,7 +75,7 @@ export default function FeedContent({
           <ArrowElbowDownRight />
         </Icon>
 
-        <CookieImage src={NFTImage01} />
+        <CookieImage src={NFTImage01} onClick={handleAnswerClick} />
       </AnswerWrapper>
 
       <InfoWrapper>

@@ -13,13 +13,18 @@ interface Props extends FeedProps {
   user: UserType;
 }
 
-export default function Feed({ question, user, viewCount, hammer }: Props) {
+export default function Feed({ id, question, user, viewCount, hammer }: Props) {
   const { profile, name } = user;
 
   return (
     <Container>
       <UserInfo profile={profile} name={name} />
-      <FeedContent question={question} viewCount={viewCount} hammer={hammer} />
+      <FeedContent
+        id={id}
+        question={question}
+        viewCount={viewCount}
+        hammer={hammer}
+      />
     </Container>
   );
 }

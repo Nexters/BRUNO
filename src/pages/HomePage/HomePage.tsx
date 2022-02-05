@@ -69,6 +69,7 @@ function HomePage() {
             return (
               <Feed
                 key={id}
+                id={id}
                 question={question}
                 user={user}
                 viewCount={viewCount}
