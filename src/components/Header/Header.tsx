@@ -14,9 +14,22 @@ const Container = styled.header`
   color: white;
 `;
 
+const AppTitle = styled.div`
+  font-family: 'Sansita Swashed', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+`;
+
 const ButtonWrapper = styled.div`
   display: flex;
   gap: 18px;
+`;
+
+const Border = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: ${(props) => props.theme.colors.gray20};
 `;
 
 function Header() {
@@ -29,23 +42,26 @@ function Header() {
   };
 
   return (
-    <Container>
-      <div>CookiePang</div>
+    <>
+      <Container>
+        <AppTitle>Cookie Pang</AppTitle>
 
-      <ButtonWrapper>
-        <IconButton onClick={handleClickAlarm}>
-          <Icon color={theme.colors.gray100}>
-            <AlarmOn24 />
-          </Icon>
-        </IconButton>
+        <ButtonWrapper>
+          <IconButton onClick={handleClickAlarm}>
+            <Icon color={theme.colors.gray100}>
+              <AlarmOn24 />
+            </Icon>
+          </IconButton>
 
-        <IconButton onClick={handleClickSetting}>
-          <Icon color={theme.colors.gray100}>
-            <Setting24 />
-          </Icon>
-        </IconButton>
-      </ButtonWrapper>
-    </Container>
+          <IconButton onClick={handleClickSetting}>
+            <Icon color={theme.colors.gray100}>
+              <Setting24 />
+            </Icon>
+          </IconButton>
+        </ButtonWrapper>
+      </Container>
+      <Border />
+    </>
   );
 }
 

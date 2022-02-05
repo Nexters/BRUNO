@@ -1,28 +1,81 @@
-import Header from '@src/components/Header';
-import Navigation from '@src/components/Navigation';
 import PageLayout from '@src/components/shared/PageLayout';
+import Header from '@src/components/Header/Header';
+import Navigation from '@src/components/Navigation';
+import HomeTab from '@src/components/HomeTab';
+
 import styled from 'styled-components';
+import Feed from '@src/components/Feed';
+
+const NAVIGATION_HEIGHT = 68;
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  width: 100%;
+  height: calc(100vh - ${NAVIGATION_HEIGHT}px);
 `;
 
 const ContentsWrapper = styled.main`
-  height: calc(100% - 56px);
-  padding-bottom: 68px;
+  height: 100%;
+  padding: 16px;
+  padding-bottom: ${NAVIGATION_HEIGHT}px;
+  overflow-x: hidden;
   overflow-y: scroll;
-  background-color: ${(props) => props.theme.colors.gray100};
 `;
 
 function HomePage() {
+  const Feeds = [
+    {
+      id: 1,
+      question:
+        'My real secret is real real real rel xxxxxxxsssssssssssssssss?',
+      user: {
+        profile: null,
+        name: 'John Doe',
+      },
+      viewCount: 235,
+      hammer: 52434,
+    },
+    {
+      id: 2,
+      question: 'My real secret',
+      user: {
+        profile: null,
+        name: 'John Doe',
+      },
+      viewCount: 235,
+      hammer: 54535,
+    },
+    {
+      id: 3,
+      question: 'My real secret',
+      user: {
+        profile: null,
+        name: 'John Doe',
+      },
+      viewCount: 235,
+      hammer: 5422,
+    },
+  ];
+
   return (
-    <PageLayout padding="0">
+    <PageLayout>
+      <Header />
       <Container>
-        <Header />
         <ContentsWrapper>
-          <p>내용</p>
+          <HomeTab />
+          {Feeds.map((data) => {
+            const { id, question, user, viewCount, hammer } = data;
+            return (
+              <Feed
+                key={id}
+                question={question}
+                user={user}
+                viewCount={viewCount}
+                hammer={hammer}
+              />
+            );
+          })}
         </ContentsWrapper>
       </Container>
 
