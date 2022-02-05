@@ -6,17 +6,19 @@ import HomeTab from '@src/components/HomeTab';
 import styled from 'styled-components';
 import Feed from '@src/components/Feed';
 
+const NAVIGATION_HEIGHT = 68;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: calc(100vh - 71px);
+  height: calc(100vh - ${NAVIGATION_HEIGHT}px);
 `;
 
 const ContentsWrapper = styled.main`
   height: 100%;
   padding: 16px;
-  padding-bottom: 68px;
+  padding-bottom: ${NAVIGATION_HEIGHT}px;
   overflow-x: hidden;
   overflow-y: scroll;
 `;
