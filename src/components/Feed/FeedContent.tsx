@@ -47,8 +47,7 @@ const CookieImage = styled.img`
 `;
 
 const InfoText = styled.span`
-  margin-left: 4px;
-  margin-right: 8px;
+  margin: 0 8px 0 4px;
 `;
 
 export default function FeedContent({

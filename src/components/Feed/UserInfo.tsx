@@ -22,9 +22,9 @@ const InfoWrapper = styled.div`
 `;
 
 const UserName = styled.p`
-margin: 0;
-font-size: ${(props) => props.theme.fontSize.body02}
-font-weight: 500;
+  margin: 0;
+  font-size: ${(props) => props.theme.fontSize.body02};
+  font-weight: 500;
 `;
 
 const Time = styled.p`
