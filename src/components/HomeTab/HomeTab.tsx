@@ -18,7 +18,7 @@ export default function HomeTab() {
       {CATEGORIES.map((category, index) => (
         <CategoryButton
           // eslint-disable-next-line react/no-array-index-key
-          key={`CATEGORT_${index}`}
+          key={`CATEGORY_${index}`}
           category={category}
           color={COLORS[index % COLORS.length]}
         />
