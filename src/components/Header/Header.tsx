@@ -9,8 +9,8 @@ const Container = styled.header`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 56px;
-  padding: 0 16px;
+  height: 69px;
+  padding: 12px 16px 25px 16px;
   color: white;
 `;
 

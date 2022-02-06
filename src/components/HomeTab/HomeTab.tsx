@@ -7,8 +7,8 @@ const Wrapper = styled.div`
   flex-direction: row;
   gap: 8px;
   width: 100%;
-  height: 40px;
-  margin-bottom: 16px;
+  padding: 8px 16px;
+  margin-bottom: 8px;
   overflow-x: scroll;
 `;
 
