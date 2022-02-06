@@ -1,5 +1,5 @@
-import CategoryButton from '@src/components/shared/CategoryButton';
 import styled from 'styled-components';
+import CategoryButton from '@src/components/shared/CategoryButton';
 import { CATEGORIES, COLORS } from './const';
 
 const Wrapper = styled.div`
@@ -7,8 +7,7 @@ const Wrapper = styled.div`
   flex-direction: row;
   gap: 8px;
   width: 100%;
-  padding: 8px 16px;
-  margin-bottom: 8px;
+  padding: 16px 20px;
   overflow-x: scroll;
 `;
 
