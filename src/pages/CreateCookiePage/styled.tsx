@@ -1,15 +1,30 @@
-import { theme } from '@src/assets/styles';
 import styled from 'styled-components';
+
+const NAVIGATION_HEIGHT = 68;
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100vh - ${NAVIGATION_HEIGHT}px);
+  padding: 16px 0;
+`;
+
+export const Wrapper = styled.div`
+  margin-bottom: 16px;
+  padding: 0 20px;
+`;
+export const AnswerWrapper = styled.div`
+  background-color: #1a1c2c;
+  margin-bottom: 16px;
+  padding: 20px 20px 16px 20px;
+`;
 
 export const Label = styled.div`
   margin-bottom: 6px;
   font-weight: 700;
-  font-size: 13px;
-  color: ${(props) => props.theme.colors.gray20};
-`;
-
-export const Section = styled.section`
-  padding: 16px 20px;
+  font-size: ${(props) => props.theme.fontSize.caption};
+  color: ${(props) => props.theme.colors.gray100};
 `;
 
 export const QuestionInput = styled.input<{ isEmpty: boolean }>`
@@ -21,11 +36,6 @@ export const QuestionInput = styled.input<{ isEmpty: boolean }>`
   ::placeholder {
     color: ${(props) => props.theme.colors.gray50};
   }
-`;
-
-export const AnswerSection = styled.section`
-  padding: 20px 20px 16px 20px;
-  background-color: ${(props) => props.theme.colors.gray90};
 `;
 
 export const AnswerInput = styled.textarea<{ hasQuestion: boolean }>`
@@ -42,7 +52,7 @@ export const AnswerInput = styled.textarea<{ hasQuestion: boolean }>`
 
 export const AnswerGuide = styled.div`
   margin-top: 18px;
-  color: ${(props) => props.theme.colors.gray40};
+  color: ${(props) => props.theme.colors.gray50};
 `;
 
 export const HammerPriceWrapper = styled.div`
@@ -60,34 +70,20 @@ export const HammerControlButton = styled.button`
   color: ${(props) => props.theme.colors.gray40};
 `;
 
-export const HammperPrice = styled.div`
+export const HammerPrice = styled.div`
   margin: 0 16px;
   width: 100px;
   padding: 11px 0;
   border-radius: 10px;
-  border: 1px solid #f2f2f4;
-  font-size: 16px;
+  border: 1px solid #13161b;
+  font-size: ${(props) => props.theme.fontSize.body01};
+  background-color: ${(props) => props.theme.colors.blank};
+  color: ${(props) => props.theme.colors.gray100};
   text-align: center;
 `;
 
 export const CategoryWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
   gap: 8px;
 `;
-
-export const CategoryButton = styled.button<{ isSelected: boolean }>`
-  padding: 7px 16px;
-  border-radius: 37px;
-  background-color: ${({ theme, isSelected }) =>
-    isSelected ? theme.colors.gray10 : theme.colors.gray90};
-  color: ${({ theme, isSelected }) =>
-    isSelected ? theme.colors.gray100 : theme.colors.gray50};
-`;
-
-export const CreateButtonStyle = {
-  background: 'none',
-  'background-color': theme.colors.gray20,
-  margin: '20px',
-};

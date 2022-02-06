@@ -1,5 +1,6 @@
 import Icon, { Edit24, Home24, Profile24 } from '@src/assets/Icon';
 import { theme } from '@src/assets/styles';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import IconButton from '../shared/IconButton';
 
@@ -31,15 +32,22 @@ const WriteButton = styled.button`
 `;
 
 export default function Navigation() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const handleClickHome = () => {
-    console.log('home');
+    navigate('/');
   };
 
   const handleClickWrite = () => {
-    console.log('write');
+    if (location.pathname !== '/create') {
+      navigate('/create');
+    }
   };
   const handleClickProfile = () => {
-    console.log('profile');
+    if (location.pathname !== '/user') {
+      navigate('/user/me');
+    }
   };
 
   return (
