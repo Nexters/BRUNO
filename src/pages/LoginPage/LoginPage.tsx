@@ -1,9 +1,11 @@
-import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import QRCode from 'react-qr-code';
 
 import PageLayout from '@src/components/shared/PageLayout';
 import MainButton from '@src/components/shared/MainButton';
-import { LoginType } from '@src/components/LoginForm/type';
+import { useKlipPrepare, useKlipLogin } from '@src/klip';
+import { getKlipQrcodeSelector } from '@src/recoil/auth';
 
 const BottomWrapper = styled.div`
   width: 100%;
@@ -14,16 +16,16 @@ const BottomWrapper = styled.div`
 `;
 
 function LoginPage() {
-  const navigate = useNavigate();
-  const handleClickButton = (type: LoginType) => {
-    if (type === LoginType.KLIP) navigate('./klip');
-    else navigate('./other');
-  };
+  const { isFetched } = useKlipPrepare();
+  const { refetch: klipLogin } = useKlipLogin();
+  const qrcode = useRecoilValue(getKlipQrcodeSelector);
+
   return (
     <PageLayout padding="40px 20px" layoutStyle={{ display: 'flex' }}>
       <BottomWrapper>
+        {isFetched && <QRCode value={qrcode} size={100} />}
         <MainButton
-          onClick={() => handleClickButton(LoginType.KLIP)}
+          onClick={klipLogin}
           value="Connect With Kakao Klip"
           buttonStyle={{ margin: 0 }}
         />

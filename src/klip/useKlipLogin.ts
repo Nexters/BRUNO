@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
@@ -39,6 +40,7 @@ export const useKlipPrepare = () => {
 };
 
 export const useKlipLogin = () => {
+  const navigate = useNavigate();
   const klip = useRecoilValue(klipAuthAtom);
   const setAddress = useSetRecoilState(klipAddressAtom);
 
@@ -50,6 +52,7 @@ export const useKlipLogin = () => {
         const { status, result } = data;
         if (status === KlipApiStatus.COMPLETED && result?.klaytn_address) {
           setAddress(result.klaytn_address);
+          navigate('/');
         }
       },
       enabled: false,
