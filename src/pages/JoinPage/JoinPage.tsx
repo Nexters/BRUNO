@@ -4,13 +4,12 @@ import LoginForm from '@src/components/LoginForm';
 import PageLayout from '@src/components/shared/PageLayout';
 import { LoginType } from '@src/components/LoginForm/type';
 
-function KlipLoginPage() {
+function JoinPage() {
   const [profileId, setProfileId] = useState('');
 
-  const handleClickLogin = useCallback(async () => {
-    // TODO : klip 로그인 연동 ?!
-    if (!profileId) return null;
-  }, []);
+  const handleClickLogin = async () => {
+    console.log(profileId);
+  };
 
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setProfileId(e.target.value);
@@ -27,4 +26,4 @@ function KlipLoginPage() {
   );
 }
 
-export default KlipLoginPage;
+export default JoinPage;
