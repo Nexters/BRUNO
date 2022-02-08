@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import CategoryButton from '@src/components/shared/CategoryButton';
-import { CATEGORIES, COLORS } from './const';
+import { CATEGORIES, COLORS } from '../shared/const';
 
 const Wrapper = styled.div`
   display: flex;
