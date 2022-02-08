@@ -1,9 +1,14 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import LoginPage from '@src/pages/LoginPage';
 import JoinPage from '@src/pages/JoinPage';
+import { useLogin } from '@src/hooks';
 
 function Auth() {
+  const { isLoggedIn } = useLogin();
+
+  if (isLoggedIn) return <Navigate to="/" />;
+
   return (
     <Routes>
       <Route path="/" element={<LoginPage />} />

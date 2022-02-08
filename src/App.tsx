@@ -26,7 +26,7 @@ function App() {
             <Routes>
               {/* Authentication이 필요한 경우 PrivateRoute로 감싸주어야 함 */}
               <Route path="/login/*" element={<Auth />} />
-              <Route path="/" element={<PrivateRoute component={<Main />} />} />
+              <Route path="*" element={<PrivateRoute component={<Main />} />} />
               <Route
                 path="/user/*"
                 element={<PrivateRoute component={<User />} />}
