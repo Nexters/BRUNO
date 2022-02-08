@@ -96,6 +96,7 @@ function CreateCookiePage() {
                 key={`CATEGORY_${index}`}
                 category={category}
                 color={COLORS[index % COLORS.length]}
+                isSelected={false}
               />
             ))}
           </CategoryWrapper>
