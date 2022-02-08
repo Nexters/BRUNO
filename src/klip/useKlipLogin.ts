@@ -20,17 +20,21 @@ import { KlipApiStatus } from './types';
  */
 
 export const openDeepLink = (reqKey: string) => {
+  console.log('hi');
   web2app({
     urlScheme: `kakaotalk://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=${reqKey}`,
     intentURI: `intent://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=${reqKey}#Intent;scheme=kakaotalk;package=com.kakao.talk;end`,
     appName: 'COOKIEPANG',
     storeURL: 'itms-apps://itunes.apple.com/app/id362057947',
+    willInvokeApp: () => {
+      console.log('hi');
+    },
   });
 };
 
 export const useKlipPrepare = () => {
   const setKlip = useSetRecoilState(klipAuthAtom);
-  const { isFetched } = useQuery(['klip', 'prepare'], postKlipAuth, {
+  const { isFetched, data } = useQuery(['klip', 'prepare'], postKlipAuth, {
     onSuccess: (data) => {
       const { request_key: requestKey, expiration_time: expirationTime } =
         data.data;
@@ -38,7 +42,7 @@ export const useKlipPrepare = () => {
     },
   });
 
-  return { isFetched };
+  return { isFetched, requestKey: data?.data?.request_key };
 };
 
 export const useKlipLogin = () => {
