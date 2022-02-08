@@ -1,4 +1,5 @@
 import { RecoilRoot } from 'recoil';
+import { CookiesProvider } from 'react-cookie';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -17,19 +18,21 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/login/*" element={<Auth />} />
-            <Route path="/user/*" element={<User />} />
-          </Routes>
-        </BrowserRouter>
-      </RecoilRoot>
-      {/* dev tool 제거 시 아래 line comment out! */}
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <CookiesProvider>
+      <QueryClientProvider client={queryClient}>
+        <RecoilRoot>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route path="/login/*" element={<Auth />} />
+              <Route path="/user/*" element={<User />} />
+            </Routes>
+          </BrowserRouter>
+        </RecoilRoot>
+        {/* dev tool 제거 시 아래 line comment out! */}
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </CookiesProvider>
   );
 }
 
