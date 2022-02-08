@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import Main from '@src/routes/Main';
 import Auth from '@src/routes/Auth';
 import User from '@src/routes/User';
+import PrivateRoute from './routes/PrivateRoute';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,9 +24,13 @@ function App() {
         <RecoilRoot>
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Main />} />
+              {/* Authentication이 필요한 경우 PrivateRoute로 감싸주어야 함 */}
               <Route path="/login/*" element={<Auth />} />
-              <Route path="/user/*" element={<User />} />
+              <Route path="/" element={<PrivateRoute component={<Main />} />} />
+              <Route
+                path="/user/*"
+                element={<PrivateRoute component={<User />} />}
+              />
             </Routes>
           </BrowserRouter>
         </RecoilRoot>
