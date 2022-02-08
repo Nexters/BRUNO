@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useCookies } from 'react-cookie';
 
-import { klipAuthAtom, klipAddressAtom } from '@src/recoil/auth';
+import { klipAuthAtom } from '@src/recoil/auth';
 import { web2app } from '@src/utils/web2app';
+import { CookieName } from '@src/hooks';
 import { postKlipAuth, getKlipResult } from './axios';
 import { KlipApiStatus } from './types';
 
@@ -40,9 +42,9 @@ export const useKlipPrepare = () => {
 };
 
 export const useKlipLogin = () => {
+  const [_, setCookie] = useCookies([CookieName.KLIP_ADDRESS]);
   const navigate = useNavigate();
   const klip = useRecoilValue(klipAuthAtom);
-  const setAddress = useSetRecoilState(klipAddressAtom);
 
   const { isFetched, refetch } = useQuery(
     ['klip', 'result'],
@@ -51,7 +53,7 @@ export const useKlipLogin = () => {
       onSuccess: ({ data }) => {
         const { status, result } = data;
         if (status === KlipApiStatus.COMPLETED && result?.klaytn_address) {
-          setAddress(result.klaytn_address);
+          setCookie(CookieName.KLIP_ADDRESS, result.klaytn_address);
           navigate('/');
         }
       },
