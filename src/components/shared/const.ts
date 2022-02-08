@@ -1,6 +1,7 @@
 import { theme } from '@src/assets/styles';
 
 export const CATEGORIES = [
+  'All',
   'Free Chat',
   'Love',
   'Invest',
