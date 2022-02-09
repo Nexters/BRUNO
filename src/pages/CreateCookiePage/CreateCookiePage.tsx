@@ -2,31 +2,25 @@ import { useState, ChangeEvent } from 'react';
 
 import PageLayout from '@src/components/shared/PageLayout';
 import MainButton from '@src/components/shared/MainButton';
+import Header from '@src/components/Header';
+import Navigation from '@src/components/Navigation';
+import CategoryButton from '@src/components/shared/CategoryButton';
+import { CATEGORIES, COLORS } from '@src/components/shared/const';
+import { LABEL_TEXT_MAP } from './const';
+
 import {
+  Container,
+  Wrapper,
+  AnswerWrapper,
   Label,
-  Section,
   QuestionInput,
-  AnswerSection,
   AnswerInput,
   AnswerGuide,
   HammerPriceWrapper,
-  HammperPrice,
+  HammerPrice,
   HammerControlButton,
   CategoryWrapper,
-  CategoryButton,
-  CreateButtonStyle,
 } from './styled';
-
-const CATEGORIES = [
-  '자유',
-  '투자정보',
-  '비밀',
-  '취업정보',
-  '연애',
-  '19금',
-  '맛집탐방',
-  '친구',
-];
 
 function CreateCookiePage() {
   const [cookieInfo, setCookieInfo] = useState({
@@ -51,58 +45,64 @@ function CreateCookiePage() {
     }));
   };
 
-  const handleClickCategory = (value: string) => {
-    setCookieInfo({ ...cookieInfo, category: value });
-  };
+  // const handleClickCategory = (value: string) => {
+  //   setCookieInfo({ ...cookieInfo, category: value });
+  // };
 
   return (
     <PageLayout>
-      <Section>
-        <Label>질문</Label>
-        <QuestionInput
-          value={cookieInfo.question}
-          placeholder="묻고 싶은 질문을 입력해주세요"
-          isEmpty={!cookieInfo.question}
-          onChange={(e) => handleChangeInput(e, 'question')}
-        />
-      </Section>
-      <AnswerSection>
-        <Label>답변</Label>
-        <AnswerInput
-          value={cookieInfo.answer}
-          placeholder="답변을 입력해주세요"
-          hasQuestion={!!cookieInfo.question}
-          onChange={(e) => handleChangeInput(e, 'answer')}
-        />
-        <AnswerGuide>*대답 부분이 쿠키로 만들어질 예정이예요.</AnswerGuide>
-      </AnswerSection>
-      <Section>
-        <Label>망치 가격</Label>
-        <HammerPriceWrapper>
-          <HammerControlButton onClick={() => handleHammerPrice(false)}>
-            -
-          </HammerControlButton>
-          <HammperPrice>{cookieInfo.hammer}</HammperPrice>
-          <HammerControlButton onClick={() => handleHammerPrice(true)}>
-            +
-          </HammerControlButton>
-        </HammerPriceWrapper>
-      </Section>
-      <Section>
-        <Label>카테고리</Label>
-        <CategoryWrapper>
-          {CATEGORIES.map((value) => (
-            <CategoryButton
-              key={value}
-              isSelected={value === cookieInfo.category}
-              onClick={() => handleClickCategory(value)}
-            >
-              {value}
-            </CategoryButton>
-          ))}
-        </CategoryWrapper>
-      </Section>
-      <MainButton value="쿠키 만들기" buttonStyle={CreateButtonStyle} />
+      <Header />
+      <Navigation />
+
+      <Container>
+        <Wrapper>
+          <Label>{LABEL_TEXT_MAP.question}</Label>
+          <QuestionInput
+            value={cookieInfo.question}
+            isEmpty={!cookieInfo.question}
+            onChange={(e) => handleChangeInput(e, 'question')}
+          />
+        </Wrapper>
+
+        <AnswerWrapper>
+          <Label>{LABEL_TEXT_MAP.answer}</Label>
+          <AnswerInput
+            value={cookieInfo.answer}
+            hasQuestion={!!cookieInfo.question}
+            onChange={(e) => handleChangeInput(e, 'answer')}
+          />
+          <AnswerGuide>*Answer is converted into cookies.</AnswerGuide>
+        </AnswerWrapper>
+
+        <Wrapper>
+          <Label>{LABEL_TEXT_MAP.cost}</Label>
+          <HammerPriceWrapper>
+            <HammerControlButton onClick={() => handleHammerPrice(false)}>
+              -
+            </HammerControlButton>
+            <HammerPrice>{cookieInfo.hammer}</HammerPrice>
+            <HammerControlButton onClick={() => handleHammerPrice(true)}>
+              +
+            </HammerControlButton>
+          </HammerPriceWrapper>
+        </Wrapper>
+
+        <Wrapper>
+          <Label>{LABEL_TEXT_MAP.category}</Label>
+          <CategoryWrapper>
+            {CATEGORIES.map((category, index) => (
+              <CategoryButton
+                // eslint-disable-next-line react/no-array-index-key
+                key={`CATEGORY_${index}`}
+                category={category}
+                color={COLORS[index % COLORS.length]}
+                isSelected={false}
+              />
+            ))}
+          </CategoryWrapper>
+          <MainButton value="Make a Cookie" />
+        </Wrapper>
+      </Container>
     </PageLayout>
   );
 }

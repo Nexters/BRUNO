@@ -1,14 +1,14 @@
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import Icon, { ArrowElbowDownRight, Hammer24, View24 } from '@src/assets/Icon';
 import { NFTImage01 } from '@src/assets/images';
 import { theme } from '@src/assets/styles';
-import styled from 'styled-components';
 import { FeedProps } from './type';
 
 const Wrapper = styled.div`
   width: 100%;
   margin-top: 16px;
-  padding: 10px 16px;
+  padding: 8px 16px;
   background-color: #1a1c2c;
   border-radius: 8px;
 `;
@@ -25,15 +25,15 @@ const QuestionWrapper = styled.div`
 
 const AnswerWrapper = styled.div`
   display: flex;
-  justify-contents: flex-start;
-  margin-top: 16px;
+  justify-content: flex-start;
+  margin-top: 14px;
   margin-left: 20px;
 `;
 
 const InfoWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-contents: center;
+  align-items: center;
   height: 24px;
   font-weight: bold;
   font-size: 13px;

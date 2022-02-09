@@ -31,7 +31,7 @@ export const theme = {
     large: '18px',
     body01: '16px',
     body02: '14px',
-    caption: '12px',
+    caption: '13px',
   },
   height: {
     header: '69px',
