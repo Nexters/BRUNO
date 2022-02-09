@@ -28,6 +28,7 @@ export default function Feed({ id, question, user, viewCount, hammer }: Props) {
       <Container>
         <UserInfo profile={profile} name={name} />
         <FeedContent
+          id={id}
           question={question}
           viewCount={viewCount}
           hammer={hammer}

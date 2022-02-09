@@ -28,7 +28,7 @@ const ViewCountText = styled.span`
   color: ${(props) => props.theme.colors.gray60};
 `;
 
-export default function CookieDetailPage() {
+function CookieDetailPage() {
   return (
     <PageLayout>
       <Header />
@@ -36,7 +36,7 @@ export default function CookieDetailPage() {
 
       <Wrapper>
         <CategoryWrapper>
-          <CategoryButton category="Free Chat" color="#3E6DFE" />
+          <CategoryButton isSelected category="Free Chat" color="#3E6DFE" />
 
           <ViewCountWrapper>
             <Icon color={theme.colors.gray60}>
@@ -51,3 +51,5 @@ export default function CookieDetailPage() {
     </PageLayout>
   );
 }
+
+export default CookieDetailPage;
