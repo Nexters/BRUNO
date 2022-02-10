@@ -37,6 +37,23 @@ export const theme = {
     header: '69px',
     nav: '48px',
   },
+  text: {
+    ellipsis: (line: number) => {
+      if (line === 1 || !line)
+        return {
+          overflow: 'hidden',
+          'text-overflow': 'ellipsis',
+          'white-space': 'nowrap',
+        };
+      return {
+        display: '-webkit-box',
+        overflow: 'hidden',
+        'text-overflow': 'ellipsis',
+        '-webkit-box-orient': 'vertical',
+        '-webkit-line-clamp': String(line),
+      };
+    },
+  },
 } as const;
 
 export type ThemeType = typeof theme;

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+import { rgba } from 'polished';
 import { Button as button } from '@src/components/shared/MainButton';
+import { theme } from '@src/assets/styles';
 
 export const Container = styled.div`
   position: fixed;
@@ -18,8 +20,7 @@ export const ModalWrapper = styled.div`
   height: 100%;
   margin: 0 auto;
   padding: 0 20px;
-  background-color: rgba(0, 0, 0, 0.5);
-  /* TODO : bg color dimmed 수정 */
+  background-color: ${(props) => rgba(props.theme.colors.gray00, 0.75)};
 `;
 
 export const ModalBox = styled.div`
@@ -45,6 +46,7 @@ export const DescriptionLabel = styled.div`
   margin-top: 9px;
   white-space: pre-wrap;
   text-align: center;
+  ${theme.text.ellipsis(2)}
 `;
 
 export const ButtonWrapper = styled.div`
