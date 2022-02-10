@@ -1,4 +1,4 @@
-import UserPhoto from '@src/components/UserPhoto';
+import UserPhoto from './UserPhoto';
 import BioSection from './BioSection';
 
 interface Props {
