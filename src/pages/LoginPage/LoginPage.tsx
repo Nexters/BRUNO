@@ -5,9 +5,12 @@ import QRCode from 'react-qr-code';
 
 import PageLayout from '@src/components/shared/PageLayout';
 import MainButton from '@src/components/shared/MainButton';
+import Modal from '@src/components/shared/Modal';
 import { useKlipPrepare, useKlipLogin, openDeepLink } from '@src/klip';
 import { getKlipQrcodeSelector } from '@src/recoil/auth';
 import { useLogin } from '@src/hooks';
+import { LoginStage } from './types';
+import { LOGIN_MODAL_LABEL } from './const';
 
 const BottomWrapper = styled.div`
   width: 100%;
@@ -18,31 +21,31 @@ const BottomWrapper = styled.div`
   margin-bottom: 40px;
 `;
 
-enum LoginStage {
-  INITIAL = 'inital',
-  PREPARE = 'prepare',
-  REQUEST = 'request',
-  RESULT = 'result',
-}
-
 function LoginPage() {
-  const [loginStage, setLoginStage] = useState(LoginStage.INITIAL);
-  const { isFetched, requestKey } = useKlipPrepare();
   const { isMobile } = useLogin();
-  const { refetch: klipLogin } = useKlipLogin();
+  const { isFetched, requestKey } = useKlipPrepare();
+  const { refetch: klipLogin, isRequestFail } = useKlipLogin();
+
+  const [loginStage, setLoginStage] = useState(LoginStage.INITIAL);
   const qrcode = useRecoilValue(getKlipQrcodeSelector);
 
   useEffect(() => {
     if (isFetched) setLoginStage(LoginStage.PREPARE);
   }, [isFetched]);
 
+  useEffect(() => {
+    if (isFetched) setLoginStage(LoginStage.REQUEST_FAIL);
+  }, [isRequestFail]);
+
+  const requestKlipLogin = () => {
+    if (isMobile) openDeepLink(requestKey);
+    else klipLogin();
+  };
+
   const handleClickButton = () => {
     if (loginStage === LoginStage.PREPARE) {
-      if (isMobile) openDeepLink(requestKey);
-      else klipLogin();
+      requestKlipLogin();
       setLoginStage(LoginStage.REQUEST);
-    } else if (loginStage === LoginStage.REQUEST) {
-      klipLogin();
     }
   };
 
@@ -56,6 +59,18 @@ function LoginPage() {
           buttonStyle={{ margin: 0 }}
         />
       </BottomWrapper>
+      <Modal
+        label={LOGIN_MODAL_LABEL[loginStage]}
+        open={loginStage === LoginStage.REQUEST}
+        onClickYes={klipLogin}
+        onClickNo={() => setLoginStage(LoginStage.PREPARE)}
+      />
+      <Modal
+        label={LOGIN_MODAL_LABEL[loginStage]}
+        open={loginStage === LoginStage.REQUEST_FAIL}
+        onClickYes={requestKlipLogin}
+        onClickNo={() => setLoginStage(LoginStage.PREPARE)}
+      />
     </PageLayout>
   );
 }

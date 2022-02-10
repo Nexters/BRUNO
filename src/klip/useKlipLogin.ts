@@ -50,7 +50,7 @@ export const useKlipLogin = () => {
   const navigate = useNavigate();
   const klip = useRecoilValue(klipAuthAtom);
 
-  const { isFetched, refetch } = useQuery(
+  const { isFetched, refetch, data } = useQuery(
     ['klip', 'result'],
     () => getKlipResult(klip.requestKey),
     {
@@ -65,5 +65,10 @@ export const useKlipLogin = () => {
     },
   );
 
-  return { isFetched, refetch, openDeepLink };
+  return {
+    isFetched,
+    refetch,
+    openDeepLink,
+    isRequestFail: isFetched && data?.data?.status === KlipApiStatus.PREPARED,
+  };
 };
