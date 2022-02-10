@@ -1,20 +1,11 @@
-import { NAVIGATION_HEIGHT } from '@src/assets/styles';
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: calc(100vh - ${NAVIGATION_HEIGHT}px);
-  padding: 16px 0;
-`;
-
 export const Wrapper = styled.div`
-  margin-bottom: 16px;
+  margin: 16px 0;
   padding: 0 20px;
 `;
 export const AnswerWrapper = styled.div`
-  background-color: #1a1c2c;
+  background-color: ${(props) => props.theme.colors.gray20};
   margin-bottom: 16px;
   padding: 20px 20px 16px 20px;
 `;

@@ -4,12 +4,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import IconButton from '../shared/IconButton';
 
-const Wrapper = styled.nav`
+const Root = styled.nav`
   bottom: 0;
   position: absolute;
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 100%;
+  max-width: 700px;
   height: 48px;
   background-color: ${(props) => props.theme.colors.gray10};
 `;
@@ -52,7 +53,7 @@ export default function Navigation() {
 
   return (
     <>
-      <Wrapper>
+      <Root>
         <ButtonWrapper>
           <IconButton onClick={handleClickHome}>
             <Icon color={theme.colors.gray100}>
@@ -68,7 +69,7 @@ export default function Navigation() {
             </Icon>
           </IconButton>
         </ButtonWrapper>
-      </Wrapper>
+      </Root>
 
       <WriteButton onClick={handleClickWrite}>
         <Icon color={theme.colors.gray100}>

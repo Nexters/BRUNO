@@ -1,8 +1,14 @@
 import { ChangeEvent, useCallback, useState } from 'react';
+import styled from 'styled-components';
 
 import LoginForm from '@src/components/LoginForm';
-import PageLayout from '@src/components/shared/PageLayout';
 import { LoginType } from '@src/components/LoginForm/type';
+
+const Root = styled.div`
+  width: 100%;
+  display: flex;
+  padding: 20px;
+`;
 
 function JoinPage() {
   const [profileId, setProfileId] = useState('');
@@ -16,13 +22,13 @@ function JoinPage() {
   }, []);
 
   return (
-    <PageLayout padding="20px">
+    <Root>
       <LoginForm
         type={LoginType.KLIP}
         onClickLoginButton={handleClickLogin}
         onChangeInput={handleChange}
       />
-    </PageLayout>
+    </Root>
   );
 }
 

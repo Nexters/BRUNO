@@ -3,12 +3,9 @@ import styled from 'styled-components';
 import Icon, { View24 } from '@src/assets/Icon';
 import { theme } from '@src/assets/styles';
 import CookieInfo from '@src/components/CookieInfo';
-import Header from '@src/components/Header';
-import Navigation from '@src/components/Navigation';
 import CategoryButton from '@src/components/shared/CategoryButton';
 import PageLayout from '@src/components/shared/PageLayout';
 import { cookieInfoType, historyType } from '.';
-import { Container } from '../CreateCookiePage/styled';
 
 const CategoryWrapper = styled.div`
   display: flex;
@@ -76,32 +73,27 @@ function CookieDetailPage() {
 
   if (!cookieInfo || !history) return null;
   return (
-    <PageLayout>
-      <Header />
-      <Navigation />
+    <>
+      <CategoryWrapper>
+        <CategoryButton isSelected category={category} color="#3E6DFE" />
 
-      <Container>
-        <CategoryWrapper>
-          <CategoryButton isSelected category={category} color="#3E6DFE" />
+        <ViewCountWrapper>
+          <Icon color={theme.colors.gray60}>
+            <View24 />
+          </Icon>
+          <ViewCountText>{viewCount}</ViewCountText>
+        </ViewCountWrapper>
+      </CategoryWrapper>
 
-          <ViewCountWrapper>
-            <Icon color={theme.colors.gray60}>
-              <View24 />
-            </Icon>
-            <ViewCountText>{viewCount}</ViewCountText>
-          </ViewCountWrapper>
-        </CategoryWrapper>
-
-        <CookieInfo
-          question={question}
-          hammer={hammer}
-          collector={collector}
-          creator={creator}
-          cookieInfo={cookieInfo}
-          history={history}
-        />
-      </Container>
-    </PageLayout>
+      <CookieInfo
+        question={question}
+        hammer={hammer}
+        collector={collector}
+        creator={creator}
+        cookieInfo={cookieInfo}
+        history={history}
+      />
+    </>
   );
 }
 
