@@ -1,25 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import styled from 'styled-components';
 import QRCode from 'react-qr-code';
 
 import PageLayout from '@src/components/shared/PageLayout';
 import MainButton from '@src/components/shared/MainButton';
 import Modal from '@src/components/shared/Modal';
+import { AppTitle } from '@src/components/Header/Header';
+import { MainLogo01 } from '@src/assets/images';
 import { useKlipPrepare, useKlipLogin, openDeepLink } from '@src/klip';
 import { getKlipQrcodeSelector } from '@src/recoil/auth';
 import { useLogin } from '@src/hooks';
+
+import { BottomWrapper, LogoWrapper, Logo, SubText } from './styled';
 import { LoginStage } from './types';
 import { LOGIN_MODAL_LABEL } from './const';
-
-const BottomWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: auto;
-  margin-bottom: 40px;
-`;
 
 function LoginPage() {
   const { isMobile } = useLogin();
@@ -34,7 +28,7 @@ function LoginPage() {
   }, [isFetched]);
 
   useEffect(() => {
-    if (isFetched) setLoginStage(LoginStage.REQUEST_FAIL);
+    if (isRequestFail) setLoginStage(LoginStage.REQUEST_FAIL);
   }, [isRequestFail]);
 
   const requestKlipLogin = () => {
@@ -50,12 +44,28 @@ function LoginPage() {
   };
 
   return (
-    <PageLayout padding="40px 20px" layoutStyle={{ display: 'flex' }}>
+    <PageLayout
+      padding="40px 20px"
+      layoutStyle={{
+        display: 'flex',
+        'flex-direction': 'column',
+        'align-items': 'center',
+      }}
+    >
+      <LogoWrapper>
+        <Logo src={MainLogo01} />
+        <AppTitle>Cookie Pang</AppTitle>
+        <SubText>
+          {
+            '다른 사람의 비밀을 구매하고\n나만의 비밀로 포춘 쿠키를 만들어보세요.'
+          }
+        </SubText>
+      </LogoWrapper>
       <BottomWrapper>
         {isFetched && !isMobile && <QRCode value={qrcode} size={100} />}
         <MainButton
           onClick={handleClickButton}
-          value="Connect With Kakao Klip"
+          value="카카오 Klip 으로 연동하기"
           buttonStyle={{ margin: 0 }}
         />
       </BottomWrapper>
