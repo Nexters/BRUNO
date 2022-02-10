@@ -26,6 +26,7 @@ export const Button = styled.button<{ buttonStyle?: string }>`
 interface MainButtonProps {
   value: string;
   onClick?: () => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   buttonStyle?: any;
 }
 

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 interface PageLayoutProps {
   children: ReactNode;
   padding?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   layoutStyle?: any;
 }
 
