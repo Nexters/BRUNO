@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useCookies } from 'react-cookie';
 
-import { klipAuthAtom, klipAddressAtom } from '@src/recoil/auth';
+import { klipAuthAtom } from '@src/recoil/auth';
 import { web2app } from '@src/utils/web2app';
+import { CookieName } from '@src/hooks';
 import { postKlipAuth, getKlipResult } from './axios';
 import { KlipApiStatus } from './types';
 
@@ -18,17 +20,21 @@ import { KlipApiStatus } from './types';
  */
 
 export const openDeepLink = (reqKey: string) => {
+  console.log('hi');
   web2app({
     urlScheme: `kakaotalk://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=${reqKey}`,
     intentURI: `intent://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=${reqKey}#Intent;scheme=kakaotalk;package=com.kakao.talk;end`,
     appName: 'COOKIEPANG',
     storeURL: 'itms-apps://itunes.apple.com/app/id362057947',
+    willInvokeApp: () => {
+      console.log('hi');
+    },
   });
 };
 
 export const useKlipPrepare = () => {
   const setKlip = useSetRecoilState(klipAuthAtom);
-  const { isFetched } = useQuery(['klip', 'prepare'], postKlipAuth, {
+  const { isFetched, data } = useQuery(['klip', 'prepare'], postKlipAuth, {
     onSuccess: (data) => {
       const { request_key: requestKey, expiration_time: expirationTime } =
         data.data;
@@ -36,13 +42,13 @@ export const useKlipPrepare = () => {
     },
   });
 
-  return { isFetched };
+  return { isFetched, requestKey: data?.data?.request_key };
 };
 
 export const useKlipLogin = () => {
+  const [_, setCookie] = useCookies([CookieName.KLIP_ADDRESS]);
   const navigate = useNavigate();
   const klip = useRecoilValue(klipAuthAtom);
-  const setAddress = useSetRecoilState(klipAddressAtom);
 
   const { isFetched, refetch } = useQuery(
     ['klip', 'result'],
@@ -51,7 +57,7 @@ export const useKlipLogin = () => {
       onSuccess: ({ data }) => {
         const { status, result } = data;
         if (status === KlipApiStatus.COMPLETED && result?.klaytn_address) {
-          setAddress(result.klaytn_address);
+          setCookie(CookieName.KLIP_ADDRESS, result.klaytn_address);
           navigate('/');
         }
       },
