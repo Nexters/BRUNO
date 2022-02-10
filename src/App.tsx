@@ -1,7 +1,7 @@
 import { RecoilRoot } from 'recoil';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+// import { ReactQueryDevtools } from 'react-query/devtools';
 
 import Main from '@src/routes/Main';
 import Auth from '@src/routes/Auth';
@@ -21,14 +21,14 @@ function App() {
       <RecoilRoot>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Main />} />
+            <Route path="*" element={<Main />} />
             <Route path="/login/*" element={<Auth />} />
             <Route path="/user/*" element={<User />} />
           </Routes>
         </BrowserRouter>
       </RecoilRoot>
       {/* dev tool 제거 시 아래 line comment out! */}
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }

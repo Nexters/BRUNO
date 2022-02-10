@@ -1,6 +1,5 @@
+import { NAVIGATION_HEIGHT } from '@src/assets/styles';
 import styled from 'styled-components';
-
-const NAVIGATION_HEIGHT = 68;
 
 export const Container = styled.div`
   display: flex;
