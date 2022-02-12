@@ -44,9 +44,9 @@ export const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
     /* width > 700px */
   }
   ${MEDIA_QUERY.mobile} {
-    /* width > 360px */
+    /* width > 320px */
   }
   ${MEDIA_QUERY.small} {
-    /* width < 360px */
+    /* width < 320px */
   }
 `;
