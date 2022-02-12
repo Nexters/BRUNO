@@ -22,6 +22,10 @@ export const theme = {
     main: 'linear-gradient(180deg, #00011C 0%, #000002 97.4%)',
     button00: 'linear-gradient(90deg, #336FFF -2.24%, #E44AEB 100%);',
     button01: 'linear-gradient(90deg, #336FFF -2.24%, #E44AEB 100%);',
+    style01: 'linear-gradient(180deg, #92e4d3 0%, #a43ad4 100%)',
+    style02:
+      'linear-gradient(180deg, #4A9FEE 0%, #69B4B9 43.75%, #6653DA 100%)',
+    style03: 'linear-gradient(180deg, #E4DD5F 0%, #56D9CC 100%)',
   },
   fontSize: {
     head01: '32px',
@@ -39,18 +43,18 @@ export const theme = {
   },
   text: {
     ellipsis: (line: number) => {
-      if (line === 1 || !line)
+      if (line > 1)
         return {
+          display: '-webkit-box',
           overflow: 'hidden',
           'text-overflow': 'ellipsis',
-          'white-space': 'nowrap',
+          '-webkit-box-orient': 'vertical',
+          '-webkit-line-clamp': String(line),
         };
       return {
-        display: '-webkit-box',
         overflow: 'hidden',
         'text-overflow': 'ellipsis',
-        '-webkit-box-orient': 'vertical',
-        '-webkit-line-clamp': String(line),
+        'white-space': 'nowrap',
       };
     },
   },

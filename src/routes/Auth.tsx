@@ -11,7 +11,7 @@ function Auth() {
 
   return (
     <Routes>
-      <Route path="/" element={<LoginPage />} />
+      <Route path="/login" element={<LoginPage />} />
       <Route path="/join" element={<JoinPage />} />
     </Routes>
   );

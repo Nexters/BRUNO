@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import QRCode from 'react-qr-code';
 
-import PageLayout from '@src/components/shared/PageLayout';
 import MainButton from '@src/components/shared/MainButton';
 import Modal from '@src/components/shared/Modal';
 import { AppTitle } from '@src/components/Header/Header';
@@ -11,7 +10,7 @@ import { useKlipPrepare, useKlipLogin, openDeepLink } from '@src/klip';
 import { getKlipQrcodeSelector } from '@src/recoil/auth';
 import { useLogin } from '@src/hooks';
 
-import { BottomWrapper, LogoWrapper, Logo, SubText } from './styled';
+import { Root, BottomWrapper, LogoWrapper, Logo, SubText } from './styled';
 import { LoginStage } from './types';
 import { LOGIN_MODAL_LABEL } from './const';
 
@@ -44,14 +43,13 @@ function LoginPage() {
   };
 
   return (
-    <PageLayout
-      padding="40px 20px"
-      layoutStyle={{
-        display: 'flex',
-        'flex-direction': 'column',
-        'align-items': 'center',
-      }}
-    >
+    // padding="40px 20px"
+    // layoutStyle={{
+    //   display: 'flex',
+    //   'flex-direction': 'column',
+    //   'align-items': 'center',
+    // }}
+    <Root>
       <LogoWrapper>
         <Logo src={MainLogo01} />
         <AppTitle>Cookie Pang</AppTitle>
@@ -81,7 +79,7 @@ function LoginPage() {
         onClickYes={requestKlipLogin}
         onClickNo={() => setLoginStage(LoginStage.PREPARE)}
       />
-    </PageLayout>
+    </Root>
   );
 }
 

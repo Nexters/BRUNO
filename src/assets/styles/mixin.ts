@@ -9,3 +9,5 @@ export const MEDIA_QUERY = {
   small: `@media screen and (max-width: ${MEDIA_SIZE.small}px)`,
   mobile: `@media screen and (max-width: ${MEDIA_SIZE.mobile}px)`,
 };
+
+export const NAVIGATION_HEIGHT = 68;

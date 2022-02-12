@@ -1,37 +1,46 @@
-// import { useEffect } from 'react';
 import styled from 'styled-components';
+import { theme } from '@src/assets/styles';
+import ResponseButton from './ResponseButton';
 
 const Wrapper = styled.div`
-  min-height: 125px;
+  min-height: 76px;
   margin: 0 20px;
-  padding: 16px 24px;
-  border-radius: 10px;
-  background-color: ${(props) => props.theme.colors.gray90};
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: ${(props) => props.theme.colors.gray20};
+  font-size: ${(props) => props.theme.fontSize.body01};
+  color: ${(props) => props.theme.colors.gray90};
   & + & {
     margin-top: 16px;
   }
 `;
 
+const LabelWrapper = styled.div`
+  display: flex;
+  gap: 8px;
+`;
+
 const Label = styled.span`
-  margin-bottom: 8px;
-  font-size: ${(props) => props.theme.fontSize.large};
   font-weight: 700;
-  color: ${(props) => props.theme.colors.gray50};
 `;
 
 const Question = styled.div`
-  font-size: ${(props) => props.theme.fontSize.body01};
+  ${theme.text.ellipsis(2)}
 `;
 
 interface Props {
   question: string;
+  isMy: boolean;
 }
 
-function RequestItem({ question }: Props) {
+function RequestItem({ question, isMy }: Props) {
   return (
     <Wrapper>
-      <Label>Q</Label>
-      <Question>{question}</Question>
+      <LabelWrapper>
+        <Label>Q.</Label>
+        <Question>{question}</Question>
+      </LabelWrapper>
+      {isMy && <ResponseButton />}
     </Wrapper>
   );
 }
