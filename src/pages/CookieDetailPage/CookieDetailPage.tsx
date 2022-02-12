@@ -4,8 +4,7 @@ import Icon, { View24 } from '@src/assets/Icon';
 import { theme } from '@src/assets/styles';
 import CookieInfo from '@src/components/CookieInfo';
 import CategoryButton from '@src/components/shared/CategoryButton';
-import PageLayout from '@src/components/shared/PageLayout';
-import { cookieInfoType, historyType } from '.';
+import { CookieInfoType, HistoryType } from '.';
 
 const CategoryWrapper = styled.div`
   display: flex;
@@ -34,8 +33,8 @@ function CookieDetailPage() {
 
   const [collector, setCollector] = useState<string>('');
   const [creator, setCreator] = useState<string>('');
-  const [cookieInfo, setCookieInfo] = useState<cookieInfoType>();
-  const [history, setHistory] = useState<historyType>();
+  const [cookieInfo, setCookieInfo] = useState<CookieInfoType>();
+  const [history, setHistory] = useState<HistoryType>();
 
   useEffect(() => {
     // to do: 쿠키 상세 정보 가져오기

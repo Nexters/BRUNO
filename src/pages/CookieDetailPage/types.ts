@@ -1,17 +1,17 @@
-export type cookieInfoType = {
+export type CookieInfoType = {
   wallet: string;
   token: string;
 };
 
-type historyPropertyType = {
+type HistoryPropertyType = {
   user: string;
   question: string;
   hammer: number;
   time: string;
 };
 
-export type historyType = {
-  update: historyPropertyType;
-  create: historyPropertyType;
-  purchase: historyPropertyType;
+export type HistoryType = {
+  update: HistoryPropertyType;
+  create: HistoryPropertyType;
+  purchase: HistoryPropertyType;
 };

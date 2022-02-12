@@ -1,7 +1,7 @@
 import { theme } from '@src/assets/styles';
 import Icon, { ArrowElbowDownRight, Hammer24 } from '@src/assets/Icon';
 import { ProfileImage01, ProfileImage02 } from '@src/assets/images';
-import { cookieInfoType, historyType } from '@src/pages/CookieDetailPage';
+import { CookieInfoType, HistoryType } from '@src/pages/CookieDetailPage';
 import MainButton from '../shared/MainButton';
 import {
   AnswerWrapper,
@@ -30,8 +30,8 @@ type Props = {
   hammer: number;
   collector: string;
   creator: string;
-  cookieInfo: cookieInfoType;
-  history: historyType;
+  cookieInfo: CookieInfoType;
+  history: HistoryType;
 };
 
 function CookieInfo({
@@ -46,8 +46,7 @@ function CookieInfo({
     <>
       <CookieArea>
         <QuestionWrapper>
-          <div>Q.</div>
-          <div>{question}</div>
+          <div>Q. {question}</div>
         </QuestionWrapper>
 
         <AnswerWrapper>

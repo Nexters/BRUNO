@@ -1,5 +1,5 @@
 import HomeTab from '@src/components/HomeTab';
-import Feed from '@src/components/Feed';
+import FeedCard from '@src/components/FeedCard';
 
 import styled from 'styled-components';
 
@@ -49,7 +49,7 @@ function HomePage() {
         {Feeds.map((data) => {
           const { id, question, user, viewCount, hammer } = data;
           return (
-            <Feed
+            <FeedCard
               key={id}
               id={id}
               question={question}

@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
 export const Title = styled.p`
-  margin: 0;
-  margin-bottom: 8px;
-  font-weight: bold;
+  margin: 0 0 8px 0;
+  font-weight: 700;
   font-size: ${(props) => props.theme.fontSize.body02};
 `;
 
@@ -18,7 +17,7 @@ export const QuestionWrapper = styled.div`
   flex-direction: row;
   gap: 4px;
   width: 100%;
-  font-weight: bold;
+  font-weight: 700;
   font-size: ${(props) => props.theme.fontSize.body01};
   overflow-x: hidden;
 `;
@@ -45,7 +44,7 @@ export const HammerWrapper = styled.div`
   margin-top: 16px;
 `;
 export const Hammer = styled.span`
-  font-weight: bold;
+  font-weight: 700;
   font-size: ${(props) => props.theme.fontSize.large};
 `;
 export const HammerCount = styled.div`
@@ -53,11 +52,10 @@ export const HammerCount = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 8px;
-  font-weight: bold;
+  font-weight: 700;
   font-size: ${(props) => props.theme.fontSize.title01};
 `;
 export const HammerUnit = styled.span`
-align-self: 
   font-weight: 400;
   font-size: ${(props) => props.theme.fontSize.body01};
 `;
