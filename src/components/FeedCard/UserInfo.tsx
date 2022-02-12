@@ -31,7 +31,7 @@ const Time = styled.p`
   margin: 0;
   font-size: 13px;
   line-height: 20px;
-  color: ${(props) => props.theme.colors.gray60};
+  color: ${(props) => props.theme.colors.basic.gray60};
 `;
 
 export default function UserInfo({ profile, name }: UserType) {

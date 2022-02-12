@@ -20,7 +20,7 @@ export const ModalWrapper = styled.div`
   height: 100%;
   margin: 0 auto;
   padding: 0 20px;
-  background-color: ${(props) => rgba(props.theme.colors.gray00, 0.75)};
+  background-color: ${(props) => rgba(props.theme.colors.basic.gray00, 0.75)};
 `;
 
 export const ModalBox = styled.div`
@@ -32,9 +32,9 @@ export const ModalBox = styled.div`
   margin: auto;
   padding: 16px;
   align-items: center;
-  background-color: ${(props) => props.theme.colors.gray20};
+  background-color: ${(props) => props.theme.colors.basic.gray20};
   border-radius: 24px;
-  color: ${(props) => props.theme.colors.gray90};
+  color: ${(props) => props.theme.colors.basic.gray90};
 `;
 
 export const AskLabel = styled.div`
@@ -62,5 +62,5 @@ export const YesButton = styled(button)`
 
 export const NoButton = styled(YesButton)`
   background: none;
-  background-color: ${(props) => props.theme.colors.gray30};
+  background-color: ${(props) => props.theme.colors.basic.gray30};
 `;

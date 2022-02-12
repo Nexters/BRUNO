@@ -50,7 +50,7 @@ function CookieInfo({
         </QuestionWrapper>
 
         <AnswerWrapper>
-          <Icon color={theme.colors.gray60}>
+          <Icon color={theme.colors.basic.gray60}>
             <ArrowElbowDownRight />
           </Icon>
 
@@ -60,7 +60,7 @@ function CookieInfo({
         <HammerWrapper>
           <Hammer>망치</Hammer>
           <HammerCount>
-            <Icon color={theme.colors.gray60}>
+            <Icon color={theme.colors.basic.gray60}>
               <Hammer24 />
             </Icon>
             {hammer}

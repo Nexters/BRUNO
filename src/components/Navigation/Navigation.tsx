@@ -12,7 +12,7 @@ const Root = styled.nav`
   width: 100%;
   max-width: 700px;
   height: 48px;
-  background-color: ${(props) => props.theme.colors.gray10};
+  background-color: ${(props) => props.theme.colors.basic.gray10};
 `;
 
 const ButtonWrapper = styled.div`
@@ -56,7 +56,7 @@ export default function Navigation() {
       <Root>
         <ButtonWrapper>
           <IconButton onClick={handleClickHome}>
-            <Icon color={theme.colors.gray100}>
+            <Icon color={theme.colors.basic.gray100}>
               <Home24 />
             </Icon>
           </IconButton>
@@ -64,7 +64,7 @@ export default function Navigation() {
 
         <ButtonWrapper>
           <IconButton onClick={handleClickProfile}>
-            <Icon color={theme.colors.gray100}>
+            <Icon color={theme.colors.basic.gray100}>
               <Profile24 />
             </Icon>
           </IconButton>
@@ -72,7 +72,7 @@ export default function Navigation() {
       </Root>
 
       <WriteButton onClick={handleClickWrite}>
-        <Icon color={theme.colors.gray100}>
+        <Icon color={theme.colors.basic.gray100}>
           <Edit24 />
         </Icon>
       </WriteButton>

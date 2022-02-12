@@ -11,7 +11,7 @@ const IconWrapper = styled.div`
   line-height: 0;
 `;
 
-function Icon({ children, color = theme.colors.gray50 }: Props) {
+function Icon({ children, color = theme.colors.basic.gray50 }: Props) {
   return <IconWrapper style={{ stroke: color }}>{children}</IconWrapper>;
 }
 

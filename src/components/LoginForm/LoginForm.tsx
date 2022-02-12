@@ -19,7 +19,7 @@ const Title = styled.div`
   font-size: ${(props) => props.theme.fontSize.head02};
   font-weight: 700;
   white-space: pre-wrap;
-  color: ${(props) => props.theme.colors.gray90};
+  color: ${(props) => props.theme.colors.basic.gray90};
 `;
 
 const BottomWrapper = styled.div`
@@ -31,7 +31,7 @@ const BottomWrapper = styled.div`
 
 const GuideLink = styled.a`
   margin: 9px 0 13px 0;
-  color: ${(props) => props.theme.colors.gray50};
+  color: ${(props) => props.theme.colors.basic.gray50};
 `;
 
 interface Props {

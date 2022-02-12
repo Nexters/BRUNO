@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   width: 100%;
   margin-top: 12px;
   padding: 0 20px;
-  border-bottom: 2px solid ${(props) => props.theme.colors.gray20};
+  border-bottom: 2px solid ${(props) => props.theme.colors.basic.gray20};
 `;
 
 const TABS = [

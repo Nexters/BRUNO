@@ -8,7 +8,7 @@ const Wrapper = styled.div`
 const Label = styled.span`
   font-size: 13px;
   font-weight: 700;
-  color: ${(props) => props.theme.colors.gray90}; ;
+  color: ${(props) => props.theme.colors.basic.gray90}; ;
 `;
 
 const Input = styled.input`
@@ -19,9 +19,9 @@ const Input = styled.input`
   border-radius: 10px;
   border: 1px solid #292a2c;
   font-size: ${(props) => props.theme.fontSize.body01};
-  color: ${(props) => props.theme.colors.gray100};
+  color: ${(props) => props.theme.colors.basic.gray100};
   ::placeholder {
-    color: ${(props) => props.theme.colors.gray40};
+    color: ${(props) => props.theme.colors.basic.gray40};
   }
 `;
 

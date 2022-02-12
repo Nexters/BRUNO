@@ -8,8 +8,8 @@ export const Title = styled.p`
 
 export const CookieArea = styled.div`
   padding: 20px;
-  background-color: ${(props) => props.theme.colors.gray20};
-  color: ${(props) => props.theme.colors.gray90};
+  background-color: ${(props) => props.theme.colors.basic.gray20};
+  color: ${(props) => props.theme.colors.basic.gray90};
 `;
 
 export const QuestionWrapper = styled.div`
@@ -68,7 +68,7 @@ export const CreatorArea = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 30px;
   padding: 20px 16px;
-  color: ${(props) => props.theme.colors.gray90};
+  color: ${(props) => props.theme.colors.basic.gray90};
 `;
 
 export const ProfileWrapper = styled.div`
@@ -100,7 +100,7 @@ export const UserName = styled.span`
 
 export const CookieInfoArea = styled.div`
   padding: 0 16px;
-  color: ${(props) => props.theme.colors.gray90};
+  color: ${(props) => props.theme.colors.basic.gray90};
 `;
 
 export const CookieInfoWrapper = styled.div`
@@ -109,7 +109,7 @@ export const CookieInfoWrapper = styled.div`
   justify-content: space-between;
   margin-top: 4px;
   font-size: ${(props) => props.theme.fontSize.body02};
-  color: ${(props) => props.theme.colors.gray60};
+  color: ${(props) => props.theme.colors.basic.gray60};
 `;
 
 export const CardWrapper = styled.div`
@@ -127,11 +127,11 @@ export const HistoryCard = styled.div`
   background: #1a1c2c;
   border-radius: 10px;
   font-size: ${(props) => props.theme.fontSize.body02};
-  color: ${(props) => props.theme.colors.gray60};
+  color: ${(props) => props.theme.colors.basic.gray60};
 `;
 
 export const Time = styled.p`
   margin: 4px 0 0 0;
   font-size: ${(props) => props.theme.fontSize.caption};
-  color: ${(props) => props.theme.colors.gray50};
+  color: ${(props) => props.theme.colors.basic.gray50};
 `;

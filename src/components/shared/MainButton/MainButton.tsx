@@ -19,7 +19,7 @@ export const Button = styled.button<{ buttonStyle?: string }>`
   font-size: ${(props) => props.theme.fontSize.body02};
   line-height: 160%;
   font-weight: bold;
-  color: ${(props) => props.theme.colors.gray100};
+  color: ${(props) => props.theme.colors.basic.gray100};
   ${(props) => props.buttonStyle};
 `;
 

@@ -7,12 +7,12 @@ const Wrapper = styled.div`
 const Nickname = styled.div`
   font-size: ${(props) => props.theme.fontSize.title02};
   font-weight: 700;
-  color: ${(props) => props.theme.colors.gray90};
+  color: ${(props) => props.theme.colors.basic.gray90};
 `;
 
 const Bio = styled.div`
   font-size: ${(props) => props.theme.fontSize.body01};
-  color: ${(props) => props.theme.colors.gray60};
+  color: ${(props) => props.theme.colors.basic.gray60};
 `;
 
 function BioSection() {

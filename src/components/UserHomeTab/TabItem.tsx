@@ -7,7 +7,7 @@ const Tab = styled.div`
   flex: 1;
   margin-bottom: -2px;
   padding-top: 10px;
-  color: ${({ theme }) => theme.colors.gray70};
+  color: ${({ theme }) => theme.colors.basic.gray70};
 `;
 
 const Line = styled.hr<{ isActive?: boolean }>`
