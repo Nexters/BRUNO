@@ -33,7 +33,7 @@ export const CookieImage = styled.div`
   padding-top: 55%;
   width: 100%;
   margin-left: 8px;
-  background: ${(props) => props.theme.background.style01};
+  background: ${(props) => props.theme.colors.brand.style01};
   border-radius: 8px;
 `;
 
