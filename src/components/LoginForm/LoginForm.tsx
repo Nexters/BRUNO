@@ -7,9 +7,10 @@ import MainButton from '@src/components/shared/MainButton';
 import { LoginType } from './type';
 import { LOGIN_FORM_TEXT_MAP } from './const';
 
-const Wrapper = styled.div`
+const Root = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   height: 100%;
   padding-top: 66px;
 `;
@@ -43,7 +44,7 @@ function LoginForm({ type, onClickLoginButton, onChangeInput }: Props) {
   const TEXT = LOGIN_FORM_TEXT_MAP[type];
 
   return (
-    <Wrapper>
+    <Root>
       <Title>{TEXT.title}</Title>
       <LoginInput
         placeholder={TEXT.placeholder}
@@ -54,7 +55,7 @@ function LoginForm({ type, onClickLoginButton, onChangeInput }: Props) {
         <MainButton value={TEXT.button} onClick={onClickLoginButton} />
         <GuideLink>{TEXT.guide}</GuideLink>
       </BottomWrapper>
-    </Wrapper>
+    </Root>
   );
 }
 

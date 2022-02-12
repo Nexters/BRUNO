@@ -3,11 +3,16 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import QRCode from 'react-qr-code';
 
-import PageLayout from '@src/components/shared/PageLayout';
 import MainButton from '@src/components/shared/MainButton';
 import { useKlipPrepare, useKlipLogin, openDeepLink } from '@src/klip';
 import { getKlipQrcodeSelector } from '@src/recoil/auth';
 import { useLogin } from '@src/hooks';
+
+const Root = styled.div`
+  width: 100%;
+  padding: 40px 20px;
+  display: flex;
+`;
 
 const BottomWrapper = styled.div`
   width: 100%;
@@ -47,7 +52,7 @@ function LoginPage() {
   };
 
   return (
-    <PageLayout padding="40px 20px" layoutStyle={{ display: 'flex' }}>
+    <Root>
       <BottomWrapper>
         {isFetched && !isMobile && <QRCode value={qrcode} size={100} />}
         <MainButton
@@ -56,7 +61,7 @@ function LoginPage() {
           buttonStyle={{ margin: 0 }}
         />
       </BottomWrapper>
-    </PageLayout>
+    </Root>
   );
 }
 

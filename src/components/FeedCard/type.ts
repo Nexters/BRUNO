@@ -1,4 +1,5 @@
 export type FeedProps = {
+  id: number;
   question: string;
   viewCount: number;
   hammer: number;
