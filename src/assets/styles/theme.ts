@@ -6,7 +6,7 @@ export const theme = {
     gray20: '#1A1C2C',
     gray30: '#3E4043',
     gray40: '#5B5D61',
-    gray50: '#9B9EA5',
+    gray50: '#949BAC',
     gray60: '#C4C8D3',
     gray70: '#D6D9DE',
     gray80: '#E4E5E9',

@@ -20,21 +20,19 @@ import { KlipApiStatus } from './types';
  */
 
 export const openDeepLink = (reqKey: string) => {
-  console.log('hi');
   web2app({
     urlScheme: `kakaotalk://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=${reqKey}`,
     intentURI: `intent://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=${reqKey}#Intent;scheme=kakaotalk;package=com.kakao.talk;end`,
     appName: 'COOKIEPANG',
     storeURL: 'itms-apps://itunes.apple.com/app/id362057947',
-    willInvokeApp: () => {
-      console.log('hi');
-    },
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    willInvokeApp: () => {},
   });
 };
 
 export const useKlipPrepare = () => {
   const setKlip = useSetRecoilState(klipAuthAtom);
-  const { isFetched, data } = useQuery(['klip', 'prepare'], postKlipAuth, {
+  const { isFetched, data } = useQuery(['klip/prepare'], postKlipAuth, {
     onSuccess: (data) => {
       const { request_key: requestKey, expiration_time: expirationTime } =
         data.data;
@@ -50,8 +48,8 @@ export const useKlipLogin = () => {
   const navigate = useNavigate();
   const klip = useRecoilValue(klipAuthAtom);
 
-  const { isFetched, refetch } = useQuery(
-    ['klip', 'result'],
+  const { isFetched, refetch, data } = useQuery(
+    ['klip/result'],
     () => getKlipResult(klip.requestKey),
     {
       onSuccess: ({ data }) => {
@@ -65,5 +63,10 @@ export const useKlipLogin = () => {
     },
   );
 
-  return { isFetched, refetch, openDeepLink };
+  return {
+    isFetched,
+    refetch,
+    openDeepLink,
+    isRequestFail: isFetched && data?.data?.status === KlipApiStatus.PREPARED,
+  };
 };

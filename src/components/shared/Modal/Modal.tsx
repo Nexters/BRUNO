@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Container,
   ModalWrapper,
@@ -10,8 +10,8 @@ import {
   YesButton,
 } from './styled';
 
-interface ModalLabel {
-  ask: string;
+export interface ModalLabel {
+  title: string;
   description: string;
   yes: string;
   no?: string;
@@ -21,23 +21,34 @@ interface Props {
   open: boolean;
   label: ModalLabel;
   onClickYes?: () => void;
+  onClickNo?: () => void;
 }
 
-function Modal({ open, label, onClickYes }: Props) {
+function Modal({ open, label, onClickYes, onClickNo }: Props) {
   const [isOpen, setOpen] = useState(open);
-  const { ask, description, yes, no = '취소하기' } = label;
+
+  useEffect(() => {
+    setOpen(open);
+  }, [open]);
 
   if (!isOpen) return null;
+
+  const { title, description, yes, no = '취소하기' } = label || {};
+  const handleClickYes = () => onClickYes?.();
+  const handleClickNo = () => {
+    onClickNo?.();
+    setOpen(false);
+  };
 
   return (
     <Container>
       <ModalWrapper>
         <ModalBox>
-          <AskLabel>{ask}</AskLabel>
+          <AskLabel>{title}</AskLabel>
           <DescriptionLabel>{description}</DescriptionLabel>
           <ButtonWrapper>
-            <NoButton onClick={() => setOpen(false)}>{no}</NoButton>
-            <YesButton onClick={onClickYes}>{yes}</YesButton>
+            <NoButton onClick={handleClickNo}>{no}</NoButton>
+            <YesButton onClick={handleClickYes}>{yes}</YesButton>
           </ButtonWrapper>
         </ModalBox>
       </ModalWrapper>
