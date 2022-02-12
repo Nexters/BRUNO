@@ -31,15 +31,17 @@ const LengthCounter = styled.span`
   color: ${theme.colors.state.error};
 `;
 
-const InputWrapper = styled.div`
+const TextAreaWrapper = styled.div`
+  height: 110px;
   border-radius: 10px;
   background-image: ${theme.colors.brand.main};
 `;
 
-const InputComponent = styled.input<{
+const TextAreaComponent = styled.textarea<{
   error: boolean;
 }>`
   width: 100%;
+  height: 110px;
   margin: 0;
   padding: 11px 16px;
   border: 1px solid
@@ -48,9 +50,10 @@ const InputComponent = styled.input<{
   border-radius: 10px;
   background-color: ${(props) =>
     props.disabled ? theme.colors.basic.gray30 : theme.colors.basic.gray10};
-  color: ${theme.colors.basic.gray100};
+  color: ${theme.colors.basic.gray60};
   &:focus {
     width: ${({ error }) => (error ? '100%' : 'calc(100% - 4px)')};
+    height: ${({ error }) => (error ? '110px' : 'calc(100% - 4px)')};
     margin: ${({ error }) => (error ? 0 : '2px')};
   }
   ::placeholder {
@@ -58,7 +61,7 @@ const InputComponent = styled.input<{
   }
 `;
 
-export default function Input({
+export default function TextArea({
   value,
   onChange,
   label,
@@ -69,7 +72,7 @@ export default function Input({
   const [error, setError] = useState<boolean>(false);
   const isCloseLimit = !!(limit && value.length >= limit - 5);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     if (!limit || e.target.value.length <= limit) {
       onChange(e.target.value);
 
@@ -91,15 +94,15 @@ export default function Input({
         )}
       </InfoWrapper>
 
-      <InputWrapper>
-        <InputComponent
+      <TextAreaWrapper>
+        <TextAreaComponent
           value={value}
           placeholder={placeholder}
           onChange={handleChange}
           error={error}
           disabled={disabled}
         />
-      </InputWrapper>
+      </TextAreaWrapper>
     </Root>
   );
 }

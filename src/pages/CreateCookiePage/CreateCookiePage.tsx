@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState } from 'react';
 
 import MainButton from '@src/components/shared/MainButton';
 import CategoryButton from '@src/components/shared/CategoryButton';
@@ -6,6 +6,7 @@ import { CATEGORIES, COLORS } from '@src/components/shared/const';
 import Icon, { Minus24, Plus24 } from '@src/assets/Icon';
 import { theme } from '@src/assets/styles';
 import Input from '@src/components/shared/Input';
+import TextArea from '@src/components/shared/TextArea';
 import { LABEL_TEXT_MAP } from './const';
 
 import {
@@ -21,19 +22,12 @@ import {
 
 function CreateCookiePage() {
   const [cookieInfo, setCookieInfo] = useState({
-    answer: '',
     hammer: 1,
     category: '',
   });
 
   const [question, setQuestion] = useState<string>('');
-
-  const handleChangeInput = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    key: string,
-  ) => {
-    setCookieInfo({ ...cookieInfo, [key]: e.target.value });
-  };
+  const [answer, setAnswer] = useState<string>('');
 
   const handleHammerPrice = (add: boolean) => {
     if (!add && cookieInfo.hammer === 1) return null;
@@ -60,13 +54,14 @@ function CreateCookiePage() {
       </Wrapper>
 
       <AnswerWrapper>
-        <Label>{LABEL_TEXT_MAP.answer}</Label>
-        {/* <AnswerInput
-          value={cookieInfo.answer}
-          hasQuestion={!!cookieInfo.question}
-          onChange={(e) => handleChangeInput(e, 'answer')}
-        /> */}
-        <AnswerGuide>*Answer is converted into cookies.</AnswerGuide>
+        <TextArea
+          value={answer}
+          onChange={setAnswer}
+          label={LABEL_TEXT_MAP.answer}
+          placeholder={LABEL_TEXT_MAP.answerPlaceholder}
+          limit={50}
+        />
+        <AnswerGuide>*{LABEL_TEXT_MAP.answerInfo}</AnswerGuide>
       </AnswerWrapper>
 
       <Wrapper>
