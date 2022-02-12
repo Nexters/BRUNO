@@ -62,7 +62,7 @@ export const useKlipLogin = () => {
       enabled: false,
     },
   );
-  console.log(data);
+
   return {
     isFetched,
     refetch,
