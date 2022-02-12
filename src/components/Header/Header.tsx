@@ -14,7 +14,7 @@ const Container = styled.header`
   color: white;
 `;
 
-const AppTitle = styled.div`
+export const AppTitle = styled.div`
   font-family: 'Sansita Swashed', sans-serif;
   font-style: normal;
   font-weight: bold;

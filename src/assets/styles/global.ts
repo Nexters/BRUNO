@@ -12,6 +12,7 @@ export const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
   body {
     overflow: hidden;
     background-color: ${(props) => props.theme.colors.basic.gray20};
+    color: ${(props) => props.theme.colors.basic.gray100};
     font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
   }
 
