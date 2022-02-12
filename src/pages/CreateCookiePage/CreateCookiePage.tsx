@@ -7,7 +7,7 @@ import Icon, { Minus24, Plus24 } from '@src/assets/Icon';
 import { theme } from '@src/assets/styles';
 import Input from '@src/components/shared/Input';
 import TextArea from '@src/components/shared/TextArea';
-import { LABEL_TEXT_MAP } from './const';
+import { TEXT_MAP } from './const';
 
 import {
   Wrapper,
@@ -21,25 +21,24 @@ import {
 } from './styled';
 
 function CreateCookiePage() {
-  const [cookieInfo, setCookieInfo] = useState({
-    hammer: 1,
-    category: '',
-  });
-
   const [question, setQuestion] = useState<string>('');
   const [answer, setAnswer] = useState<string>('');
+  const [hammer, setHammer] = useState<number>(1);
+  const [category, setCategory] = useState<string>('');
 
   const handleHammerPrice = (add: boolean) => {
-    if (!add && cookieInfo.hammer === 1) return null;
-    setCookieInfo(({ hammer, ...rest }) => ({
-      ...rest,
-      hammer: add ? hammer + 1 : hammer - 1,
-    }));
+    if (!add && hammer === 1) return null;
+
+    if (add) {
+      setHammer(hammer + 1);
+    } else {
+      setHammer(hammer - 1);
+    }
   };
 
-  // const handleClickCategory = (value: string) => {
-  //   setCookieInfo({ ...cookieInfo, category: value });
-  // };
+  const handleClickCategory = (value: string) => {
+    setCategory(value);
+  };
 
   return (
     <>
@@ -47,8 +46,8 @@ function CreateCookiePage() {
         <Input
           value={question}
           onChange={setQuestion}
-          label={LABEL_TEXT_MAP.question}
-          placeholder={LABEL_TEXT_MAP.questionPlaceholder}
+          label={TEXT_MAP.question}
+          placeholder={TEXT_MAP.questionPlaceholder}
           limit={25}
         />
       </Wrapper>
@@ -57,22 +56,22 @@ function CreateCookiePage() {
         <TextArea
           value={answer}
           onChange={setAnswer}
-          label={LABEL_TEXT_MAP.answer}
-          placeholder={LABEL_TEXT_MAP.answerPlaceholder}
+          label={TEXT_MAP.answer}
+          placeholder={TEXT_MAP.answerPlaceholder}
           limit={50}
         />
-        <AnswerGuide>*{LABEL_TEXT_MAP.answerInfo}</AnswerGuide>
+        <AnswerGuide>*{TEXT_MAP.answerInfo}</AnswerGuide>
       </AnswerWrapper>
 
       <Wrapper>
-        <Label>{LABEL_TEXT_MAP.cost}</Label>
+        <Label>{TEXT_MAP.cost}</Label>
         <HammerPriceWrapper>
           <HammerControlButton onClick={() => handleHammerPrice(false)}>
             <Icon color={theme.colors.basic.gray10}>
               <Minus24 />
             </Icon>
           </HammerControlButton>
-          <HammerPrice>{cookieInfo.hammer}</HammerPrice>
+          <HammerPrice>{hammer}</HammerPrice>
           <HammerControlButton onClick={() => handleHammerPrice(true)}>
             <Icon color={theme.colors.basic.gray10}>
               <Plus24 />
@@ -82,19 +81,20 @@ function CreateCookiePage() {
       </Wrapper>
 
       <Wrapper>
-        <Label>{LABEL_TEXT_MAP.category}</Label>
+        <Label>{TEXT_MAP.category}</Label>
         <CategoryWrapper>
-          {CATEGORIES.map((category, index) => (
+          {CATEGORIES.map((categoryName, index) => (
             <CategoryButton
               // eslint-disable-next-line react/no-array-index-key
               key={`CATEGORY_${index}`}
-              category={category}
+              category={categoryName}
               color={COLORS[index % COLORS.length]}
               isSelected={false}
+              onClick={() => handleClickCategory(categoryName)}
             />
           ))}
         </CategoryWrapper>
-        <MainButton value="Make a Cookie" />
+        <MainButton value={TEXT_MAP.makeCookie} />
       </Wrapper>
     </>
   );
