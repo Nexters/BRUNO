@@ -1,19 +1,17 @@
 import { useState, ChangeEvent } from 'react';
 
-import PageLayout from '@src/components/shared/PageLayout';
 import MainButton from '@src/components/shared/MainButton';
 import CategoryButton from '@src/components/shared/CategoryButton';
 import { CATEGORIES, COLORS } from '@src/components/shared/const';
 import Icon, { Minus24, Plus24 } from '@src/assets/Icon';
 import { theme } from '@src/assets/styles';
+import Input from '@src/components/shared/Input';
 import { LABEL_TEXT_MAP } from './const';
 
 import {
   Wrapper,
   AnswerWrapper,
   Label,
-  QuestionInput,
-  AnswerInput,
   AnswerGuide,
   HammerPriceWrapper,
   HammerPrice,
@@ -23,11 +21,12 @@ import {
 
 function CreateCookiePage() {
   const [cookieInfo, setCookieInfo] = useState({
-    question: '',
     answer: '',
     hammer: 1,
     category: '',
   });
+
+  const [question, setQuestion] = useState<string>('');
 
   const handleChangeInput = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -49,23 +48,24 @@ function CreateCookiePage() {
   // };
 
   return (
-    <PageLayout>
+    <>
       <Wrapper>
-        <Label>{LABEL_TEXT_MAP.question}</Label>
-        <QuestionInput
-          value={cookieInfo.question}
-          isEmpty={!cookieInfo.question}
-          onChange={(e) => handleChangeInput(e, 'question')}
+        <Input
+          value={question}
+          onChange={setQuestion}
+          label={LABEL_TEXT_MAP.question}
+          placeholder={LABEL_TEXT_MAP.questionPlaceholder}
+          limit={25}
         />
       </Wrapper>
 
       <AnswerWrapper>
         <Label>{LABEL_TEXT_MAP.answer}</Label>
-        <AnswerInput
+        {/* <AnswerInput
           value={cookieInfo.answer}
           hasQuestion={!!cookieInfo.question}
           onChange={(e) => handleChangeInput(e, 'answer')}
-        />
+        /> */}
         <AnswerGuide>*Answer is converted into cookies.</AnswerGuide>
       </AnswerWrapper>
 
@@ -101,7 +101,7 @@ function CreateCookiePage() {
         </CategoryWrapper>
         <MainButton value="Make a Cookie" />
       </Wrapper>
-    </PageLayout>
+    </>
   );
 }
 
