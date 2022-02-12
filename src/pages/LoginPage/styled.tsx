@@ -4,6 +4,8 @@ export const Root = styled.div`
   width: 100%;
   padding: 40px 20px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const BottomWrapper = styled.div`

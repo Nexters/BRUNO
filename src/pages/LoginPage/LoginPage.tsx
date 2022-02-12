@@ -43,12 +43,6 @@ function LoginPage() {
   };
 
   return (
-    // padding="40px 20px"
-    // layoutStyle={{
-    //   display: 'flex',
-    //   'flex-direction': 'column',
-    //   'align-items': 'center',
-    // }}
     <Root>
       <LogoWrapper>
         <Logo src={MainLogo01} />
