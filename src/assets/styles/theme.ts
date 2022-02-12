@@ -39,18 +39,18 @@ export const theme = {
   },
   text: {
     ellipsis: (line: number) => {
-      if (line === 1 || !line)
+      if (line > 1)
         return {
+          display: '-webkit-box',
           overflow: 'hidden',
           'text-overflow': 'ellipsis',
-          'white-space': 'nowrap',
+          '-webkit-box-orient': 'vertical',
+          '-webkit-line-clamp': String(line),
         };
       return {
-        display: '-webkit-box',
         overflow: 'hidden',
         'text-overflow': 'ellipsis',
-        '-webkit-box-orient': 'vertical',
-        '-webkit-line-clamp': String(line),
+        'white-space': 'nowrap',
       };
     },
   },
