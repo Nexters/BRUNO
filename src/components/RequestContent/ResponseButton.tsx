@@ -1,4 +1,3 @@
-// import { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { Button as button } from '@src/components/shared/MainButton';

@@ -15,7 +15,7 @@ const Line = styled.hr<{ isActive?: boolean }>`
   margin: 10px 0 0 0;
   border-radius: 4px 4px 4px 4px;
   border-bottom: ${({ isActive, theme }) =>
-    isActive && `2px solid ${theme.colors.purple00}`}; ;
+    isActive && `2px solid ${theme.colors.brand.sub03}`}; ;
 `;
 
 const Number = styled.div`
