@@ -9,6 +9,7 @@ interface PageLayoutProps {
   padding?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   layoutStyle?: any;
+  onlyContents?: boolean;
 }
 
 interface LayoutProps {
@@ -30,16 +31,21 @@ const Layout = styled.div<LayoutProps>`
   ${(props) => props.layoutStyle};
 `;
 
-function PageLayout({ children, padding, layoutStyle }: PageLayoutProps) {
+function PageLayout({
+  children,
+  padding,
+  layoutStyle,
+  onlyContents = false,
+}: PageLayoutProps) {
   return (
     <Root>
-      <Header />
+      {!onlyContents && <Header />}
 
       <Layout layoutStyle={layoutStyle} padding={padding}>
         {children}
       </Layout>
 
-      <Navigation />
+      {!onlyContents && <Navigation />}
     </Root>
   );
 }
