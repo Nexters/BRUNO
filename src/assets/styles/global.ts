@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
   html,
   body {
     overflow: hidden;
-    background-color: #EBEBEB;
+    background-color: ${(props) => props.theme.colors.basic.gray20};
     font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
   }
 
@@ -20,8 +20,8 @@ export const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
     max-width: 700px;
     min-height: 100vh;
     margin: 0 auto;
-    background: ${(props) => props.theme.background.main};
-    font-size: 14px;
+    background: ${(props) => props.theme.colors.background.gradientBlack};
+    font-size:  ${(props) => props.theme.fontSize.body02};
   }
 
   * {
