@@ -15,8 +15,8 @@ interface PageLayoutProps {
 interface LayoutProps {
   layoutStyle?: string;
   padding?: string;
+  onlyContents: boolean;
 }
-
 const Root = styled.div`
   width: 100%;
 `;
@@ -26,7 +26,7 @@ const Layout = styled.div<LayoutProps>`
   height: calc(100vh - ${NAVIGATION_HEIGHT}px);
   overflow-y: scroll;
   padding: ${(props) => props.padding || ''};
-  padding-bottom: ${NAVIGATION_HEIGHT}px;
+  padding-bottom: ${(props) => !props.onlyContents && NAVIGATION_HEIGHT}px;
   background: ${(props) => props.theme.background.main};
   ${(props) => props.layoutStyle};
 `;
@@ -41,7 +41,11 @@ function PageLayout({
     <Root>
       {!onlyContents && <Header />}
 
-      <Layout layoutStyle={layoutStyle} padding={padding}>
+      <Layout
+        layoutStyle={layoutStyle}
+        padding={padding}
+        onlyContents={onlyContents}
+      >
         {children}
       </Layout>
 
