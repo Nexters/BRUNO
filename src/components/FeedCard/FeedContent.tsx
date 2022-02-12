@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Icon, { ArrowElbowDownRight, Hammer24, View24 } from '@src/assets/Icon';
+import Icon, { Comment24, Hammer24, View24 } from '@src/assets/Icon';
 import { NFTImage01 } from '@src/assets/images';
 import { theme } from '@src/assets/styles';
 import { FeedProps } from './type';
@@ -72,7 +72,7 @@ export default function FeedContent({
 
       <AnswerWrapper>
         <Icon color={theme.colors.basic.gray60}>
-          <ArrowElbowDownRight />
+          <Comment24 />
         </Icon>
 
         <CookieImage src={NFTImage01} onClick={handleAnswerClick} />

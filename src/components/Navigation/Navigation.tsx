@@ -1,7 +1,6 @@
-import Icon, { Edit24, Home24, Profile24 } from '@src/assets/Icon';
-import { theme } from '@src/assets/styles';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import Icon, { Home24, Plus24, Profile24 } from '@src/assets/Icon';
 import IconButton from '../shared/IconButton';
 
 const Root = styled.nav`
@@ -36,6 +35,9 @@ export default function Navigation() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const isHome = location.pathname === '/';
+  const isProfile = location.pathname.includes('/user');
+
   const handleClickHome = () => {
     navigate('/');
   };
@@ -56,7 +58,7 @@ export default function Navigation() {
       <Root>
         <ButtonWrapper>
           <IconButton onClick={handleClickHome}>
-            <Icon color={theme.colors.basic.gray100}>
+            <Icon isOn={isHome}>
               <Home24 />
             </Icon>
           </IconButton>
@@ -64,7 +66,7 @@ export default function Navigation() {
 
         <ButtonWrapper>
           <IconButton onClick={handleClickProfile}>
-            <Icon color={theme.colors.basic.gray100}>
+            <Icon isOn={isProfile}>
               <Profile24 />
             </Icon>
           </IconButton>
@@ -72,8 +74,8 @@ export default function Navigation() {
       </Root>
 
       <WriteButton onClick={handleClickWrite}>
-        <Icon color={theme.colors.basic.gray100}>
-          <Edit24 />
+        <Icon>
+          <Plus24 />
         </Icon>
       </WriteButton>
     </>

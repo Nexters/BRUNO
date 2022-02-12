@@ -1,5 +1,5 @@
 import { theme } from '@src/assets/styles';
-import Icon, { ArrowElbowDownRight, Hammer24 } from '@src/assets/Icon';
+import Icon, { Comment24, Hammer24 } from '@src/assets/Icon';
 import { ProfileImage01, ProfileImage02 } from '@src/assets/images';
 import { CookieInfoType, HistoryType } from '@src/pages/CookieDetailPage';
 import MainButton from '../shared/MainButton';
@@ -51,7 +51,7 @@ function CookieInfo({
 
         <AnswerWrapper>
           <Icon color={theme.colors.basic.gray60}>
-            <ArrowElbowDownRight />
+            <Comment24 />
           </Icon>
 
           <CookieImage />
