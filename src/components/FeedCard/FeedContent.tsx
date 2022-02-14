@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Icon, { ArrowElbowDownRight, Hammer24, View24 } from '@src/assets/Icon';
+import Icon, { Comment24, Hammer24, View24 } from '@src/assets/Icon';
 import { NFTImage01 } from '@src/assets/images';
 import { theme } from '@src/assets/styles';
 import { FeedProps } from './type';
@@ -37,7 +37,7 @@ const InfoWrapper = styled.div`
   height: 24px;
   font-weight: bold;
   font-size: 13px;
-  color: ${(props) => props.theme.colors.gray60};
+  color: ${(props) => props.theme.colors.basic.gray60};
   margin-top: 16px;
 `;
 
@@ -71,20 +71,20 @@ export default function FeedContent({
       </QuestionWrapper>
 
       <AnswerWrapper>
-        <Icon color={theme.colors.gray60}>
-          <ArrowElbowDownRight />
+        <Icon color={theme.colors.basic.gray60}>
+          <Comment24 />
         </Icon>
 
         <CookieImage src={NFTImage01} onClick={handleAnswerClick} />
       </AnswerWrapper>
 
       <InfoWrapper>
-        <Icon color={theme.colors.gray60}>
+        <Icon color={theme.colors.basic.gray60}>
           <View24 />
         </Icon>
         <InfoText>{viewCount}</InfoText>
 
-        <Icon color={theme.colors.gray60}>
+        <Icon color={theme.colors.basic.gray60}>
           <Hammer24 />
         </Icon>
         <InfoText>{hammer}</InfoText>

@@ -29,7 +29,7 @@ const ButtonWrapper = styled.div`
 const Border = styled.div`
   width: 100%;
   height: 1px;
-  background-color: ${(props) => props.theme.colors.gray20};
+  background-color: ${(props) => props.theme.colors.basic.gray20};
 `;
 
 function Header() {
@@ -48,13 +48,13 @@ function Header() {
 
         <ButtonWrapper>
           <IconButton onClick={handleClickAlarm}>
-            <Icon color={theme.colors.gray100}>
+            <Icon color={theme.colors.basic.gray100}>
               <AlarmOn24 />
             </Icon>
           </IconButton>
 
           <IconButton onClick={handleClickSetting}>
-            <Icon color={theme.colors.gray100}>
+            <Icon color={theme.colors.basic.gray100}>
               <Setting24 />
             </Icon>
           </IconButton>

@@ -7,9 +7,9 @@ const Wrapper = styled.div`
   margin: 0 20px;
   padding: 12px 16px;
   border-radius: 8px;
-  background-color: ${(props) => props.theme.colors.gray20};
+  background-color: ${(props) => props.theme.colors.basic.gray20};
   font-size: ${(props) => props.theme.fontSize.body01};
-  color: ${(props) => props.theme.colors.gray90};
+  color: ${(props) => props.theme.colors.basic.gray90};
   & + & {
     margin-top: 16px;
   }

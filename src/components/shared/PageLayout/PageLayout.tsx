@@ -27,7 +27,7 @@ const Layout = styled.div<LayoutProps>`
   overflow-y: scroll;
   padding: ${(props) => props.padding || ''};
   padding-bottom: ${(props) => !props.onlyContents && NAVIGATION_HEIGHT}px;
-  background: ${(props) => props.theme.background.main};
+  background: ${(props) => props.theme.colors.background.gradientBlack};
   ${(props) => props.layoutStyle};
 `;
 

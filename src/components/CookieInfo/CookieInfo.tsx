@@ -1,5 +1,5 @@
 import { theme } from '@src/assets/styles';
-import Icon, { ArrowElbowDownRight, Hammer24 } from '@src/assets/Icon';
+import Icon, { Comment24, Hammer24 } from '@src/assets/Icon';
 import { ProfileImage01, ProfileImage02 } from '@src/assets/images';
 import { CookieInfoType, HistoryType } from '@src/pages/CookieDetailPage';
 import MainButton from '../shared/MainButton';
@@ -50,8 +50,8 @@ function CookieInfo({
         </QuestionWrapper>
 
         <AnswerWrapper>
-          <Icon color={theme.colors.gray60}>
-            <ArrowElbowDownRight />
+          <Icon color={theme.colors.basic.gray60}>
+            <Comment24 />
           </Icon>
 
           <CookieImage />
@@ -60,7 +60,7 @@ function CookieInfo({
         <HammerWrapper>
           <Hammer>망치</Hammer>
           <HammerCount>
-            <Icon color={theme.colors.gray60}>
+            <Icon color={theme.colors.basic.gray60}>
               <Hammer24 />
             </Icon>
             {hammer}

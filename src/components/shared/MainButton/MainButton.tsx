@@ -15,11 +15,11 @@ export const Button = styled.button<{ buttonStyle?: string }>`
   margin: 20px 0;
   padding: 13px;
   border-radius: 44px;
-  background: ${(props) => props.theme.background.button00};
+  background: ${(props) => props.theme.colors.brand.main};
   font-size: ${(props) => props.theme.fontSize.body02};
   line-height: 160%;
   font-weight: bold;
-  color: ${(props) => props.theme.colors.gray100};
+  color: ${(props) => props.theme.colors.basic.gray100};
   ${(props) => props.buttonStyle};
 `;
 

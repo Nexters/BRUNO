@@ -11,8 +11,8 @@ export const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
   html,
   body {
     overflow: hidden;
-    background-color: #EBEBEB;
-    color: ${(props) => props.theme.colors.gray100};
+    background-color: ${(props) => props.theme.colors.basic.gray20};
+    color: ${(props) => props.theme.colors.basic.gray100};
     font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
   }
 
@@ -21,8 +21,8 @@ export const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
     max-width: 700px;
     min-height: 100vh;
     margin: 0 auto;
-    background: ${(props) => props.theme.background.main};
-    font-size: 14px;
+    background: ${(props) => props.theme.colors.background.gradientBlack};
+    font-size:  ${(props) => props.theme.fontSize.body02};
   }
 
   * {
@@ -45,9 +45,9 @@ export const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
     /* width > 700px */
   }
   ${MEDIA_QUERY.mobile} {
-    /* width > 360px */
+    /* width > 320px */
   }
   ${MEDIA_QUERY.small} {
-    /* width < 360px */
+    /* width < 320px */
   }
 `;

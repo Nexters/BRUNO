@@ -16,7 +16,7 @@ const Button = styled.button<{ isSelected: boolean; color: string }>`
   border-radius: 37px;
   background-color: ${({ isSelected, color }) =>
     isSelected ? rgba(color, 0.5) : 'transparent'};
-  color: ${(props) => props.theme.colors.gray100};
+  color: ${(props) => props.theme.colors.basic.gray100};
   font-weight: bold;
   font-size: ${(props) => props.theme.fontSize.body02};
   cursor: pointer;

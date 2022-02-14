@@ -4,6 +4,8 @@ import PageLayout from '@src/components/shared/PageLayout';
 import MainButton from '@src/components/shared/MainButton';
 import CategoryButton from '@src/components/shared/CategoryButton';
 import { CATEGORIES, COLORS } from '@src/components/shared/const';
+import Icon, { Minus24, Plus24 } from '@src/assets/Icon';
+import { theme } from '@src/assets/styles';
 import { LABEL_TEXT_MAP } from './const';
 
 import {
@@ -71,11 +73,15 @@ function CreateCookiePage() {
         <Label>{LABEL_TEXT_MAP.cost}</Label>
         <HammerPriceWrapper>
           <HammerControlButton onClick={() => handleHammerPrice(false)}>
-            -
+            <Icon color={theme.colors.basic.gray10}>
+              <Minus24 />
+            </Icon>
           </HammerControlButton>
           <HammerPrice>{cookieInfo.hammer}</HammerPrice>
           <HammerControlButton onClick={() => handleHammerPrice(true)}>
-            +
+            <Icon color={theme.colors.basic.gray10}>
+              <Plus24 />
+            </Icon>
           </HammerControlButton>
         </HammerPriceWrapper>
       </Wrapper>

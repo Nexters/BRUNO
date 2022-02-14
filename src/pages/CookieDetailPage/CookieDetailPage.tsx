@@ -21,7 +21,7 @@ const ViewCountWrapper = styled.div`
 `;
 const ViewCountText = styled.span`
   margin-left: 5px;
-  color: ${(props) => props.theme.colors.gray60};
+  color: ${(props) => props.theme.colors.basic.gray60};
 `;
 
 function CookieDetailPage() {
@@ -77,7 +77,7 @@ function CookieDetailPage() {
         <CategoryButton isSelected category={category} color="#3E6DFE" />
 
         <ViewCountWrapper>
-          <Icon color={theme.colors.gray60}>
+          <Icon color={theme.colors.basic.gray60}>
             <View24 />
           </Icon>
           <ViewCountText>{viewCount}</ViewCountText>

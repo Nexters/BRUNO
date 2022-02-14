@@ -1,4 +1,3 @@
-// import { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { Button as button } from '@src/components/shared/MainButton';
@@ -16,8 +15,8 @@ const Button = styled(button)`
 
 const RejectButton = styled(Button)`
   background: none;
-  background-color: ${(props) => props.theme.colors.gray30};
-  color: ${(props) => props.theme.colors.gray90};
+  background-color: ${(props) => props.theme.colors.basic.gray30};
+  color: ${(props) => props.theme.colors.basic.gray90};
 `;
 
 function ResponseButton() {

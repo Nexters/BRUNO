@@ -1,31 +1,35 @@
 export const theme = {
   colors: {
-    blank: '#010115',
-    gray00: '#000000',
-    gray10: '#292A2C',
-    gray20: '#1A1C2C',
-    gray30: '#3E4043',
-    gray40: '#5B5D61',
-    gray50: '#949BAC',
-    gray60: '#C4C8D3',
-    gray70: '#D6D9DE',
-    gray80: '#E4E5E9',
-    gray90: '#F1F1F5',
-    gray100: '#FFFFFF',
-    blue00: '#3E6DFE',
-    purple00: '#553EF5',
-    pink00: '#FF329B',
-    pink01: '#E44AEB', // 어두운 핑크
-    orange00: '#FF6833',
-  },
-  background: {
-    main: 'linear-gradient(180deg, #00011C 0%, #000002 97.4%)',
-    button00: 'linear-gradient(90deg, #336FFF -2.24%, #E44AEB 100%);',
-    button01: 'linear-gradient(90deg, #336FFF -2.24%, #E44AEB 100%);',
-    style01: 'linear-gradient(180deg, #92e4d3 0%, #a43ad4 100%)',
-    style02:
-      'linear-gradient(180deg, #4A9FEE 0%, #69B4B9 43.75%, #6653DA 100%)',
-    style03: 'linear-gradient(180deg, #E4DD5F 0%, #56D9CC 100%)',
+    basic: {
+      gray00: '#000000',
+      gray10: '#010115',
+      gray20: '#1C1F26',
+      gray30: '#262B36',
+      gray40: '#3E4656',
+      gray50: '#969BAC',
+      gray60: '#C4C8D3',
+      gray70: '#D6D9DE',
+      gray80: '#E4E5E9',
+      gray90: '#F1F1F5',
+      gray100: '#FFFFFF',
+    },
+    brand: {
+      sub01: '#3E6DFE', // blue
+      sub02: '#E44AEB', // pink
+      sub03: '#6231CD', // purple
+      sub04: '#FF6833', // orange
+      main: 'linear-gradient(90deg, #336FFF -2.24%, #E44AEB 100%)',
+      style01: 'linear-gradient(180deg, #92e4d3 0%, #a43ad4 100%)',
+      style02:
+        'linear-gradient(180deg, #4A9FEE 0%, #69B4B9 43.75%, #6653DA 100%)',
+      style03: 'linear-gradient(180deg, #E6E19A 0%, #42A097 100%)',
+    },
+    background: {
+      gradientBlack: 'linear-gradient(180deg, #00011C 0%, #000002 97.4%)',
+    },
+    state: {
+      error: '#EA4D4D',
+    },
   },
   fontSize: {
     head01: '32px',

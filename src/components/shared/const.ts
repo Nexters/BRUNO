@@ -13,9 +13,8 @@ export const CATEGORIES = [
   'Invest',
 ];
 export const COLORS = [
-  theme.colors.blue00,
-  theme.colors.pink01,
-  theme.colors.orange00,
-  theme.colors.pink00,
-  theme.colors.purple00,
+  theme.colors.brand.sub01,
+  theme.colors.brand.sub02,
+  theme.colors.brand.sub03,
+  theme.colors.brand.sub04,
 ];
