@@ -10,6 +10,7 @@ interface PageLayoutProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   layoutStyle?: any;
   onlyContents?: boolean;
+  headerTitle?: string;
 }
 
 interface LayoutProps {
@@ -17,6 +18,7 @@ interface LayoutProps {
   padding?: string;
   onlyContents: boolean;
 }
+
 const Root = styled.div`
   width: 100%;
 `;
@@ -36,11 +38,11 @@ function PageLayout({
   padding,
   layoutStyle,
   onlyContents = false,
+  headerTitle,
 }: PageLayoutProps) {
   return (
     <Root>
-      {!onlyContents && <Header />}
-
+      {!onlyContents && <Header headerTitle={headerTitle} />}
       <Layout
         layoutStyle={layoutStyle}
         padding={padding}
@@ -48,7 +50,6 @@ function PageLayout({
       >
         {children}
       </Layout>
-
       {!onlyContents && <Navigation />}
     </Root>
   );

@@ -2,6 +2,7 @@ import Icon, { AlarmOn24, Setting24 } from '@src/assets/Icon';
 import { theme } from '@src/assets/styles';
 import styled from 'styled-components';
 import IconButton from '../shared/IconButton';
+import SubHeader from '../SubHeader';
 
 const Container = styled.header`
   display: flex;
@@ -32,7 +33,11 @@ const Border = styled.div`
   background-color: ${(props) => props.theme.colors.basic.gray20};
 `;
 
-function Header() {
+interface Props {
+  headerTitle?: string;
+}
+
+function Header({ headerTitle }: Props) {
   const handleClickAlarm = () => {
     console.log('alarm');
   };
@@ -40,6 +45,8 @@ function Header() {
   const handleClickSetting = () => {
     console.log('setting');
   };
+
+  if (headerTitle) return <SubHeader headerTitle={headerTitle} />;
 
   return (
     <>
