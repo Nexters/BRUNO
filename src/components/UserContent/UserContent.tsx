@@ -4,9 +4,9 @@ import styled from 'styled-components';
 
 import { TabType } from '@src/components/UserHomeTab';
 import RequestContent from '@src/components/RequestContent';
+import CollectedCookieGrid from '@src/components/CollectedCookieGrid/CollectedCookieGrid';
 
 const Container = styled.div`
-  padding-top: 20px;
   overflow-y: scroll;
   height: calc(100vh - 270px);
 `;
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const getTabCotent = (isMy: boolean) => ({
-  [TabType.COLLECT]: <div>collect</div>,
+  [TabType.COLLECT]: <CollectedCookieGrid />,
   [TabType.CREATE]: <div>create</div>,
   [TabType.REQUEST]: <RequestContent isMy={isMy} />,
 });
