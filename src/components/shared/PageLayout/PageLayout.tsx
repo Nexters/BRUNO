@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { NAVIGATION_HEIGHT } from '@src/assets/styles';
 import Header from '@src/components/Header';
 import Navigation from '@src/components/Navigation';
+import { HeaderPage } from '@src/components/Header/const';
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -10,7 +11,7 @@ interface PageLayoutProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   layoutStyle?: any;
   onlyContents?: boolean;
-  headerTitle?: string;
+  pageType?: HeaderPage;
 }
 
 interface LayoutProps {
@@ -38,11 +39,11 @@ function PageLayout({
   padding,
   layoutStyle,
   onlyContents = false,
-  headerTitle,
+  pageType,
 }: PageLayoutProps) {
   return (
     <Root>
-      {!onlyContents && <Header headerTitle={headerTitle} />}
+      {!onlyContents && <Header pageType={pageType} />}
       <Layout
         layoutStyle={layoutStyle}
         padding={padding}

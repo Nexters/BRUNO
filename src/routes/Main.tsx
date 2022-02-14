@@ -5,6 +5,7 @@ import CreateCookiePage from '@src/pages/CreateCookiePage';
 import CookieDetailPage from '@src/pages/CookieDetailPage';
 import AskPage from '@src/pages/AskPage';
 import PageLayout from '@src/components/shared/PageLayout';
+import { HeaderPage } from '@src/components/Header/const';
 
 function Main() {
   return (
@@ -28,7 +29,7 @@ function Main() {
       <Route
         path="/ask/:userId"
         element={
-          <PageLayout headerTitle="Ask">
+          <PageLayout pageType={HeaderPage.ASK}>
             <AskPage />
           </PageLayout>
         }

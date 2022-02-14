@@ -1,8 +1,11 @@
+import styled from 'styled-components';
+
 import Icon, { AlarmOn24, Setting24 } from '@src/assets/Icon';
 import { theme } from '@src/assets/styles';
-import styled from 'styled-components';
+
 import IconButton from '../shared/IconButton';
 import SubHeader from '../SubHeader';
+import { HeaderPage, HEADER_VALUES } from './const';
 
 const Container = styled.header`
   display: flex;
@@ -34,10 +37,10 @@ const Border = styled.div`
 `;
 
 interface Props {
-  headerTitle?: string;
+  pageType?: HeaderPage;
 }
 
-function Header({ headerTitle }: Props) {
+function Header({ pageType }: Props) {
   const handleClickAlarm = () => {
     console.log('alarm');
   };
@@ -46,7 +49,7 @@ function Header({ headerTitle }: Props) {
     console.log('setting');
   };
 
-  if (headerTitle) return <SubHeader headerTitle={headerTitle} />;
+  if (pageType) return <SubHeader pageType={pageType} />;
 
   return (
     <>
