@@ -66,7 +66,7 @@ function AskPage() {
         </CategorySection>
       </Section>
       <ButtonWrapper>
-        <MainButton value="쿠키 만들기" />
+        <MainButton value="쿠키 만들기" buttonStyle={{ margin: 0 }} />
       </ButtonWrapper>
     </Wrapper>
   );
