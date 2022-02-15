@@ -1,10 +1,10 @@
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
-import { theme } from '@src/assets/styles';
 
 type Props = {
   value: string;
-  onChange: (key: string) => void;
+  infoKey: string;
+  onChange: (key: string, value: string) => void;
   label?: string;
   placeholder?: string;
   limit?: number;
@@ -21,20 +21,20 @@ const InfoWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  font-size: ${theme.fontSize.caption};
+  font-size: ${(props) => props.theme.fontSize.caption};
   font-weight: 700;
-  color: ${theme.colors.basic.gray90};
+  color: ${(props) => props.theme.colors.basic.gray90};
 `;
 
 const LengthCounter = styled.span`
   font-weight: 400;
-  color: ${theme.colors.state.error};
+  color: ${(props) => props.theme.colors.state.error};
 `;
 
 const TextAreaWrapper = styled.div`
   height: 110px;
   border-radius: 10px;
-  background-image: ${theme.colors.brand.main};
+  background-image: ${(props) => props.theme.colors.brand.main};
 `;
 
 const TextAreaComponent = styled.textarea<{
@@ -45,24 +45,25 @@ const TextAreaComponent = styled.textarea<{
   margin: 0;
   padding: 11px 16px;
   border: 1px solid
-    ${({ error }) =>
+    ${({ theme, error }) =>
       error ? theme.colors.state.error : theme.colors.basic.gray40};
   border-radius: 10px;
-  background-color: ${(props) =>
-    props.disabled ? theme.colors.basic.gray30 : theme.colors.basic.gray10};
-  color: ${theme.colors.basic.gray60};
+  background-color: ${({ disabled, theme }) =>
+    disabled ? theme.colors.basic.gray30 : theme.colors.basic.gray10};
+  color: ${(props) => props.theme.colors.basic.gray60};
   &:focus {
     width: ${({ error }) => (error ? '100%' : 'calc(100% - 4px)')};
     height: ${({ error }) => (error ? '110px' : 'calc(100% - 4px)')};
     margin: ${({ error }) => (error ? 0 : '2px')};
   }
   ::placeholder {
-    color: ${theme.colors.basic.gray40};
+    color: ${(props) => props.theme.colors.basic.gray40};
   }
 `;
 
 export default function TextArea({
   value,
+  infoKey,
   onChange,
   label,
   placeholder,
@@ -74,11 +75,11 @@ export default function TextArea({
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     if (!limit || e.target.value.length <= limit) {
-      onChange(e.target.value);
+      onChange(infoKey, e.target.value);
 
       if (error) setError(false);
     } else {
-      onChange(value);
+      onChange(infoKey, value);
       setError(true);
     }
   };

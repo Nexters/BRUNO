@@ -8,3 +8,5 @@ export const TEXT_MAP = {
   category: '카테고리',
   makeCookie: '쿠키 만들기',
 };
+
+export const ANSWER_LIMIT = 50;

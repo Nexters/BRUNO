@@ -3,11 +3,11 @@ import { useState } from 'react';
 import MainButton from '@src/components/shared/MainButton';
 import CategoryButton from '@src/components/shared/CategoryButton';
 import { CATEGORIES, COLORS } from '@src/components/shared/const';
-import Icon, { Minus24, Plus24 } from '@src/assets/Icon';
-import { theme } from '@src/assets/styles';
 import Input from '@src/components/shared/Input';
 import TextArea from '@src/components/shared/TextArea';
-import { TEXT_MAP } from './const';
+import Icon, { Minus24, Plus24 } from '@src/assets/Icon';
+import { theme } from '@src/assets/styles';
+import { TEXT_MAP, ANSWER_LIMIT } from './const';
 
 import {
   Wrapper,
@@ -20,32 +20,45 @@ import {
   CategoryWrapper,
 } from './styled';
 
+type CookieInfo = {
+  question: string;
+  answer: string;
+  hammer: number;
+  category: string;
+};
+
 function CreateCookiePage() {
-  const [question, setQuestion] = useState<string>('');
-  const [answer, setAnswer] = useState<string>('');
-  const [hammer, setHammer] = useState<number>(1);
-  const [category, setCategory] = useState<string>('');
+  const [cookieInfo, setCookieInfo] = useState<CookieInfo>({
+    question: '',
+    answer: '',
+    hammer: 1,
+    category: '',
+  });
 
   const handleHammerPrice = (add: boolean) => {
-    if (!add && hammer === 1) return null;
+    if (!add && cookieInfo.hammer === 1) return null;
 
-    if (add) {
-      setHammer(hammer + 1);
-    } else {
-      setHammer(hammer - 1);
-    }
+    setCookieInfo({
+      ...cookieInfo,
+      hammer: add ? cookieInfo.hammer + 1 : cookieInfo.hammer - 1,
+    });
   };
 
   const handleClickCategory = (value: string) => {
-    setCategory(value);
+    setCookieInfo({ ...cookieInfo, category: value });
+  };
+
+  const handleChangeInput = (key: string, value: string) => {
+    setCookieInfo({ ...cookieInfo, [key]: value });
   };
 
   return (
     <>
       <Wrapper>
         <Input
-          value={question}
-          onChange={setQuestion}
+          value={cookieInfo.question}
+          infoKey="question"
+          onChange={handleChangeInput}
           label={TEXT_MAP.question}
           placeholder={TEXT_MAP.questionPlaceholder}
           limit={25}
@@ -54,11 +67,12 @@ function CreateCookiePage() {
 
       <AnswerWrapper>
         <TextArea
-          value={answer}
-          onChange={setAnswer}
+          value={cookieInfo.answer}
+          infoKey="answer"
+          onChange={handleChangeInput}
           label={TEXT_MAP.answer}
           placeholder={TEXT_MAP.answerPlaceholder}
-          limit={50}
+          limit={ANSWER_LIMIT}
         />
         <AnswerGuide>*{TEXT_MAP.answerInfo}</AnswerGuide>
       </AnswerWrapper>
@@ -71,7 +85,7 @@ function CreateCookiePage() {
               <Minus24 />
             </Icon>
           </HammerControlButton>
-          <HammerPrice>{hammer}</HammerPrice>
+          <HammerPrice>{cookieInfo.hammer}</HammerPrice>
           <HammerControlButton onClick={() => handleHammerPrice(true)}>
             <Icon color={theme.colors.basic.gray10}>
               <Plus24 />
