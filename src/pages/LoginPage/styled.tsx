@@ -33,6 +33,6 @@ export const Logo = styled.img`
 export const SubText = styled.div`
   margin-top: 8px;
   text-align: center;
-  color: ${(props) => props.theme.colors.gray50};
+  color: ${(props) => props.theme.colors.basic.gray50};
   white-space: pre-wrap;
 `;
