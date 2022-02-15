@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import CategoryButton from '@src/components/shared/CategoryButton';
 import { CATEGORIES, COLORS } from '@src/components/shared/const';
 import MainButton from '@src/components/shared/MainButton';
+import Input from '@src/components/shared/Input';
 
 const Wrapper = styled.main`
   height: 100%;
@@ -22,6 +24,7 @@ const Section = styled.div`
 `;
 
 const From = styled.div`
+  margin-top: 16px;
   text-align: right;
   color: ${(props) => props.theme.colors.basic.gray50};
 `;
@@ -43,12 +46,26 @@ const ButtonWrapper = styled.div`
 `;
 
 function AskPage() {
+  const [askData, setAskData] = useState({
+    question: '',
+    category: '',
+  });
+
+  const handleChangeInput = (key: string, value: string) => {
+    setAskData({ ...askData, [key]: value });
+  };
+
   return (
     <Wrapper>
       <UserName>@Username15texts</UserName>
       <Section>
         <Title>Question</Title>
-        {/* TODO : input 추가 */}
+        <Input
+          value={askData.question}
+          onChange={handleChangeInput}
+          infoKey="question"
+          placeholder="질문을 입력하세요."
+        />
         <From>From. Anonymous</From>
       </Section>
       <Section>
