@@ -1,22 +1,42 @@
 import styled from 'styled-components';
 import { rgba } from 'polished';
 
+import { theme } from '@src/assets/styles/theme';
+
 type Props = {
   category: string;
   color: string;
   isSelected: boolean;
   onClick?: () => void;
+  disabled?: boolean;
 };
 
-const Button = styled.button<{ isSelected: boolean; color: string }>`
+type ButtonProps = {
+  isSelected: boolean;
+  color: string;
+  disabled?: boolean;
+};
+
+const getCategoryButtonColor = ({
+  isSelected,
+  color,
+  disabled,
+}: ButtonProps) => {
+  if (disabled) {
+    return isSelected ? theme.colors.basic.gray30 : theme.colors.basic.gray20;
+  }
+  return isSelected ? rgba(color, 0.5) : 'transparent';
+};
+
+const Button = styled.button<ButtonProps>`
   width: fit-content;
   height: 40px;
-  border: 1px solid ${(props) => props.color};
   padding: 7px 16px;
-  border: 1px solid ${(props) => props.color};
+  border: ${({ color, disabled }) =>
+    disabled ? 'none' : `1px solid ${color}`};
   border-radius: 37px;
-  background-color: ${({ isSelected, color }) =>
-    isSelected ? rgba(color, 0.5) : 'transparent'};
+  background-color: ${({ isSelected, color, disabled }) =>
+    getCategoryButtonColor({ isSelected, color, disabled })};
   color: ${(props) => props.theme.colors.basic.gray100};
   font-weight: bold;
   font-size: ${(props) => props.theme.fontSize.body02};
@@ -29,9 +49,15 @@ export default function CategoryButton({
   color,
   isSelected,
   onClick,
+  disabled = false,
 }: Props) {
   return (
-    <Button color={color} isSelected={isSelected} onClick={onClick}>
+    <Button
+      color={color}
+      isSelected={isSelected}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {category}
     </Button>
   );
