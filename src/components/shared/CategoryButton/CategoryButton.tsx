@@ -5,6 +5,7 @@ type Props = {
   category: string;
   color: string;
   isSelected: boolean;
+  onClick?: () => void;
 };
 
 const Button = styled.button<{ isSelected: boolean; color: string }>`
@@ -23,9 +24,14 @@ const Button = styled.button<{ isSelected: boolean; color: string }>`
   white-space: nowrap;
 `;
 
-export default function CategoryButton({ category, color, isSelected }: Props) {
+export default function CategoryButton({
+  category,
+  color,
+  isSelected,
+  onClick,
+}: Props) {
   return (
-    <Button color={color} isSelected={isSelected}>
+    <Button color={color} isSelected={isSelected} onClick={onClick}>
       {category}
     </Button>
   );
