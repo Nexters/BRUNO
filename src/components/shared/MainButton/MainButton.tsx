@@ -16,6 +16,7 @@ export const Button = styled.button<{ buttonStyle?: string }>`
   padding: 13px;
   border-radius: 44px;
   background: ${(props) => props.theme.colors.brand.main};
+  cursor: pointer;
   font-size: ${(props) => props.theme.fontSize.body02};
   line-height: 160%;
   font-weight: bold;

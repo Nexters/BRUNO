@@ -1,19 +1,18 @@
-import { useState, ChangeEvent } from 'react';
+import { useState } from 'react';
 
-import PageLayout from '@src/components/shared/PageLayout';
 import MainButton from '@src/components/shared/MainButton';
 import CategoryButton from '@src/components/shared/CategoryButton';
 import { CATEGORIES, COLORS } from '@src/components/shared/const';
+import Input from '@src/components/shared/Input';
+import TextArea from '@src/components/shared/TextArea';
 import Icon, { Minus24, Plus24 } from '@src/assets/Icon';
 import { theme } from '@src/assets/styles';
-import { LABEL_TEXT_MAP } from './const';
+import { TEXT_MAP, ANSWER_LIMIT } from './const';
 
 import {
   Wrapper,
   AnswerWrapper,
   Label,
-  QuestionInput,
-  AnswerInput,
   AnswerGuide,
   HammerPriceWrapper,
   HammerPrice,
@@ -21,56 +20,65 @@ import {
   CategoryWrapper,
 } from './styled';
 
+type CookieInfo = {
+  question: string;
+  answer: string;
+  hammer: number;
+  category: string;
+};
+
 function CreateCookiePage() {
-  const [cookieInfo, setCookieInfo] = useState({
+  const [cookieInfo, setCookieInfo] = useState<CookieInfo>({
     question: '',
     answer: '',
     hammer: 1,
     category: '',
   });
 
-  const handleChangeInput = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    key: string,
-  ) => {
-    setCookieInfo({ ...cookieInfo, [key]: e.target.value });
-  };
-
   const handleHammerPrice = (add: boolean) => {
     if (!add && cookieInfo.hammer === 1) return null;
-    setCookieInfo(({ hammer, ...rest }) => ({
-      ...rest,
-      hammer: add ? hammer + 1 : hammer - 1,
-    }));
+
+    setCookieInfo({
+      ...cookieInfo,
+      hammer: add ? cookieInfo.hammer + 1 : cookieInfo.hammer - 1,
+    });
   };
 
-  // const handleClickCategory = (value: string) => {
-  //   setCookieInfo({ ...cookieInfo, category: value });
-  // };
+  const handleClickCategory = (value: string) => {
+    setCookieInfo({ ...cookieInfo, category: value });
+  };
+
+  const handleChangeInput = (key: string, value: string) => {
+    setCookieInfo({ ...cookieInfo, [key]: value });
+  };
 
   return (
-    <PageLayout>
+    <>
       <Wrapper>
-        <Label>{LABEL_TEXT_MAP.question}</Label>
-        <QuestionInput
+        <Input
           value={cookieInfo.question}
-          isEmpty={!cookieInfo.question}
-          onChange={(e) => handleChangeInput(e, 'question')}
+          infoKey="question"
+          onChange={handleChangeInput}
+          label={TEXT_MAP.question}
+          placeholder={TEXT_MAP.questionPlaceholder}
+          limit={25}
         />
       </Wrapper>
 
       <AnswerWrapper>
-        <Label>{LABEL_TEXT_MAP.answer}</Label>
-        <AnswerInput
+        <TextArea
           value={cookieInfo.answer}
-          hasQuestion={!!cookieInfo.question}
-          onChange={(e) => handleChangeInput(e, 'answer')}
+          infoKey="answer"
+          onChange={handleChangeInput}
+          label={TEXT_MAP.answer}
+          placeholder={TEXT_MAP.answerPlaceholder}
+          limit={ANSWER_LIMIT}
         />
-        <AnswerGuide>*Answer is converted into cookies.</AnswerGuide>
+        <AnswerGuide>*{TEXT_MAP.answerInfo}</AnswerGuide>
       </AnswerWrapper>
 
       <Wrapper>
-        <Label>{LABEL_TEXT_MAP.cost}</Label>
+        <Label>{TEXT_MAP.cost}</Label>
         <HammerPriceWrapper>
           <HammerControlButton onClick={() => handleHammerPrice(false)}>
             <Icon color={theme.colors.basic.gray10}>
@@ -87,21 +95,22 @@ function CreateCookiePage() {
       </Wrapper>
 
       <Wrapper>
-        <Label>{LABEL_TEXT_MAP.category}</Label>
+        <Label>{TEXT_MAP.category}</Label>
         <CategoryWrapper>
-          {CATEGORIES.map((category, index) => (
+          {CATEGORIES.map((categoryName, index) => (
             <CategoryButton
               // eslint-disable-next-line react/no-array-index-key
               key={`CATEGORY_${index}`}
-              category={category}
+              category={categoryName}
               color={COLORS[index % COLORS.length]}
               isSelected={false}
+              onClick={() => handleClickCategory(categoryName)}
             />
           ))}
         </CategoryWrapper>
-        <MainButton value="Make a Cookie" />
+        <MainButton value={TEXT_MAP.makeCookie} />
       </Wrapper>
-    </PageLayout>
+    </>
   );
 }
 
