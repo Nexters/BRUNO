@@ -39,7 +39,7 @@ function PageLayout({
   padding,
   layoutStyle,
   onlyContents = false,
-  pageType,
+  pageType = HeaderPage.MAIN,
 }: PageLayoutProps) {
   return (
     <Root>

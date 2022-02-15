@@ -1,5 +1,6 @@
 export enum HeaderPage {
   ASK = 'ask',
+  MAIN = 'main',
 }
 
 type HeaderValues = {
