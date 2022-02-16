@@ -61,7 +61,6 @@ function CreateCookiePage() {
           onChange={handleChangeInput}
           label={TEXT_MAP.question}
           placeholder={TEXT_MAP.questionPlaceholder}
-          limit={25}
         />
       </Wrapper>
 

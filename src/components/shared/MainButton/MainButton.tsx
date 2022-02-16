@@ -21,6 +21,7 @@ export const Button = styled.button<{ buttonStyle?: string }>`
   line-height: 160%;
   font-weight: bold;
   color: ${(props) => props.theme.colors.basic.gray100};
+  cursor: pointer;
   ${(props) => props.buttonStyle};
 `;
 
