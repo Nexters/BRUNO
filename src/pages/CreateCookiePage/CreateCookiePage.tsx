@@ -48,8 +48,11 @@ function CreateCookiePage() {
     setCookieInfo({ ...cookieInfo, category: value });
   };
 
-  const handleChangeInput = (key: string, value: string) => {
-    setCookieInfo({ ...cookieInfo, [key]: value });
+  const handleChangeQuestion = (value: string) => {
+    setCookieInfo({ ...cookieInfo, question: value });
+  };
+  const handleChangeAnswer = (value: string) => {
+    setCookieInfo({ ...cookieInfo, answer: value });
   };
 
   return (
@@ -57,8 +60,7 @@ function CreateCookiePage() {
       <Wrapper>
         <Input
           value={cookieInfo.question}
-          infoKey="question"
-          onChange={handleChangeInput}
+          onChange={handleChangeQuestion}
           label={TEXT_MAP.question}
           placeholder={TEXT_MAP.questionPlaceholder}
         />
@@ -67,8 +69,7 @@ function CreateCookiePage() {
       <AnswerWrapper>
         <TextArea
           value={cookieInfo.answer}
-          infoKey="answer"
-          onChange={handleChangeInput}
+          onChange={handleChangeAnswer}
           label={TEXT_MAP.answer}
           placeholder={TEXT_MAP.answerPlaceholder}
           limit={ANSWER_LIMIT}

@@ -51,8 +51,8 @@ function AskPage() {
     category: '',
   });
 
-  const handleChangeInput = (key: string, value: string) => {
-    setAskData({ ...askData, [key]: value });
+  const handleChangeQuestion = (value: string) => {
+    setAskData({ ...askData, question: value });
   };
 
   return (
@@ -62,8 +62,7 @@ function AskPage() {
         <Title>Question</Title>
         <Input
           value={askData.question}
-          onChange={handleChangeInput}
-          infoKey="question"
+          onChange={handleChangeQuestion}
           placeholder="질문을 입력하세요."
         />
         <From>From. Anonymous</From>

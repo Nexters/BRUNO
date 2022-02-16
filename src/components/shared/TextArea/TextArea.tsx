@@ -3,8 +3,7 @@ import styled from 'styled-components';
 
 type Props = {
   value: string;
-  infoKey: string;
-  onChange: (key: string, value: string) => void;
+  onChange: (value: string) => void;
   label?: string;
   placeholder?: string;
   limit?: number;
@@ -63,7 +62,6 @@ const TextAreaComponent = styled.textarea<{
 
 export default function TextArea({
   value,
-  infoKey,
   onChange,
   label,
   placeholder,
@@ -75,11 +73,11 @@ export default function TextArea({
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     if (!limit || e.target.value.length <= limit) {
-      onChange(infoKey, e.target.value);
+      onChange(e.target.value);
 
       if (error) setError(false);
     } else {
-      onChange(infoKey, value);
+      onChange(value);
       setError(true);
     }
   };
