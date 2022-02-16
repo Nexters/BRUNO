@@ -52,6 +52,7 @@ function LoginForm({ type, value, onClickLoginButton, onChangeInput }: Props) {
         onChange={onChangeInput}
         label={TEXT.inputLabel}
         placeholder={TEXT.placeholder}
+        limit={15}
       />
       <BottomWrapper>
         <GuideLink>{TEXT.guide}</GuideLink>
