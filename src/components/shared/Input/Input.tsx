@@ -63,7 +63,7 @@ export default function Input({
   onChange,
   label,
   placeholder,
-  limit = 25,
+  limit = 35,
   disabled = false,
 }: Props) {
   const [error, setError] = useState<boolean>(false);

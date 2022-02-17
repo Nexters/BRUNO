@@ -65,7 +65,7 @@ export default function TextArea({
   onChange,
   label,
   placeholder,
-  limit,
+  limit = 50,
   disabled = false,
 }: Props) {
   const [error, setError] = useState<boolean>(false);
