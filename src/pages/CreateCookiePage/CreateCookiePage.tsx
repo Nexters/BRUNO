@@ -20,6 +20,10 @@ import {
   CategoryWrapper,
 } from './styled';
 
+type Props = {
+  isEdit?: boolean;
+};
+
 type CookieInfo = {
   question: string;
   answer: string;
@@ -27,7 +31,7 @@ type CookieInfo = {
   category: string;
 };
 
-function CreateCookiePage() {
+function CreateCookiePage({ isEdit = false }: Props) {
   const [cookieInfo, setCookieInfo] = useState<CookieInfo>({
     question: '',
     answer: '',
@@ -63,6 +67,8 @@ function CreateCookiePage() {
           onChange={handleChangeQuestion}
           label={TEXT_MAP.question}
           placeholder={TEXT_MAP.questionPlaceholder}
+          limit={25}
+          disabled={isEdit}
         />
       </Wrapper>
 
@@ -73,6 +79,7 @@ function CreateCookiePage() {
           label={TEXT_MAP.answer}
           placeholder={TEXT_MAP.answerPlaceholder}
           limit={ANSWER_LIMIT}
+          disabled={isEdit}
         />
         <AnswerGuide>*{TEXT_MAP.answerInfo}</AnswerGuide>
       </AnswerWrapper>
@@ -105,10 +112,13 @@ function CreateCookiePage() {
               color={COLORS[index % COLORS.length]}
               isSelected={false}
               onClick={() => handleClickCategory(categoryName)}
+              disabled={isEdit}
             />
           ))}
         </CategoryWrapper>
-        <MainButton value={TEXT_MAP.makeCookie} />
+        <MainButton
+          value={isEdit ? TEXT_MAP.editCookie : TEXT_MAP.makeCookie}
+        />
       </Wrapper>
     </>
   );
