@@ -37,11 +37,11 @@ const GuideLink = styled.a`
 interface Props {
   type: LoginType;
   value: string;
-  onClickLoginButton: () => void;
+  handleClickButton: () => void;
   onChangeInput: (value: string) => void;
 }
 
-function LoginForm({ type, value, onClickLoginButton, onChangeInput }: Props) {
+function RegistId({ type, value, handleClickButton, onChangeInput }: Props) {
   const TEXT = LOGIN_FORM_TEXT_MAP[type];
 
   return (
@@ -58,7 +58,7 @@ function LoginForm({ type, value, onClickLoginButton, onChangeInput }: Props) {
         <GuideLink>{TEXT.guide}</GuideLink>
         <MainButton
           value={TEXT.button}
-          onClick={onClickLoginButton}
+          onClick={handleClickButton}
           buttonStyle={{ margin: 0 }}
         />
       </BottomWrapper>
@@ -66,4 +66,4 @@ function LoginForm({ type, value, onClickLoginButton, onChangeInput }: Props) {
   );
 }
 
-export default LoginForm;
+export default RegistId;
