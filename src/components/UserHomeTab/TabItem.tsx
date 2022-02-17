@@ -8,6 +8,7 @@ const Tab = styled.div`
   margin-bottom: -2px;
   padding-top: 10px;
   color: ${({ theme }) => theme.colors.basic.gray70};
+  cursor: pointer;
 `;
 
 const Line = styled.hr<{ isActive?: boolean }>`

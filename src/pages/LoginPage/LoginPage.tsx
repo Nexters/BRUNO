@@ -4,7 +4,7 @@ import QRCode from 'react-qr-code';
 
 import MainButton from '@src/components/shared/MainButton';
 import Modal from '@src/components/shared/Modal';
-import { AppTitle } from '@src/components/Header/Header';
+import { AppTitle } from '@src/components/Header/MainHeader';
 import { MainLogo01 } from '@src/assets/images';
 import { useKlipPrepare, useKlipLogin, openDeepLink } from '@src/klip';
 import { getKlipQrcodeSelector } from '@src/recoil/auth';

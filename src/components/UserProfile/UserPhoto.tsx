@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Button } from '@src/components/shared/MainButton';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Wrapper = styled.div`
   display: flex;
@@ -46,13 +47,20 @@ interface Props {
 }
 
 function UserPhoto({ isMy }: Props) {
+  const navigate = useNavigate();
+  const { userId } = useParams();
+
+  const handleClickAskButton = () => navigate(`/ask/${userId}`);
+
   return (
     <Wrapper>
       <PhotoWrapper>
         <Photo />
         {isMy && <AddButton>+</AddButton>}
       </PhotoWrapper>
-      {!isMy && <RequestButton>Ask Me</RequestButton>}
+      {!isMy && (
+        <RequestButton onClick={handleClickAskButton}>Ask Me</RequestButton>
+      )}
     </Wrapper>
   );
 }
