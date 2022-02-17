@@ -9,6 +9,11 @@ import RegistInfo from '@src/components/RegisterInfo';
 function JoinPage() {
   const [step, setStep] = useState<number>(0);
   const [profileId, setProfileId] = useState<string>('');
+  const [info, setInfo] = useState<Record<string, string>>({
+    location: '',
+    height: '',
+    job: '',
+  });
 
   const validateId = useMemo(() => {
     if (profileId === '') return false;
@@ -33,7 +38,13 @@ function JoinPage() {
         />
       )}
 
-      {step === 1 && <RegistInfo />}
+      {step === 1 && (
+        <RegistInfo
+          value={info}
+          setValue={setInfo}
+          handleClickButton={toNextStep}
+        />
+      )}
     </PageLayout>
   );
 }
