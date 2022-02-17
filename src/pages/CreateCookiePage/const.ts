@@ -7,6 +7,7 @@ export const TEXT_MAP = {
   cost: '망치 무게',
   category: '카테고리',
   makeCookie: '쿠키 만들기',
+  editCookie: '쿠키 수정하기',
 };
 
 export const ANSWER_LIMIT = 50;

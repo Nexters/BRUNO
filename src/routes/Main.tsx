@@ -27,6 +27,14 @@ function Main() {
         }
       />
       <Route
+        path="/edit/:cookieId"
+        element={
+          <PageLayout>
+            <CreateCookiePage isEdit />
+          </PageLayout>
+        }
+      />
+      <Route
         path="/ask/:userId"
         element={
           <PageLayout pageType={HeaderPage.ASK}>
