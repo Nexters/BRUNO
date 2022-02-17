@@ -4,7 +4,7 @@ import MainButton from '@src/components/shared/MainButton';
 import Input from '../shared/Input';
 
 import { LoginType } from './type';
-import { LOGIN_FORM_TEXT_MAP } from './const';
+import { REGIST_TEXT_MAP } from './const';
 
 const Root = styled.div`
   display: flex;
@@ -42,7 +42,7 @@ interface Props {
 }
 
 function RegistId({ type, value, handleClickButton, onChangeInput }: Props) {
-  const TEXT = LOGIN_FORM_TEXT_MAP[type];
+  const TEXT = REGIST_TEXT_MAP[type];
 
   return (
     <Root>
