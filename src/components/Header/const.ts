@@ -1,6 +1,7 @@
 export enum HeaderPage {
   ASK = 'ask',
   MAIN = 'main',
+  JOIN = 'join',
 }
 
 type HeaderValues = {
@@ -14,5 +15,9 @@ export const HEADER_VALUES: HeaderValues = {
   [HeaderPage.ASK]: {
     left: true,
     center: 'Ask',
+  },
+  [HeaderPage.JOIN]: {
+    left: true,
+    center: '',
   },
 };

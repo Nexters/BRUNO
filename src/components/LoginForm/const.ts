@@ -9,10 +9,10 @@ export const LOGIN_FORM_TEXT_MAP = {
     guide: 'How To Connect My Wallet',
   },
   [LoginType.KLIP]: {
-    title: 'Input\nYour Profile ID',
-    inputLabel: 'Profile ID',
-    placeholder: 'Input Your Profile ID',
-    button: 'Regist ID',
-    guide: 'Once selected ID can not be changed anymore.',
+    title: '프로필로 등록할\n아이디를 입력해주세요.',
+    inputLabel: '유저 아이디',
+    placeholder: '프로필 아이디를 입력해주세요.',
+    button: '아이디 등록하기',
+    guide: '한 번 입력한 아이디는 바꿀 수 없어요.',
   },
 };

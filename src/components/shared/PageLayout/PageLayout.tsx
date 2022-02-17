@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 import styled from 'styled-components';
 import { NAVIGATION_HEIGHT } from '@src/assets/styles';
 import Header from '@src/components/Header';
@@ -41,9 +41,14 @@ function PageLayout({
   onlyContents = false,
   pageType = HeaderPage.MAIN,
 }: PageLayoutProps) {
+  const showHeader = useMemo(() => {
+    if (pageType === HeaderPage.JOIN) return true;
+    return !onlyContents;
+  }, []);
+
   return (
     <Root>
-      {!onlyContents && <Header pageType={pageType} />}
+      {showHeader && <Header pageType={pageType} />}
       <Layout
         layoutStyle={layoutStyle}
         padding={padding}

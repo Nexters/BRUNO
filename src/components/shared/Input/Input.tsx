@@ -4,8 +4,7 @@ import { theme } from '@src/assets/styles';
 
 type Props = {
   value: string;
-  infoKey: string;
-  onChange: (key: string, value: string) => void;
+  onChange: (value: string) => void;
   label?: string;
   placeholder?: string;
   limit?: number;
@@ -61,11 +60,10 @@ const InputComponent = styled.input<{
 
 export default function Input({
   value,
-  infoKey,
   onChange,
   label,
   placeholder,
-  limit = 25,
+  limit = 35,
   disabled = false,
 }: Props) {
   const [error, setError] = useState<boolean>(false);
@@ -73,11 +71,11 @@ export default function Input({
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!limit || e.target.value.length <= limit) {
-      onChange(infoKey, e.target.value);
+      onChange(e.target.value);
 
       if (error) setError(false);
     } else {
-      onChange(infoKey, value);
+      onChange(value);
       setError(true);
     }
   };
