@@ -7,9 +7,10 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import Main from '@src/routes/Main';
 import Auth from '@src/routes/Auth';
 import User from '@src/routes/User';
-import PrivateRoute from './routes/PrivateRoute';
-import LoginPage from './pages/LoginPage';
-import JoinPage from './pages/JoinPage';
+import PrivateRoute from '@src/routes/PrivateRoute';
+import LoginPage from '@src/pages/LoginPage';
+import JoinPage from '@src/pages/JoinPage';
+import QRcodeModal from '@src/components/shared/QRcodeModal';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,6 +26,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <RecoilRoot>
           <BrowserRouter>
+            <QRcodeModal />
             <Routes>
               {/* Auth */}
               <Route

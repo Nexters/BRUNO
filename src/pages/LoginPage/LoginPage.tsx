@@ -7,7 +7,7 @@ import Modal from '@src/components/shared/Modal';
 import { AppTitle } from '@src/components/Header/MainHeader';
 import { MainLogo01 } from '@src/assets/images';
 import { useKlipPrepare, useKlipLogin, openDeepLink } from '@src/klip';
-import { getKlipQrcodeSelector } from '@src/recoil/auth';
+import { getKlipQrcodeSelector } from '@src/recoil/klip';
 import { useLogin } from '@src/hooks';
 
 import { Root, BottomWrapper, LogoWrapper, Logo, SubText } from './styled';
