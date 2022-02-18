@@ -8179,6 +8179,13 @@ kleur@^3.0.3:
   resolved "https://registry.npmjs.org/kleur/-/kleur-3.0.3.tgz"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
+klip-sdk@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/klip-sdk/-/klip-sdk-2.0.1.tgz#8ff52174323c0dd150e26c2032176c622289bfe3"
+  integrity sha512-BMhEv38F8EaL+CJ+cejmU4g3RZwSZmL4iOsRg8z5NJxrCLaghRMe2mi/YFaLIoWcqUImijpNFmnKJC4OYekulg==
+  dependencies:
+    whatwg-fetch "^3.4.0"
+
 klona@^2.0.4, klona@^2.0.5:
   version "2.0.5"
   resolved "https://registry.npmjs.org/klona/-/klona-2.0.5.tgz"
@@ -12692,7 +12699,7 @@ whatwg-encoding@^1.0.5:
   dependencies:
     iconv-lite "0.4.24"
 
-whatwg-fetch@^3.6.2:
+whatwg-fetch@^3.4.0, whatwg-fetch@^3.6.2:
   version "3.6.2"
   resolved "https://registry.npmjs.org/whatwg-fetch/-/whatwg-fetch-3.6.2.tgz"
   integrity sha512-bJlen0FcuU/0EMLrdbJ7zOnW6ITZLrZMIarMUVmdKtsGvZna8vxKYaexICWPfZ8qwf9fzNq+UEIZrnSaApt6RA==
