@@ -5,3 +5,11 @@ export enum KlipApiStatus {
   CANCELED = 'canceled',
   ERROR = 'error',
 }
+
+export enum Stage {
+  INITIAL = 'inital',
+  PREPARE = 'prepare',
+  REQUEST = 'request',
+  RESULT = 'result',
+  REQUEST_FAIL = 'request_fail',
+}

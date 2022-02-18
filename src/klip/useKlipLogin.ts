@@ -3,35 +3,14 @@ import { useQuery } from 'react-query';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useCookies } from 'react-cookie';
 
-import { klipAuthAtom } from '@src/recoil/auth';
-import { web2app } from '@src/utils/web2app';
+import { klipRequestKeyAtom } from '@src/recoil/klip';
 import { CookieName } from '@src/hooks';
 import { postKlipAuth, getKlipResult } from './axios';
 import { KlipApiStatus } from './types';
-
-/*
- * urlScheme : iphone custom scheme
- * intentURI : android intent URI
- * appName : application Name (ex. facebook, twitter, daum)
- * storeURL : app store URL
- * willInvokeApp : function for logging
- * onAppMissing : fallback function (default. move to appstore)
- * onUnsupportedEnvironment : fallback function
- */
-
-export const openDeepLink = (reqKey: string) => {
-  web2app({
-    urlScheme: `kakaotalk://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=${reqKey}`,
-    intentURI: `intent://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=${reqKey}#Intent;scheme=kakaotalk;package=com.kakao.talk;end`,
-    appName: 'COOKIEPANG',
-    storeURL: 'itms-apps://itunes.apple.com/app/id362057947',
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    willInvokeApp: () => {},
-  });
-};
+import { openDeepLink } from './utils';
 
 export const useKlipPrepare = () => {
-  const setKlip = useSetRecoilState(klipAuthAtom);
+  const setKlip = useSetRecoilState(klipRequestKeyAtom);
   const { isFetched, data } = useQuery(['klip/prepare'], postKlipAuth, {
     onSuccess: (data) => {
       const { request_key: requestKey, expiration_time: expirationTime } =
@@ -46,7 +25,7 @@ export const useKlipPrepare = () => {
 export const useKlipLogin = () => {
   const [_, setCookie] = useCookies([CookieName.KLIP_ADDRESS]);
   const navigate = useNavigate();
-  const klip = useRecoilValue(klipAuthAtom);
+  const klip = useRecoilValue(klipRequestKeyAtom);
 
   const { isFetched, refetch, data } = useQuery(
     ['klip/result'],
