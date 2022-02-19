@@ -52,6 +52,17 @@ function CreateCookiePage({ isEdit = false }: Props) {
     category: '',
   });
 
+  const createCookie = async () => {
+    const cookieData = await fetchResult(cookieInfo);
+    console.log(cookieData);
+    if (!cookieData) setStage(Stage.REQUEST_FAIL);
+    else {
+      const { id } = cookieData;
+      setCookieInfo({ ...cookieInfo, id });
+      setStage(Stage.RESULT);
+    }
+  };
+
   const handleHammerPrice = (add: boolean) => {
     if (!add && cookieInfo.hammer === 1) return null;
 
@@ -71,6 +82,8 @@ function CreateCookiePage({ isEdit = false }: Props) {
       await fetchPrepare(cookieInfo);
       setOpen();
       setStage(Stage.PREPARE);
+    } else if (stage === Stage.REQUEST) {
+      createCookie();
     }
   };
 
@@ -83,19 +96,9 @@ function CreateCookiePage({ isEdit = false }: Props) {
     }
   };
 
-  const createCookie = async () => {
-    const cookieData = await fetchResult(cookieInfo);
-    if (!cookieData) setStage(Stage.REQUEST_FAIL);
-    else {
-      const { id } = cookieData;
-      setCookieInfo({ ...cookieInfo, id });
-      setStage(Stage.RESULT);
-    }
-  };
-
   useEffect(() => {
     if (stage === Stage.PREPARE && !isOpen) {
-      createCookie();
+      setStage(Stage.REQUEST);
     }
   }, [isOpen]);
 
