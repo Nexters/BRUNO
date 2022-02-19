@@ -19,13 +19,14 @@ export const MODAL_LABEL_MAP: { [key in string]: ModalLabel } = {
     title: '쿠키가 성공적으로 구워졌습니다.',
     description: '구운 쿠키를 확인하시겠어요?',
     yes: '확인하러 가기',
-    no: '메인으로',
+    no: '피드로 돌아가기',
   },
   [Stage.REQUEST_FAIL]: {
     title: '쿠키 굽기가 실패했습니다.',
     description:
       '쿠키 굽기를 알 수 없는 이유로 실패했습니다.\n다시 시도하시겠어요?',
     yes: '다시 시도하기',
+    no: '피드로 돌아가기',
   },
 };
 
