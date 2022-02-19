@@ -63,12 +63,18 @@ export const useExecuteContract = () => {
   };
 
   const fetchResult = async (cookieInfo) => {
-    const data = await getResult(requestData.requestKey);
-    const result = await postCookie({
+    const resultData = await getResult(requestData.requestKey);
+    if (!resultData?.result) return false; // request 실패
+
+    // 여기를 이제 props로 받아야...
+    const { data: cookieData, status } = await postCookie({
       ...cookieInfo,
-      tokenAddress: data?.result?.tx_hash,
+      txHash: resultData?.result?.tx_hash,
     });
-    return result;
+    if (status === 200) {
+      return cookieData;
+    }
+    return false;
   };
 
   const openDeepLink = () => _openDeepLink(requestData.requestKey);
