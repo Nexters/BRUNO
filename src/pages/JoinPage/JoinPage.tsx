@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import PageLayout from '@src/components/shared/PageLayout';
 import { HeaderPage } from '@src/components/Header/const';
@@ -15,10 +15,10 @@ function JoinPage() {
     job: '',
   });
 
-  const validateId = useMemo(() => {
+  const validateId = () => {
     if (profileId === '') return false;
     return true;
-  }, [profileId]);
+  };
 
   const toNextStep = () => {
     if (step === 0) {
