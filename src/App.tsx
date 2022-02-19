@@ -10,6 +10,7 @@ import User from '@src/routes/User';
 import PrivateRoute from './routes/PrivateRoute';
 import LoginPage from './pages/LoginPage';
 import JoinPage from './pages/JoinPage';
+import TutorialPage from './pages/TutorialPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,6 +33,10 @@ function App() {
                 element={<Auth component={<LoginPage />} />}
               />
               <Route path="/join" element={<Auth component={<JoinPage />} />} />
+              <Route
+                path="/tutorial"
+                element={<Auth component={<TutorialPage />} />}
+              />
               {/* Authentication이 필요한 경우 PrivateRoute로 감싸주어야 함 */}
               <Route path="*" element={<PrivateRoute component={<Main />} />} />
               <Route
