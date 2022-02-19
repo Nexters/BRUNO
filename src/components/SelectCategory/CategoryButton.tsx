@@ -14,10 +14,8 @@ const Root = styled.div`
 
 const Text = styled.p<{ isActive: boolean }>`
   padding: 11px 16px;
-  color: ${(props) =>
-    props.isActive
-      ? props.theme.colors.basic.gray90
-      : props.theme.colors.basic.gray40};
+  color: ${({ isActive, theme }) =>
+    isActive ? theme.colors.basic.gray90 : theme.colors.basic.gray40};
 `;
 
 const ButtonWrapper = styled.div`
@@ -38,11 +36,8 @@ const AddButton = styled.button<{ isActive: boolean }>`
   width: 22px;
   height: 22px;
   border-radius: 100px;
-  cursor: pointer;
-  background: ${(props) =>
-    props.isActive
-      ? props.theme.colors.brand.main
-      : props.theme.colors.background.gradientBlack};
+  background: ${({ isActive, theme }) =>
+    isActive ? theme.colors.brand.main : theme.colors.background.gradientBlack};
 `;
 
 type Props = {
