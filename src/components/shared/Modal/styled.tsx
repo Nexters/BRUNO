@@ -28,7 +28,7 @@ export const ModalBox = styled.div`
   flex-direction: column;
   justify-content: center;
   min-width: 320px;
-  height: 193px;
+  max-height: 193px;
   margin: auto;
   padding: 16px;
   align-items: center;
@@ -42,8 +42,9 @@ export const AskLabel = styled.div`
   font-size: ${(props) => props.theme.fontSize.body01};
   font-weight: 700;
 `;
+
 export const DescriptionLabel = styled.div`
-  margin-top: 9px;
+  margin: 9px 0 18px 0;
   white-space: pre-wrap;
   text-align: center;
   ${theme.text.ellipsis(2)}

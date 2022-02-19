@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import MainButton from '@src/components/shared/MainButton';
 import CategoryButton from '@src/components/shared/CategoryButton';
@@ -7,7 +7,11 @@ import Input from '@src/components/shared/Input';
 import TextArea from '@src/components/shared/TextArea';
 import Icon, { Minus24, Plus24 } from '@src/assets/Icon';
 import { theme } from '@src/assets/styles';
-import { TEXT_MAP, ANSWER_LIMIT } from './const';
+import { useExecuteContract, Stage } from '@src/klip';
+import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
+import Modal from '@src/components/shared/Modal';
+import { useNavigate } from 'react-router-dom';
+import { TEXT_MAP, ANSWER_LIMIT, MODAL_LABEL_MAP } from './const';
 
 import {
   Wrapper,
@@ -25,16 +29,25 @@ type Props = {
 };
 
 type CookieInfo = {
-  question: string;
-  answer: string;
+  id?: number;
+  title: string;
+  contents: string;
   hammer: number;
   category: string;
 };
 
 function CreateCookiePage({ isEdit = false }: Props) {
+  const navigate = useNavigate();
+  const { isOpen, setOpen } = useQRcodeModal();
+  const { fetchPrepare, fetchResult } = useExecuteContract();
+  const [stage, setStage] = useState<Stage>(Stage.INITIAL);
+
+  const isModalOpen = stage === Stage.REQUEST_FAIL || stage === Stage.RESULT;
+
   const [cookieInfo, setCookieInfo] = useState<CookieInfo>({
-    question: '',
-    answer: '',
+    id: undefined,
+    title: '',
+    contents: '',
     hammer: 1,
     category: '',
   });
@@ -48,20 +61,50 @@ function CreateCookiePage({ isEdit = false }: Props) {
     });
   };
 
-  const handleClickCategory = (value: string) => {
-    setCookieInfo({ ...cookieInfo, category: value });
-  };
-
   const handleChangeInput = (key: string, value: string) => {
     setCookieInfo({ ...cookieInfo, [key]: value });
   };
+
+  const handleClickCreate = async () => {
+    // 사용자가 정보를 입력하고 버튼 클릭
+    if (stage === Stage.INITIAL) {
+      await fetchPrepare(cookieInfo);
+      setOpen();
+      setStage(Stage.PREPARE);
+    }
+  };
+
+  const handleClickModal = (yes: boolean) => {
+    if (yes) {
+      if (stage === Stage.RESULT) navigate(`/cookie/${cookieInfo.id}`);
+      else setStage(Stage.INITIAL);
+    } else {
+      navigate('/');
+    }
+  };
+
+  const createCookie = async () => {
+    const cookieData = await fetchResult(cookieInfo);
+    if (!cookieData) setStage(Stage.REQUEST_FAIL);
+    else {
+      const { id } = cookieData;
+      setCookieInfo({ ...cookieInfo, id });
+      setStage(Stage.RESULT);
+    }
+  };
+
+  useEffect(() => {
+    if (stage === Stage.PREPARE && !isOpen) {
+      createCookie();
+    }
+  }, [isOpen]);
 
   return (
     <>
       <Wrapper>
         <Input
-          value={cookieInfo.question}
-          infoKey="question"
+          value={cookieInfo.title}
+          infoKey="title"
           onChange={handleChangeInput}
           label={TEXT_MAP.question}
           placeholder={TEXT_MAP.questionPlaceholder}
@@ -72,8 +115,8 @@ function CreateCookiePage({ isEdit = false }: Props) {
 
       <AnswerWrapper>
         <TextArea
-          value={cookieInfo.answer}
-          infoKey="answer"
+          value={cookieInfo.contents}
+          infoKey="contents"
           onChange={handleChangeInput}
           label={TEXT_MAP.answer}
           placeholder={TEXT_MAP.answerPlaceholder}
@@ -109,14 +152,21 @@ function CreateCookiePage({ isEdit = false }: Props) {
               key={`CATEGORY_${index}`}
               category={categoryName}
               color={COLORS[index % COLORS.length]}
-              isSelected={false}
-              onClick={() => handleClickCategory(categoryName)}
+              isSelected={cookieInfo.category === categoryName}
+              onClick={() => handleChangeInput('category', categoryName)}
               disabled={isEdit}
             />
           ))}
         </CategoryWrapper>
         <MainButton
-          value={isEdit ? TEXT_MAP.editCookie : TEXT_MAP.makeCookie}
+          value={stage === Stage.INITIAL ? '권한 요청하기' : '쿠키 생성하기'}
+          onClick={handleClickCreate}
+        />
+        <Modal
+          label={MODAL_LABEL_MAP[stage] || null}
+          open={isModalOpen}
+          onClickYes={() => handleClickModal(true)}
+          onClickNo={() => handleClickModal(false)}
         />
       </Wrapper>
     </>

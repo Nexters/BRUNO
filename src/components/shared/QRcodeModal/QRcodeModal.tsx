@@ -19,6 +19,7 @@ import {
 function QRcodeModal() {
   const request = useRecoilValue(klipRequestKeyAtom);
   const [isOpen, setOpen] = useRecoilState(QRcodeModalAtom);
+  const qrcode = `https://klipwallet.com/?target=/a2a?request_key=${request.requestKey}`;
 
   if (!isOpen || !request.requestKey) return null;
 
@@ -37,7 +38,7 @@ function QRcodeModal() {
           <Title>카카오 Klip QR 연결</Title>
           <Timer>남은 시간</Timer>
           <QRcodeWrapper>
-            <QRCode value={request.requestKey} size={150} />
+            <QRCode value={qrcode} size={150} />
           </QRcodeWrapper>
           <Guide>
             {`QR 코드 리더기 또는 카카오 앱을 통해\nQR 코드를 스캔해주세요.`}
