@@ -2,10 +2,10 @@ import axios from 'axios';
 import config from '@src/config';
 import { useInfiniteQuery } from 'react-query';
 
-const getCookieList = (page: number) =>
+export const getCookieList = (page?: number) =>
   axios.get(`${config.baseApiUrl}/categories/all/cookies`, {
     params: {
-      page,
+      page: page ?? 0,
       size: 5,
     },
     headers: {

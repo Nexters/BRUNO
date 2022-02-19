@@ -1,6 +1,7 @@
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import CategoryButton from '@src/components/shared/CategoryButton';
-import { CATEGORIES, COLORS } from '../shared/const';
+import { categoryListSelector } from '@src/recoil/category';
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,14 +13,13 @@ const Wrapper = styled.div`
 `;
 
 export default function HomeTab() {
+  const categoryList = useRecoilValue(categoryListSelector);
   return (
     <Wrapper>
-      {CATEGORIES.map((category, index) => (
+      {categoryList.map((category, index) => (
         <CategoryButton
-          // eslint-disable-next-line react/no-array-index-key
-          key={`CATEGORY_${index}`}
+          key={category.categoryId}
           category={category}
-          color={COLORS[(index + 1) % COLORS.length]}
           isSelected={index === 0} // TODO : selected 로직 추가
         />
       ))}

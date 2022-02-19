@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
 
+import { categoryListSelector, Category } from '@src/recoil/category';
 import MainButton from '@src/components/shared/MainButton';
 import CategoryButton from '@src/components/shared/CategoryButton';
-import { CATEGORIES, COLORS } from '@src/components/shared/const';
 import Input from '@src/components/shared/Input';
 import TextArea from '@src/components/shared/TextArea';
 import Icon, { Minus24, Plus24 } from '@src/assets/Icon';
@@ -28,15 +29,16 @@ type CookieInfo = {
   question: string;
   answer: string;
   hammer: number;
-  category: string;
+  category: number;
 };
 
 function CreateCookiePage({ isEdit = false }: Props) {
+  const categoryList = useRecoilValue(categoryListSelector);
   const [cookieInfo, setCookieInfo] = useState<CookieInfo>({
     question: '',
     answer: '',
     hammer: 1,
-    category: '',
+    category: 0,
   });
 
   const handleHammerPrice = (add: boolean) => {
@@ -48,8 +50,8 @@ function CreateCookiePage({ isEdit = false }: Props) {
     });
   };
 
-  const handleClickCategory = (value: string) => {
-    setCookieInfo({ ...cookieInfo, category: value });
+  const handleClickCategory = (category: Category) => {
+    setCookieInfo({ ...cookieInfo, category: category.categoryId });
   };
 
   const handleChangeQuestion = (value: string) => {
@@ -104,14 +106,12 @@ function CreateCookiePage({ isEdit = false }: Props) {
       <Wrapper>
         <Label>{TEXT_MAP.category}</Label>
         <CategoryWrapper>
-          {CATEGORIES.map((categoryName, index) => (
+          {categoryList.map((item, index) => (
             <CategoryButton
-              // eslint-disable-next-line react/no-array-index-key
-              key={`CATEGORY_${index}`}
-              category={categoryName}
-              color={COLORS[index % COLORS.length]}
+              key={item.categoryId}
+              category={item}
               isSelected={false}
-              onClick={() => handleClickCategory(categoryName)}
+              onClick={() => handleClickCategory(item)}
               disabled={isEdit}
             />
           ))}

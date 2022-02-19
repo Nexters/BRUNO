@@ -2,10 +2,11 @@ import styled from 'styled-components';
 import { rgba } from 'polished';
 
 import { theme } from '@src/assets/styles/theme';
+import { Category } from '@src/recoil/category';
+import { CATEGORY_COLOR_MAP } from './const';
 
 type Props = {
-  category: string;
-  color: string;
+  category: Category;
   isSelected: boolean;
   onClick?: () => void;
   disabled?: boolean;
@@ -46,19 +47,18 @@ const Button = styled.button<ButtonProps>`
 
 export default function CategoryButton({
   category,
-  color,
   isSelected,
   onClick,
   disabled = false,
 }: Props) {
   return (
     <Button
-      color={color}
+      color={CATEGORY_COLOR_MAP[category.color]}
       isSelected={isSelected}
       onClick={onClick}
       disabled={disabled}
     >
-      {category}
+      {category.name}
     </Button>
   );
 }
