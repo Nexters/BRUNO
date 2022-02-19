@@ -4,7 +4,7 @@ import MainButton from '@src/components/shared/MainButton';
 import Input from '../shared/Input';
 
 import { LoginType } from './type';
-import { LOGIN_FORM_TEXT_MAP } from './const';
+import { REGIST_TEXT_MAP } from './const';
 
 const Root = styled.div`
   display: flex;
@@ -37,12 +37,12 @@ const GuideLink = styled.a`
 interface Props {
   type: LoginType;
   value: string;
-  onClickLoginButton: () => void;
+  handleClickButton: () => void;
   onChangeInput: (value: string) => void;
 }
 
-function LoginForm({ type, value, onClickLoginButton, onChangeInput }: Props) {
-  const TEXT = LOGIN_FORM_TEXT_MAP[type];
+function RegistId({ type, value, handleClickButton, onChangeInput }: Props) {
+  const TEXT = REGIST_TEXT_MAP[type];
 
   return (
     <Root>
@@ -58,7 +58,7 @@ function LoginForm({ type, value, onClickLoginButton, onChangeInput }: Props) {
         <GuideLink>{TEXT.guide}</GuideLink>
         <MainButton
           value={TEXT.button}
-          onClick={onClickLoginButton}
+          onClick={handleClickButton}
           buttonStyle={{ margin: 0 }}
         />
       </BottomWrapper>
@@ -66,4 +66,4 @@ function LoginForm({ type, value, onClickLoginButton, onChangeInput }: Props) {
   );
 }
 
-export default LoginForm;
+export default RegistId;

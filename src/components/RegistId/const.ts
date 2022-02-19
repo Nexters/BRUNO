@@ -1,6 +1,6 @@
 import { LoginType } from './type';
 
-export const LOGIN_FORM_TEXT_MAP = {
+export const REGIST_TEXT_MAP = {
   [LoginType.OTHER_WALLET]: {
     title: 'Input\nYour Wallet Address',
     inputLabel: 'Wallet Address',
