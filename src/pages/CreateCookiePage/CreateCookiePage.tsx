@@ -119,7 +119,6 @@ function CreateCookiePage({ isEdit = false }: Props) {
           onChange={handleChangeInput}
           label={TEXT_MAP.question}
           placeholder={TEXT_MAP.questionPlaceholder}
-          limit={25}
           disabled={isEdit}
         />
       </Wrapper>
