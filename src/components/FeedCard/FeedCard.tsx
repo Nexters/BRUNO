@@ -19,7 +19,8 @@ export default function Feed({ cookie }: Props) {
 
   return (
     <Container>
-      <UserInfo profile="" name={`User ${authorUserId}`} createdAt={createdAt} />
+      {/* TODO : 서버한테 닉네임 달라고 하기 */}
+      <UserInfo userId={authorUserId} profile="" name={`User ${authorUserId}`} createdAt={createdAt} />
       <FeedContent id={id} question={title} viewCount={0} hammer={price} />
     </Container>
   );
