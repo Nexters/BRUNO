@@ -51,9 +51,10 @@ export default function CategoryButton({
   onClick,
   disabled = false,
 }: Props) {
+  const color = CATEGORY_COLOR_MAP[category.color] || CATEGORY_COLOR_MAP.BLUE;
   return (
     <Button
-      color={CATEGORY_COLOR_MAP[category.color]}
+      color={color}
       isSelected={isSelected}
       onClick={onClick}
       disabled={disabled}
