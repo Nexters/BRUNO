@@ -40,7 +40,7 @@ export default function UserInfo({ profile, name }: UserType) {
       <Profile src={profile || ProfileImage01} />
       <InfoWrapper>
         <UserName>{name}</UserName>
-        <Time>32 min age</Time>
+        <Time>32 min ago</Time>
       </InfoWrapper>
     </Wrapper>
   );

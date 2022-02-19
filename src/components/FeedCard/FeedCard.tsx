@@ -1,40 +1,26 @@
 import styled from 'styled-components';
+import { CookieType } from '@src/queries/types';
 import UserInfo from './UserInfo';
 import FeedContent from './FeedContent';
-import { FeedProps, UserType } from './type';
 
 const Container = styled.div`
   width: 100%;
-  padding: 0 16px;
+  padding: 24px 20px 16px 20px;
   color: ${(props) => props.theme.colors.basic.gray100};
+  border-bottom: 1px solid ${(props) => props.theme.colors.basic.gray30};
 `;
 
-const Border = styled.div`
-  width: 100%;
-  height: 1px;
-  background-color: ${(props) => props.theme.colors.basic.gray20};
-  margin: 24px 0;
-`;
-
-interface Props extends FeedProps {
-  user: UserType;
+interface Props {
+  cookie: CookieType;
 }
 
-export default function Feed({ id, question, user, viewCount, hammer }: Props) {
-  const { profile, name } = user;
+export default function Feed({ cookie }: Props) {
+  const { id, title, price } = cookie;
 
   return (
-    <>
-      <Container>
-        <UserInfo profile={profile} name={name} />
-        <FeedContent
-          id={id}
-          question={question}
-          viewCount={viewCount}
-          hammer={hammer}
-        />
-      </Container>
-      <Border />
-    </>
+    <Container>
+      <UserInfo profile="" name="이름" />
+      <FeedContent id={id} question={title} viewCount={0} hammer={price} />
+    </Container>
   );
 }
