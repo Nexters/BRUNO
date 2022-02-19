@@ -34,7 +34,7 @@ export default function HomeTab() {
         isSelected={selectedCategory === ALL_CATEGORY.categoryId}
         onClick={() => setCategory(ALL_CATEGORY.categoryId)}
       />
-      {categoryList.map((item, index) => (
+      {categoryList.map((item) => (
         <CategoryButton
           key={item.categoryId}
           category={item}
