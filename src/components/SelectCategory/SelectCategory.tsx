@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import MainButton from '@src/components/shared/MainButton';
 import CategoryButton from './CategoryButton';
-import { REGIST_TEXT_MAP } from './const';
+import { REGIST_TEXT_MAP as TEXT } from './const';
 
 const Root = styled.div`
   display: flex;
@@ -53,8 +53,6 @@ function SelectCategory({
   handleClickCategory,
   handleClickNext,
 }: Props) {
-  const TEXT = REGIST_TEXT_MAP;
-
   return (
     <Root>
       <Title>{TEXT.title}</Title>
