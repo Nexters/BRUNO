@@ -12,6 +12,7 @@ import TextArea from '@src/components/shared/TextArea';
 import Modal from '@src/components/shared/Modal';
 import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
 import Icon, { Minus24, Plus24 } from '@src/assets/Icon';
+import { postCookie } from '@src/queries/cookies';
 
 import { TEXT_MAP, ANSWER_LIMIT, MODAL_LABEL_MAP } from './const';
 import { CookieInfo } from './types';
@@ -52,7 +53,9 @@ function CreateCookiePage({ isEdit = false }: Props) {
   });
 
   const createCookie = async () => {
-    const cookieData = await fetchResult(cookieInfo);
+    const resultFunc = (txHash: string) =>
+      postCookie({ ...cookieInfo, txHash });
+    const cookieData = await fetchResult(resultFunc);
     if (!cookieData) setStage(Stage.REQUEST_FAIL);
     else {
       const { id } = cookieData;

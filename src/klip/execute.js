@@ -3,7 +3,6 @@ import { useRecoilState } from 'recoil';
 import { prepare, getResult } from 'klip-sdk';
 
 import { klipRequestKeyAtom } from '@src/recoil/klip';
-import { postCookie } from '@src/queries/cookies';
 import { getAbiString } from './abi';
 import { openDeepLink as _openDeepLink } from './utils';
 
@@ -63,13 +62,15 @@ export const useExecuteContract = () => {
     return result.request_key;
   };
 
-  const fetchResult = async (cookieInfo) => {
+  const fetchResult = async (callbackFunc) => {
     const resultData = await getResult(requestData.requestKey);
-    if (!resultData?.result) return false;
-    return postCookie({
-      ...cookieInfo,
-      txHash: resultData?.result?.tx_hash,
-    });
+    // if (!resultData?.result) return false;
+    if (callbackFunc) {
+      return callbackFunc({
+        txHash: resultData?.result?.tx_hash,
+      });
+    }
+    return true;
   };
 
   // reqKey update timing issue => directly take param
