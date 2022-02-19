@@ -64,6 +64,7 @@ export const useExecuteContract = () => {
 
   const fetchResult = async (cookieInfo) => {
     const resultData = await getResult(requestData.requestKey);
+    if (!resultData?.result) return false;
     return postCookie({
       ...cookieInfo,
       txHash: resultData?.result?.tx_hash,

@@ -9,6 +9,7 @@ export const TEXT_MAP = {
   answerInfo: '이 부분이 쿠키로 바뀔 예정입니다.',
   cost: '망치 무게',
   category: '카테고리',
+  request: '권한 요청하기',
   makeCookie: '쿠키 만들기',
   editCookie: '쿠키 수정하기',
 };

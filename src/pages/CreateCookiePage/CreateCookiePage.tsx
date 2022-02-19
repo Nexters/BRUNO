@@ -43,6 +43,10 @@ function CreateCookiePage({ isEdit = false }: Props) {
   const [stage, setStage] = useState<Stage>(Stage.INITIAL);
 
   const isModalOpen = stage === Stage.REQUEST_FAIL || stage === Stage.RESULT;
+  const buttonText =
+    stage === Stage.INITIAL
+      ? TEXT_MAP.request
+      : TEXT_MAP[isEdit ? 'editCookie' : 'makeCookie'];
 
   const [cookieInfo, setCookieInfo] = useState<CookieInfo>({
     id: undefined,
@@ -54,7 +58,6 @@ function CreateCookiePage({ isEdit = false }: Props) {
 
   const createCookie = async () => {
     const cookieData = await fetchResult(cookieInfo);
-    console.log(cookieData);
     if (!cookieData) setStage(Stage.REQUEST_FAIL);
     else {
       const { id } = cookieData;
@@ -161,10 +164,7 @@ function CreateCookiePage({ isEdit = false }: Props) {
             />
           ))}
         </CategoryWrapper>
-        <MainButton
-          value={stage === Stage.INITIAL ? '권한 요청하기' : '쿠키 생성하기'}
-          onClick={handleClickCreate}
-        />
+        <MainButton value={buttonText} onClick={handleClickCreate} />
         <Modal
           label={MODAL_LABEL_MAP[stage] || null}
           open={isModalOpen}
