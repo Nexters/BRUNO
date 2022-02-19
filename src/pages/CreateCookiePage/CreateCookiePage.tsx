@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import { useExecuteContract, Stage } from '@src/klip';
+import { theme } from '@src/assets/styles';
 import MainButton from '@src/components/shared/MainButton';
 import CategoryButton from '@src/components/shared/CategoryButton';
 import { CATEGORIES, COLORS } from '@src/components/shared/const';
 import Input from '@src/components/shared/Input';
 import TextArea from '@src/components/shared/TextArea';
-import Icon, { Minus24, Plus24 } from '@src/assets/Icon';
-import { theme } from '@src/assets/styles';
-import { useExecuteContract, Stage } from '@src/klip';
-import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
 import Modal from '@src/components/shared/Modal';
-import { useNavigate } from 'react-router-dom';
+import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
+import Icon, { Minus24, Plus24 } from '@src/assets/Icon';
+
 import { TEXT_MAP, ANSWER_LIMIT, MODAL_LABEL_MAP } from './const';
+import { CookieInfo } from './types';
 
 import {
   Wrapper,
@@ -26,14 +28,6 @@ import {
 
 type Props = {
   isEdit?: boolean;
-};
-
-type CookieInfo = {
-  id?: number;
-  title: string;
-  contents: string;
-  hammer: number;
-  category: string;
 };
 
 function CreateCookiePage({ isEdit = false }: Props) {

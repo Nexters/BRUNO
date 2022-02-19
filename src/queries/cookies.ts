@@ -2,6 +2,7 @@ import axios from 'axios';
 import config from '@src/config';
 import { useInfiniteQuery } from 'react-query';
 
+import { CookieInfo } from '@src/pages/CreateCookiePage';
 import { isSuccess } from './utils';
 
 export const getCookieList = (page?: number) =>
@@ -15,7 +16,14 @@ export const getCookieList = (page?: number) =>
     },
   });
 
-export const postCookie = async ({ title, contents, hammer, txHash }: any) => {
+type PostCookieArgs = CookieInfo & { txHash: string };
+
+export const postCookie = async ({
+  title,
+  contents,
+  hammer,
+  txHash,
+}: PostCookieArgs) => {
   try {
     const { data: cookieData, status } = await axios.post(
       `${config.baseApiUrl}/cookies`,
