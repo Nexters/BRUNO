@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Input from '../shared/Input';
 import MainButton from '../shared/MainButton';
-import { REGIST_TEXT_MAP } from './const';
+import { REGIST_TEXT_MAP as TEXT } from './const';
 
 const Root = styled.div`
   display: flex;
@@ -57,32 +57,32 @@ function RegistInfo({ value, setValue, handleClickButton }: Props) {
 
   return (
     <Root>
-      <Title>{REGIST_TEXT_MAP.title}</Title>
+      <Title>{TEXT.title}</Title>
       <InputWrapper>
         <Input
           value={value.location}
           onChange={handleChangeLocationInput}
-          label={REGIST_TEXT_MAP.question.location.inputLabel}
-          placeholder={REGIST_TEXT_MAP.question.location.placeholder}
+          label={TEXT.question.location.inputLabel}
+          placeholder={TEXT.question.location.placeholder}
         />
         <Input
           value={value.height}
           onChange={handleChangeHeightInput}
-          label={REGIST_TEXT_MAP.question.height.inputLabel}
-          placeholder={REGIST_TEXT_MAP.question.height.placeholder}
+          label={TEXT.question.height.inputLabel}
+          placeholder={TEXT.question.height.placeholder}
         />
         <Input
           value={value.job}
           onChange={handleChangeJobInput}
-          label={REGIST_TEXT_MAP.question.job.inputLabel}
-          placeholder={REGIST_TEXT_MAP.question.job.placeholder}
+          label={TEXT.question.job.inputLabel}
+          placeholder={TEXT.question.job.placeholder}
         />
       </InputWrapper>
 
       <BottomWrapper>
-        <GuideLink>{REGIST_TEXT_MAP.guide}</GuideLink>
+        <GuideLink>{TEXT.guide}</GuideLink>
         <MainButton
-          value={REGIST_TEXT_MAP.button}
+          value={TEXT.button}
           onClick={handleClickButton}
           buttonStyle={{ margin: 0 }}
         />
