@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 
 import { useExecuteContract, Stage } from '@src/klip';
 import { theme } from '@src/assets/styles';
@@ -33,7 +34,7 @@ type Props = {
 function CreateCookiePage({ isEdit = false }: Props) {
   const navigate = useNavigate();
   const { isOpen, setOpen } = useQRcodeModal();
-  const { fetchPrepare, fetchResult } = useExecuteContract();
+  const { fetchPrepare, fetchResult, openDeepLink } = useExecuteContract();
   const [stage, setStage] = useState<Stage>(Stage.INITIAL);
 
   const isModalOpen = stage === Stage.REQUEST_FAIL || stage === Stage.RESULT;
@@ -76,9 +77,16 @@ function CreateCookiePage({ isEdit = false }: Props) {
   const handleClickCreate = async () => {
     // 사용자가 정보를 입력하고 버튼 클릭
     if (stage === Stage.INITIAL) {
-      await fetchPrepare(cookieInfo);
-      setOpen();
-      setStage(Stage.PREPARE);
+      const reqKey = await fetchPrepare(cookieInfo);
+
+      if (isMobile) {
+        openDeepLink(reqKey);
+        setStage(Stage.REQUEST);
+      } else {
+        setOpen();
+        setStage(Stage.PREPARE);
+        // PC : QRmodal close 시 REQUEST로 set
+      }
     } else if (stage === Stage.REQUEST) {
       createCookie();
     }

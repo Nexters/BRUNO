@@ -1,1 +1,1 @@
-export const isSuccess = (status: number) => status / 100 === 2;
+export const isSuccess = (status: number) => Math.floor(status / 100) === 2;

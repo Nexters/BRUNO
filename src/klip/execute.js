@@ -60,6 +60,7 @@ export const useExecuteContract = () => {
       });
       setRequestKey((state) => ({ ...state, requestKey: result.request_key }));
     }
+    return result.request_key;
   };
 
   const fetchResult = async (cookieInfo) => {
@@ -71,7 +72,8 @@ export const useExecuteContract = () => {
     });
   };
 
-  const openDeepLink = () => _openDeepLink(requestData.requestKey);
+  // reqKey update timing issue => directly take param
+  const openDeepLink = (key) => _openDeepLink(key);
 
   return {
     ...state,
