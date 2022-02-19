@@ -5,6 +5,7 @@ import { HeaderPage } from '@src/components/Header/const';
 import RegistId from '@src/components/RegistId';
 import { LoginType } from '@src/components/RegistId/type';
 import RegistInfo from '@src/components/RegisterInfo';
+import SelectCategory from '@src/components/SelectCategory';
 
 function JoinPage() {
   const [step, setStep] = useState<number>(0);
@@ -14,6 +15,14 @@ function JoinPage() {
     height: '',
     job: '',
   });
+  const [category, setCategory] = useState([
+    {
+      id: 0,
+      name: '자유',
+      color: 'RED',
+    },
+  ]); // server에서 받아온 category 정보
+  const [selectedCategory, setSelectedCategory] = useState<number[]>([]);
 
   const validateId = () => {
     if (profileId === '') return false;
@@ -25,6 +34,20 @@ function JoinPage() {
       if (!validateId) return; // to do : Input invalid 표시
     }
     setStep(step + 1);
+  };
+
+  const handleClickCategory = (id: number) => {
+    if (selectedCategory.some((categoryId) => categoryId === id)) {
+      setSelectedCategory(
+        selectedCategory.filter((categoryId) => categoryId !== id),
+      );
+    } else {
+      setSelectedCategory(selectedCategory.concat(id));
+    }
+  };
+
+  const regist = () => {
+    console.log('등록!');
   };
 
   return (
@@ -43,6 +66,15 @@ function JoinPage() {
           value={info}
           setValue={setInfo}
           handleClickButton={toNextStep}
+        />
+      )}
+
+      {step === 2 && (
+        <SelectCategory
+          category={category}
+          selected={selectedCategory}
+          handleClickCategory={handleClickCategory}
+          handleClickNext={regist}
         />
       )}
     </PageLayout>
