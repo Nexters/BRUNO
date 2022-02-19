@@ -1,5 +1,4 @@
 export enum CategoryColor {
-  RED = 'RED',
   PURPLE = 'PURPLE',
   BLUE = 'BLUE',
   PINK = 'PINK',
