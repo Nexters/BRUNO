@@ -8,4 +8,5 @@ export type FeedProps = {
 export type UserType = {
   profile: string | null;
   name: string;
+  createdAt: string;
 };

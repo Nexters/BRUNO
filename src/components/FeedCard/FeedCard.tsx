@@ -15,11 +15,11 @@ interface Props {
 }
 
 export default function Feed({ cookie }: Props) {
-  const { id, title, price } = cookie;
+  const { id, authorUserId, title, price, createdAt } = cookie;
 
   return (
     <Container>
-      <UserInfo profile="" name="이름" />
+      <UserInfo profile="" name={`User ${authorUserId}`} createdAt={createdAt} />
       <FeedContent id={id} question={title} viewCount={0} hammer={price} />
     </Container>
   );
