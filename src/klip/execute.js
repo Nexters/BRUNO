@@ -64,7 +64,7 @@ export const useExecuteContract = () => {
 
   const fetchResult = async (callbackFunc) => {
     const resultData = await getResult(requestData.requestKey);
-    // if (!resultData?.result) return false;
+    if (!resultData?.result) return false;
     if (callbackFunc) {
       return callbackFunc({
         txHash: resultData?.result?.tx_hash,
