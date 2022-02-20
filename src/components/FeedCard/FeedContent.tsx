@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 const BoxWrapper = styled.div`
   padding: 12px 16px;
   border-radius: 8px;
-  background-color: #1a1c2c;
+  background-color: ${(props) => props.theme.colors.basic.gray20};
 `;
 
 const QuestionWrapper = styled.div`
@@ -68,7 +68,7 @@ export default function FeedContent({ id, question, viewCount, hammer }: FeedPro
           <div>Q. {question}</div>
         </QuestionWrapper>
         <AnswerWrapper>
-          <Icon color={theme.colors.basic.gray60}>
+          <Icon color={theme.colors.basic.gray60} style={{ marginBottom: 'auto' }}>
             <Comment24 />
           </Icon>
           <CookieImage src={NFTImage01} onClick={handleAnswerClick} />

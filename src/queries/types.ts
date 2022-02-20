@@ -18,3 +18,28 @@ export type CookieType = {
   fromBlockAddress: number;
   categoryId: number;
 };
+
+export enum CookieHistoryAction {
+  MODIFY = 'MODIFY',
+  BUY = 'BUY',
+  CREATE = 'CREATE',
+}
+
+export type CookieHistory = {
+  action: CookieHistoryAction;
+  content: string;
+  createdAt: string;
+};
+
+export type CookieDetail = {
+  question: string;
+  answer: string;
+  collectorName: string;
+  creatorName: string;
+  contractAddress: string;
+  nftTokenId: number;
+  viewCount: number;
+  price: number;
+  histories: CookieHistory[];
+  myCookie: boolean;
+};
