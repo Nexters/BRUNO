@@ -18,7 +18,7 @@ function CollectedCookieGrid({ userId }: { userId: string }) {
   return (
     <Wrapper>
       {cookies.map((cookie) => (
-        <CollectedCookie key={cookie.id} categoryId={cookie.categoryId} status={cookie.status} />
+        <CollectedCookie key={cookie.id} id={cookie.id} categoryId={cookie.categoryId} status={cookie.status} />
       ))}
     </Wrapper>
   );

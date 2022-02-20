@@ -14,14 +14,20 @@ const Wrapper = styled.div`
   border-bottom: 2px solid ${(props) => props.theme.colors.basic.gray20};
 `;
 
-const TABS = [
-  { type: TabType.COLLECT, name: '수집한 쿠키', count: 7 },
-  { type: TabType.CREATE, name: '만든 쿠키', count: 23 },
-  { type: TabType.REQUEST, name: '받은 요청', count: 12 },
-];
+type Props = {
+  count: {
+    collected: number;
+  };
+};
 
-function UserHomeTab() {
+function UserHomeTab({ count }: Props) {
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const TABS = [
+    { type: TabType.COLLECT, name: '수집한 쿠키', count: count?.collected ?? 0 },
+    { type: TabType.CREATE, name: '만든 쿠키', count: 23 },
+    { type: TabType.REQUEST, name: '받은 요청', count: 12 },
+  ];
 
   const currentTab = searchParams.get('tab') as TabType;
 
