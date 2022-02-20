@@ -18,3 +18,22 @@ export type CookieType = {
   fromBlockAddress: number;
   categoryId: number;
 };
+
+export type CookieHistory = {
+  action: 'CREATE' | 'MODIFY';
+  content: string;
+  createdAt: string;
+};
+
+export type CookieDetail = {
+  question: string;
+  answer: string;
+  collectorName: string;
+  creatorName: string;
+  contractAddress: string;
+  nftTokenId: number;
+  viewCount: number;
+  price: number;
+  histories: CookieHistory[];
+  myCookie: boolean;
+};
