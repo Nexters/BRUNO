@@ -8,9 +8,12 @@ import { FeedProps } from './type';
 const Wrapper = styled.div`
   width: 100%;
   margin-top: 16px;
-  padding: 8px 16px;
-  background-color: #1a1c2c;
+`;
+
+const BoxWrapper = styled.div`
+  padding: 12px 16px;
   border-radius: 8px;
+  background-color: #1a1c2c;
 `;
 
 const QuestionWrapper = styled.div`
@@ -18,8 +21,8 @@ const QuestionWrapper = styled.div`
   flex-direction: row;
   gap: 4px;
   width: 100%;
-  font-weight: bold;
-  font-size: ${(props) => props.theme.fontSize.large};
+  font-weight: 500;
+  font-size: ${(props) => props.theme.fontSize.body01};
   overflow-x: hidden;
 `;
 
@@ -30,15 +33,15 @@ const AnswerWrapper = styled.div`
   margin-left: 20px;
 `;
 
-const InfoWrapper = styled.div`
+const NumericSection = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   height: 24px;
+  margin-top: 16px;
   font-weight: bold;
   font-size: 13px;
   color: ${(props) => props.theme.colors.basic.gray60};
-  margin-top: 16px;
 `;
 
 const CookieImage = styled.img`
@@ -51,12 +54,7 @@ const InfoText = styled.span`
   margin: 0 8px 0 4px;
 `;
 
-export default function FeedContent({
-  id,
-  question,
-  viewCount,
-  hammer,
-}: FeedProps) {
+export default function FeedContent({ id, question, viewCount, hammer }: FeedProps) {
   const navigate = useNavigate();
 
   const handleAnswerClick = () => {
@@ -65,30 +63,28 @@ export default function FeedContent({
 
   return (
     <Wrapper>
-      <QuestionWrapper>
-        <div>Q.</div>
-        <div>{question}</div>
-      </QuestionWrapper>
+      <BoxWrapper>
+        <QuestionWrapper>
+          <div>Q. {question}</div>
+        </QuestionWrapper>
+        <AnswerWrapper>
+          <Icon color={theme.colors.basic.gray60}>
+            <Comment24 />
+          </Icon>
+          <CookieImage src={NFTImage01} onClick={handleAnswerClick} />
+        </AnswerWrapper>
+      </BoxWrapper>
 
-      <AnswerWrapper>
-        <Icon color={theme.colors.basic.gray60}>
-          <Comment24 />
-        </Icon>
-
-        <CookieImage src={NFTImage01} onClick={handleAnswerClick} />
-      </AnswerWrapper>
-
-      <InfoWrapper>
+      <NumericSection>
         <Icon color={theme.colors.basic.gray60}>
           <View24 />
         </Icon>
         <InfoText>{viewCount}</InfoText>
-
         <Icon color={theme.colors.basic.gray60}>
           <Hammer24 />
         </Icon>
         <InfoText>{hammer}</InfoText>
-      </InfoWrapper>
+      </NumericSection>
     </Wrapper>
   );
 }

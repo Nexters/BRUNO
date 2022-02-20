@@ -34,7 +34,7 @@ function App() {
                 <Route path="/join" element={<Auth component={<JoinPage />} />} />
                 {/* Authentication이 필요한 경우 PrivateRoute로 감싸주어야 함 */}
                 <Route path="*" element={<PrivateRoute component={<Main />} />} />
-                <Route path="/user/*" element={<PrivateRoute component={<User />} />} />
+                <Route path="/users/*" element={<PrivateRoute component={<User />} />} />
               </Routes>
             </BrowserRouter>
           </Suspense>

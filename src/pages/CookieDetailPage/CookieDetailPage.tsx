@@ -6,7 +6,7 @@ import { theme } from '@src/assets/styles';
 import CookieInfo from '@src/components/CookieInfo';
 import CategoryButton from '@src/components/shared/CategoryButton';
 import { Category, CategoryColor } from '@src/recoil/category';
-import { CookieInfoType, HistoryType } from '.';
+import { CookieInfoType, HistoryType } from './types';
 
 const CategoryWrapper = styled.div`
   display: flex;
