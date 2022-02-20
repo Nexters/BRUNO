@@ -4,15 +4,14 @@ import { isMobile } from 'react-device-detect';
 
 import { useExecuteContract, Stage, CookieMethod } from '@src/klip';
 import { theme } from '@src/assets/styles';
-import { useRecoilValue } from 'recoil';
 
-import { categoryListSelector, Category } from '@src/recoil/category';
+import { Category } from '@src/recoil/category';
 import MainButton from '@src/components/shared/MainButton';
-import CategoryButton from '@src/components/shared/CategoryButton';
 import Input from '@src/components/shared/Input';
 import TextArea from '@src/components/shared/TextArea';
 import Modal from '@src/components/shared/Modal';
 import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
+import CategorySection from '@src/components/CategorySection';
 import Icon, { Minus24, Plus24 } from '@src/assets/Icon';
 import { postCookie } from '@src/queries/cookies';
 
@@ -27,7 +26,6 @@ import {
   HammerPriceWrapper,
   HammerPrice,
   HammerControlButton,
-  CategoryWrapper,
 } from './styled';
 
 type Props = {
@@ -41,7 +39,6 @@ function CreateCookiePage({ isEdit = false }: Props) {
     method: CookieMethod.MINT_COOKIE_BY_HAMMER,
   });
   const [stage, setStage] = useState<Stage>(Stage.INITIAL);
-  const categoryList = useRecoilValue(categoryListSelector);
 
   const isModalOpen = stage === Stage.REQUEST_FAIL || stage === Stage.RESULT;
   const buttonText = stage === Stage.INITIAL ? TEXT_MAP.request : TEXT_MAP[isEdit ? 'editCookie' : 'makeCookie'];
@@ -75,7 +72,7 @@ function CreateCookiePage({ isEdit = false }: Props) {
   };
 
   const handleClickCategory = (category: Category) => {
-    setCookieInfo({ ...cookieInfo, category: category.categoryId });
+    if (!isEdit) setCookieInfo({ ...cookieInfo, category: category.categoryId });
   };
 
   const handleChangeInput = (key: string, value: string) => {
@@ -158,17 +155,7 @@ function CreateCookiePage({ isEdit = false }: Props) {
 
       <Wrapper>
         <Label>{TEXT_MAP.category}</Label>
-        <CategoryWrapper>
-          {categoryList.map((item, index) => (
-            <CategoryButton
-              key={item.categoryId}
-              category={item}
-              isSelected={false}
-              onClick={() => handleClickCategory(item)}
-              disabled={isEdit}
-            />
-          ))}
-        </CategoryWrapper>
+        <CategorySection isEdit={isEdit} setCategory={handleClickCategory} currentCategory={cookieInfo.category} />
         <MainButton value={buttonText} onClick={handleClickCreate} />
         <Modal
           label={MODAL_LABEL_MAP[stage] || null}
