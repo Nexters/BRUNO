@@ -1,11 +1,10 @@
 import axios from 'axios';
-import config from '@src/config';
 
 import { CookieInfo } from '@src/pages/CreateCookiePage';
 import { getErrorStatus } from './utils';
 
 export const getCookieList = (page?: number) =>
-  axios.get(`${config.baseApiUrl}/categories/all/cookies`, {
+  axios.get('/categories/all/cookies', {
     params: {
       page: page ?? 0,
       size: 10,
@@ -19,7 +18,7 @@ type PostCookieArgs = CookieInfo & { txHash: string };
 
 export const postCookie = async ({ title, contents, hammer, txHash }: PostCookieArgs) => {
   try {
-    const { data: cookieData } = await axios.post(`${config.baseApiUrl}/cookies`, {
+    const { data: cookieData } = await axios.post('/cookies', {
       question: title,
       answer: contents,
       price: hammer,
@@ -47,7 +46,7 @@ export const getCookieDetail = async ({ userId, cookieId }: GetCookieArgs) => {
 };
 
 export const getCookieListByCategory = async (categoryId: string, page: number) =>
-  axios.get(`${config.baseApiUrl}/categories/${categoryId}/cookies`, {
+  axios.get(`/categories/${categoryId}/cookies`, {
     params: {
       page: page ?? 0,
       size: 5,

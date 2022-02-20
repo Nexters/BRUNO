@@ -43,3 +43,13 @@ export type CookieDetail = {
   histories: CookieHistory[];
   myCookie: boolean;
 };
+
+export type UserProfileType = {
+  id: number;
+  walletAddress: string;
+  nickname: string;
+  introduction: string;
+  profileUrl: string;
+  backgroundUrl: string;
+  status: 'ACTIVE';
+};
