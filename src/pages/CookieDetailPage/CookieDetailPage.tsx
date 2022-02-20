@@ -1,12 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { useQuery } from 'react-query';
 
 import Icon, { View24 } from '@src/assets/Icon';
 import { theme } from '@src/assets/styles';
 import CookieInfo from '@src/components/CookieInfo';
 import CategoryButton from '@src/components/shared/CategoryButton';
 import { Category, CategoryColor } from '@src/recoil/category';
-import { CookieInfoType, HistoryType } from './types';
+import { getCookieDetail } from '@src/queries/cookies';
+import { CookieDetail } from '@src/queries/types';
+import { useLogin } from '@src/hooks';
 
 const CategoryWrapper = styled.div`
   display: flex;
@@ -26,56 +30,26 @@ const ViewCountText = styled.span`
   color: ${(props) => props.theme.colors.basic.gray60};
 `;
 
+type CookieDetailParams = { cookieId: string };
+
 function CookieDetailPage() {
+  const { userId } = useLogin();
+  const { cookieId } = useParams<CookieDetailParams>() as CookieDetailParams;
+
+  const { data } = useQuery<CookieDetail, Error>(['cookie', 'detail'], () =>
+    getCookieDetail({ userId, cookieId: +cookieId }),
+  );
+
   const [category, setCategory] = useState<Category>({
     categoryId: 1,
     name: 'friends',
     color: CategoryColor.BLUE,
   });
-  const [viewCount, setViewCount] = useState<number>(0);
 
-  const [question, setQuestion] = useState<string>('');
-  const [hammer, setHammer] = useState<number>(0);
+  if (!data) return <div>loading...</div>;
 
-  const [collector, setCollector] = useState<string>('');
-  const [creator, setCreator] = useState<string>('');
-  const [cookieInfo, setCookieInfo] = useState<CookieInfoType>();
-  const [history, setHistory] = useState<HistoryType>();
+  const { question, price, viewCount, histories, collectorName, creatorName } = data;
 
-  useEffect(() => {
-    // to do: 쿠키 상세 정보 가져오기
-    setViewCount(235);
-    setQuestion('너는 누구냐?');
-    setHammer(24);
-    setCollector('강동구 호랑이');
-    setCreator('상일동 치타');
-    setCookieInfo({
-      wallet: '0x12451801',
-      token: '125414',
-    });
-    setHistory({
-      update: {
-        user: '강동구 호랑이',
-        question: '내가 여자친구가 있을까',
-        hammer: 32,
-        time: '2022-10-32 20:00',
-      },
-      create: {
-        user: '강동구 호랑이',
-        question: '내가 여자친구가 있을까',
-        hammer: 32,
-        time: '2022-10-32 20:00',
-      },
-      purchase: {
-        user: '강동구 호랑이',
-        question: '내가 여자친구가 있을까',
-        hammer: 32,
-        time: '2022-10-32 20:00',
-      },
-    });
-  }, []);
-
-  if (!cookieInfo || !history) return null;
   return (
     <>
       <CategoryWrapper>
@@ -90,11 +64,10 @@ function CookieDetailPage() {
 
       <CookieInfo
         question={question}
-        hammer={hammer}
-        collector={collector}
-        creator={creator}
-        cookieInfo={cookieInfo}
-        history={history}
+        hammer={price}
+        collector={collectorName}
+        creator={creatorName}
+        historyList={histories}
       />
     </>
   );

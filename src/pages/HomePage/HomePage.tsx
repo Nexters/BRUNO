@@ -2,7 +2,7 @@ import HomeTab from '@src/components/HomeTab';
 import FeedCard from '@src/components/FeedCard';
 
 import styled from 'styled-components';
-import { useGetAllCookies } from '@src/queries/cookies';
+import { useGetAllCookies } from '@src/queries/hooks';
 
 const ContentsWrapper = styled.main`
   border-top: 8px solid ${(props) => props.theme.colors.basic.gray20};
