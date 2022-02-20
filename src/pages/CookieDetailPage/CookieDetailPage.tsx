@@ -40,12 +40,14 @@ function CookieDetailPage() {
     getCookieDetail({ userId, cookieId: +cookieId }),
   );
 
+  // TODO : 서버 카테고리 주면 적용해야 함
   const [category, setCategory] = useState<Category>({
     categoryId: 1,
     name: 'friends',
     color: CategoryColor.BLUE,
   });
 
+  // TODO : loading 페이지 추가...
   if (!data) return <div>loading...</div>;
 
   const { question, price, viewCount, histories, collectorName, creatorName } = data;
