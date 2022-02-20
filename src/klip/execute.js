@@ -5,6 +5,7 @@ import { prepare, getResult } from 'klip-sdk';
 import { klipRequestKeyAtom } from '@src/recoil/klip';
 import { getAbiString } from './abi';
 import { openDeepLink as _openDeepLink } from './utils';
+import { CookieMethod } from './types';
 
 const bappName = 'COOKIEPANG';
 // const successLink = '';
@@ -23,13 +24,16 @@ const bappName = 'COOKIEPANG';
  * @params {string} failLink - 사용자 동의과정에서 문제가 발생 할 경우 돌아올 링크 (optional)
  */
 
-const prepareExcution = async (data) => {
+const COOKIE_CONTRACT_ADDR = '0x80C8be670A3b138b49d21323Fde06d1E48916f4C';
+
+const prepareExcution = async (data, methodName) => {
+  const abi = await getAbiString(CookieMethod[methodName]);
+  if (!abi) return false;
+
   const { title, contents, category, hammer } = data;
-  const abi = await getAbiString('mintCookieByHammer');
-  // const from = '0xB21F0285d27beb2373EC...';
-  const to = '0x80C8be670A3b138b49d21323Fde06d1E48916f4C';
-  const value = '0';
-  const params = `["t1_title_${title}","t1_contents_${contents}","null","t1_tag_${category}",${hammer}]`;
+  const to = COOKIE_CONTRACT_ADDR; // TODO : COIN으로도 치환가능하게 수정
+  const value = '0'; // TODO : 추후 수정
+  const params = `["${title}","${contents}","null","${category}",${hammer}]`;
   const result = await prepare.executeContract({
     bappName,
     to,
@@ -41,7 +45,7 @@ const prepareExcution = async (data) => {
   return result;
 };
 
-export const useExecuteContract = () => {
+export const useExecuteContract = ({ method }) => {
   const [requestData, setRequestKey] = useRecoilState(klipRequestKeyAtom);
   const [state, setState] = useState({
     loading: true,
@@ -49,8 +53,8 @@ export const useExecuteContract = () => {
   });
 
   const fetchPrepare = async (data) => {
-    const result = await prepareExcution(data);
-    if (result.err) setState({ error: true, loading: false });
+    const result = await prepareExcution(data, method);
+    if (!result || result.err) setState({ error: true, loading: false });
     else if (result.request_key) {
       setState({
         ...state,

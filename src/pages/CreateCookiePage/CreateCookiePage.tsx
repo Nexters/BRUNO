@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 
-import { useExecuteContract, Stage } from '@src/klip';
+import { useExecuteContract, Stage, CookieMethod } from '@src/klip';
 import { theme } from '@src/assets/styles';
 import MainButton from '@src/components/shared/MainButton';
 import CategoryButton from '@src/components/shared/CategoryButton';
@@ -35,7 +35,9 @@ type Props = {
 function CreateCookiePage({ isEdit = false }: Props) {
   const navigate = useNavigate();
   const { isOpen, setOpen } = useQRcodeModal();
-  const { fetchPrepare, fetchResult, openDeepLink } = useExecuteContract();
+  const { fetchPrepare, fetchResult, openDeepLink } = useExecuteContract({
+    method: CookieMethod.MINT_COOKIE_BY_HAMMER,
+  });
   const [stage, setStage] = useState<Stage>(Stage.INITIAL);
 
   const isModalOpen = stage === Stage.REQUEST_FAIL || stage === Stage.RESULT;
