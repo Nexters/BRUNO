@@ -1,5 +1,8 @@
 import { ProfileImage01 } from '@src/assets/images';
 import styled from 'styled-components';
+
+import { formatTime } from '@src/utils/format';
+import { useNavigate } from 'react-router-dom';
 import { UserType } from './type';
 
 const Wrapper = styled.div`
@@ -34,13 +37,16 @@ const Time = styled.p`
   color: ${(props) => props.theme.colors.basic.gray60};
 `;
 
-export default function UserInfo({ profile, name }: UserType) {
+export default function UserInfo({ userId, profile, name, createdAt: _createdAt }: UserType) {
+  const navigate = useNavigate();
+  const created = formatTime(_createdAt);
+
   return (
     <Wrapper>
-      <Profile src={profile || ProfileImage01} />
+      <Profile src={profile || ProfileImage01} onClick={() => navigate(`/users/${userId}`)} />
       <InfoWrapper>
         <UserName>{name}</UserName>
-        <Time>32 min age</Time>
+        <Time>{created}</Time>
       </InfoWrapper>
     </Wrapper>
   );

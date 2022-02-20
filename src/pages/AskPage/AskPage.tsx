@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
 
+import { categoryListSelector } from '@src/recoil/category/selectors';
 import CategoryButton from '@src/components/shared/CategoryButton';
-import { CATEGORIES, COLORS } from '@src/components/shared/const';
 import MainButton from '@src/components/shared/MainButton';
 import Input from '@src/components/shared/Input';
 
@@ -46,13 +47,14 @@ const ButtonWrapper = styled.div`
 `;
 
 function AskPage() {
+  const categoryList = useRecoilValue(categoryListSelector);
   const [askData, setAskData] = useState({
     question: '',
     category: '',
   });
 
-  const handleChangeInput = (key: string, value: string) => {
-    setAskData({ ...askData, [key]: value });
+  const handleChangeQuestion = (value: string) => {
+    setAskData({ ...askData, question: value });
   };
 
   return (
@@ -62,8 +64,7 @@ function AskPage() {
         <Title>Question</Title>
         <Input
           value={askData.question}
-          onChange={handleChangeInput}
-          infoKey="question"
+          onChange={handleChangeQuestion}
           placeholder="질문을 입력하세요."
         />
         <From>From. Anonymous</From>
@@ -71,12 +72,10 @@ function AskPage() {
       <Section>
         <Title>Categories</Title>
         <CategorySection>
-          {CATEGORIES.map((category, index) => (
+          {categoryList.map((category, index) => (
             <CategoryButton
-              // eslint-disable-next-line react/no-array-index-key
-              key={`CATEGORY_${index}`}
+              key={category.categoryId}
               category={category}
-              color={COLORS[index % COLORS.length]}
               isSelected={false}
             />
           ))}

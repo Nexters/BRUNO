@@ -36,22 +36,11 @@ export default function Navigation() {
   const navigate = useNavigate();
 
   const isHome = location.pathname === '/';
-  const isProfile = location.pathname.includes('/user');
+  const isProfile = location.pathname.includes('/users');
 
-  const handleClickHome = () => {
-    navigate('/');
-  };
-
-  const handleClickWrite = () => {
-    if (location.pathname !== '/create') {
-      navigate('/create');
-    }
-  };
-  const handleClickProfile = () => {
-    if (location.pathname !== '/user') {
-      navigate('/user/me');
-    }
-  };
+  const handleClickHome = () => navigate('/');
+  const handleClickWrite = () => navigate('/create');
+  const handleClickProfile = () => navigate('/users/me');
 
   return (
     <>

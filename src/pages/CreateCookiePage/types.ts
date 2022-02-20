@@ -3,5 +3,5 @@ export type CookieInfo = {
   title: string;
   contents: string;
   hammer: number;
-  category: string;
+  category: number;
 };

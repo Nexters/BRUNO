@@ -4,9 +4,11 @@ import { isMobile } from 'react-device-detect';
 
 import { useExecuteContract, Stage, CookieMethod } from '@src/klip';
 import { theme } from '@src/assets/styles';
+import { useRecoilValue } from 'recoil';
+
+import { categoryListSelector, Category } from '@src/recoil/category';
 import MainButton from '@src/components/shared/MainButton';
 import CategoryButton from '@src/components/shared/CategoryButton';
-import { CATEGORIES, COLORS } from '@src/components/shared/const';
 import Input from '@src/components/shared/Input';
 import TextArea from '@src/components/shared/TextArea';
 import Modal from '@src/components/shared/Modal';
@@ -39,24 +41,21 @@ function CreateCookiePage({ isEdit = false }: Props) {
     method: CookieMethod.MINT_COOKIE_BY_HAMMER,
   });
   const [stage, setStage] = useState<Stage>(Stage.INITIAL);
+  const categoryList = useRecoilValue(categoryListSelector);
 
   const isModalOpen = stage === Stage.REQUEST_FAIL || stage === Stage.RESULT;
-  const buttonText =
-    stage === Stage.INITIAL
-      ? TEXT_MAP.request
-      : TEXT_MAP[isEdit ? 'editCookie' : 'makeCookie'];
+  const buttonText = stage === Stage.INITIAL ? TEXT_MAP.request : TEXT_MAP[isEdit ? 'editCookie' : 'makeCookie'];
 
   const [cookieInfo, setCookieInfo] = useState<CookieInfo>({
     id: undefined,
     title: '',
     contents: '',
     hammer: 1,
-    category: '',
+    category: 0,
   });
 
   const createCookie = async () => {
-    const resultFunc = (txHash: string) =>
-      postCookie({ ...cookieInfo, txHash });
+    const resultFunc = (txHash: string) => postCookie({ ...cookieInfo, txHash });
     const cookieData = await fetchResult(resultFunc);
     if (!cookieData) setStage(Stage.REQUEST_FAIL);
     else {
@@ -73,6 +72,10 @@ function CreateCookiePage({ isEdit = false }: Props) {
       ...cookieInfo,
       hammer: add ? cookieInfo.hammer + 1 : cookieInfo.hammer - 1,
     });
+  };
+
+  const handleClickCategory = (category: Category) => {
+    setCookieInfo({ ...cookieInfo, category: category.categoryId });
   };
 
   const handleChangeInput = (key: string, value: string) => {
@@ -117,8 +120,7 @@ function CreateCookiePage({ isEdit = false }: Props) {
       <Wrapper>
         <Input
           value={cookieInfo.title}
-          infoKey="title"
-          onChange={handleChangeInput}
+          onChange={(value) => handleChangeInput('title', value)}
           label={TEXT_MAP.question}
           placeholder={TEXT_MAP.questionPlaceholder}
           disabled={isEdit}
@@ -128,8 +130,7 @@ function CreateCookiePage({ isEdit = false }: Props) {
       <AnswerWrapper>
         <TextArea
           value={cookieInfo.contents}
-          infoKey="contents"
-          onChange={handleChangeInput}
+          onChange={(value) => handleChangeInput('contents', value)}
           label={TEXT_MAP.answer}
           placeholder={TEXT_MAP.answerPlaceholder}
           limit={ANSWER_LIMIT}
@@ -158,14 +159,12 @@ function CreateCookiePage({ isEdit = false }: Props) {
       <Wrapper>
         <Label>{TEXT_MAP.category}</Label>
         <CategoryWrapper>
-          {CATEGORIES.map((categoryName, index) => (
+          {categoryList.map((item, index) => (
             <CategoryButton
-              // eslint-disable-next-line react/no-array-index-key
-              key={`CATEGORY_${index}`}
-              category={categoryName}
-              color={COLORS[index % COLORS.length]}
-              isSelected={cookieInfo.category === categoryName}
-              onClick={() => handleChangeInput('category', categoryName)}
+              key={item.categoryId}
+              category={item}
+              isSelected={false}
+              onClick={() => handleClickCategory(item)}
               disabled={isEdit}
             />
           ))}
