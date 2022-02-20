@@ -15,11 +15,13 @@ export const useGetAllCookies = () => {
 };
 
 export const useUserInfo = ({ userId }: { userId: string }) => {
-  const { data: userProfile } = useQuery<UserProfileType>(['users', 'profile'], () => getUser(userId));
-  const { data: collectedCookies } = useQuery<UserCookieList>(['users', 'collected'], () =>
+  const { data: userProfile } = useQuery<UserProfileType>(['users', 'profile', userId], () => getUser(userId));
+
+  // TODO : infinite scroll
+  const { data: collectedCookies } = useQuery<UserCookieList>(['users', 'collected', userId], () =>
     getUserCookies({ userId, target: UserCookieType.COLLECTED }),
   );
-  const { data: createdCookies } = useQuery<UserCookieList>(['users', 'cookies'], () =>
+  const { data: createdCookies } = useQuery<UserCookieList>(['users', 'created', userId], () =>
     getUserCookies({ userId, target: UserCookieType.COOKIES }),
   );
 
