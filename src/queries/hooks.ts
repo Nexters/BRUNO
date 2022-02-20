@@ -2,16 +2,31 @@ import { useQuery } from 'react-query';
 
 import { useLogin } from '@src/hooks';
 import { CookieFeed, UserCookieList, UserCookieType, UserProfileType } from './types';
-import { getCookieList, getUserCookies } from './cookies';
+import { getCookieList, getUserCookies, getCookieListByCategory } from './cookies';
 import { getUser } from './users';
 
-export const useGetAllCookies = () => {
+export const useGetAllCookies = ({ categoryId }: { categoryId: string }) => {
   const { userId } = useLogin();
-  const { data, isLoading, isError } = useQuery<CookieFeed[]>(['categories', 'all', 'cookies'], () =>
-    getCookieList({ userId }),
+  const {
+    data: allCookies,
+    isLoading,
+    isError,
+  } = useQuery<CookieFeed[]>(['categories', 'all', 'cookies'], () => getCookieList({ userId }));
+  const {
+    data: categoryCookies,
+    isLoading: categoryIsLoading,
+    isError: categoryIsError,
+  } = useQuery<CookieFeed[]>(
+    ['categories', categoryId, 'cookies'],
+    () => getCookieListByCategory({ userId, categoryId }),
+    { enabled: !!categoryId },
   );
 
-  return { cookieList: data ?? [], isLoading, isError };
+  return {
+    cookieList: (categoryId ? categoryCookies : allCookies) ?? [],
+    isLoading: isLoading || categoryIsLoading,
+    isError: isError || categoryIsError,
+  };
 };
 
 export const useUserInfo = ({ userId }: { userId: string }) => {
