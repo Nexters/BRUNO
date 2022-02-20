@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 
-import { CommonUseQuery, CookieType } from './types';
-import { getCookieList } from './cookies';
+import { CommonUseQuery, CookieType, UserCookieType } from './types';
+import { getCookieList, getUserCookies } from './cookies';
 import { getUser } from './users';
 
 type UseGetAllCookie = CommonUseQuery & {
@@ -15,9 +15,17 @@ export const useGetAllCookies = (): UseGetAllCookie => {
 };
 
 export const useUserInfo = ({ userId }: { userId: string }) => {
-  const { data: userProfile } = useQuery(['users'], () => getUser(userId));
+  const { data: userProfile } = useQuery(['users', 'profile'], () => getUser(userId));
+  const { data: collectedCookies } = useQuery(['users', 'collected'], () =>
+    getUserCookies({ userId, target: UserCookieType.COLLECTED }),
+  );
+  const { data: createdCookies } = useQuery(['users', 'cookies'], () =>
+    getUserCookies({ userId, target: UserCookieType.COOKIES }),
+  );
 
   return {
     userProfile: userProfile ?? {},
+    collectedCookies: collectedCookies ?? [],
+    createdCookies: createdCookies ?? [],
   };
 };

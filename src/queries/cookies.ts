@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import { CookieInfo } from '@src/pages/CreateCookiePage';
 import { getErrorStatus } from './utils';
+import { UserCookieType } from './types';
 
 export const getCookieList = (page?: number) =>
   axios.get('/categories/all/cookies', {
@@ -55,3 +56,20 @@ export const getCookieListByCategory = async (categoryId: string, page: number) 
       'Content-Type': 'application/json',
     },
   });
+
+type GetUserCookiesArgs = { userId: string; page?: number; size?: number; target: UserCookieType };
+
+export const getUserCookies = async ({ userId, page, size, target }: GetUserCookiesArgs) => {
+  try {
+    const { data: userCookieData } = await axios.get(`/users/${userId}/cookies`, {
+      params: {
+        page: page ?? 0,
+        size: size ?? 20,
+        target,
+      },
+    });
+    return userCookieData;
+  } catch (error) {
+    getErrorStatus(error);
+  }
+};

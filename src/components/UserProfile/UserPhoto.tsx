@@ -63,7 +63,7 @@ function UserPhoto({ isMy, imageUrl }: Props) {
         <Photo src={imageUrl || defaultImageUrl} />
         {isMy && <AddButton>+</AddButton>}
       </PhotoWrapper>
-      {!isMy && <RequestButton onClick={handleClickAskButton}>Ask Me</RequestButton>}
+      {!isMy && <RequestButton onClick={handleClickAskButton}>질문 요청하기</RequestButton>}
     </Wrapper>
   );
 }

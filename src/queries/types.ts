@@ -53,3 +53,8 @@ export type UserProfileType = {
   backgroundUrl: string;
   status: 'ACTIVE';
 };
+
+export enum UserCookieType {
+  COLLECTED = 'COLLECTED',
+  COOKIES = 'COOKIES',
+}
