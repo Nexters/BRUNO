@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ProfileImage01, ProfileImage02 } from '@src/assets/images';
 import { Button } from '@src/components/shared/MainButton';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -14,12 +15,14 @@ const PhotoWrapper = styled.div`
   position: relative;
   width: 100px;
   height: 100px;
-  border: 4px solid #ffffff;
   border-radius: 100%;
   background-color: ${(props) => props.theme.colors.basic.gray10};
 `;
 
-const Photo = styled.img``;
+const Photo = styled.img`
+  width: 100px;
+  height: 100px;
+`;
 
 const AddButton = styled.button`
   position: absolute;
@@ -44,23 +47,23 @@ const RequestButton = styled(Button)`
 
 interface Props {
   isMy: boolean;
+  imageUrl: string;
 }
 
-function UserPhoto({ isMy }: Props) {
+function UserPhoto({ isMy, imageUrl }: Props) {
   const navigate = useNavigate();
   const { userId } = useParams();
 
+  const defaultImageUrl = isMy ? ProfileImage01 : ProfileImage02;
   const handleClickAskButton = () => navigate(`/ask/${userId}`);
 
   return (
     <Wrapper>
       <PhotoWrapper>
-        <Photo />
+        <Photo src={imageUrl || defaultImageUrl} />
         {isMy && <AddButton>+</AddButton>}
       </PhotoWrapper>
-      {!isMy && (
-        <RequestButton onClick={handleClickAskButton}>Ask Me</RequestButton>
-      )}
+      {!isMy && <RequestButton onClick={handleClickAskButton}>Ask Me</RequestButton>}
     </Wrapper>
   );
 }
