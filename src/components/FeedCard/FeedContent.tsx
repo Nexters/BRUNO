@@ -33,7 +33,7 @@ const AnswerWrapper = styled.div`
   margin-left: 20px;
 `;
 
-const NumericSecion = styled.div`
+const NumericSection = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -65,8 +65,7 @@ export default function FeedContent({ id, question, viewCount, hammer }: FeedPro
     <Wrapper>
       <BoxWrapper>
         <QuestionWrapper>
-          <div>Q.</div>
-          <div>{question}</div>
+          <div>Q. {question}</div>
         </QuestionWrapper>
         <AnswerWrapper>
           <Icon color={theme.colors.basic.gray60}>
@@ -76,7 +75,7 @@ export default function FeedContent({ id, question, viewCount, hammer }: FeedPro
         </AnswerWrapper>
       </BoxWrapper>
 
-      <NumericSecion>
+      <NumericSection>
         <Icon color={theme.colors.basic.gray60}>
           <View24 />
         </Icon>
@@ -85,7 +84,7 @@ export default function FeedContent({ id, question, viewCount, hammer }: FeedPro
           <Hammer24 />
         </Icon>
         <InfoText>{hammer}</InfoText>
-      </NumericSecion>
+      </NumericSection>
     </Wrapper>
   );
 }
