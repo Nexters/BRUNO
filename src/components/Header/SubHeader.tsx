@@ -45,7 +45,7 @@ function SubHeader({ pageType }: Props) {
   const handleClickBack = () => navigate(-1);
 
   const handleClickSkip = () => {
-    navigate('/'); // to do : 쿠키 만들었어요! 페이지로 이동
+    navigate('/tutorial/completed');
   };
 
   return (
@@ -62,9 +62,7 @@ function SubHeader({ pageType }: Props) {
       </div>
 
       <RightWrapper>
-        {right && pageType === HeaderPage.TUTORIAL && (
-          <SkipButton onClick={handleClickSkip}>Skip</SkipButton>
-        )}
+        {right && pageType === HeaderPage.TUTORIAL && <SkipButton onClick={handleClickSkip}>Skip</SkipButton>}
       </RightWrapper>
     </Container>
   );

@@ -9,10 +9,10 @@ import '@src/config/axios';
 import Main from '@src/routes/Main';
 import Auth from '@src/routes/Auth';
 import User from '@src/routes/User';
+import Tutorial from '@src/routes/Tutorial';
 import PrivateRoute from '@src/routes/PrivateRoute';
 import LoginPage from '@src/pages/LoginPage';
 import JoinPage from '@src/pages/JoinPage';
-import TutorialPage from '@src/pages/TutorialPage';
 import QRcodeModal from '@src/components/shared/QRcodeModal';
 
 const queryClient = new QueryClient({
@@ -36,9 +36,9 @@ function App() {
                 <Route path="/login" element={<Auth component={<LoginPage />} />} />
                 <Route path="/join" element={<Auth component={<JoinPage />} />} />
                 {/* Authentication이 필요한 경우 PrivateRoute로 감싸주어야 함 */}
-                <Route path="/tutorial" element={<Auth component={<TutorialPage />} />} />
                 <Route path="*" element={<PrivateRoute component={<Main />} />} />
                 <Route path="/users/*" element={<PrivateRoute component={<User />} />} />
+                <Route path="/tutorial/*" element={<PrivateRoute component={<Tutorial />} />} />
               </Routes>
             </BrowserRouter>
           </Suspense>
