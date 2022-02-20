@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
+import '@src/config/axios';
 import Main from '@src/routes/Main';
 import Auth from '@src/routes/Auth';
 import User from '@src/routes/User';

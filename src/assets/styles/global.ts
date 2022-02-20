@@ -37,6 +37,10 @@ export const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
     outline: none;
   }
 
+  button {
+    cursor: pointer;
+  }
+
   hr {
     border: none;
   }
