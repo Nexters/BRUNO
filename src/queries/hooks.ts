@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 
-import { CommonUseQuery, CookieType, UserCookieType } from './types';
+import { CommonUseQuery, CookieType, UserCookieList, UserCookieType, UserProfileType } from './types';
 import { getCookieList, getUserCookies } from './cookies';
 import { getUser } from './users';
 
@@ -15,17 +15,17 @@ export const useGetAllCookies = (): UseGetAllCookie => {
 };
 
 export const useUserInfo = ({ userId }: { userId: string }) => {
-  const { data: userProfile } = useQuery(['users', 'profile'], () => getUser(userId));
-  const { data: collectedCookies } = useQuery(['users', 'collected'], () =>
+  const { data: userProfile } = useQuery<UserProfileType>(['users', 'profile'], () => getUser(userId));
+  const { data: collectedCookies } = useQuery<UserCookieList>(['users', 'collected'], () =>
     getUserCookies({ userId, target: UserCookieType.COLLECTED }),
   );
-  const { data: createdCookies } = useQuery(['users', 'cookies'], () =>
+  const { data: createdCookies } = useQuery<UserCookieList>(['users', 'cookies'], () =>
     getUserCookies({ userId, target: UserCookieType.COOKIES }),
   );
 
   return {
-    userProfile: userProfile ?? {},
-    collectedCookies: collectedCookies ?? [],
-    createdCookies: createdCookies ?? [],
+    userProfile: userProfile ?? null,
+    collectedCookies: collectedCookies ?? { cookies: [] },
+    createdCookies: createdCookies ?? { cookies: [] },
   };
 };

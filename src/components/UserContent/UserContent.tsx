@@ -13,19 +13,20 @@ const Container = styled.div`
 
 interface Props {
   isMy?: boolean;
+  userId: string;
 }
 
-const getTabCotent = (isMy: boolean) => ({
-  [TabType.COLLECT]: <CollectedCookieGrid />,
+const getTabCotent = (userId: string, isMy: boolean) => ({
+  [TabType.COLLECT]: <CollectedCookieGrid userId={userId} />,
   [TabType.CREATE]: <div>create</div>,
   [TabType.REQUEST]: <RequestContent isMy={isMy} />,
 });
 
-function UserContent({ isMy = false }: Props) {
+function UserContent({ isMy = false, userId }: Props) {
   const [searchParams] = useSearchParams();
 
   const currentTab = searchParams.get('tab') as TabType;
-  const TabContent = getTabCotent(isMy)[currentTab];
+  const TabContent = getTabCotent(userId, isMy)[currentTab];
 
   return <Container>{TabContent}</Container>;
 }

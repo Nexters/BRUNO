@@ -15,13 +15,17 @@ type UserPageParams = { id: string };
 
 function UserPage({ isMy = false }: Props) {
   const { id } = useParams<UserPageParams>() as UserPageParams;
-  const { userId } = useLogin();
-  const { userProfile } = useUserInfo({ userId: isMy ? String(userId) : id });
+  const { userId: myId } = useLogin();
+  const userId = isMy ? String(myId) : id;
+  const { userProfile } = useUserInfo({ userId });
+
+  if (!userProfile) return null;
+
   return (
     <PageLayout>
       <UserProfile isMy={isMy} profile={userProfile} />
       <UserHomeTab />
-      <UserContent isMy={isMy} />
+      <UserContent isMy={isMy} userId={userId} />
     </PageLayout>
   );
 }

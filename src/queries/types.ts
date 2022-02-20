@@ -3,6 +3,17 @@ export type CommonUseQuery = {
   isError: boolean;
 };
 
+export type Page = {
+  totalCount: number;
+  page: number;
+  size: number;
+};
+
+export enum CookieStatus {
+  ACTIVE = 'ACTIVE',
+  HIDDEN = 'HIDDEN',
+}
+
 export type CookieType = {
   id: number;
   title: string;
@@ -12,7 +23,7 @@ export type CookieType = {
   authorUserId: number;
   ownedUserId: number;
   createdAt: string;
-  status: 'ACTIVE' | 'HIDDEN';
+  status: CookieStatus;
   txHash: string;
   nftTokenId: number;
   fromBlockAddress: number;
@@ -58,3 +69,7 @@ export enum UserCookieType {
   COLLECTED = 'COLLECTED',
   COOKIES = 'COOKIES',
 }
+
+export type UserCookieList = Page & {
+  cookies: CookieType[];
+};
