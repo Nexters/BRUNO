@@ -1,4 +1,4 @@
-import { CategoryColor } from '@src/recoil/category';
+import { CategoryColor } from '@src/queries/types';
 import { theme } from '@src/assets/styles';
 
 export const CATEGORY_COLOR_MAP = {
@@ -6,5 +6,4 @@ export const CATEGORY_COLOR_MAP = {
   [CategoryColor.PINK]: theme.colors.brand.sub02,
   [CategoryColor.PURPLE]: theme.colors.brand.sub03,
   [CategoryColor.LIME]: theme.colors.brand.sub04,
-  [CategoryColor.RED]: theme.colors.brand.sub04,
 };

@@ -1,6 +1,6 @@
 import { selector, selectorFamily } from 'recoil';
 import { getCategoryist } from '@src/queries/categories';
-import { Category, CategoryColor } from './types';
+import { Category, CategoryColor } from '@src/queries/types';
 
 export const categoryListSelector = selector<Category[]>({
   key: 'category/listSelector',
@@ -18,7 +18,7 @@ export const categorySelector = selectorFamily<Category | null, number>({
     (categoryId: number) =>
     async ({ get }) => {
       const categories = await get(categoryListSelector);
-      return categories.find((item) => item.categoryId === categoryId) || null;
+      return categories.find((item) => item.id === categoryId) || null;
     },
 });
 
@@ -28,7 +28,7 @@ export const categoryColorSelector = selectorFamily<CategoryColor | null, number
     (categoryId: number) =>
     async ({ get }) => {
       const categories = await get(categoryListSelector);
-      const color = categories.find((item) => item.categoryId === categoryId)?.color;
+      const color = categories.find((item) => item.id === categoryId)?.color;
       return color ?? CategoryColor.BLUE;
     },
 });

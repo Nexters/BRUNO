@@ -4,16 +4,22 @@ import { CookieInfo } from '@src/pages/CreateCookiePage';
 import { getErrorStatus } from './utils';
 import { UserCookieType } from './types';
 
-export const getCookieList = (page?: number) =>
-  axios.get('/categories/all/cookies', {
-    params: {
-      page: page ?? 0,
-      size: 10,
-    },
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+export const getCookieList = async ({ page, userId }: { userId: number; page?: number }) => {
+  try {
+    const { data: cookieData } = await axios.get(`/users/${userId}/categories/all/cookies`, {
+      params: {
+        page: page ?? 0,
+        size: 10,
+      },
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return cookieData;
+  } catch {
+    return false;
+  }
+};
 
 type PostCookieArgs = CookieInfo & { txHash: string };
 

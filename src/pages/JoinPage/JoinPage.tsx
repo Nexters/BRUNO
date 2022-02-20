@@ -19,7 +19,7 @@ function JoinPage() {
     {
       id: 0,
       name: '자유',
-      color: 'RED',
+      color: 'BLUE',
     },
   ]); // server에서 받아온 category 정보
   const [selectedCategory, setSelectedCategory] = useState<number[]>([]);
@@ -38,9 +38,7 @@ function JoinPage() {
 
   const handleClickCategory = (id: number) => {
     if (selectedCategory.some((categoryId) => categoryId === id)) {
-      setSelectedCategory(
-        selectedCategory.filter((categoryId) => categoryId !== id),
-      );
+      setSelectedCategory(selectedCategory.filter((categoryId) => categoryId !== id));
     } else {
       setSelectedCategory(selectedCategory.concat(id));
     }
@@ -53,21 +51,10 @@ function JoinPage() {
   return (
     <PageLayout padding="20px" pageType={HeaderPage.JOIN} onlyContents>
       {step === 0 && (
-        <RegistId
-          type={LoginType.KLIP}
-          value={profileId}
-          handleClickButton={toNextStep}
-          onChangeInput={setProfileId}
-        />
+        <RegistId type={LoginType.KLIP} value={profileId} handleClickButton={toNextStep} onChangeInput={setProfileId} />
       )}
 
-      {step === 1 && (
-        <RegistInfo
-          value={info}
-          setValue={setInfo}
-          handleClickButton={toNextStep}
-        />
-      )}
+      {step === 1 && <RegistInfo value={info} setValue={setInfo} handleClickButton={toNextStep} />}
 
       {step === 2 && (
         <SelectCategory

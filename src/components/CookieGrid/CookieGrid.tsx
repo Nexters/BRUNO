@@ -10,7 +10,6 @@ const Wrapper = styled.div`
 `;
 
 function CookieGrid({ cookies = [] }: { cookies: CookieType[] }) {
-  console.log(cookies);
   return (
     <Wrapper>
       {cookies.map((cookie) => (

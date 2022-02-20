@@ -42,6 +42,35 @@ export type CookieHistory = {
   createdAt: string;
 };
 
+export enum CategoryColor {
+  PURPLE = 'PURPLE',
+  BLUE = 'BLUE',
+  PINK = 'PINK',
+  LIME = 'LIME',
+}
+
+export type Category = {
+  id: number;
+  name: string;
+  color: CategoryColor;
+};
+
+export type CookieFeed = {
+  cookieId: number;
+  question: string;
+  answer: string;
+  cookieImageUrl: string;
+  creatorId: number;
+  creatorProfileUrl: string;
+  creatorrName: string;
+  contractAddress: string;
+  nftTokenId: number;
+  viewCount: number;
+  price: number;
+  createdAt: string;
+  myCookie: boolean;
+};
+
 export type CookieDetail = {
   question: string;
   answer: string;
@@ -53,6 +82,7 @@ export type CookieDetail = {
   price: number;
   histories: CookieHistory[];
   myCookie: boolean;
+  category: Category;
 };
 
 export type UserProfileType = {

@@ -16,7 +16,7 @@ function HomePage() {
       <HomeTab />
       <ContentsWrapper>
         {cookieList.map((cookie) => (
-          <FeedCard key={cookie.id} cookie={cookie} />
+          <FeedCard key={cookie.cookieId} cookie={cookie} />
         ))}
       </ContentsWrapper>
     </>

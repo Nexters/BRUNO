@@ -1,7 +1,8 @@
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
-import { categoryListSelector, Category } from '@src/recoil/category';
+import { categoryListSelector } from '@src/recoil/category';
+import { Category } from '@src/queries/types';
 import CategoryButton from '@src/components/shared/CategoryButton';
 
 type Props = {
@@ -23,9 +24,9 @@ function CategorySection({ isEdit = false, currentCategory, setCategory }: Props
     <CategoryWrapper>
       {categoryList.map((item) => (
         <CategoryButton
-          key={item.categoryId}
+          key={item.id}
           category={item}
-          isSelected={currentCategory === item.categoryId}
+          isSelected={currentCategory === item.id}
           onClick={() => setCategory(item)}
           disabled={isEdit}
         />

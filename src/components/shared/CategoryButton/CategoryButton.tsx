@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { rgba } from 'polished';
 
 import { theme } from '@src/assets/styles/theme';
-import { Category } from '@src/recoil/category';
+import { Category } from '@src/queries/types';
 import { CATEGORY_COLOR_MAP } from './const';
 
 type Props = {
@@ -18,11 +18,7 @@ type ButtonProps = {
   disabled?: boolean;
 };
 
-const getCategoryButtonColor = ({
-  isSelected,
-  color,
-  disabled,
-}: ButtonProps) => {
+const getCategoryButtonColor = ({ isSelected, color, disabled }: ButtonProps) => {
   if (disabled) {
     return isSelected ? theme.colors.basic.gray30 : theme.colors.basic.gray20;
   }
@@ -33,11 +29,9 @@ const Button = styled.button<ButtonProps>`
   width: fit-content;
   height: 40px;
   padding: 7px 16px;
-  border: ${({ color, disabled }) =>
-    disabled ? 'none' : `1px solid ${color}`};
+  border: ${({ color, disabled }) => (disabled ? 'none' : `1px solid ${color}`)};
   border-radius: 37px;
-  background-color: ${({ isSelected, color, disabled }) =>
-    getCategoryButtonColor({ isSelected, color, disabled })};
+  background-color: ${({ isSelected, color, disabled }) => getCategoryButtonColor({ isSelected, color, disabled })};
   color: ${(props) => props.theme.colors.basic.gray100};
   font-weight: bold;
   font-size: ${(props) => props.theme.fontSize.body02};
@@ -45,20 +39,10 @@ const Button = styled.button<ButtonProps>`
   white-space: nowrap;
 `;
 
-export default function CategoryButton({
-  category,
-  isSelected,
-  onClick,
-  disabled = false,
-}: Props) {
+export default function CategoryButton({ category, isSelected, onClick, disabled = false }: Props) {
   const color = CATEGORY_COLOR_MAP[category.color] || CATEGORY_COLOR_MAP.BLUE;
   return (
-    <Button
-      color={color}
-      isSelected={isSelected}
-      onClick={onClick}
-      disabled={disabled}
-    >
+    <Button color={color} isSelected={isSelected} onClick={onClick} disabled={disabled}>
       {category.name}
     </Button>
   );

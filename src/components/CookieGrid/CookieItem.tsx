@@ -1,9 +1,9 @@
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
-import { CategoryColor, categoryColorSelector } from '@src/recoil/category';
+import { categoryColorSelector } from '@src/recoil/category';
 import Icon from '@src/assets/Icon';
-import { CookieStatus } from '@src/queries/types';
+import { CookieStatus, CategoryColor } from '@src/queries/types';
 import { useNavigate } from 'react-router-dom';
 import { ACTIVE_COLOR_MAP, HIDDEN_COLOR_MAP, BOX_COLOR_MAP } from './const';
 
