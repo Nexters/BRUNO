@@ -27,6 +27,6 @@ export const useUserInfo = ({ userId }: { userId: string }) => {
     userProfile: userProfile ?? null,
     collectedCookies: collectedCookies ?? { cookies: [] },
     createdCookies: createdCookies ?? { cookies: [] },
-    count: { collected: collectedCookies?.totalCount || 0 },
+    count: { collected: collectedCookies?.totalCount || 0, created: createdCookies?.totalCount || 0 },
   };
 };

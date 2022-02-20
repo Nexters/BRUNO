@@ -17,6 +17,7 @@ const Wrapper = styled.div`
 type Props = {
   count: {
     collected: number;
+    created: number;
   };
 };
 
@@ -24,8 +25,8 @@ function UserHomeTab({ count }: Props) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const TABS = [
-    { type: TabType.COLLECT, name: '수집한 쿠키', count: count?.collected ?? 0 },
-    { type: TabType.CREATE, name: '만든 쿠키', count: 23 },
+    { type: TabType.COLLECT, name: '수집한 쿠키', count: count.collected },
+    { type: TabType.CREATE, name: '만든 쿠키', count: count.created },
     { type: TabType.REQUEST, name: '받은 요청', count: 12 },
   ];
 
