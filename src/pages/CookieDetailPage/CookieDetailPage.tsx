@@ -50,8 +50,6 @@ function CookieDetailPage() {
   // TODO : loading 페이지 추가...
   if (!data) return <div>loading...</div>;
 
-  const { question, price, viewCount, histories, collectorName, creatorName } = data;
-
   return (
     <>
       <CategoryWrapper>
@@ -60,16 +58,10 @@ function CookieDetailPage() {
           <Icon color={theme.colors.basic.gray60}>
             <View24 />
           </Icon>
-          <ViewCountText>{viewCount}</ViewCountText>
+          <ViewCountText>{data?.viewCount}</ViewCountText>
         </ViewCountWrapper>
       </CategoryWrapper>
-      <CookieDetails
-        question={question}
-        hammer={price}
-        collector={collectorName}
-        creator={creatorName}
-        historyList={histories}
-      />
+      <CookieDetails data={data} />
     </>
   );
 }

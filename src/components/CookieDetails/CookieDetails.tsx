@@ -1,7 +1,7 @@
 import { theme } from '@src/assets/styles';
 import Icon, { Comment24, Hammer24 } from '@src/assets/Icon';
 import { ProfileImage01, ProfileImage02 } from '@src/assets/images';
-import { CookieHistory } from '@src/queries/types';
+import { CookieDetail } from '@src/queries/types';
 import CookieHistorySection from '@src/components/CookieHistorySection';
 import MainButton from '../shared/MainButton';
 import {
@@ -24,14 +24,12 @@ import {
 } from './styled';
 
 type Props = {
-  question: string;
-  hammer: number;
-  collector: string;
-  creator: string;
-  historyList: CookieHistory[];
+  data: CookieDetail;
 };
 
-function CookieDetails({ question, hammer, collector, creator, historyList }: Props) {
+function CookieDetails({ data }: Props) {
+  const { question, price, histories, collectorName, creatorName, nftTokenId, contractAddress } = data;
+
   return (
     <>
       <CookieArea>
@@ -52,7 +50,7 @@ function CookieDetails({ question, hammer, collector, creator, historyList }: Pr
             <Icon color={theme.colors.basic.gray60}>
               <Hammer24 />
             </Icon>
-            {hammer}
+            {price}
             <HammerUnit>개</HammerUnit>
           </HammerCount>
         </HammerWrapper>
@@ -61,18 +59,18 @@ function CookieDetails({ question, hammer, collector, creator, historyList }: Pr
 
       <CreatorArea>
         <ProfileWrapper>
-          <Title>Collector</Title>
+          <Title>소유자</Title>
           <UserInfoWrapper>
             <UserImage src={ProfileImage01} />
-            <UserName>{collector}</UserName>
+            <UserName>{collectorName}</UserName>
           </UserInfoWrapper>
         </ProfileWrapper>
 
         <ProfileWrapper>
-          <Title>Creator</Title>
+          <Title>생성자</Title>
           <UserInfoWrapper>
             <UserImage src={ProfileImage02} />
-            <UserName>{creator}</UserName>
+            <UserName>{creatorName}</UserName>
           </UserInfoWrapper>
         </ProfileWrapper>
       </CreatorArea>
@@ -81,15 +79,15 @@ function CookieDetails({ question, hammer, collector, creator, historyList }: Pr
         <Title>쿠키 정보</Title>
         <CookieInfoWrapper>
           <span>계약 주소</span>
-          <span>{234}</span>
+          <span>{contractAddress}</span>
         </CookieInfoWrapper>
         <CookieInfoWrapper>
           <span>토큰 주소</span>
-          <span>{123}</span>
+          <span>{nftTokenId}</span>
         </CookieInfoWrapper>
 
         <Title style={{ marginTop: '20px' }}>쿠키 히스토리</Title>
-        <CookieHistorySection historyList={historyList} />
+        <CookieHistorySection historyList={histories} />
       </CookieInfoArea>
     </>
   );
