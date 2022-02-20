@@ -17,7 +17,7 @@ export const theme = {
       sub01: '#3E6DFE', // blue
       sub02: '#E44AEB', // pink
       sub03: '#6231CD', // purple
-      sub04: '#FF6833', // orange
+      sub04: '#A7DB13', // lime
       main: 'linear-gradient(90deg, #336FFF -2.24%, #E44AEB 100%)',
       style01: 'linear-gradient(180deg, #92e4d3 0%, #a43ad4 100%)',
       style02:

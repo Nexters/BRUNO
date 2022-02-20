@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
 import Icon, { View24 } from '@src/assets/Icon';
 import { theme } from '@src/assets/styles';
 import CookieInfo from '@src/components/CookieInfo';
 import CategoryButton from '@src/components/shared/CategoryButton';
-import { CookieInfoType, HistoryType } from '.';
+import { Category, CategoryColor } from '@src/recoil/category';
+import { CookieInfoType, HistoryType } from './types';
 
 const CategoryWrapper = styled.div`
   display: flex;
@@ -25,7 +27,11 @@ const ViewCountText = styled.span`
 `;
 
 function CookieDetailPage() {
-  const [category, setCategory] = useState<string>('');
+  const [category, setCategory] = useState<Category>({
+    categoryId: 1,
+    name: 'friends',
+    color: CategoryColor.BLUE,
+  });
   const [viewCount, setViewCount] = useState<number>(0);
 
   const [question, setQuestion] = useState<string>('');
@@ -38,7 +44,6 @@ function CookieDetailPage() {
 
   useEffect(() => {
     // to do: 쿠키 상세 정보 가져오기
-    setCategory('Free chat');
     setViewCount(235);
     setQuestion('너는 누구냐?');
     setHammer(24);
@@ -74,8 +79,7 @@ function CookieDetailPage() {
   return (
     <>
       <CategoryWrapper>
-        <CategoryButton isSelected category={category} color="#3E6DFE" />
-
+        <CategoryButton isSelected category={category} />
         <ViewCountWrapper>
           <Icon color={theme.colors.basic.gray60}>
             <View24 />

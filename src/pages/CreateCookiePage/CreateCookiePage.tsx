@@ -1,13 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 
+import { useExecuteContract, Stage, CookieMethod } from '@src/klip';
+import { theme } from '@src/assets/styles';
+
+import { Category } from '@src/recoil/category';
 import MainButton from '@src/components/shared/MainButton';
-import CategoryButton from '@src/components/shared/CategoryButton';
-import { CATEGORIES, COLORS } from '@src/components/shared/const';
 import Input from '@src/components/shared/Input';
 import TextArea from '@src/components/shared/TextArea';
+import Modal from '@src/components/shared/Modal';
+import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
+import CategorySection from '@src/components/CategorySection';
 import Icon, { Minus24, Plus24 } from '@src/assets/Icon';
-import { theme } from '@src/assets/styles';
-import { TEXT_MAP, ANSWER_LIMIT } from './const';
+import { postCookie } from '@src/queries/cookies';
+
+import { TEXT_MAP, ANSWER_LIMIT, MODAL_LABEL_MAP } from './const';
+import { CookieInfo } from './types';
 
 import {
   Wrapper,
@@ -17,27 +26,41 @@ import {
   HammerPriceWrapper,
   HammerPrice,
   HammerControlButton,
-  CategoryWrapper,
 } from './styled';
 
 type Props = {
   isEdit?: boolean;
 };
 
-type CookieInfo = {
-  question: string;
-  answer: string;
-  hammer: number;
-  category: string;
-};
-
 function CreateCookiePage({ isEdit = false }: Props) {
-  const [cookieInfo, setCookieInfo] = useState<CookieInfo>({
-    question: '',
-    answer: '',
-    hammer: 1,
-    category: '',
+  const navigate = useNavigate();
+  const { isOpen, setOpen } = useQRcodeModal();
+  const { fetchPrepare, fetchResult, openDeepLink } = useExecuteContract({
+    method: CookieMethod.MINT_COOKIE_BY_HAMMER,
   });
+  const [stage, setStage] = useState<Stage>(Stage.INITIAL);
+
+  const isModalOpen = stage === Stage.REQUEST_FAIL || stage === Stage.RESULT;
+  const buttonText = stage === Stage.INITIAL ? TEXT_MAP.request : TEXT_MAP[isEdit ? 'editCookie' : 'makeCookie'];
+
+  const [cookieInfo, setCookieInfo] = useState<CookieInfo>({
+    id: undefined,
+    title: '',
+    contents: '',
+    hammer: 1,
+    category: 0,
+  });
+
+  const createCookie = async () => {
+    const resultFunc = (txHash: string) => postCookie({ ...cookieInfo, txHash });
+    const cookieData = await fetchResult(resultFunc);
+    if (!cookieData) setStage(Stage.REQUEST_FAIL);
+    else {
+      const { id } = cookieData;
+      setCookieInfo({ ...cookieInfo, id });
+      setStage(Stage.RESULT);
+    }
+  };
 
   const handleHammerPrice = (add: boolean) => {
     if (!add && cookieInfo.hammer === 1) return null;
@@ -48,34 +71,63 @@ function CreateCookiePage({ isEdit = false }: Props) {
     });
   };
 
-  const handleClickCategory = (value: string) => {
-    setCookieInfo({ ...cookieInfo, category: value });
+  const handleClickCategory = (category: Category) => {
+    if (!isEdit) setCookieInfo({ ...cookieInfo, category: category.categoryId });
   };
 
-  const handleChangeQuestion = (value: string) => {
-    setCookieInfo({ ...cookieInfo, question: value });
+  const handleChangeInput = (key: string, value: string) => {
+    setCookieInfo({ ...cookieInfo, [key]: value });
   };
-  const handleChangeAnswer = (value: string) => {
-    setCookieInfo({ ...cookieInfo, answer: value });
+
+  const handleClickCreate = async () => {
+    // 사용자가 정보를 입력하고 버튼 클릭
+    if (stage === Stage.INITIAL) {
+      const reqKey = await fetchPrepare(cookieInfo);
+
+      if (isMobile) {
+        openDeepLink(reqKey);
+        setStage(Stage.REQUEST);
+      } else {
+        setOpen();
+        setStage(Stage.PREPARE);
+        // PC : QRmodal close 시 REQUEST로 set
+      }
+    } else if (stage === Stage.REQUEST) {
+      createCookie();
+    }
   };
+
+  const handleClickModal = (yes: boolean) => {
+    if (yes) {
+      if (stage === Stage.RESULT) navigate(`/cookie/${cookieInfo.id}`);
+      else setStage(Stage.INITIAL);
+    } else {
+      navigate('/');
+    }
+  };
+
+  useEffect(() => {
+    if (stage === Stage.PREPARE && !isOpen) {
+      setStage(Stage.REQUEST);
+    }
+  }, [isOpen]);
 
   return (
     <>
       <Wrapper>
         <Input
-          value={cookieInfo.question}
-          onChange={handleChangeQuestion}
+          value={cookieInfo.title}
+          onChange={(value) => handleChangeInput('title', value)}
           label={TEXT_MAP.question}
           placeholder={TEXT_MAP.questionPlaceholder}
-          limit={25}
           disabled={isEdit}
         />
       </Wrapper>
 
       <AnswerWrapper>
         <TextArea
-          value={cookieInfo.answer}
-          onChange={handleChangeAnswer}
+          value={cookieInfo.contents}
+          onChange={(value) => handleChangeInput('contents', value)}
           label={TEXT_MAP.answer}
           placeholder={TEXT_MAP.answerPlaceholder}
           limit={ANSWER_LIMIT}
@@ -103,21 +155,13 @@ function CreateCookiePage({ isEdit = false }: Props) {
 
       <Wrapper>
         <Label>{TEXT_MAP.category}</Label>
-        <CategoryWrapper>
-          {CATEGORIES.map((categoryName, index) => (
-            <CategoryButton
-              // eslint-disable-next-line react/no-array-index-key
-              key={`CATEGORY_${index}`}
-              category={categoryName}
-              color={COLORS[index % COLORS.length]}
-              isSelected={false}
-              onClick={() => handleClickCategory(categoryName)}
-              disabled={isEdit}
-            />
-          ))}
-        </CategoryWrapper>
-        <MainButton
-          value={isEdit ? TEXT_MAP.editCookie : TEXT_MAP.makeCookie}
+        <CategorySection isEdit={isEdit} setCategory={handleClickCategory} currentCategory={cookieInfo.category} />
+        <MainButton value={buttonText} onClick={handleClickCreate} />
+        <Modal
+          label={MODAL_LABEL_MAP[stage] || null}
+          open={isModalOpen}
+          onClickYes={() => handleClickModal(true)}
+          onClickNo={() => handleClickModal(false)}
         />
       </Wrapper>
     </>
