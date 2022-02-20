@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 
-export const klipAuthAtom = atom({
-  key: 'auth/klipAuthAtom',
+export const klipRequestKeyAtom = atom({
+  key: 'klip/requestKeyAtom',
   default: {
     requestKey: '',
     expirationTime: null,
@@ -9,7 +9,7 @@ export const klipAuthAtom = atom({
 });
 
 export const klipAddressAtom = atom({
-  key: 'auth/klipAddressAtom',
+  key: 'klip/addressAtom',
   default: {
     address: null,
   },

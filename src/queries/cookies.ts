@@ -1,6 +1,9 @@
 import axios from 'axios';
 import config from '@src/config';
 import { useQuery } from 'react-query';
+
+import { CookieInfo } from '@src/pages/CreateCookiePage';
+import { isSuccess } from './utils';
 import { CommonUseQuery, CookieType } from './types';
 
 export const getCookieList = (page?: number) =>
@@ -14,16 +17,27 @@ export const getCookieList = (page?: number) =>
     },
   });
 
-export const postCookie = ({ title, contents, hammer, txHash }: any) =>
-  axios.post(`${config.baseApiUrl}/cookies`, {
-    question: title,
-    answer: contents,
-    price: hammer,
-    authorUserId: 1,
-    ownedUserId: 1,
-    txHash,
-    categoryId: 1,
-  });
+type PostCookieArgs = CookieInfo & { txHash: string };
+
+export const postCookie = async ({ title, contents, hammer, txHash }: PostCookieArgs) => {
+  try {
+    const { data: cookieData, status } = await axios.post(`${config.baseApiUrl}/cookies`, {
+      question: title,
+      answer: contents,
+      price: hammer,
+      authorUserId: 1,
+      ownedUserId: 1,
+      txHash,
+      categoryId: 1,
+    });
+    if (isSuccess(status)) {
+      return cookieData;
+    }
+    return false;
+  } catch {
+    return false; // request 실패
+  }
+};
 
 export const getCookieListByCategory = async (categoryId: string, page: number) =>
   axios.get(`${config.baseApiUrl}/categories/${categoryId}/cookies`, {
