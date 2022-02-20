@@ -21,7 +21,7 @@ interface Props {
   status: CookieStatus;
 }
 
-function CollectedCookie({ id, categoryId, status }: Props) {
+function CookieItem({ id, categoryId, status }: Props) {
   const navigate = useNavigate();
   const color = useRecoilValue(categoryColorSelector(categoryId)) || CategoryColor.BLUE;
 
@@ -40,4 +40,4 @@ function CollectedCookie({ id, categoryId, status }: Props) {
   );
 }
 
-export default CollectedCookie;
+export default CookieItem;
