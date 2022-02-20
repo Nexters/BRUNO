@@ -2,10 +2,10 @@ import { theme } from '@src/assets/styles';
 import Icon, { Comment24, Hammer24 } from '@src/assets/Icon';
 import { ProfileImage01, ProfileImage02 } from '@src/assets/images';
 import { CookieHistory } from '@src/queries/types';
+import CookieHistorySection from '@src/components/CookieHistorySection';
 import MainButton from '../shared/MainButton';
 import {
   AnswerWrapper,
-  CardWrapper,
   CookieArea,
   CookieImage,
   CookieInfoArea,
@@ -15,10 +15,8 @@ import {
   HammerCount,
   HammerUnit,
   HammerWrapper,
-  HistoryCard,
   ProfileWrapper,
   QuestionWrapper,
-  Time,
   Title,
   UserImage,
   UserInfoWrapper,
@@ -33,7 +31,7 @@ type Props = {
   historyList: CookieHistory[];
 };
 
-function CookieInfo({ question, hammer, collector, creator, historyList }: Props) {
+function CookieDetails({ question, hammer, collector, creator, historyList }: Props) {
   return (
     <>
       <CookieArea>
@@ -42,7 +40,7 @@ function CookieInfo({ question, hammer, collector, creator, historyList }: Props
         </QuestionWrapper>
 
         <AnswerWrapper>
-          <Icon color={theme.colors.basic.gray60}>
+          <Icon color={theme.colors.basic.gray60} style={{ marginBottom: 'auto' }}>
             <Comment24 />
           </Icon>
           <CookieImage />
@@ -91,18 +89,10 @@ function CookieInfo({ question, hammer, collector, creator, historyList }: Props
         </CookieInfoWrapper>
 
         <Title style={{ marginTop: '20px' }}>쿠키 히스토리</Title>
-        <CardWrapper>
-          {historyList.map((history) => (
-            <HistoryCard>
-              <Title>수정</Title>
-              {/* {`'${history.update.user}'님이 'Q.${history.update.question}'를 망치 ${history.update.hammer}개로 수정했습니다.`}
-              <Time>{history.update.time}</Time> */}
-            </HistoryCard>
-          ))}
-        </CardWrapper>
+        <CookieHistorySection historyList={historyList} />
       </CookieInfoArea>
     </>
   );
 }
 
-export default CookieInfo;
+export default CookieDetails;

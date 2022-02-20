@@ -19,8 +19,14 @@ export type CookieType = {
   categoryId: number;
 };
 
+export enum CookieHistoryAction {
+  MODIFY = 'MODIFY',
+  BUY = 'BUY',
+  CREATE = 'CREATE',
+}
+
 export type CookieHistory = {
-  action: 'CREATE' | 'MODIFY';
+  action: CookieHistoryAction;
   content: string;
   createdAt: string;
 };

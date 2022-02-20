@@ -5,7 +5,7 @@ import { useQuery } from 'react-query';
 
 import Icon, { View24 } from '@src/assets/Icon';
 import { theme } from '@src/assets/styles';
-import CookieInfo from '@src/components/CookieInfo';
+import CookieDetails from '@src/components/CookieDetails';
 import CategoryButton from '@src/components/shared/CategoryButton';
 import { Category, CategoryColor } from '@src/recoil/category';
 import { getCookieDetail } from '@src/queries/cookies';
@@ -61,8 +61,7 @@ function CookieDetailPage() {
           <ViewCountText>{viewCount}</ViewCountText>
         </ViewCountWrapper>
       </CategoryWrapper>
-
-      <CookieInfo
+      <CookieDetails
         question={question}
         hammer={price}
         collector={collectorName}
