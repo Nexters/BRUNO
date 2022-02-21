@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { useRecoilValue } from 'recoil';
+import { useQuery } from 'react-query';
 
-import { categoryListSelector } from '@src/recoil/category/selectors';
-import CategoryButton from '@src/components/shared/CategoryButton';
 import MainButton from '@src/components/shared/MainButton';
 import Input from '@src/components/shared/Input';
+import { useNavigate, useParams } from 'react-router-dom';
+import { UserProfileType } from '@src/queries/types';
+import { getUser } from '@src/queries/users';
+import { postAsk } from '@src/queries/ask';
+import { useLogin } from '@src/hooks';
 
 const Wrapper = styled.main`
   height: 100%;
@@ -36,45 +39,42 @@ const Title = styled.div`
   font-size: 13px;
 `;
 
-const CategorySection = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-`;
-
 const ButtonWrapper = styled.div`
   margin-top: auto;
 `;
 
+type AskPageParam = { userId: string };
+
 function AskPage() {
-  const categoryList = useRecoilValue(categoryListSelector);
+  const navigate = useNavigate();
+  const { userId: senderId } = useLogin();
+  const { userId } = useParams<AskPageParam>();
+  const { data: userProfile } = useQuery<UserProfileType>(['users', 'profile', userId], () => getUser(userId || ''));
   const [askData, setAskData] = useState({
-    question: '',
-    category: '',
+    title: '',
+    category: '', // TODO : 안쓸 것 같으면 나중에 제거 (스펙 확인중)
   });
 
   const handleChangeQuestion = (value: string) => {
-    setAskData({ ...askData, question: value });
+    setAskData({ ...askData, title: value });
+  };
+
+  const handleClickCreate = async () => {
+    if (!askData.title.trim() || !userId) return false;
+    const result = await postAsk(askData.title, senderId, userId);
+    if (result) navigate('/');
   };
 
   return (
     <Wrapper>
-      <UserName>@Username15texts</UserName>
+      <UserName>@{userProfile?.nickname || '사용자'}</UserName>
       <Section>
-        <Title>Question</Title>
-        <Input value={askData.question} onChange={handleChangeQuestion} placeholder="질문을 입력하세요." />
-        <From>From. Anonymous</From>
-      </Section>
-      <Section>
-        <Title>Categories</Title>
-        <CategorySection>
-          {categoryList.map((category) => (
-            <CategoryButton key={category.id} category={category} isSelected={false} />
-          ))}
-        </CategorySection>
+        <Title>질문</Title>
+        <Input value={askData.title} onChange={handleChangeQuestion} placeholder="궁금한 내용을 입력해주세요." />
+        <From>From. 익명</From>
       </Section>
       <ButtonWrapper>
-        <MainButton value="쿠키 만들기" buttonStyle={{ margin: 0 }} />
+        <MainButton value="질문 요청하기" buttonStyle={{ margin: 0 }} onClick={handleClickCreate} />
       </ButtonWrapper>
     </Wrapper>
   );

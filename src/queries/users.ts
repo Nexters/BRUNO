@@ -2,6 +2,7 @@ import axios from 'axios';
 import { getErrorStatus } from './utils';
 
 export const getUser = async (userId: string) => {
+  if (!userId) return false;
   try {
     const { data: userData } = await axios.get(`/users/${userId}`);
     return userData;

@@ -62,7 +62,7 @@ export type CookieFeed = {
   cookieImageUrl: string;
   creatorId: number;
   creatorProfileUrl: string;
-  creatorrName: string;
+  creatorName: string;
   contractAddress: string;
   nftTokenId: number;
   viewCount: number;
