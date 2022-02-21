@@ -5,14 +5,20 @@ import { CategoryColor } from '@src/queries/types';
 import { useRecoilValue } from 'recoil';
 import { categoryColorSelector } from '@src/recoil/category';
 
-const CookieImage = styled.img`
-  width: 288px;
-  margin-left: 8px;
+const Wrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
+const CookieImage = styled.img<{ width?: string }>`
+  width: ${({ width }) => width || '288px'};
 `;
 
 type Props = {
   cookieId: number;
   categoryId: number;
+  width?: string;
 };
 
 const NFT_COOKIE_MAP = {
@@ -22,7 +28,7 @@ const NFT_COOKIE_MAP = {
   [CategoryColor.PURPLE]: NFTPurple,
 };
 
-export default function FeedContent({ cookieId, categoryId }: Props) {
+export default function FeedContent({ cookieId, categoryId, width }: Props) {
   const navigate = useNavigate();
   const color = useRecoilValue(categoryColorSelector(categoryId)) || CategoryColor.BLUE;
   const cookieImage = NFT_COOKIE_MAP[color];
@@ -31,5 +37,9 @@ export default function FeedContent({ cookieId, categoryId }: Props) {
     navigate(`/cookie/${cookieId}`);
   };
 
-  return <CookieImage src={cookieImage} onClick={handleAnswerClick} />;
+  return (
+    <Wrapper>
+      <CookieImage src={cookieImage} onClick={handleAnswerClick} width={width} />
+    </Wrapper>
+  );
 }

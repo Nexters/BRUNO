@@ -65,7 +65,7 @@ export default function FeedContent({ cookie }: Props) {
           <Icon color={theme.colors.basic.gray60} style={{ marginBottom: 'auto' }}>
             <Comment24 />
           </Icon>
-          <NFTCookie cookieId={cookieId} categoryId={1} />
+          <NFTCookie cookieId={cookieId} categoryId={1} width="160px" />
         </AnswerWrapper>
       </BoxWrapper>
 
