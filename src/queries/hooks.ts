@@ -1,9 +1,9 @@
 import { useQuery } from 'react-query';
 
 import { useLogin } from '@src/hooks';
-import { CookieFeed, UserCookieList, UserCookieType, UserProfileType } from './types';
+import { CookieFeed, UserCookieList, UserCookieType, UserProfileType, UserAsk } from './types';
 import { getCookieList, getUserCookies, getCookieListByCategory } from './cookies';
-import { getUser } from './users';
+import { getUser, getUserAsk } from './users';
 
 export const useGetAllCookies = ({ categoryId }: { categoryId: string }) => {
   const { userId } = useLogin();
@@ -40,10 +40,20 @@ export const useUserInfo = ({ userId }: { userId: string }) => {
     getUserCookies({ userId, target: UserCookieType.COOKIES }),
   );
 
+  const { data: askItems, refetch: refetchAsk } = useQuery<UserAsk[]>(['user', 'ask', userId], () =>
+    getUserAsk(userId),
+  );
+
   return {
     userProfile: userProfile ?? null,
     collectedCookies: collectedCookies ?? { cookies: [] },
     createdCookies: createdCookies ?? { cookies: [] },
-    count: { collected: collectedCookies?.totalCount || 0, created: createdCookies?.totalCount || 0 },
+    askItems: askItems ?? [],
+    refetchAsk,
+    count: {
+      collected: collectedCookies?.totalCount || 0,
+      created: createdCookies?.totalCount || 0,
+      ask: askItems?.length || 0,
+    },
   };
 };

@@ -19,13 +19,13 @@ interface Props {
 
 function UserContent({ isMy = false, userId }: Props) {
   const [searchParams] = useSearchParams();
-  const { collectedCookies, createdCookies } = useUserInfo({ userId });
+  const { collectedCookies, createdCookies, askItems, refetchAsk } = useUserInfo({ userId });
 
   const getTabCotent = useMemo(
     () => ({
       [TabType.COLLECT]: <CookieGrid cookies={collectedCookies?.cookies} />,
       [TabType.CREATE]: <CookieGrid cookies={createdCookies?.cookies} />,
-      [TabType.REQUEST]: <AskContent isMy={isMy} userId={userId} />,
+      [TabType.REQUEST]: <AskContent isMy={isMy} userId={userId} askItems={askItems} refetch={refetchAsk} />,
     }),
     [collectedCookies, createdCookies, isMy],
   );

@@ -1,6 +1,4 @@
 import { AskStatus, UserAsk } from '@src/queries/types';
-import { getUserAsk } from '@src/queries/users';
-import { useQuery } from 'react-query';
 import styled from 'styled-components';
 import AskItem from './AskItem';
 
@@ -11,13 +9,13 @@ const Wrapper = styled.div`
 interface Props {
   isMy?: boolean;
   userId: string;
+  askItems: UserAsk[];
+  refetch: () => void;
 }
 
-function AskContent({ isMy = false, userId }: Props) {
-  const { data: askList, refetch } = useQuery<UserAsk[]>(['user', 'ask', userId], () => getUserAsk(userId));
-
-  if (!askList) return null;
-  const filteredAskList = askList.filter((ask) => ask.status === AskStatus.PENDING);
+function AskContent({ isMy = false, userId, askItems, refetch }: Props) {
+  if (!askItems) return null;
+  const filteredAskList = askItems.filter((ask) => ask.status === AskStatus.PENDING);
 
   return (
     <Wrapper>
