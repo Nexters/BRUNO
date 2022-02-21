@@ -3,11 +3,11 @@ import Icon, { Comment24, Hammer24 } from '@src/assets/Icon';
 import { ProfileImage01, ProfileImage02 } from '@src/assets/images';
 import { CookieDetail } from '@src/queries/types';
 import CookieHistorySection from '@src/components/CookieHistorySection';
+import NFTCookie from '@src/components/shared/NFTCookie';
 import MainButton from '../shared/MainButton';
 import {
   AnswerWrapper,
   CookieArea,
-  CookieImage,
   CookieInfoArea,
   CookieInfoWrapper,
   CreatorArea,
@@ -41,7 +41,7 @@ function CookieDetails({ data }: Props) {
           <Icon color={theme.colors.basic.gray60} style={{ marginBottom: 'auto' }}>
             <Comment24 />
           </Icon>
-          <CookieImage />
+          <NFTCookie cookieId={1} categoryId={1} />
         </AnswerWrapper>
 
         <HammerWrapper>

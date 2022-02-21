@@ -1,9 +1,9 @@
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
 import Icon, { Comment24, Hammer24, View24 } from '@src/assets/Icon';
-import { NFTImage01 } from '@src/assets/images';
 import { theme } from '@src/assets/styles';
-import { FeedProps } from './type';
+import { CookieFeed } from '@src/queries/types';
+import NFTCookie from '@src/components/shared/NFTCookie';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -44,22 +44,16 @@ const NumericSection = styled.div`
   color: ${(props) => props.theme.colors.basic.gray60};
 `;
 
-const CookieImage = styled.img`
-  width: 160px;
-  height: 112px;
-  margin-left: 24px;
-`;
-
 const InfoText = styled.span`
   margin: 0 8px 0 4px;
 `;
 
-export default function FeedContent({ id, question, viewCount, hammer }: FeedProps) {
-  const navigate = useNavigate();
+type Props = {
+  cookie: CookieFeed;
+};
 
-  const handleAnswerClick = () => {
-    navigate(`/cookie/${id}`);
-  };
+export default function FeedContent({ cookie }: Props) {
+  const { cookieId, question, price, viewCount } = cookie;
 
   return (
     <Wrapper>
@@ -71,7 +65,7 @@ export default function FeedContent({ id, question, viewCount, hammer }: FeedPro
           <Icon color={theme.colors.basic.gray60} style={{ marginBottom: 'auto' }}>
             <Comment24 />
           </Icon>
-          <CookieImage src={NFTImage01} onClick={handleAnswerClick} />
+          <NFTCookie cookieId={cookieId} categoryId={1} />
         </AnswerWrapper>
       </BoxWrapper>
 
@@ -83,7 +77,7 @@ export default function FeedContent({ id, question, viewCount, hammer }: FeedPro
         <Icon color={theme.colors.basic.gray60}>
           <Hammer24 />
         </Icon>
-        <InfoText>{hammer}</InfoText>
+        <InfoText>{price}</InfoText>
       </NumericSection>
     </Wrapper>
   );

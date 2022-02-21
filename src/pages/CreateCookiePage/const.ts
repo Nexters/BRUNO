@@ -22,7 +22,7 @@ export const MODAL_LABEL_MAP: { [key in string]: ModalLabel } = {
     no: '피드로 돌아가기',
   },
   [Stage.REQUEST_FAIL]: {
-    title: '쿠키 굽기가 실패했습니다.',
+    title: '쿠키 굽기를 실패했습니다.',
     description: '쿠키 정상적으로 굽지 못했습니다.\n다시 시도해주세요.',
     yes: '다시 시도하기',
     no: '피드로 돌아가기',

@@ -15,13 +15,13 @@ interface Props {
 }
 
 export default function FeedCard({ cookie }: Props) {
-  const { cookieId, creatorId, creatorProfileUrl, creatorrName, question, price, createdAt } = cookie;
+  const { creatorId, creatorProfileUrl, creatorrName, createdAt } = cookie;
 
   return (
     <Container>
       {/* TODO : 서버한테 닉네임 달라고 하기 */}
       <UserInfo userId={creatorId} profile={creatorProfileUrl} name={creatorrName} createdAt={createdAt} />
-      <FeedContent id={cookieId} question={question} viewCount={0} hammer={price} />
+      <FeedContent cookie={cookie} />
     </Container>
   );
 }
