@@ -14,7 +14,7 @@ interface Props {
 }
 
 function AskContent({ isMy = false, userId }: Props) {
-  const { data: askList } = useQuery<UserAsk[]>(['user', 'ask', userId], () => getUserAsk(userId));
+  const { data: askList, refetch } = useQuery<UserAsk[]>(['user', 'ask', userId], () => getUserAsk(userId));
 
   if (!askList) return null;
   const filteredAskList = askList.filter((ask) => ask.status === AskStatus.PENDING);
@@ -22,7 +22,7 @@ function AskContent({ isMy = false, userId }: Props) {
   return (
     <Wrapper>
       {filteredAskList.map((ask) => (
-        <AskItem key={ask.id} item={ask} isMy={isMy} />
+        <AskItem key={ask.id} item={ask} isMy={isMy} refetch={refetch} />
       ))}
     </Wrapper>
   );

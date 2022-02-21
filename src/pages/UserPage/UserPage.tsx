@@ -19,11 +19,9 @@ function UserPage({ isMy = false }: Props) {
   const userId = isMy ? String(myId) : id;
   const { userProfile, count } = useUserInfo({ userId });
 
-  if (!userProfile) return null;
-
   return (
     <PageLayout>
-      <UserProfile isMy={isMy} profile={userProfile} />
+      {userProfile && <UserProfile isMy={isMy} profile={userProfile} />}
       <UserHomeTab count={count} />
       <UserContent isMy={isMy} userId={userId} />
     </PageLayout>

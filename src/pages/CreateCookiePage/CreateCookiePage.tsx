@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 
 import { useExecuteContract, Stage, CookieMethod } from '@src/klip';
@@ -13,8 +13,9 @@ import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
 import CategorySection from '@src/components/CategorySection';
 import Icon, { Minus24, Plus24 } from '@src/assets/Icon';
 import { postCookie } from '@src/queries/cookies';
-import { Category } from '@src/queries/types';
+import { AskStatus, Category } from '@src/queries/types';
 
+import { updateAskStatus } from '@src/queries/ask';
 import { TEXT_MAP, ANSWER_LIMIT, MODAL_LABEL_MAP } from './const';
 import { CookieInfo } from './types';
 
@@ -32,8 +33,13 @@ type Props = {
   isEdit?: boolean;
 };
 
+type CreateState = { title?: string; askId?: number };
+
 function CreateCookiePage({ isEdit = false }: Props) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const state = (location.state || {}) as CreateState;
+
   const { isOpen, setOpen } = useQRcodeModal();
   const { fetchPrepare, fetchResult, openDeepLink } = useExecuteContract({
     method: CookieMethod.MINT_COOKIE_BY_HAMMER,
@@ -45,7 +51,7 @@ function CreateCookiePage({ isEdit = false }: Props) {
 
   const [cookieInfo, setCookieInfo] = useState<CookieInfo>({
     id: undefined,
-    title: '',
+    title: state.title ?? '',
     contents: '',
     hammer: 1,
     category: 0,
@@ -59,6 +65,7 @@ function CreateCookiePage({ isEdit = false }: Props) {
       const { id } = cookieData;
       setCookieInfo({ ...cookieInfo, id });
       setStage(Stage.RESULT);
+      if (state.askId) updateAskStatus(state.askId, AskStatus.ACCEPTED);
     }
   };
 

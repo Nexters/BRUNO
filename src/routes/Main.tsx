@@ -19,7 +19,7 @@ function Main() {
         }
       />
       <Route
-        path="/create"
+        path="/create/cookie"
         element={
           <PageLayout>
             <CreateCookiePage />

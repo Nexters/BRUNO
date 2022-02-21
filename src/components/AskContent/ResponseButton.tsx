@@ -13,17 +13,22 @@ const Button = styled(button)`
   height: 40px;
 `;
 
-const RejectButton = styled(Button)`
+const IgnoreButton = styled(Button)`
   background: none;
   background-color: ${(props) => props.theme.colors.basic.gray30};
   color: ${(props) => props.theme.colors.basic.gray90};
 `;
 
-function ResponseButton() {
+type Props = {
+  onClickAccept: () => void;
+  onClickIgnore: () => void;
+};
+
+function ResponseButton({ onClickAccept, onClickIgnore }: Props) {
   return (
     <Wrapper>
-      <Button>Accept</Button>
-      <RejectButton>Ignore</RejectButton>
+      <Button onClick={onClickAccept}>쿠키 굽기</Button>
+      <IgnoreButton onClick={onClickIgnore}>요청 삭제하기</IgnoreButton>
     </Wrapper>
   );
 }

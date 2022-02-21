@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { theme } from '@src/assets/styles';
-import { UserAsk } from '@src/queries/types';
+import { AskStatus, UserAsk } from '@src/queries/types';
+import { useNavigate } from 'react-router-dom';
+import { updateAskStatus } from '@src/queries/ask';
 import ResponseButton from './ResponseButton';
 
 const Wrapper = styled.div`
@@ -32,17 +34,27 @@ const Question = styled.div`
 interface Props {
   item: UserAsk;
   isMy: boolean;
+  refetch: () => void;
 }
 
-function AskItem({ item, isMy }: Props) {
-  const { title } = item;
+function AskItem({ item, isMy, refetch }: Props) {
+  const navigate = useNavigate();
+  const { id, title } = item;
+
+  const onClickAccept = () => navigate('/create/cookie', { state: { title, askId: id } });
+
+  const onClickIgnore = async () => {
+    const result = await updateAskStatus(id, AskStatus.IGNORED);
+    if (result) refetch();
+  };
+
   return (
     <Wrapper>
       <LabelWrapper>
         <Label>Q.</Label>
         <Question>{title}</Question>
       </LabelWrapper>
-      {isMy && <ResponseButton />}
+      {isMy && <ResponseButton onClickAccept={onClickAccept} onClickIgnore={onClickIgnore} />}
     </Wrapper>
   );
 }
