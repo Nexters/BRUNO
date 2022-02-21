@@ -23,7 +23,7 @@ export const useGetAllCookies = ({ categoryId }: { categoryId: string }) => {
   );
 
   return {
-    cookieList: (categoryId ? categoryCookies : allCookies) ?? [],
+    cookieList: (categoryId ? categoryCookies : allCookies) || [],
     isLoading: isLoading || categoryIsLoading,
     isError: isError || categoryIsError,
   };
