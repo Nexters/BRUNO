@@ -13,6 +13,10 @@ const CookieWrapper = styled.div`
     width: 100%;
     height: 100%;
   }
+
+  ${(props) => props.theme.media.large} {
+    width: 20%;
+  }
 `;
 
 interface Props {

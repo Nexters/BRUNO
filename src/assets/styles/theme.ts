@@ -1,3 +1,5 @@
+import { MEDIA_QUERY } from './mixin';
+
 export const theme = {
   colors: {
     basic: {
@@ -20,8 +22,7 @@ export const theme = {
       sub04: '#A7DB13', // lime
       main: 'linear-gradient(90deg, #336FFF -2.24%, #E44AEB 100%)',
       style01: 'linear-gradient(180deg, #92e4d3 0%, #a43ad4 100%)',
-      style02:
-        'linear-gradient(180deg, #4A9FEE 0%, #69B4B9 43.75%, #6653DA 100%)',
+      style02: 'linear-gradient(180deg, #4A9FEE 0%, #69B4B9 43.75%, #6653DA 100%)',
       style03: 'linear-gradient(180deg, #E6E19A 0%, #42A097 100%)',
     },
     background: {
@@ -61,6 +62,11 @@ export const theme = {
         'white-space': 'nowrap',
       };
     },
+  },
+  media: {
+    large: MEDIA_QUERY.large,
+    small: MEDIA_QUERY.small,
+    mobile: MEDIA_QUERY.mobile,
   },
 } as const;
 
