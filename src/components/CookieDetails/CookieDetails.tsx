@@ -59,7 +59,7 @@ function CookieDetails({ data }: Props) {
 
       <CreatorArea>
         <ProfileWrapper>
-          <Title>소유자</Title>
+          <Title>쿠키 소유자</Title>
           <UserInfoWrapper>
             <UserImage src={ProfileImage01} />
             <UserName>{collectorName}</UserName>
@@ -67,7 +67,7 @@ function CookieDetails({ data }: Props) {
         </ProfileWrapper>
 
         <ProfileWrapper>
-          <Title>생성자</Title>
+          <Title>쿠키 제작자</Title>
           <UserInfoWrapper>
             <UserImage src={ProfileImage02} />
             <UserName>{creatorName}</UserName>

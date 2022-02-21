@@ -1,7 +1,8 @@
 import { useQuery } from 'react-query';
 
 import { useLogin } from '@src/hooks';
-import { CookieFeed, UserCookieList, UserCookieType, UserProfileType, UserAsk } from './types';
+import { useMemo } from 'react';
+import { CookieFeed, UserCookieList, UserCookieType, UserProfileType, UserAsk, AskStatus } from './types';
 import { getCookieList, getUserCookies, getCookieListByCategory } from './cookies';
 import { getUser, getUserAsk } from './users';
 
@@ -44,16 +45,18 @@ export const useUserInfo = ({ userId }: { userId: string }) => {
     getUserAsk(userId),
   );
 
+  const filteredAskList = useMemo(() => askItems?.filter((ask) => ask.status === AskStatus.PENDING) ?? [], [askItems]);
+
   return {
     userProfile: userProfile ?? null,
     collectedCookies: collectedCookies ?? { cookies: [] },
     createdCookies: createdCookies ?? { cookies: [] },
-    askItems: askItems ?? [],
+    askItems: filteredAskList,
     refetchAsk,
     count: {
       collected: collectedCookies?.totalCount || 0,
       created: createdCookies?.totalCount || 0,
-      ask: askItems?.length || 0,
+      ask: filteredAskList.length || 0,
     },
   };
 };

@@ -25,7 +25,7 @@ function UserContent({ isMy = false, userId }: Props) {
     () => ({
       [TabType.COLLECT]: <CookieGrid cookies={collectedCookies?.cookies} />,
       [TabType.CREATE]: <CookieGrid cookies={createdCookies?.cookies} />,
-      [TabType.REQUEST]: <AskContent isMy={isMy} userId={userId} askItems={askItems} refetch={refetchAsk} />,
+      [TabType.REQUEST]: <AskContent isMy={isMy} askItems={askItems} refetch={refetchAsk} />,
     }),
     [collectedCookies, createdCookies, isMy],
   );
