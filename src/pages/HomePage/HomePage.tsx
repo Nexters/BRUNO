@@ -7,6 +7,11 @@ import { useSearchParams } from 'react-router-dom';
 
 const ContentsWrapper = styled.main`
   border-top: 8px solid ${(props) => props.theme.colors.basic.gray20};
+  ${(props) => props.theme.media.large} {
+    display: flex;
+    flex: 50%;
+    flex-wrap: wrap;
+  }
 `;
 
 function HomePage() {
