@@ -9,3 +9,12 @@ export const getUser = async (userId: string) => {
     getErrorStatus(error);
   }
 };
+
+export const getUserAsk = async (userId: string) => {
+  try {
+    const { data: askData } = await axios.get(`/users/${userId}/asks`, { params: { target: 'RECEIVER' } });
+    return askData;
+  } catch (error) {
+    getErrorStatus(error);
+  }
+};

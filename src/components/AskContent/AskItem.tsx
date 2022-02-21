@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { theme } from '@src/assets/styles';
+import { UserAsk } from '@src/queries/types';
 import ResponseButton from './ResponseButton';
 
 const Wrapper = styled.div`
@@ -29,20 +30,21 @@ const Question = styled.div`
 `;
 
 interface Props {
-  question: string;
+  item: UserAsk;
   isMy: boolean;
 }
 
-function RequestItem({ question, isMy }: Props) {
+function AskItem({ item, isMy }: Props) {
+  const { title } = item;
   return (
     <Wrapper>
       <LabelWrapper>
         <Label>Q.</Label>
-        <Question>{question}</Question>
+        <Question>{title}</Question>
       </LabelWrapper>
       {isMy && <ResponseButton />}
     </Wrapper>
   );
 }
 
-export default RequestItem;
+export default AskItem;

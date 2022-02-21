@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { useUserInfo } from '@src/queries/hooks';
 import { TabType } from '@src/components/UserHomeTab';
-import RequestContent from '@src/components/RequestContent';
+import AskContent from '@src/components/AskContent';
 import CookieGrid from '@src/components/CookieGrid/CookieGrid';
 
 const Container = styled.div`
@@ -25,7 +25,7 @@ function UserContent({ isMy = false, userId }: Props) {
     () => ({
       [TabType.COLLECT]: <CookieGrid cookies={collectedCookies?.cookies} />,
       [TabType.CREATE]: <CookieGrid cookies={createdCookies?.cookies} />,
-      [TabType.REQUEST]: <RequestContent isMy={isMy} />,
+      [TabType.REQUEST]: <AskContent isMy={isMy} userId={userId} />,
     }),
     [collectedCookies, createdCookies, isMy],
   );

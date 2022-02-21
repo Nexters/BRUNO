@@ -103,3 +103,18 @@ export enum UserCookieType {
 export type UserCookieList = Page & {
   cookies: CookieType[];
 };
+
+export enum AskStatus {
+  PENDING = 'PENDING',
+  IGNORED = 'IGNORED',
+  ACCEPTED = 'ACCEPTED',
+  DELETED = 'DELETED',
+}
+
+export type UserAsk = {
+  id: number;
+  title: string;
+  status: AskStatus;
+  senderUserId: number;
+  receiverUserId: number;
+};
