@@ -42,7 +42,8 @@ function PageLayout({
   pageType = HeaderPage.MAIN,
 }: PageLayoutProps) {
   const showHeader = useMemo(() => {
-    if (pageType === HeaderPage.JOIN) return true;
+    if (pageType === HeaderPage.JOIN || pageType === HeaderPage.TUTORIAL)
+      return true;
     return !onlyContents;
   }, []);
 
