@@ -55,7 +55,7 @@ export type Category = {
   color: CategoryColor;
 };
 
-export type CookieFeed = {
+export type CookieFeedItem = {
   cookieId: number;
   question: string;
   answer: string;
@@ -69,6 +69,13 @@ export type CookieFeed = {
   price: number;
   createdAt: string;
   myCookie: boolean;
+};
+
+export type CookieFeed = {
+  contents: CookieFeedItem[];
+  isLastPage: boolean;
+  nowPageIndex: number;
+  totalPageIndex: number;
 };
 
 export type CookieDetail = {

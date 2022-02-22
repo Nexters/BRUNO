@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
+import { useCookies } from 'react-cookie';
 
 import { useExecuteContract, Stage, CookieMethod } from '@src/klip';
 import { theme } from '@src/assets/styles';
@@ -14,11 +15,12 @@ import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
 import CategorySection from '@src/components/CategorySection';
 import Icon, { Minus24, Plus24 } from '@src/assets/Icon';
 import { postCookie } from '@src/queries/cookies';
-import { AskStatus, Category } from '@src/queries/types';
-
+import { AskStatus, Category, CategoryColor } from '@src/queries/types';
+import { getApproval } from '@src/klip/axios';
 import { updateAskStatus } from '@src/queries/ask';
-import { useLogin } from '@src/hooks';
+import { useLogin, CookieName } from '@src/hooks';
 import { ContractError, contractErrorAtom } from '@src/recoil/klip';
+import { COOKIE_IMAGE_URLS } from '@src/klip/const';
 import { TEXT_MAP, ANSWER_LIMIT, MODAL_LABEL_MAP } from './const';
 import { CookieInfo } from './types';
 
@@ -36,22 +38,25 @@ type Props = {
   isEdit?: boolean;
 };
 
+const SHOW_MODAL_STAGES = [Stage.REQUEST_FAIL, Stage.RESULT, Stage.NOT_YET_APPROVE];
+
 type CreateState = { title?: string; askId?: number };
 
 function CreateCookiePage({ isEdit = false }: Props) {
   const navigate = useNavigate();
   const location = useLocation();
   const state = (location.state || {}) as CreateState;
-  const { userId } = useLogin();
-  const { isOpen, setOpen } = useQRcodeModal();
+  const { userId, isApproval } = useLogin();
+  const { isOpen, setOpen, setClose } = useQRcodeModal();
   const [contractError, setError] = useRecoilState(contractErrorAtom);
   const { fetchPrepare, fetchResult, openDeepLink } = useExecuteContract({
     method: CookieMethod.MINT_COOKIE_BY_HAMMER,
     userId,
   });
   const [stage, setStage] = useState<Stage>(Stage.INITIAL);
+  const [_, setCookie] = useCookies([CookieName.IS_APPROVAL]);
 
-  const isModalOpen = stage === Stage.REQUEST_FAIL || stage === Stage.RESULT || contractError !== ContractError.NONE;
+  const isModalOpen = SHOW_MODAL_STAGES.includes(stage) || contractError !== ContractError.NONE;
   const buttonText = stage === Stage.INITIAL ? TEXT_MAP.request : TEXT_MAP[isEdit ? 'editCookie' : 'makeCookie'];
 
   const [cookieInfo, setCookieInfo] = useState<CookieInfo>({
@@ -62,8 +67,10 @@ function CreateCookiePage({ isEdit = false }: Props) {
     category: 0,
   });
 
+  const [categoryInfo, setCategoryInfo] = useState({ name: '', color: CategoryColor.BLUE });
+
   const createCookie = async () => {
-    const resultFunc = (txHash: string) => postCookie({ ...cookieInfo, txHash });
+    const resultFunc = (txHash: string) => postCookie({ ...cookieInfo, txHash, authorUserId: userId });
     const cookieData = await fetchResult(resultFunc);
     if (!cookieData) setStage(Stage.REQUEST_FAIL);
     else {
@@ -84,7 +91,10 @@ function CreateCookiePage({ isEdit = false }: Props) {
   };
 
   const handleClickCategory = (category: Category) => {
-    if (!isEdit) setCookieInfo({ ...cookieInfo, category: category.id });
+    if (!isEdit) {
+      setCookieInfo({ ...cookieInfo, category: category.id });
+      setCategoryInfo({ name: category.name, color: category.color });
+    }
   };
 
   const handleChangeInput = (key: string, value: string) => {
@@ -92,9 +102,23 @@ function CreateCookiePage({ isEdit = false }: Props) {
   };
 
   const handleClickCreate = async () => {
-    // 사용자가 정보를 입력하고 버튼 클릭
+    if (!isApproval) {
+      const resultFunc = () => getApproval(userId);
+      const approvalResult = await fetchResult(resultFunc);
+      if (!approvalResult) {
+        setStage(Stage.NOT_YET_APPROVE);
+        return;
+      }
+      setCookie(CookieName.IS_APPROVAL, true);
+    }
+
     if (stage === Stage.INITIAL) {
-      const reqKey = await fetchPrepare(cookieInfo);
+      const reqKey = await fetchPrepare({
+        ...cookieInfo,
+        categoryImage: COOKIE_IMAGE_URLS[categoryInfo.color],
+        category: categoryInfo.name,
+      });
+
       if (!reqKey) {
         setStage(Stage.REQUEST_FAIL);
         return;
@@ -115,9 +139,13 @@ function CreateCookiePage({ isEdit = false }: Props) {
 
   const handleClickModal = (yes: boolean) => {
     if (yes) {
-      if (contractError === ContractError.INSUFFICIENT_HAMMER) navigate('/users/my');
-      else if (stage === Stage.RESULT) navigate(`/cookie/${cookieInfo.id}`);
-      else setStage(Stage.INITIAL);
+      if (stage === Stage.NOT_YET_APPROVE) navigate('/settings');
+      else if (contractError === ContractError.INSUFFICIENT_HAMMER) navigate('/users/my');
+      else if (contractError === ContractError.NONE || stage === Stage.RESULT) navigate(`/cookie/${cookieInfo.id}`);
+      else {
+        setError(ContractError.NONE);
+        setStage(Stage.INITIAL);
+      }
     } else {
       navigate('/');
     }
@@ -129,7 +157,13 @@ function CreateCookiePage({ isEdit = false }: Props) {
     }
   }, [isOpen]);
 
-  useEffect(() => () => setError(ContractError.NONE), []);
+  useEffect(
+    () => () => {
+      setError(ContractError.NONE);
+      setClose();
+    },
+    [],
+  );
 
   return (
     <>
@@ -177,7 +211,7 @@ function CreateCookiePage({ isEdit = false }: Props) {
         <CategorySection isEdit={isEdit} setCategory={handleClickCategory} currentCategory={cookieInfo.category} />
         <MainButton value={buttonText} onClick={handleClickCreate} />
         <Modal
-          label={contractError ? MODAL_LABEL_MAP[contractError] : MODAL_LABEL_MAP[stage]}
+          label={contractError === ContractError.NONE ? MODAL_LABEL_MAP[stage] : MODAL_LABEL_MAP[contractError]}
           open={isModalOpen}
           onClickYes={() => handleClickModal(true)}
           onClickNo={() => handleClickModal(false)}

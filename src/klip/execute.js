@@ -3,10 +3,10 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { prepare, getResult } from 'klip-sdk';
 
 import { contractErrorAtom, klipRequestKeyAtom } from '@src/recoil/klip';
-import { getAbiString } from './abi';
+import { getAbiString, isHammerContractMethod } from './abi';
 import { openDeepLink as _openDeepLink } from './utils';
-import { CookieMethod, CoinMethod } from './types';
-import { isAvailableCreating } from './mintCookie';
+import { CookieMethod } from './types';
+import { getMintCookieParams, isAvailableCreating } from './mintCookie';
 
 const bappName = 'COOKIEPANG';
 // const successLink = '';
@@ -32,10 +32,15 @@ const PRE_EXECUTION = {
   [CookieMethod.MINT_COOKIE_BY_HAMMER]: isAvailableCreating,
 };
 
-const prepareExcution = async ({ userId, setError, ...data }, methodName, isHammerContract) => {
-  const method = isHammerContract ? CoinMethod : CookieMethod;
-  const abi = await getAbiString(method[methodName], isHammerContract);
+const GET_PARAM_FUNC = {
+  [CookieMethod.MINT_COOKIE_BY_HAMMER]: getMintCookieParams,
+};
+
+const prepareExcution = async ({ userId, setError, ...data }, methodName) => {
+  const isHammerContract = isHammerContractMethod(methodName);
+  const abi = await getAbiString(methodName, isHammerContract);
   const preExecution = PRE_EXECUTION[methodName];
+  const getParamsFunc = GET_PARAM_FUNC[methodName];
 
   let preResult = true;
   if (preExecution) {
@@ -44,10 +49,9 @@ const prepareExcution = async ({ userId, setError, ...data }, methodName, isHamm
 
   if (!abi || !preResult) return false;
 
-  const { title, contents, category, hammer } = data;
   const to = isHammerContract ? HAMMER_CONTRACT_ADDR : COOKIE_CONTRACT_ADDR;
   const value = '0'; // TODO : 추후 수정
-  const params = `["${title}","${contents}","null","${category}",${hammer}]`;
+  const params = getParamsFunc ? getParamsFunc(data) : '[]';
   const result = await prepare.executeContract({
     bappName,
     to,
@@ -85,9 +89,7 @@ export const useExecuteContract = ({ method, userId }) => {
     const resultData = await getResult(requestData.requestKey);
     if (!resultData?.result) return false;
     if (callbackFunc) {
-      return callbackFunc({
-        txHash: resultData?.result?.tx_hash,
-      });
+      return callbackFunc(resultData?.result?.tx_hash);
     }
     return true;
   };

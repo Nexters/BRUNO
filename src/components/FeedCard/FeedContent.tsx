@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import Icon, { Comment24, Hammer24, View24 } from '@src/assets/Icon';
 import { theme } from '@src/assets/styles';
-import { CookieFeed } from '@src/queries/types';
+import { CookieFeedItem } from '@src/queries/types';
 import NFTCookie from '@src/components/shared/NFTCookie';
 
 const Wrapper = styled.div`
@@ -50,7 +50,7 @@ const InfoText = styled.span`
 `;
 
 type Props = {
-  cookie: CookieFeed;
+  cookie: CookieFeedItem;
 };
 
 export default function FeedContent({ cookie }: Props) {

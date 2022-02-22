@@ -26,8 +26,19 @@ export const categorySelector = selectorFamily<Category | null, number>({
     },
 });
 
+export const categoryValueSelector = selectorFamily<string | null, number>({
+  key: 'categoryValue/selector',
+  get:
+    (categoryId: number) =>
+    async ({ get }) => {
+      const categories = await get(categoryListSelector);
+      const category = categories.find((item) => item.id === categoryId) || null;
+      return category?.name || '';
+    },
+});
+
 export const categoryColorSelector = selectorFamily<CategoryColor | null, number>({
-  key: 'category/selector',
+  key: 'categoryColor/selector',
   get:
     (categoryId: number) =>
     async ({ get }) => {

@@ -12,6 +12,7 @@ export enum Stage {
   REQUEST = 'request',
   RESULT = 'result',
   REQUEST_FAIL = 'request_fail',
+  NOT_YET_APPROVE = 'not_yet_approve',
 }
 
 export enum CookieMethod {
@@ -21,4 +22,6 @@ export enum CookieMethod {
   MINT_COOKIE_BY_KLAYTN = 'mintCookieByKlaytn',
 }
 
-export enum CoinMethod {}
+export enum HammerMethod {
+  MAX_APPROVE = 'maxApprove',
+}
