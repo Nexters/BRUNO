@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import Input from '../shared/Input';
 import MainButton from '../shared/MainButton';
@@ -34,8 +33,9 @@ const BottomWrapper = styled.div`
 `;
 
 const GuideLink = styled.a`
-  margin-bottom: 20px;
   color: ${(props) => props.theme.colors.basic.gray50};
+  text-align: center;
+  white-space: pre-wrap;
 `;
 
 interface Props {

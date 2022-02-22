@@ -30,7 +30,6 @@ const BottomWrapper = styled.div`
 `;
 
 const GuideLink = styled.a`
-  margin-bottom: 20px;
   color: ${(props) => props.theme.colors.basic.gray50};
 `;
 

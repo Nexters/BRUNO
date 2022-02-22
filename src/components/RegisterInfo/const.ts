@@ -1,7 +1,7 @@
 export const REGIST_TEXT_MAP = {
-  title: '당신의 첫 비밀을\n알려주세요',
-  button: '비밀 등록하기',
-  guide: '등록하기 버튼을 클릭하면\n개인정보 이용약관에 동의함으로 간주합니다.',
+  title: '쿠키를 만들기 위해\n정보를 입력해주세요',
+  button: '쿠키 3개 만들기',
+  guide: '쿠키 만들기 버튼을 클릭하면\n개인정보 이용약관에 동의함으로 간주합니다.',
   question: {
     location: {
       inputLabel: '사는 지역',

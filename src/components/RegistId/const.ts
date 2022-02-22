@@ -9,10 +9,10 @@ export const REGIST_TEXT_MAP = {
     guide: 'How To Connect My Wallet',
   },
   [LoginType.KLIP]: {
-    title: '프로필로 등록할\n아이디를 입력해주세요.',
-    inputLabel: '유저 아이디',
-    placeholder: '프로필 아이디를 입력해주세요.',
-    button: '아이디 등록하기',
-    guide: '한 번 입력한 아이디는 바꿀 수 없어요.',
+    title: '사용할 닉네임을\n입력해주세요.',
+    inputLabel: '닉네임',
+    placeholder: '닉네임을 입력해주세요.',
+    button: '닉네임 등록하기',
+    guide: '한 번 지정한 닉네임은 변경 할 수 없습니다.',
   },
 };
