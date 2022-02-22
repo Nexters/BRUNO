@@ -5,7 +5,7 @@ import { prepare, getResult } from 'klip-sdk';
 import { klipRequestKeyAtom } from '@src/recoil/klip';
 import { getAbiString } from './abi';
 import { openDeepLink as _openDeepLink } from './utils';
-import { CookieMethod } from './types';
+import { CookieMethod, CoinMethod } from './types';
 
 const bappName = 'COOKIEPANG';
 // const successLink = '';
@@ -24,14 +24,16 @@ const bappName = 'COOKIEPANG';
  * @params {string} failLink - 사용자 동의과정에서 문제가 발생 할 경우 돌아올 링크 (optional)
  */
 
-const COOKIE_CONTRACT_ADDR = '0x80C8be670A3b138b49d21323Fde06d1E48916f4C';
+const COOKIE_CONTRACT_ADDR = '0xC0b8FC7fE268Ae1e874e009F86D74010C3385D59';
+const HAMMER_CONTRACT_ADDR = '0xD6E679cf1c9980203604a57603e79e0660757C8a';
 
-const prepareExcution = async (data, methodName) => {
-  const abi = await getAbiString(CookieMethod[methodName]);
+const prepareExcution = async (data, methodName, isHammerContract) => {
+  const method = isHammerContract ? CoinMethod : CookieMethod;
+  const abi = await getAbiString(method[methodName]);
   if (!abi) return false;
 
   const { title, contents, category, hammer } = data;
-  const to = COOKIE_CONTRACT_ADDR; // TODO : COIN으로도 치환가능하게 수정
+  const to = isHammerContract ? HAMMER_CONTRACT_ADDR : COOKIE_CONTRACT_ADDR;
   const value = '0'; // TODO : 추후 수정
   const params = `["${title}","${contents}","null","${category}",${hammer}]`;
   const result = await prepare.executeContract({
