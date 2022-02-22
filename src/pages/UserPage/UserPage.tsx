@@ -23,7 +23,7 @@ function UserPage({ isMy = false }: Props) {
 
   useEffect(() => {
     if (id === String(myId)) navigate('/users/my');
-    else if (!isMy && Boolean(Number(id))) navigate('/users/my');
+    else if (!isMy && !Number(id)) navigate('/users/my');
   }, [id, myId]);
 
   return (

@@ -61,7 +61,7 @@ function AskPage() {
 
   const handleClickCreate = async () => {
     if (!askData.title.trim() || !userId) return false;
-    const result = await postAsk(askData.title, senderId, userId);
+    const result = await postAsk(askData.title, senderId, userId); // useMutation 추가하기
     if (result) navigate('/');
   };
 
