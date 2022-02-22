@@ -1,7 +1,7 @@
-import { Category, CategoryColor } from '@src/recoil/category';
+import { Category, CategoryColor } from '@src/queries/types';
 
 export const ALL_CATEGORY: Category = {
-  categoryId: 0,
+  id: 0,
   name: '전체',
   color: CategoryColor.LIME,
 };

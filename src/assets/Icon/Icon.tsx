@@ -7,17 +7,25 @@ type Props = {
   color?: string;
   isOn?: boolean;
   style?: CSSProperties;
+  svgStyle?: CSSProperties;
 };
 
-const IconWrapper = styled.div`
+const IconWrapper = styled.div<{ svgStyle?: any }>`
   line-height: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  svg {
+    ${(props) => props.svgStyle}
+  }
 `;
 
-function Icon({ children, color = theme.colors.basic.gray100, isOn = false, style }: Props) {
-  return <IconWrapper style={{ stroke: isOn ? '' : color, fill: isOn ? color : '', ...style }}>{children}</IconWrapper>;
+function Icon({ children, color = theme.colors.basic.gray100, isOn = false, style, svgStyle }: Props) {
+  return (
+    <IconWrapper style={{ stroke: isOn ? '' : color, fill: isOn ? color : '', ...style }} svgStyle={svgStyle}>
+      {children}
+    </IconWrapper>
+  );
 }
 
 export default Icon;

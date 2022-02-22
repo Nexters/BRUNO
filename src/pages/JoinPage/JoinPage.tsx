@@ -22,7 +22,7 @@ function JoinPage() {
     {
       id: 0,
       name: '자유',
-      color: 'RED',
+      color: 'BLUE',
     },
   ]); // server에서 받아온 category 정보
   const [selectedCategory, setSelectedCategory] = useState<number[]>([]);

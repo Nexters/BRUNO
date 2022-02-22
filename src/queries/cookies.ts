@@ -1,25 +1,31 @@
 import axios from 'axios';
-import config from '@src/config';
 
 import { CookieInfo } from '@src/pages/CreateCookiePage';
 import { getErrorStatus } from './utils';
+import { UserCookieType } from './types';
 
-export const getCookieList = (page?: number) =>
-  axios.get(`${config.baseApiUrl}/categories/all/cookies`, {
-    params: {
-      page: page ?? 0,
-      size: 10,
-    },
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+export const getCookieList = async ({ page, userId }: { userId: number; page?: number }) => {
+  try {
+    const { data: cookieData } = await axios.get(`/users/${userId}/categories/all/cookies`, {
+      params: {
+        page: page ?? 0,
+        size: 10,
+      },
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return cookieData;
+  } catch {
+    return false;
+  }
+};
 
 type PostCookieArgs = CookieInfo & { txHash: string };
 
 export const postCookie = async ({ title, contents, hammer, txHash }: PostCookieArgs) => {
   try {
-    const { data: cookieData } = await axios.post(`${config.baseApiUrl}/cookies`, {
+    const { data: cookieData } = await axios.post('/cookies', {
       question: title,
       answer: contents,
       price: hammer,
@@ -47,7 +53,7 @@ export const getCookieDetail = async ({ userId, cookieId }: GetCookieArgs) => {
 };
 
 export const getCookieListByCategory = async (categoryId: string, page: number) =>
-  axios.get(`${config.baseApiUrl}/categories/${categoryId}/cookies`, {
+  axios.get(`/categories/${categoryId}/cookies`, {
     params: {
       page: page ?? 0,
       size: 5,
@@ -56,3 +62,20 @@ export const getCookieListByCategory = async (categoryId: string, page: number) 
       'Content-Type': 'application/json',
     },
   });
+
+type GetUserCookiesArgs = { userId: string; page?: number; size?: number; target: UserCookieType };
+
+export const getUserCookies = async ({ userId, page, size, target }: GetUserCookiesArgs) => {
+  try {
+    const { data: userCookieData } = await axios.get(`/users/${userId}/cookies`, {
+      params: {
+        page: page ?? 0,
+        size: size ?? 20,
+        target,
+      },
+    });
+    return userCookieData;
+  } catch (error) {
+    getErrorStatus(error);
+  }
+};

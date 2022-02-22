@@ -22,7 +22,7 @@ export default function HomeTab() {
   const categoryList = useRecoilValue(categoryListSelector);
 
   useEffect(() => {
-    if (selectedCategory === ALL_CATEGORY.categoryId) setSearchParams({});
+    if (selectedCategory === ALL_CATEGORY.id) setSearchParams({});
     else if (selectedCategory) setSearchParams({ category: String(selectedCategory) });
   }, [selectedCategory]);
 
@@ -31,15 +31,15 @@ export default function HomeTab() {
       <CategoryButton
         key="all"
         category={ALL_CATEGORY}
-        isSelected={selectedCategory === ALL_CATEGORY.categoryId}
-        onClick={() => setCategory(ALL_CATEGORY.categoryId)}
+        isSelected={selectedCategory === ALL_CATEGORY.id}
+        onClick={() => setCategory(ALL_CATEGORY.id)}
       />
       {categoryList.map((item) => (
         <CategoryButton
-          key={item.categoryId}
+          key={item.id}
           category={item}
-          isSelected={selectedCategory === item.categoryId}
-          onClick={() => setCategory(item.categoryId)}
+          isSelected={selectedCategory === item.id}
+          onClick={() => setCategory(item.id)}
         />
       ))}
     </Wrapper>

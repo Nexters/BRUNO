@@ -40,7 +40,7 @@ export default function Navigation() {
 
   const handleClickHome = () => navigate('/');
   const handleClickWrite = () => navigate('/create');
-  const handleClickProfile = () => navigate('/users/me');
+  const handleClickProfile = () => navigate('/users/my');
 
   return (
     <>

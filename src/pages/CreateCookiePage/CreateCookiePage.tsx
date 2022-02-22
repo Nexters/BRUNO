@@ -5,7 +5,6 @@ import { isMobile } from 'react-device-detect';
 import { useExecuteContract, Stage, CookieMethod } from '@src/klip';
 import { theme } from '@src/assets/styles';
 
-import { Category } from '@src/recoil/category';
 import MainButton from '@src/components/shared/MainButton';
 import Input from '@src/components/shared/Input';
 import TextArea from '@src/components/shared/TextArea';
@@ -14,6 +13,7 @@ import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
 import CategorySection from '@src/components/CategorySection';
 import Icon, { Minus24, Plus24 } from '@src/assets/Icon';
 import { postCookie } from '@src/queries/cookies';
+import { Category } from '@src/queries/types';
 
 import { TEXT_MAP, ANSWER_LIMIT, MODAL_LABEL_MAP } from './const';
 import { CookieInfo } from './types';
@@ -72,7 +72,7 @@ function CreateCookiePage({ isEdit = false }: Props) {
   };
 
   const handleClickCategory = (category: Category) => {
-    if (!isEdit) setCookieInfo({ ...cookieInfo, category: category.categoryId });
+    if (!isEdit) setCookieInfo({ ...cookieInfo, category: category.id });
   };
 
   const handleChangeInput = (key: string, value: string) => {
