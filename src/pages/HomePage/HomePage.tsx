@@ -2,7 +2,7 @@ import HomeTab from '@src/components/HomeTab';
 import FeedCard from '@src/components/FeedCard';
 
 import styled from 'styled-components';
-import { useGetAllCookies } from '@src/queries/hooks';
+import { useGetCookies } from '@src/queries/hooks';
 import { useSearchParams } from 'react-router-dom';
 
 const ContentsWrapper = styled.main`
@@ -16,7 +16,7 @@ const ContentsWrapper = styled.main`
 
 function HomePage() {
   const [searchParams] = useSearchParams();
-  const { cookieList } = useGetAllCookies({ categoryId: searchParams.get('category') || '' });
+  const { cookieList } = useGetCookies({ categoryId: searchParams.get('category') || '' });
 
   return (
     <>

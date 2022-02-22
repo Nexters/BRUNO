@@ -6,7 +6,7 @@ import { CookieFeed, UserCookieList, UserCookieType, UserProfileType, UserAsk, A
 import { getCookieList, getUserCookies, getCookieListByCategory } from './cookies';
 import { getUser, getUserAsk } from './users';
 
-export const useGetAllCookies = ({ categoryId }: { categoryId: string }) => {
+export const useGetCookies = ({ categoryId }: { categoryId: string }) => {
   const { userId } = useLogin();
   const {
     data: allCookies,
