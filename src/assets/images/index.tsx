@@ -1,4 +1,5 @@
-import MainLogo01 from './logo/Main_01.png';
+import MainLogoImage from './logo/main.png';
+import MainLogo from './logo/logo.png';
 import ProfileImage01 from './profile/Default_01.png';
 import ProfileImage02 from './profile/Default_02.png';
 import ProfileImage03 from './profile/Default_03.png';
@@ -11,7 +12,8 @@ import NFTBlue from './nft/Cookie_Blue.png';
 import NFTPurple from './nft/Cookie_Purple.png';
 
 export {
-  MainLogo01,
+  MainLogoImage,
+  MainLogo,
   ProfileImage01,
   ProfileImage02,
   ProfileImage03,

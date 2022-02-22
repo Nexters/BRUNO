@@ -25,9 +25,13 @@ export const LogoWrapper = styled.div`
   margin-top: auto;
 `;
 
+export const LogoImage = styled.img`
+  width: 190px;
+  margin-bottom: 24px;
+`;
 export const Logo = styled.img`
-  width: 50%;
-  max-width: 200px;
+  width: 120px;
+  margin-bottom: 8px;
 `;
 
 export const SubText = styled.div`
