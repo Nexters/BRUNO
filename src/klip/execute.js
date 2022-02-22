@@ -29,7 +29,7 @@ const HAMMER_CONTRACT_ADDR = '0xD6E679cf1c9980203604a57603e79e0660757C8a';
 
 const prepareExcution = async (data, methodName, isHammerContract) => {
   const method = isHammerContract ? CoinMethod : CookieMethod;
-  const abi = await getAbiString(method[methodName]);
+  const abi = await getAbiString(method[methodName], isHammerContract);
   if (!abi) return false;
 
   const { title, contents, category, hammer } = data;
