@@ -1,13 +1,13 @@
 import { theme } from '@src/assets/styles';
 import Icon, { Comment24, Hammer24 } from '@src/assets/Icon';
 import { ProfileImage01, ProfileImage02 } from '@src/assets/images';
-import { CookieInfoType, HistoryType } from '@src/pages/CookieDetailPage';
+import { CookieDetail } from '@src/queries/types';
+import CookieHistorySection from '@src/components/CookieHistorySection';
+import NFTCookie from '@src/components/shared/NFTCookie';
 import MainButton from '../shared/MainButton';
 import {
   AnswerWrapper,
-  CardWrapper,
   CookieArea,
-  CookieImage,
   CookieInfoArea,
   CookieInfoWrapper,
   CreatorArea,
@@ -15,10 +15,8 @@ import {
   HammerCount,
   HammerUnit,
   HammerWrapper,
-  HistoryCard,
   ProfileWrapper,
   QuestionWrapper,
-  Time,
   Title,
   UserImage,
   UserInfoWrapper,
@@ -26,22 +24,12 @@ import {
 } from './styled';
 
 type Props = {
-  question: string;
-  hammer: number;
-  collector: string;
-  creator: string;
-  cookieInfo: CookieInfoType;
-  history: HistoryType;
+  data: CookieDetail;
 };
 
-function CookieInfo({
-  question,
-  hammer,
-  collector,
-  creator,
-  cookieInfo,
-  history,
-}: Props) {
+function CookieDetails({ data }: Props) {
+  const { question, price, histories, collectorName, creatorName, nftTokenId, contractAddress } = data;
+
   return (
     <>
       <CookieArea>
@@ -50,11 +38,10 @@ function CookieInfo({
         </QuestionWrapper>
 
         <AnswerWrapper>
-          <Icon color={theme.colors.basic.gray60}>
+          <Icon color={theme.colors.basic.gray60} style={{ marginBottom: 'auto' }}>
             <Comment24 />
           </Icon>
-
-          <CookieImage />
+          <NFTCookie cookieId={1} categoryId={1} />
         </AnswerWrapper>
 
         <HammerWrapper>
@@ -63,7 +50,7 @@ function CookieInfo({
             <Icon color={theme.colors.basic.gray60}>
               <Hammer24 />
             </Icon>
-            {hammer}
+            {price}
             <HammerUnit>개</HammerUnit>
           </HammerCount>
         </HammerWrapper>
@@ -72,58 +59,38 @@ function CookieInfo({
 
       <CreatorArea>
         <ProfileWrapper>
-          <Title>Collector</Title>
-
+          <Title>소유자</Title>
           <UserInfoWrapper>
             <UserImage src={ProfileImage01} />
-            <UserName>{collector}</UserName>
+            <UserName>{collectorName}</UserName>
           </UserInfoWrapper>
         </ProfileWrapper>
 
         <ProfileWrapper>
-          <Title>Creator</Title>
+          <Title>생성자</Title>
           <UserInfoWrapper>
             <UserImage src={ProfileImage02} />
-            <UserName>{creator}</UserName>
+            <UserName>{creatorName}</UserName>
           </UserInfoWrapper>
         </ProfileWrapper>
       </CreatorArea>
 
       <CookieInfoArea>
         <Title>쿠키 정보</Title>
-
         <CookieInfoWrapper>
           <span>계약 주소</span>
-          <span>{cookieInfo.wallet}</span>
+          <span>{contractAddress}</span>
         </CookieInfoWrapper>
         <CookieInfoWrapper>
           <span>토큰 주소</span>
-          <span>{cookieInfo.token}</span>
+          <span>{nftTokenId}</span>
         </CookieInfoWrapper>
 
         <Title style={{ marginTop: '20px' }}>쿠키 히스토리</Title>
-        <CardWrapper>
-          <HistoryCard>
-            <Title>수정</Title>
-            {`'${history.update.user}'님이 'Q.${history.update.question}'를 망치 ${history.update.hammer}개로 수정했습니다.`}
-            <Time>{history.update.time}</Time>
-          </HistoryCard>
-
-          <HistoryCard>
-            <Title>구매</Title>
-            {`'${history.update.user}'님이 'Q.${history.update.question}'를 망치 ${history.update.hammer}개로 구매했습니다.`}
-            <Time>{history.update.time}</Time>
-          </HistoryCard>
-
-          <HistoryCard>
-            <Title>생성</Title>
-            {`'${history.update.user}'님이 'Q.${history.update.question}'를 망치 ${history.update.hammer}개로 생성했습니다.`}
-            <Time>{history.update.time}</Time>
-          </HistoryCard>
-        </CardWrapper>
+        <CookieHistorySection historyList={histories} />
       </CookieInfoArea>
     </>
   );
 }
 
-export default CookieInfo;
+export default CookieDetails;

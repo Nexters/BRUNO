@@ -9,7 +9,12 @@ import IconButton from '@src/components/shared/IconButton';
 
 const Container = styled(HeaderContainer)`
   padding: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
+
+const RightWrapper = styled.div``;
 
 const HeaderTitle = styled.div`
   font-weight: bold;
@@ -20,6 +25,14 @@ const HeaderTitle = styled.div`
   }
 `;
 
+const SkipButton = styled.button`
+  margin-right: 8px;
+  background-color: transparent;
+  font-size: ${(props) => props.theme.fontSize.body02};
+  font-weight: 700;
+  color: ${(props) => props.theme.colors.basic.gray90};
+`;
+
 interface Props {
   pageType: HeaderPage;
 }
@@ -27,19 +40,30 @@ interface Props {
 function SubHeader({ pageType }: Props) {
   const navigate = useNavigate();
   const header = HEADER_VALUES[pageType];
-  const { left, center } = header;
+  const { left, center, right } = header;
+
   const handleClickBack = () => navigate(-1);
+
+  const handleClickSkip = () => {
+    navigate('/tutorial/completed');
+  };
 
   return (
     <Container>
-      {left && (
-        <IconButton onClick={handleClickBack}>
-          <Icon color={theme.colors.basic.gray100}>
-            <Right24 />
-          </Icon>
-        </IconButton>
-      )}
-      <HeaderTitle>{center}</HeaderTitle>
+      <div>
+        {left && (
+          <IconButton onClick={handleClickBack}>
+            <Icon color={theme.colors.basic.gray100}>
+              <Right24 />
+            </Icon>
+          </IconButton>
+        )}
+        <HeaderTitle>{center}</HeaderTitle>
+      </div>
+
+      <RightWrapper>
+        {right && pageType === HeaderPage.TUTORIAL && <SkipButton onClick={handleClickSkip}>Skip</SkipButton>}
+      </RightWrapper>
     </Container>
   );
 }

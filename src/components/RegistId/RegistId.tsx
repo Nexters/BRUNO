@@ -47,20 +47,10 @@ function RegistId({ type, value, handleClickButton, onChangeInput }: Props) {
   return (
     <Root>
       <Title>{TEXT.title}</Title>
-      <Input
-        value={value}
-        onChange={onChangeInput}
-        label={TEXT.inputLabel}
-        placeholder={TEXT.placeholder}
-        limit={15}
-      />
+      <Input value={value} onChange={onChangeInput} label={TEXT.inputLabel} placeholder={TEXT.placeholder} limit={15} />
       <BottomWrapper>
         <GuideLink>{TEXT.guide}</GuideLink>
-        <MainButton
-          value={TEXT.button}
-          onClick={handleClickButton}
-          buttonStyle={{ margin: 0 }}
-        />
+        <MainButton value={TEXT.button} onClick={handleClickButton} />
       </BottomWrapper>
     </Root>
   );

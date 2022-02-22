@@ -62,22 +62,14 @@ function AskPage() {
       <UserName>@Username15texts</UserName>
       <Section>
         <Title>Question</Title>
-        <Input
-          value={askData.question}
-          onChange={handleChangeQuestion}
-          placeholder="질문을 입력하세요."
-        />
+        <Input value={askData.question} onChange={handleChangeQuestion} placeholder="질문을 입력하세요." />
         <From>From. Anonymous</From>
       </Section>
       <Section>
         <Title>Categories</Title>
         <CategorySection>
-          {categoryList.map((category, index) => (
-            <CategoryButton
-              key={category.categoryId}
-              category={category}
-              isSelected={false}
-            />
+          {categoryList.map((category) => (
+            <CategoryButton key={category.id} category={category} isSelected={false} />
           ))}
         </CategorySection>
       </Section>

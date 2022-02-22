@@ -1,4 +1,4 @@
-import { CategoryColor } from '@src/recoil/category';
+import { CategoryColor } from '@src/queries/types';
 import { theme } from '@src/assets/styles';
 
 export const CATEGORY_COLOR_MAP = {

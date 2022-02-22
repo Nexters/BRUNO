@@ -1,27 +1,33 @@
 import axios from 'axios';
-import config from '@src/config';
-import { useQuery } from 'react-query';
 
 import { CookieInfo } from '@src/pages/CreateCookiePage';
-import { isSuccess } from './utils';
-import { CommonUseQuery, CookieType } from './types';
+import { getErrorStatus } from './utils';
+import { UserCookieType } from './types';
 
-export const getCookieList = (page?: number) =>
-  axios.get(`${config.baseApiUrl}/categories/all/cookies`, {
-    params: {
-      page: page ?? 0,
-      size: 10,
-    },
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+type GetCookieListArgs = { userId: number; page?: number };
+
+export const getCookieList = async ({ page, userId }: GetCookieListArgs) => {
+  try {
+    const { data: cookieData } = await axios.get(`/users/${userId}/categories/all/cookies`, {
+      params: {
+        page: page ?? 0,
+        size: 10,
+      },
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return cookieData;
+  } catch {
+    return false;
+  }
+};
 
 type PostCookieArgs = CookieInfo & { txHash: string };
 
 export const postCookie = async ({ title, contents, hammer, txHash }: PostCookieArgs) => {
   try {
-    const { data: cookieData, status } = await axios.post(`${config.baseApiUrl}/cookies`, {
+    const { data: cookieData } = await axios.post('/cookies', {
       question: title,
       answer: contents,
       price: hammer,
@@ -30,32 +36,55 @@ export const postCookie = async ({ title, contents, hammer, txHash }: PostCookie
       txHash,
       categoryId: 1,
     });
-    if (isSuccess(status)) {
-      return cookieData;
-    }
-    return false;
+    return cookieData;
   } catch {
     return false; // request 실패
   }
 };
 
-export const getCookieListByCategory = async (categoryId: string, page: number) =>
-  axios.get(`${config.baseApiUrl}/categories/${categoryId}/cookies`, {
-    params: {
-      page: page ?? 0,
-      size: 5,
-    },
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+type GetCookieArgs = { userId: number; cookieId: number };
 
-type UseGetAllCookie = CommonUseQuery & {
-  cookieList: CookieType[];
+export const getCookieDetail = async ({ userId, cookieId }: GetCookieArgs) => {
+  try {
+    const { data: cookieData } = await axios.get(`/users/${userId}/cookies/${cookieId}/detail`);
+    return cookieData;
+  } catch (error) {
+    // TODO : 나중에 status에 따라 error page 보여주어야
+    getErrorStatus(error);
+  }
 };
 
-export const useGetAllCookies = (): UseGetAllCookie => {
-  const { data, isLoading, isError } = useQuery(['categories', 'all', 'cookies'], () => getCookieList(0));
+export const getCookieListByCategory = async ({
+  categoryId,
+  userId,
+  page,
+}: GetCookieListArgs & { categoryId: string }) => {
+  try {
+    const { data: cookieData } = await axios.get(`/users/${userId}/categories/${categoryId}/cookies`, {
+      params: {
+        page: page ?? 0,
+        size: 20,
+      },
+    });
+    return cookieData;
+  } catch (error) {
+    getErrorStatus(error);
+  }
+};
 
-  return { cookieList: data?.data ?? [], isLoading, isError };
+type GetUserCookiesArgs = { userId: string; page?: number; size?: number; target: UserCookieType };
+
+export const getUserCookies = async ({ userId, page, size, target }: GetUserCookiesArgs) => {
+  try {
+    const { data: userCookieData } = await axios.get(`/users/${userId}/cookies`, {
+      params: {
+        page: page ?? 0,
+        size: size ?? 20,
+        target,
+      },
+    });
+    return userCookieData;
+  } catch (error) {
+    getErrorStatus(error);
+  }
 };

@@ -81,11 +81,7 @@ function RegistInfo({ value, setValue, handleClickButton }: Props) {
 
       <BottomWrapper>
         <GuideLink>{TEXT.guide}</GuideLink>
-        <MainButton
-          value={TEXT.button}
-          onClick={handleClickButton}
-          buttonStyle={{ margin: 0 }}
-        />
+        <MainButton value={TEXT.button} onClick={handleClickButton} />
       </BottomWrapper>
     </Root>
   );

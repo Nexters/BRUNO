@@ -43,6 +43,7 @@ export const HammerWrapper = styled.div`
   align-items: center;
   margin-top: 16px;
 `;
+
 export const Hammer = styled.span`
   font-weight: 700;
   font-size: ${(props) => props.theme.fontSize.large};

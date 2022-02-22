@@ -47,12 +47,7 @@ interface Props {
   handleClickNext: () => void;
 }
 
-function SelectCategory({
-  category,
-  selected,
-  handleClickCategory,
-  handleClickNext,
-}: Props) {
+function SelectCategory({ category, selected, handleClickCategory, handleClickNext }: Props) {
   return (
     <Root>
       <Title>{TEXT.title}</Title>
@@ -75,11 +70,7 @@ function SelectCategory({
         })}
       </CategoryList>
       <BottomWrapper>
-        <MainButton
-          value={TEXT.button}
-          onClick={handleClickNext}
-          buttonStyle={{ margin: 0 }}
-        />
+        <MainButton value={TEXT.button} onClick={handleClickNext} />
       </BottomWrapper>
     </Root>
   );

@@ -43,7 +43,7 @@ function Main() {
         }
       />
       <Route
-        path="/cookie/:id"
+        path="/cookie/:cookieId"
         element={
           <PageLayout>
             <CookieDetailPage />

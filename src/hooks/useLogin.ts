@@ -14,5 +14,6 @@ export const useLogin = () => {
   return {
     isLoggedIn: !!klipAddressCookie,
     isMobile,
+    userId: 1,
   };
 };

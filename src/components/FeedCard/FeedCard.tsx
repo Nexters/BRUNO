@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CookieType } from '@src/queries/types';
+import { CookieFeed } from '@src/queries/types';
 import UserInfo from './UserInfo';
 import FeedContent from './FeedContent';
 
@@ -11,17 +11,17 @@ const Container = styled.div`
 `;
 
 interface Props {
-  cookie: CookieType;
+  cookie: CookieFeed;
 }
 
-export default function Feed({ cookie }: Props) {
-  const { id, authorUserId, title, price, createdAt } = cookie;
+export default function FeedCard({ cookie }: Props) {
+  const { creatorId, creatorProfileUrl, creatorName, createdAt } = cookie;
 
   return (
     <Container>
       {/* TODO : 서버한테 닉네임 달라고 하기 */}
-      <UserInfo userId={authorUserId} profile="" name={`User ${authorUserId}`} createdAt={createdAt} />
-      <FeedContent id={id} question={title} viewCount={0} hammer={price} />
+      <UserInfo userId={creatorId} profile={creatorProfileUrl} name={creatorName} createdAt={createdAt} />
+      <FeedContent cookie={cookie} />
     </Container>
   );
 }

@@ -1,10 +1,11 @@
-// import { useEffect } from 'react';
+import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { useUserInfo } from '@src/queries/hooks';
 import { TabType } from '@src/components/UserHomeTab';
 import RequestContent from '@src/components/RequestContent';
-import CollectedCookieGrid from '@src/components/CollectedCookieGrid/CollectedCookieGrid';
+import CookieGrid from '@src/components/CookieGrid/CookieGrid';
 
 const Container = styled.div`
   overflow-y: scroll;
@@ -13,19 +14,24 @@ const Container = styled.div`
 
 interface Props {
   isMy?: boolean;
+  userId: string;
 }
 
-const getTabCotent = (isMy: boolean) => ({
-  [TabType.COLLECT]: <CollectedCookieGrid />,
-  [TabType.CREATE]: <div>create</div>,
-  [TabType.REQUEST]: <RequestContent isMy={isMy} />,
-});
-
-function UserContent({ isMy = false }: Props) {
+function UserContent({ isMy = false, userId }: Props) {
   const [searchParams] = useSearchParams();
+  const { collectedCookies, createdCookies } = useUserInfo({ userId });
+
+  const getTabCotent = useMemo(
+    () => ({
+      [TabType.COLLECT]: <CookieGrid cookies={collectedCookies?.cookies} />,
+      [TabType.CREATE]: <CookieGrid cookies={createdCookies?.cookies} />,
+      [TabType.REQUEST]: <RequestContent isMy={isMy} />,
+    }),
+    [collectedCookies, createdCookies, isMy],
+  );
 
   const currentTab = searchParams.get('tab') as TabType;
-  const TabContent = getTabCotent(isMy)[currentTab];
+  const TabContent = getTabCotent[currentTab];
 
   return <Container>{TabContent}</Container>;
 }

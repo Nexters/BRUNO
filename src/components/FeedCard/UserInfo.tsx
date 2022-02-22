@@ -37,7 +37,7 @@ const Time = styled.p`
   color: ${(props) => props.theme.colors.basic.gray60};
 `;
 
-export default function UserInfo({ userId, profile, name, createdAt: _createdAt }: UserType) {
+export default function UserInfo({ userId, profile, name = '익명의 사용자', createdAt: _createdAt }: UserType) {
   const navigate = useNavigate();
   const created = formatTime(_createdAt);
 
