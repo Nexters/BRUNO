@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import QRCode from 'react-qr-code';
 
@@ -14,6 +15,7 @@ import { LoginStage } from './types';
 import { LOGIN_MODAL_LABEL } from './const';
 
 function LoginPage() {
+  const navigate = useNavigate();
   const { isMobile } = useLogin();
   const { isFetched, requestKey } = useKlipPrepare();
   const { refetch: klipLogin, isRequestFail } = useKlipLogin();
@@ -35,9 +37,13 @@ function LoginPage() {
   };
 
   const handleClickButton = () => {
-    if (loginStage === LoginStage.PREPARE) {
-      requestKlipLogin();
-      setLoginStage(LoginStage.REQUEST);
+    if (isMobile) {
+      if (loginStage === LoginStage.PREPARE) {
+        requestKlipLogin();
+        setLoginStage(LoginStage.REQUEST);
+      }
+    } else {
+      navigate('/join');
     }
   };
 
