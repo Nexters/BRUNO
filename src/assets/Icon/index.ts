@@ -28,3 +28,4 @@ export { ReactComponent as PinkCookie } from './cookie-pink.svg';
 export { ReactComponent as PurpleCookie } from './cookie-purple.svg';
 export { ReactComponent as LimeCookie } from './cookie-lime.svg';
 export { ReactComponent as BlueCookie } from './cookie-blue.svg';
+export { ReactComponent as MainLogo } from './cookiepang_logo.svg';

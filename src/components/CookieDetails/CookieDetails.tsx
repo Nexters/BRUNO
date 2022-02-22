@@ -51,7 +51,7 @@ function CookieDetails({ data }: Props) {
               <Hammer24 />
             </Icon>
             {price}
-            <HammerUnit>개</HammerUnit>
+            <HammerUnit>톤</HammerUnit>
           </HammerCount>
         </HammerWrapper>
         <MainButton value="구매하기" />
