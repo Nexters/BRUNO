@@ -53,13 +53,18 @@ const QRcodeWrapper = styled.div`
   margin: 40px 0;
 `;
 
-export {
-  Wrapper,
-  Box,
-  Header,
-  ContentWrapper,
-  Title,
-  Timer,
-  Guide,
-  QRcodeWrapper,
-};
+const GuideIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 30px;
+`;
+
+const IconWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+`;
+
+export { Wrapper, Box, Header, ContentWrapper, Title, Timer, Guide, QRcodeWrapper, GuideIconWrapper, IconWrapper };

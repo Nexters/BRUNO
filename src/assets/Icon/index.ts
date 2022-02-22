@@ -29,3 +29,6 @@ export { ReactComponent as PurpleCookie } from './cookie-purple.svg';
 export { ReactComponent as LimeCookie } from './cookie-lime.svg';
 export { ReactComponent as BlueCookie } from './cookie-blue.svg';
 export { ReactComponent as MainLogo } from './cookiepang_logo.svg';
+export { ReactComponent as QrFlow1 } from './qr-1.svg';
+export { ReactComponent as QrFlow2 } from './qr-2.svg';
+export { ReactComponent as QrFlow3 } from './qr-3.svg';
