@@ -8,6 +8,10 @@ const Container = styled.div`
   padding: 24px 20px 16px 20px;
   color: ${(props) => props.theme.colors.basic.gray100};
   border-bottom: 1px solid ${(props) => props.theme.colors.basic.gray30};
+
+  ${(props) => props.theme.media.large} {
+    width: 50%;
+  }
 `;
 
 interface Props {

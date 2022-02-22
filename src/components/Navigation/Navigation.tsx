@@ -39,7 +39,7 @@ export default function Navigation() {
   const isProfile = location.pathname.includes('/users');
 
   const handleClickHome = () => navigate('/');
-  const handleClickWrite = () => navigate('/create');
+  const handleClickWrite = () => navigate('/create/cookie');
   const handleClickProfile = () => navigate('/users/my');
 
   return (

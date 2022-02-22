@@ -18,6 +18,7 @@ type Props = {
   count: {
     collected: number;
     created: number;
+    ask: number;
   };
 };
 
@@ -27,7 +28,7 @@ function UserHomeTab({ count }: Props) {
   const TABS = [
     { type: TabType.COLLECT, name: '수집한 쿠키', count: count.collected },
     { type: TabType.CREATE, name: '만든 쿠키', count: count.created },
-    { type: TabType.REQUEST, name: '받은 요청', count: 12 },
+    { type: TabType.REQUEST, name: '받은 요청', count: count.ask },
   ];
 
   const currentTab = searchParams.get('tab') as TabType;

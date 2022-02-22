@@ -38,9 +38,9 @@ const AddButton = styled.button`
 `;
 
 const RequestButton = styled(Button)`
-  width: 160px;
+  width: 100%;
   height: 40px;
-  margin-bottom: 5px;
+  margin: 0 0 5px 58px;
   line-height: 120%;
   background: ${(props) => props.theme.colors.brand.main};
 `;

@@ -31,6 +31,7 @@ const AnswerWrapper = styled.div`
   justify-content: flex-start;
   margin-top: 14px;
   margin-left: 20px;
+  cursor: pointer;
 `;
 
 const NumericSection = styled.div`

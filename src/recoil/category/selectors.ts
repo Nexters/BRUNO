@@ -5,9 +5,13 @@ import { Category, CategoryColor } from '@src/queries/types';
 export const categoryListSelector = selector<Category[]>({
   key: 'category/listSelector',
   get: async () => {
-    const { data: categories } = await getCategoryist();
-    if (categories) return categories;
-    return [];
+    try {
+      const { data: categories } = await getCategoryist();
+      if (categories) return categories;
+      return [];
+    } catch {
+      return [];
+    }
   },
 });
 

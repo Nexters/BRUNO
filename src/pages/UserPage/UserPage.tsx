@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { useLogin } from '@src/hooks';
 import { useUserInfo } from '@src/queries/hooks';
@@ -6,24 +6,29 @@ import PageLayout from '@src/components/shared/PageLayout';
 import UserHomeTab from '@src/components/UserHomeTab';
 import UserProfile from '@src/components/UserProfile';
 import UserContent from '@src/components/UserContent';
+import { useEffect } from 'react';
 
 interface Props {
   isMy?: boolean;
 }
 
-type UserPageParams = { id: string };
+type UserPageParams = { userId: string };
 
 function UserPage({ isMy = false }: Props) {
-  const { id } = useParams<UserPageParams>() as UserPageParams;
+  const navigate = useNavigate();
+  const { userId: id } = useParams<UserPageParams>() as UserPageParams;
   const { userId: myId } = useLogin();
   const userId = isMy ? String(myId) : id;
   const { userProfile, count } = useUserInfo({ userId });
 
-  if (!userProfile) return null;
+  useEffect(() => {
+    if (id === String(myId)) navigate('/users/my');
+    else if (!isMy && !Number(id)) navigate('/users/my');
+  }, [id, myId]);
 
   return (
     <PageLayout>
-      <UserProfile isMy={isMy} profile={userProfile} />
+      {userProfile && <UserProfile isMy={isMy} profile={userProfile} />}
       <UserHomeTab count={count} />
       <UserContent isMy={isMy} userId={userId} />
     </PageLayout>

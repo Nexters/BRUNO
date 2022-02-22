@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { useUserInfo } from '@src/queries/hooks';
 import { TabType } from '@src/components/UserHomeTab';
-import RequestContent from '@src/components/RequestContent';
+import AskContent from '@src/components/AskContent';
 import CookieGrid from '@src/components/CookieGrid/CookieGrid';
 
 const Container = styled.div`
@@ -19,15 +19,15 @@ interface Props {
 
 function UserContent({ isMy = false, userId }: Props) {
   const [searchParams] = useSearchParams();
-  const { collectedCookies, createdCookies } = useUserInfo({ userId });
+  const { collectedCookies, createdCookies, askItems, refetchAsk } = useUserInfo({ userId });
 
   const getTabCotent = useMemo(
     () => ({
       [TabType.COLLECT]: <CookieGrid cookies={collectedCookies?.cookies} />,
       [TabType.CREATE]: <CookieGrid cookies={createdCookies?.cookies} />,
-      [TabType.REQUEST]: <RequestContent isMy={isMy} />,
+      [TabType.REQUEST]: <AskContent isMy={isMy} askItems={askItems} refetch={refetchAsk} />,
     }),
-    [collectedCookies, createdCookies, isMy],
+    [collectedCookies, createdCookies, askItems, isMy],
   );
 
   const currentTab = searchParams.get('tab') as TabType;

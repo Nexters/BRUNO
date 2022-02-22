@@ -1,11 +1,12 @@
 import { useQuery } from 'react-query';
 
 import { useLogin } from '@src/hooks';
-import { CookieFeed, UserCookieList, UserCookieType, UserProfileType } from './types';
+import { useMemo } from 'react';
+import { CookieFeed, UserCookieList, UserCookieType, UserProfileType, UserAsk, AskStatus } from './types';
 import { getCookieList, getUserCookies, getCookieListByCategory } from './cookies';
-import { getUser } from './users';
+import { getUser, getUserAsk } from './users';
 
-export const useGetAllCookies = ({ categoryId }: { categoryId: string }) => {
+export const useGetCookies = ({ categoryId }: { categoryId: string }) => {
   const { userId } = useLogin();
   const {
     data: allCookies,
@@ -23,7 +24,7 @@ export const useGetAllCookies = ({ categoryId }: { categoryId: string }) => {
   );
 
   return {
-    cookieList: (categoryId ? categoryCookies : allCookies) ?? [],
+    cookieList: (categoryId ? categoryCookies : allCookies) || [],
     isLoading: isLoading || categoryIsLoading,
     isError: isError || categoryIsError,
   };
@@ -40,10 +41,22 @@ export const useUserInfo = ({ userId }: { userId: string }) => {
     getUserCookies({ userId, target: UserCookieType.COOKIES }),
   );
 
+  const { data: askItems, refetch: refetchAsk } = useQuery<UserAsk[]>(['user', 'ask', userId], () =>
+    getUserAsk(userId),
+  );
+
+  const filteredAskList = useMemo(() => askItems?.filter((ask) => ask.status === AskStatus.PENDING) ?? [], [askItems]);
+
   return {
     userProfile: userProfile ?? null,
     collectedCookies: collectedCookies ?? { cookies: [] },
     createdCookies: createdCookies ?? { cookies: [] },
-    count: { collected: collectedCookies?.totalCount || 0, created: createdCookies?.totalCount || 0 },
+    askItems: filteredAskList,
+    refetchAsk,
+    count: {
+      collected: collectedCookies?.totalCount || 0,
+      created: createdCookies?.totalCount || 0,
+      ask: filteredAskList.length || 0,
+    },
   };
 };
