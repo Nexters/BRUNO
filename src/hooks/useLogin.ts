@@ -14,7 +14,7 @@ export const useLogin = () => {
   // TODO : server에서 valid 확인하는 로직 추가
 
   return {
-    address: klipAddressCookie,
+    address: klipAddressCookie ?? '',
     isLoggedIn: !!klipAddressCookie,
     isMobile,
     userId: 1,

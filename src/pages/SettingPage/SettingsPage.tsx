@@ -33,6 +33,15 @@ const Amount = styled.span`
   font-weight: 700;
 `;
 
+const LogoutWrapper = styled(CoinWrapper)`
+  background: none;
+  border: 1px solid ${(props) => props.theme.colors.basic.gray30};
+`;
+
+const LogoutButton = styled.button`
+  color: ${(props) => props.theme.colors.basic.gray50};
+`;
+
 const getAccessButtonText = (stage: ApprovalStage) => {
   if (isMobile) return '지갑 권한 허용하기';
   if (stage === ApprovalStage.INITIAL) return 'QR코드 찍기';
@@ -42,7 +51,7 @@ const getAccessButtonText = (stage: ApprovalStage) => {
 
 function SettingPage() {
   const navigate = useNavigate();
-  const { isApproval, userId } = useLogin();
+  const { isApproval, userId, address } = useLogin();
   const { isOpen, setOpen, setClose } = useQRcodeModal();
   const [_, setCookie] = useCookies([CookieName.IS_APPROVAL]);
 
@@ -121,6 +130,12 @@ function SettingPage() {
         onClick={handleClickAccess}
       />
       <MainButton value="망치 구매하기" disabled />
+      {/* TODO 연동해제  */}
+      <LogoutWrapper>
+        <span>{`${address.slice(0, 18)}..`}</span>
+        <LogoutButton>연동 해제</LogoutButton>
+      </LogoutWrapper>
+      {/* 지갑 연동을 위한 Modal */}
       <Modal
         label={MODAL_LABEL_MAP[stage]}
         open={isModalOpen}
