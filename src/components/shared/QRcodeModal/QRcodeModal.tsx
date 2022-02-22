@@ -5,16 +5,7 @@ import Icon, { Right24 } from '@src/assets/Icon';
 import IconButton from '@src/components/shared/IconButton';
 import { klipRequestKeyAtom } from '@src/recoil/klip';
 import { QRcodeModalAtom } from '@src/recoil/ui';
-import {
-  Wrapper,
-  Box,
-  Header,
-  ContentWrapper,
-  Title,
-  Timer,
-  Guide,
-  QRcodeWrapper,
-} from './styled';
+import { Wrapper, Box, Header, ContentWrapper, Title, Timer, Guide, QRcodeWrapper } from './styled';
 
 function QRcodeModal() {
   const request = useRecoilValue(klipRequestKeyAtom);
@@ -36,13 +27,11 @@ function QRcodeModal() {
         </Header>
         <ContentWrapper>
           <Title>카카오 Klip QR 연결</Title>
-          <Timer>남은 시간</Timer>
+          {/* <Timer>남은 시간</Timer> */}
           <QRcodeWrapper>
             <QRCode value={qrcode} size={150} />
           </QRcodeWrapper>
-          <Guide>
-            {`QR 코드 리더기 또는 카카오 앱을 통해\nQR 코드를 스캔해주세요.`}
-          </Guide>
+          <Guide>{`QR 코드 리더기 또는 카카오 앱을 통해\nQR 코드를 스캔해주세요.`}</Guide>
         </ContentWrapper>
       </Box>
     </Wrapper>
