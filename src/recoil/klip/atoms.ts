@@ -14,3 +14,13 @@ export const klipAddressAtom = atom({
     address: null,
   },
 });
+
+export enum ContractError {
+  NONE = 'NONE',
+  INSUFFICIENT_HAMMER = 'INSUFFICIENT_HAMMER',
+}
+
+export const contractErrorAtom = atom<ContractError>({
+  key: 'klip/contractErrorAtom',
+  default: ContractError.NONE,
+});
