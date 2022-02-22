@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
 
 import MainButton from '@src/components/shared/MainButton';
 import Input from '@src/components/shared/Input';
 import { useNavigate, useParams } from 'react-router-dom';
 import { UserProfileType } from '@src/queries/types';
 import { getUser } from '@src/queries/users';
-import { postAsk } from '@src/queries/ask';
+import { postAsk, PostAskArgs } from '@src/queries/ask';
 import { useLogin } from '@src/hooks';
 
 const Wrapper = styled.main`
@@ -48,21 +48,26 @@ type AskPageParam = { userId: string };
 function AskPage() {
   const navigate = useNavigate();
   const { userId: senderId } = useLogin();
-  const { userId } = useParams<AskPageParam>();
+  const { userId } = useParams<AskPageParam>() as AskPageParam;
   const { data: userProfile } = useQuery<UserProfileType>(['users', 'profile', userId], () => getUser(userId || ''));
   const [askData, setAskData] = useState({
     title: '',
     category: '', // TODO : 안쓸 것 같으면 나중에 제거 (스펙 확인중)
   });
 
+  if (!userId) navigate('/');
+
+  const mutation = useMutation((data: PostAskArgs) => postAsk(data));
   const handleChangeQuestion = (value: string) => {
     setAskData({ ...askData, title: value });
   };
 
   const handleClickCreate = async () => {
     if (!askData.title.trim() || !userId) return false;
-    const result = await postAsk(askData.title, senderId, userId); // useMutation 추가하기
-    if (result) navigate('/');
+    await mutation.mutate(
+      { title: askData.title, receiverUserId: userId, senderUserId: senderId },
+      { onSuccess: () => navigate(`/users/${userId}`) },
+    );
   };
 
   return (

@@ -13,7 +13,9 @@ export const updateAskStatus = async (askId: number, status: AskStatus) => {
   }
 };
 
-export const postAsk = async (title: string, senderUserId: number | string, receiverUserId: number | string) => {
+export type PostAskArgs = { title: string; senderUserId: number | string; receiverUserId: number | string };
+
+export const postAsk = async ({ title, senderUserId, receiverUserId }: PostAskArgs) => {
   try {
     const { status: resultStatus } = await axios.post('/asks', { title, senderUserId, receiverUserId });
     if (resultStatus === 200) return true;

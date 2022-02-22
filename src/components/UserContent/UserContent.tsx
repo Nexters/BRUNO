@@ -27,7 +27,7 @@ function UserContent({ isMy = false, userId }: Props) {
       [TabType.CREATE]: <CookieGrid cookies={createdCookies?.cookies} />,
       [TabType.REQUEST]: <AskContent isMy={isMy} askItems={askItems} refetch={refetchAsk} />,
     }),
-    [collectedCookies, createdCookies, isMy],
+    [collectedCookies, createdCookies, askItems, isMy],
   );
 
   const currentTab = searchParams.get('tab') as TabType;
