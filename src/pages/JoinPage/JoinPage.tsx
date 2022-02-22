@@ -6,8 +6,11 @@ import RegistId from '@src/components/RegistId';
 import { LoginType } from '@src/components/RegistId/type';
 import RegistInfo from '@src/components/RegisterInfo';
 import SelectCategory from '@src/components/SelectCategory';
+import { useNavigate } from 'react-router-dom';
 
 function JoinPage() {
+  const navigate = useNavigate();
+
   const [step, setStep] = useState<number>(0);
   const [profileId, setProfileId] = useState<string>('');
   const [info, setInfo] = useState<Record<string, string>>({
@@ -45,7 +48,8 @@ function JoinPage() {
   };
 
   const regist = () => {
-    console.log('등록!');
+    // to do : 회원 regist api 연동
+    navigate('/tutorial');
   };
 
   return (

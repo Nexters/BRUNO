@@ -2,6 +2,7 @@ export enum HeaderPage {
   ASK = 'ask',
   MAIN = 'main',
   JOIN = 'join',
+  TUTORIAL = 'tutorial',
 }
 
 type HeaderValues = {
@@ -19,5 +20,10 @@ export const HEADER_VALUES: HeaderValues = {
   [HeaderPage.JOIN]: {
     left: true,
     center: '',
+  },
+  [HeaderPage.TUTORIAL]: {
+    left: true,
+    center: '',
+    right: true,
   },
 };
