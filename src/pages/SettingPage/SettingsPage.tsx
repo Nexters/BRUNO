@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import { useCookies } from 'react-cookie';
+import styled from 'styled-components';
 
 import { useExecuteContract, HammerMethod } from '@src/klip';
 import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
@@ -12,6 +13,25 @@ import { useLogin, CookieName } from '@src/hooks';
 import Modal from '@src/components/shared/Modal';
 import { getApproval } from '@src/klip/axios';
 import { ApprovalStage, MODAL_LABEL_MAP } from './const';
+
+const CoinWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  padding: 11px 16px;
+  border-radius: 10px;
+  color: ${(props) => props.theme.colors.basic.gray90};
+  background-color: ${(props) => props.theme.colors.basic.gray20};
+  & + & {
+    margin: 20px 0;
+  }
+`;
+
+const Amount = styled.span`
+  font-size: ${(props) => props.theme.fontSize.body01};
+  font-weight: 700;
+`;
 
 const getAccessButtonText = (stage: ApprovalStage) => {
   if (isMobile) return '지갑 권한 허용하기';
@@ -85,6 +105,15 @@ function SettingPage() {
 
   return (
     <PageLayout padding="20px" pageType={HeaderPage.SETTING} onlyContents>
+      {/* TODO : API 적용 */}
+      <CoinWrapper>
+        클레이튼
+        <Amount>234 클레이</Amount>
+      </CoinWrapper>
+      <CoinWrapper>
+        망치
+        <Amount>234 톤</Amount>
+      </CoinWrapper>
       <MainButton
         value={getAccessButtonText(stage)}
         buttonStyle={{ margin: 0 }}

@@ -103,8 +103,7 @@ function CreateCookiePage({ isEdit = false }: Props) {
 
   const handleClickCreate = async () => {
     if (!isApproval) {
-      const resultFunc = () => getApproval(userId);
-      const approvalResult = await fetchResult(resultFunc);
+      const approvalResult = await getApproval(userId);
       if (!approvalResult) {
         setStage(Stage.NOT_YET_APPROVE);
         return;
