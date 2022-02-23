@@ -13,6 +13,7 @@ export type Page = {
 export enum CookieStatus {
   ACTIVE = 'ACTIVE',
   HIDDEN = 'HIDDEN',
+  DELETED = 'DELETED',
 }
 
 export enum CategoryColor {

@@ -1,7 +1,7 @@
 import { theme } from '@src/assets/styles';
 import Icon, { Comment24, Hammer24 } from '@src/assets/Icon';
 import { ProfileImage01, ProfileImage02 } from '@src/assets/images';
-import { CookieDetail } from '@src/queries/types';
+import { CookieDetail, CookieStatus } from '@src/queries/types';
 import CookieHistorySection from '@src/components/CookieHistorySection';
 import NFTCookie from '@src/components/shared/NFTCookie';
 import MainButton from '../shared/MainButton';
@@ -27,8 +27,24 @@ type Props = {
   data: CookieDetail;
 };
 
+const getButtonText = (myCookie: boolean, status: CookieStatus) => {
+  if (status === CookieStatus.HIDDEN) return '이 쿠키는 숨겨졌어요.';
+  return myCookie ? '가격 정보 수정하기' : '쿠키 구매하기';
+};
+
 function CookieDetails({ data }: Props) {
-  const { question, price, histories, collectorName, creatorName, nftTokenId, contractAddress } = data;
+  const {
+    question,
+    price,
+    histories,
+    collectorName,
+    creatorName,
+    nftTokenId,
+    contractAddress,
+    cookieStatus,
+    myCookie,
+  } = data;
+  const buttonText = getButtonText(myCookie, cookieStatus);
 
   return (
     <>
@@ -54,7 +70,7 @@ function CookieDetails({ data }: Props) {
             <HammerUnit>톤</HammerUnit>
           </HammerCount>
         </HammerWrapper>
-        <MainButton value="구매하기" />
+        <MainButton value={buttonText} disabled={cookieStatus !== CookieStatus.ACTIVE} />
       </CookieArea>
 
       <CreatorArea>
