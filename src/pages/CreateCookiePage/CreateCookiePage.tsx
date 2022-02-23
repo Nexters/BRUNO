@@ -129,7 +129,7 @@ function CreateCookiePage({ isEdit = false }: Props) {
     }
   }, [isOpen]);
 
-  useEffect(() => () => setError(ContractError.NONE), []);
+  useEffect(() => setError(ContractError.NONE), []);
 
   return (
     <>
