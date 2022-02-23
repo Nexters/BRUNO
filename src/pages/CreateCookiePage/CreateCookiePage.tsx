@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 
@@ -16,6 +17,8 @@ import { postCookie } from '@src/queries/cookies';
 import { AskStatus, Category } from '@src/queries/types';
 
 import { updateAskStatus } from '@src/queries/ask';
+import { useLogin } from '@src/hooks';
+import { ContractError, contractErrorAtom } from '@src/recoil/klip';
 import { TEXT_MAP, ANSWER_LIMIT, MODAL_LABEL_MAP } from './const';
 import { CookieInfo } from './types';
 
@@ -39,14 +42,16 @@ function CreateCookiePage({ isEdit = false }: Props) {
   const navigate = useNavigate();
   const location = useLocation();
   const state = (location.state || {}) as CreateState;
-
+  const { userId } = useLogin();
   const { isOpen, setOpen } = useQRcodeModal();
+  const [contractError, setError] = useRecoilState(contractErrorAtom);
   const { fetchPrepare, fetchResult, openDeepLink } = useExecuteContract({
     method: CookieMethod.MINT_COOKIE_BY_HAMMER,
+    userId,
   });
   const [stage, setStage] = useState<Stage>(Stage.INITIAL);
 
-  const isModalOpen = stage === Stage.REQUEST_FAIL || stage === Stage.RESULT;
+  const isModalOpen = stage === Stage.REQUEST_FAIL || stage === Stage.RESULT || contractError !== ContractError.NONE;
   const buttonText = stage === Stage.INITIAL ? TEXT_MAP.request : TEXT_MAP[isEdit ? 'editCookie' : 'makeCookie'];
 
   const [cookieInfo, setCookieInfo] = useState<CookieInfo>({
@@ -90,6 +95,10 @@ function CreateCookiePage({ isEdit = false }: Props) {
     // 사용자가 정보를 입력하고 버튼 클릭
     if (stage === Stage.INITIAL) {
       const reqKey = await fetchPrepare(cookieInfo);
+      if (!reqKey) {
+        setStage(Stage.REQUEST_FAIL);
+        return;
+      }
 
       if (isMobile) {
         openDeepLink(reqKey);
@@ -106,7 +115,8 @@ function CreateCookiePage({ isEdit = false }: Props) {
 
   const handleClickModal = (yes: boolean) => {
     if (yes) {
-      if (stage === Stage.RESULT) navigate(`/cookie/${cookieInfo.id}`);
+      if (contractError === ContractError.INSUFFICIENT_HAMMER) navigate('/users/my');
+      else if (stage === Stage.RESULT) navigate(`/cookie/${cookieInfo.id}`);
       else setStage(Stage.INITIAL);
     } else {
       navigate('/');
@@ -118,6 +128,8 @@ function CreateCookiePage({ isEdit = false }: Props) {
       setStage(Stage.REQUEST);
     }
   }, [isOpen]);
+
+  useEffect(() => () => setError(ContractError.NONE), []);
 
   return (
     <>
@@ -165,7 +177,7 @@ function CreateCookiePage({ isEdit = false }: Props) {
         <CategorySection isEdit={isEdit} setCategory={handleClickCategory} currentCategory={cookieInfo.category} />
         <MainButton value={buttonText} onClick={handleClickCreate} />
         <Modal
-          label={MODAL_LABEL_MAP[stage] || null}
+          label={contractError ? MODAL_LABEL_MAP[contractError] : MODAL_LABEL_MAP[stage]}
           open={isModalOpen}
           onClickYes={() => handleClickModal(true)}
           onClickNo={() => handleClickModal(false)}
