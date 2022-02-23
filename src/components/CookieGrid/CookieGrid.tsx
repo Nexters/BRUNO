@@ -17,7 +17,7 @@ function CookieGrid({ cookies = [] }: { cookies: CookieType[] }) {
   return (
     <Wrapper>
       {cookies.map((cookie) => (
-        <CookieItem key={cookie.id} id={cookie.id} categoryId={cookie.categoryId} status={cookie.status} />
+        <CookieItem key={cookie.cookieId} id={cookie.cookieId} category={cookie.category} status={cookie.status} />
       ))}
     </Wrapper>
   );

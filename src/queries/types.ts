@@ -5,42 +5,15 @@ export type CommonUseQuery = {
 
 export type Page = {
   totalCount: number;
-  page: number;
-  size: number;
+  totalPageIndex: number;
+  nowPageIndex: number;
+  isLastPage: boolean;
 };
 
 export enum CookieStatus {
   ACTIVE = 'ACTIVE',
   HIDDEN = 'HIDDEN',
 }
-
-export type CookieType = {
-  id: number;
-  title: string;
-  price: number;
-  content: string;
-  imageUrl: string;
-  authorUserId: number;
-  ownedUserId: number;
-  createdAt: string;
-  status: CookieStatus;
-  txHash: string;
-  nftTokenId: number;
-  fromBlockAddress: number;
-  categoryId: number;
-};
-
-export enum CookieHistoryAction {
-  MODIFY = 'MODIFY',
-  BUY = 'BUY',
-  CREATE = 'CREATE',
-}
-
-export type CookieHistory = {
-  action: CookieHistoryAction;
-  content: string;
-  createdAt: string;
-};
 
 export enum CategoryColor {
   PURPLE = 'PURPLE',
@@ -53,6 +26,34 @@ export type Category = {
   id: number;
   name: string;
   color: CategoryColor;
+};
+
+export type CookieType = {
+  cookieId: number;
+  title: string;
+  price: number;
+  content: string;
+  category: Category;
+  imageUrl: string;
+  authorUserId: number;
+  ownedUserId: number;
+  createdAt: string;
+  status: CookieStatus;
+  txHash: string;
+  nftTokenId: number;
+  fromBlockAddress: number;
+};
+
+export enum CookieHistoryAction {
+  MODIFY = 'MODIFY',
+  BUY = 'BUY',
+  CREATE = 'CREATE',
+}
+
+export type CookieHistory = {
+  action: CookieHistoryAction;
+  content: string;
+  createdAt: string;
 };
 
 export type CookieFeedItem = {
@@ -79,6 +80,7 @@ export type CookieFeed = {
 };
 
 export type CookieDetail = {
+  cookieId: number;
   question: string;
   answer: string;
   collectorName: string;
@@ -90,6 +92,7 @@ export type CookieDetail = {
   histories: CookieHistory[];
   myCookie: boolean;
   category: Category;
+  cookieStatus: CookieStatus;
 };
 
 export type UserProfileType = {
@@ -103,12 +106,12 @@ export type UserProfileType = {
 };
 
 export enum UserCookieType {
-  COLLECTED = 'COLLECTED',
-  COOKIES = 'COOKIES',
+  OWNED = 'OWNED',
+  AUTHOR = 'AUTHOR',
 }
 
 export type UserCookieList = Page & {
-  cookies: CookieType[];
+  contents: CookieType[];
 };
 
 export enum AskStatus {
@@ -118,10 +121,14 @@ export enum AskStatus {
   DELETED = 'DELETED',
 }
 
-export type UserAsk = {
+export type Ask = {
   id: number;
   title: string;
   status: AskStatus;
   senderUserId: number;
   receiverUserId: number;
+};
+
+export type UserAsk = Page & {
+  contents: Ask[];
 };

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { categoryColorSelector } from '@src/recoil/category';
 import Icon from '@src/assets/Icon';
-import { CookieStatus, CategoryColor } from '@src/queries/types';
+import { CookieStatus, CategoryColor, Category } from '@src/queries/types';
 import { useNavigate } from 'react-router-dom';
 import { ACTIVE_COLOR_MAP, HIDDEN_COLOR_MAP, BOX_COLOR_MAP } from './const';
 
@@ -21,16 +21,16 @@ const CookieWrapper = styled.div`
 
 interface Props {
   id: number;
-  categoryId: number;
+  category: Category;
   status: CookieStatus;
 }
 
-function CookieItem({ id, categoryId, status }: Props) {
+function CookieItem({ id, category, status }: Props) {
   const navigate = useNavigate();
-  const color = useRecoilValue(categoryColorSelector(categoryId)) || CategoryColor.BLUE;
+  const categoryColor = category?.color || CategoryColor.BLUE;
 
-  const BoxIcon = BOX_COLOR_MAP[color];
-  const CookieIcon = status === CookieStatus.ACTIVE ? ACTIVE_COLOR_MAP[color] : HIDDEN_COLOR_MAP[color];
+  const BoxIcon = BOX_COLOR_MAP[categoryColor];
+  const CookieIcon = status === CookieStatus.ACTIVE ? ACTIVE_COLOR_MAP[categoryColor] : HIDDEN_COLOR_MAP[categoryColor];
 
   return (
     <CookieWrapper onClick={() => navigate(`/cookie/${id}`)}>
