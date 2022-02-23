@@ -14,7 +14,9 @@ const Container = styled(HeaderContainer)`
   justify-content: space-between;
 `;
 
-const RightWrapper = styled.div``;
+const RightWrapper = styled.div`
+  margin-left: auto;
+`;
 
 const HeaderTitle = styled.div`
   font-weight: bold;
@@ -62,7 +64,7 @@ function SubHeader({ pageType }: Props) {
       </div>
 
       <RightWrapper>
-        {right && pageType === HeaderPage.TUTORIAL && <SkipButton onClick={handleClickSkip}>Skip</SkipButton>}
+        {right && pageType === HeaderPage.TUTORIAL && <SkipButton onClick={handleClickSkip}>건너뛰기</SkipButton>}
       </RightWrapper>
     </Container>
   );
