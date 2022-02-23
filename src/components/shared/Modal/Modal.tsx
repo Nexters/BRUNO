@@ -22,9 +22,10 @@ interface Props {
   label: ModalLabel;
   onClickYes?: () => void;
   onClickNo?: () => void;
+  onlyYes?: boolean;
 }
 
-function Modal({ open, label, onClickYes, onClickNo }: Props) {
+function Modal({ open, label, onClickYes, onClickNo, onlyYes }: Props) {
   const [isOpen, setOpen] = useState(open);
 
   useEffect(() => {
@@ -47,7 +48,7 @@ function Modal({ open, label, onClickYes, onClickNo }: Props) {
           <AskLabel>{title}</AskLabel>
           <DescriptionLabel>{description}</DescriptionLabel>
           <ButtonWrapper>
-            <NoButton onClick={handleClickNo}>{no}</NoButton>
+            {!onlyYes && <NoButton onClick={handleClickNo}>{no}</NoButton>}
             <YesButton onClick={handleClickYes}>{yes}</YesButton>
           </ButtonWrapper>
         </ModalBox>

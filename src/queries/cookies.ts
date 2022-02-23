@@ -23,18 +23,18 @@ export const getCookieList = async ({ page, userId }: GetCookieListArgs) => {
   }
 };
 
-type PostCookieArgs = CookieInfo & { txHash: string };
+type PostCookieArgs = CookieInfo & { txHash: string; authorUserId: number };
 
-export const postCookie = async ({ title, contents, hammer, txHash }: PostCookieArgs) => {
+export const postCookie = async ({ title, contents, hammer, txHash, category, authorUserId }: PostCookieArgs) => {
   try {
     const { data: cookieData } = await axios.post('/cookies', {
       question: title,
       answer: contents,
       price: hammer,
-      authorUserId: 1,
-      ownedUserId: 1,
+      authorUserId,
+      ownedUserId: authorUserId,
       txHash,
-      categoryId: 1,
+      categoryId: category,
     });
     return cookieData;
   } catch {

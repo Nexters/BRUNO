@@ -6,7 +6,7 @@ const ButtonWrapper = styled.div`
   justify-content: center;
 `;
 
-export const Button = styled.button<{ buttonStyle?: string }>`
+export const Button = styled.button<{ buttonStyle?: string; disabled?: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -15,13 +15,13 @@ export const Button = styled.button<{ buttonStyle?: string }>`
   margin: 20px 0;
   padding: 13px;
   border-radius: 44px;
-  background: ${(props) => props.theme.colors.brand.main};
-  cursor: pointer;
+  background: ${({ disabled, theme }) => (disabled ? 'none' : theme.colors.brand.main)};
+  background-color: ${({ disabled, theme }) => (disabled ? theme.colors.basic.gray30 : null)};
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   font-size: ${(props) => props.theme.fontSize.body02};
   line-height: 160%;
   font-weight: bold;
-  color: ${(props) => props.theme.colors.basic.gray100};
-  cursor: pointer;
+  color: ${({ disabled, theme }) => (disabled ? theme.colors.basic.gray40 : theme.colors.basic.gray100)};
   ${(props) => props.buttonStyle};
 `;
 
@@ -30,12 +30,13 @@ interface MainButtonProps {
   onClick?: () => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   buttonStyle?: any;
+  disabled?: boolean;
 }
 
-function MainButton({ value, onClick, buttonStyle }: MainButtonProps) {
+function MainButton({ value, onClick, buttonStyle, disabled }: MainButtonProps) {
   return (
     <ButtonWrapper>
-      <Button buttonStyle={buttonStyle} onClick={() => onClick?.()}>
+      <Button buttonStyle={buttonStyle} onClick={() => onClick?.()} disabled={disabled}>
         {value}
       </Button>
     </ButtonWrapper>

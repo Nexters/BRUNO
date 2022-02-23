@@ -12,19 +12,19 @@ export const useGetCookies = ({ categoryId }: { categoryId: string }) => {
     data: allCookies,
     isLoading,
     isError,
-  } = useQuery<CookieFeed[]>(['categories', 'all', 'cookies'], () => getCookieList({ userId }));
+  } = useQuery<CookieFeed>(['categories', 'all', 'cookies'], () => getCookieList({ userId }));
   const {
     data: categoryCookies,
     isLoading: categoryIsLoading,
     isError: categoryIsError,
-  } = useQuery<CookieFeed[]>(
+  } = useQuery<CookieFeed>(
     ['categories', categoryId, 'cookies'],
     () => getCookieListByCategory({ userId, categoryId }),
     { enabled: !!categoryId },
   );
 
   return {
-    cookieList: (categoryId ? categoryCookies : allCookies) || [],
+    cookieList: (categoryId ? categoryCookies?.contents : allCookies?.contents) || [],
     isLoading: isLoading || categoryIsLoading,
     isError: isError || categoryIsError,
   };

@@ -29,6 +29,15 @@ export const getKlipResult = async (reqKey: string) =>
     },
   });
 
+export const getApproval = async (userId: string | number) => {
+  try {
+    const { data } = await axios.get(`/contract/hammers/users/${userId}/approve`);
+    return data?.answer || false;
+  } catch {
+    return false;
+  }
+};
+
 export const getCookieFee = async () => {
   try {
     const { data } = await axios.get('/contract/cookies/prices/hammer');

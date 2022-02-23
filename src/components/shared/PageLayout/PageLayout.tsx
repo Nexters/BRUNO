@@ -4,6 +4,7 @@ import { NAVIGATION_HEIGHT } from '@src/assets/styles';
 import Header from '@src/components/Header';
 import Navigation from '@src/components/Navigation';
 import { HeaderPage } from '@src/components/Header/const';
+import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -41,23 +42,19 @@ function PageLayout({
   onlyContents = false,
   pageType = HeaderPage.MAIN,
 }: PageLayoutProps) {
+  const { isOpen } = useQRcodeModal();
   const showHeader = useMemo(() => {
-    if (pageType === HeaderPage.JOIN || pageType === HeaderPage.TUTORIAL)
-      return true;
+    if (pageType === HeaderPage.JOIN || pageType === HeaderPage.TUTORIAL) return true;
     return !onlyContents;
   }, []);
 
   return (
     <Root>
       {showHeader && <Header pageType={pageType} />}
-      <Layout
-        layoutStyle={layoutStyle}
-        padding={padding}
-        onlyContents={onlyContents}
-      >
+      <Layout layoutStyle={layoutStyle} padding={padding} onlyContents={onlyContents}>
         {children}
       </Layout>
-      {!onlyContents && <Navigation />}
+      {!onlyContents && !isOpen && <Navigation />}
     </Root>
   );
 }

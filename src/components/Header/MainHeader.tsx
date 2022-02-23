@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-import Icon, { AlarmOn24, Setting24 } from '@src/assets/Icon';
+import Icon, { AlarmOn24, Setting24, MainLogo } from '@src/assets/Icon';
 
 import IconButton from '../shared/IconButton';
 
@@ -39,7 +39,9 @@ function MainHeader() {
 
   return (
     <Container>
-      <AppTitle>Cookie Pang</AppTitle>
+      <Icon>
+        <MainLogo />
+      </Icon>
       <ButtonWrapper>
         <IconButton onClick={handleClickAlarm}>
           <Icon>

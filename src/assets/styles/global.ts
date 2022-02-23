@@ -35,6 +35,7 @@ export const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
     border: none;
     resize: none;
     outline: none;
+    background: none;
   }
 
   button {
