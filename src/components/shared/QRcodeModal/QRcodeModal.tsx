@@ -24,7 +24,7 @@ function QRcodeModal() {
   const [isOpen, setOpen] = useRecoilState(QRcodeModalAtom);
   const qrcode = `https://klipwallet.com/?target=/a2a?request_key=${request.requestKey}`;
 
-  // if (!isOpen || !request.requestKey) return null;
+  if (!isOpen || !request.requestKey) return null;
 
   return (
     <Wrapper>
