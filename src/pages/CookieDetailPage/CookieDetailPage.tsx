@@ -9,6 +9,8 @@ import CategoryButton from '@src/components/shared/CategoryButton';
 import { getCookieDetail } from '@src/queries/cookies';
 import { CookieDetail } from '@src/queries/types';
 import { useLogin } from '@src/hooks';
+import Error, { ErrorType } from '@src/components/shared/Error';
+import Loading from '@src/components/shared/Loading';
 
 const CategoryWrapper = styled.div`
   display: flex;
@@ -34,12 +36,13 @@ function CookieDetailPage() {
   const { userId } = useLogin();
   const { cookieId } = useParams<CookieDetailParams>() as CookieDetailParams;
 
-  const { data } = useQuery<CookieDetail, Error>(['cookie', 'detail'], () =>
+  const { data, error } = useQuery<CookieDetail, number>(['cookie', 'detail'], () =>
     getCookieDetail({ userId, cookieId: +cookieId }),
   );
 
-  // TODO : loading 페이지 추가...
-  if (!data) return <div>loading...</div>;
+  if (error && error === 403) return <Error type={ErrorType.FORBIDDEN} />;
+  if (error && Math.abs(error / 100) === 5) return <Error type={ErrorType.SERVER_ERROR} />;
+  if (!data) return <Loading />;
 
   return (
     <>

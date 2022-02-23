@@ -24,7 +24,7 @@ function BioSection({ nickname, introduction }: Props) {
   return (
     <Wrapper>
       <Nickname>{nickname}</Nickname>
-      <Bio>{introduction}</Bio>
+      <Bio>{introduction || '아직 입력한 소개글이 없어요.'}</Bio>
     </Wrapper>
   );
 }
