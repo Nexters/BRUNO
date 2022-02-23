@@ -4,6 +4,7 @@ import { ProfileImage01, ProfileImage02 } from '@src/assets/images';
 import { CookieDetail, CookieStatus } from '@src/queries/types';
 import CookieHistorySection from '@src/components/CookieHistorySection';
 import NFTCookie from '@src/components/shared/NFTCookie';
+import { useNavigate } from 'react-router-dom';
 import MainButton from '../shared/MainButton';
 import {
   AnswerWrapper,
@@ -21,6 +22,7 @@ import {
   UserImage,
   UserInfoWrapper,
   UserName,
+  MyButtonWrapper,
 } from './styled';
 
 type Props = {
@@ -37,13 +39,16 @@ function CookieDetails({ data }: Props) {
     question,
     price,
     histories,
+    collectorId,
     collectorName,
+    creatorId,
     creatorName,
     nftTokenId,
     contractAddress,
     cookieStatus,
     myCookie,
   } = data;
+  const navigate = useNavigate();
   const buttonText = getButtonText(myCookie, cookieStatus);
 
   return (
@@ -74,7 +79,7 @@ function CookieDetails({ data }: Props) {
       </CookieArea>
 
       <CreatorArea>
-        <ProfileWrapper>
+        <ProfileWrapper onClick={() => navigate(`/users/${collectorId}`)}>
           <Title>쿠키 소유자</Title>
           <UserInfoWrapper>
             <UserImage src={ProfileImage01} />
@@ -82,7 +87,7 @@ function CookieDetails({ data }: Props) {
           </UserInfoWrapper>
         </ProfileWrapper>
 
-        <ProfileWrapper>
+        <ProfileWrapper onClick={() => navigate(`/users/${creatorId}`)}>
           <Title>쿠키 제작자</Title>
           <UserInfoWrapper>
             <UserImage src={ProfileImage02} />
@@ -105,6 +110,19 @@ function CookieDetails({ data }: Props) {
         <Title style={{ marginTop: '20px' }}>쿠키 히스토리</Title>
         <CookieHistorySection historyList={histories} />
       </CookieInfoArea>
+      {myCookie && (
+        <MyButtonWrapper>
+          <MainButton value="쿠키 숨기기" buttonStyle={{ background: theme.colors.basic.gray30 }} />
+          <MainButton
+            value="쿠키 삭제하기"
+            buttonStyle={{
+              background: 'none',
+              border: `1px solid ${theme.colors.state.error}`,
+              color: theme.colors.state.error,
+            }}
+          />
+        </MyButtonWrapper>
+      )}
     </>
   );
 }
