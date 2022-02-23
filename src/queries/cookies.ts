@@ -50,7 +50,8 @@ export const getCookieDetail = async ({ userId, cookieId }: GetCookieArgs) => {
     return cookieData;
   } catch (error) {
     // TODO : 나중에 status에 따라 error page 보여주어야
-    getErrorStatus(error);
+    const status = getErrorStatus(error);
+    throw status;
   }
 };
 

@@ -110,6 +110,7 @@ function CookieDetails({ data }: Props) {
         <Title style={{ marginTop: '20px' }}>쿠키 히스토리</Title>
         <CookieHistorySection historyList={histories} />
       </CookieInfoArea>
+      {/* TODO : 쿠키 삭제 숨기기 */}
       {myCookie && (
         <MyButtonWrapper>
           <MainButton value="쿠키 숨기기" buttonStyle={{ background: theme.colors.basic.gray30 }} />

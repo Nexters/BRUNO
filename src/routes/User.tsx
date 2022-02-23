@@ -1,14 +1,14 @@
 import { Routes, Route } from 'react-router-dom';
 
 import UserPage from '@src/pages/UserPage';
-import ErrorPage, { ErrorPageType } from '@src/pages/ErrorPage';
+import ErrorPage, { ErrorType } from '@src/components/shared/Error';
 
 function Auth() {
   return (
     <Routes>
       <Route path="/my" element={<UserPage isMy />} />
       <Route path="/:userId" element={<UserPage />} />
-      <Route path="*" element={<ErrorPage type={ErrorPageType.NOT_FOUND} />} />
+      <Route path="*" element={<ErrorPage type={ErrorType.NOT_FOUND} />} />
     </Routes>
   );
 }

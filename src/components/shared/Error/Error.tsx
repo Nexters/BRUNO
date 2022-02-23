@@ -3,7 +3,7 @@ import { NFTError } from '@src/assets/images';
 import MainButton from '@src/components/shared/MainButton';
 import PageLayout from '@src/components/shared/PageLayout';
 import { useNavigate } from 'react-router-dom';
-import { ErrorPageType } from './types';
+import { ErrorType } from './types';
 import { ERROR_TEXT } from './const';
 
 const Wrapper = styled.main`
@@ -36,24 +36,22 @@ const ImageWrapper = styled.div`
   }
 `;
 
-function ErrorPage({ type }: { type: ErrorPageType }) {
+function Error({ type }: { type: ErrorType }) {
   const navigate = useNavigate();
-  const TEXT = ERROR_TEXT[type] || ERROR_TEXT[ErrorPageType.NOT_FOUND];
+  const TEXT = ERROR_TEXT[type] || ERROR_TEXT[ErrorType.NOT_FOUND];
 
   return (
-    <PageLayout>
-      <Wrapper>
-        <Content>
-          <ImageWrapper>
-            <img src={NFTError} alt="error" />
-          </ImageWrapper>
-          <Title>{TEXT.title}.</Title>
-          <Text>{TEXT.text}</Text>
-        </Content>
-        <MainButton value="홈으로 가기" buttonStyle={{ margin: 'auto 20px 20px 20px' }} onClick={() => navigate('/')} />
-      </Wrapper>
-    </PageLayout>
+    <Wrapper>
+      <Content>
+        <ImageWrapper>
+          <img src={NFTError} alt="error" />
+        </ImageWrapper>
+        <Title>{TEXT.title}.</Title>
+        <Text>{TEXT.text}</Text>
+      </Content>
+      <MainButton value="홈으로 가기" buttonStyle={{ margin: 'auto 20px 20px 20px' }} onClick={() => navigate('/')} />
+    </Wrapper>
   );
 }
 
-export default ErrorPage;
+export default Error;
