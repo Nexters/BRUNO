@@ -40,7 +40,8 @@ function CookieDetailPage() {
     getCookieDetail({ userId, cookieId: +cookieId }),
   );
 
-  if (error || error === 403) return <Error type={ErrorType.FORBIDDEN} />;
+  if (error && error === 403) return <Error type={ErrorType.FORBIDDEN} />;
+  if (error && Math.abs(error / 100) === 5) return <Error type={ErrorType.SERVER_ERROR} />;
   if (!data) return <Loading />;
 
   return (

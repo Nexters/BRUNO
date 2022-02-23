@@ -40,9 +40,9 @@ export type CookieType = {
   ownedUserId: number;
   createdAt: string;
   status: CookieStatus;
-  txHash: string;
+  txHash?: string;
   nftTokenId: number;
-  fromBlockAddress: number;
+  fromBlockAddress?: number;
 };
 
 export enum CookieHistoryAction {
