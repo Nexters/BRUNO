@@ -22,6 +22,7 @@ const PhotoWrapper = styled.div`
 const Photo = styled.img`
   width: 100px;
   height: 100px;
+  border-radius: 100%;
 `;
 
 const AddButton = styled.button`
