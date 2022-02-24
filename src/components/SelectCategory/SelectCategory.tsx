@@ -1,5 +1,9 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import MainButton from '@src/components/shared/MainButton';
+import { useRecoilValue } from 'recoil';
+import { categoryListSelector } from '@src/recoil/category';
+import { useNavigate } from 'react-router-dom';
 import CategoryButton from './CategoryButton';
 import { REGIST_TEXT_MAP as TEXT } from './const';
 
@@ -36,18 +40,49 @@ const BottomWrapper = styled.div`
   margin-top: auto;
 `;
 
-interface Props {
-  category: Array<{
-    id: number;
-    name: string;
-    color: string;
-  }>;
-  selected: number[];
-  handleClickCategory: (id: number) => void;
-  handleClickNext: () => void;
-}
+type CategoryType = {
+  id: number;
+  name: string;
+  color: string;
+};
 
-function SelectCategory({ category, selected, handleClickCategory, handleClickNext }: Props) {
+function SelectCategory() {
+  const category: CategoryType[] = useRecoilValue(categoryListSelector);
+  const [selectedCategory, setSelectedCategory] = useState<number[]>([]);
+  const navigate = useNavigate();
+
+  const regist = () => {
+    // to do : 회원 regist api 연동
+    // const { data: userProfile } = useQuery<UserProfileType>(['walletAddress', 'nickname', 'introduction', 'profileUrl', 'backgroundUrl'], () => postUser(), {
+    //   onSuccess: (data) => {
+    //     const { request_key: requestKey, expiration_time: expirationTime } =
+    //       data.data;
+    //     // setKlip({ requestKey, expirationTime });
+    //   },);
+    // navigate('/tutorial');
+  };
+
+  const handleSubmit = () => {
+    if (selectedCategory.length <= 3) return;
+    regist();
+
+    // POST /user
+    // try {
+
+    //   setStep(1);
+    // } catch (error) {
+
+    // }
+  };
+
+  const handleClickCategory = (id: number) => {
+    if (selectedCategory.some((categoryId) => categoryId === id)) {
+      setSelectedCategory(selectedCategory.filter((categoryId) => categoryId !== id));
+    } else {
+      setSelectedCategory(selectedCategory.concat(id));
+    }
+  };
+
   return (
     <Root>
       <Title>{TEXT.title}</Title>
@@ -56,7 +91,7 @@ function SelectCategory({ category, selected, handleClickCategory, handleClickNe
       <CategoryList>
         {category.map((categoryObj) => {
           const { id } = categoryObj;
-          const isActive = selected.some((categoryId) => categoryId === id);
+          const isActive = selectedCategory.some((categoryId) => categoryId === id);
           return (
             <CategoryButton
               key={id}
@@ -70,7 +105,7 @@ function SelectCategory({ category, selected, handleClickCategory, handleClickNe
         })}
       </CategoryList>
       <BottomWrapper>
-        <MainButton value={TEXT.button} onClick={handleClickNext} />
+        <MainButton value={TEXT.button} onClick={handleSubmit} />
       </BottomWrapper>
     </Root>
   );

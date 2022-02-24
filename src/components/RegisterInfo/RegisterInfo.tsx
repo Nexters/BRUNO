@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import Input from '../shared/Input';
 import MainButton from '../shared/MainButton';
@@ -39,20 +40,36 @@ const GuideLink = styled.a`
 `;
 
 interface Props {
-  value: Record<string, string>;
-  setValue: (value: Record<string, string>) => void;
-  handleClickButton: () => void;
+  setStep: (step: number) => void;
 }
 
-function RegistInfo({ value, setValue, handleClickButton }: Props) {
+function RegistInfo({ setStep }: Props) {
+  const [info, setInfo] = useState<Record<string, string>>({
+    location: '',
+    height: '',
+    job: '',
+  });
+
   const handleChangeLocationInput = (input: string) => {
-    setValue({ ...value, location: input });
+    setInfo({ ...info, location: input });
   };
   const handleChangeHeightInput = (input: string) => {
-    setValue({ ...value, height: input });
+    setInfo({ ...info, height: input });
   };
   const handleChangeJobInput = (input: string) => {
-    setValue({ ...value, job: input });
+    setInfo({ ...info, job: input });
+  };
+
+  const handleSubmit = () => {
+    if (info.location.length === 0 || info.height.length === 0 || info.job.length === 0) return;
+    setStep(2);
+    // POST /user
+    // try {
+
+    //   setStep(1);
+    // } catch (error) {
+
+    // }
   };
 
   return (
@@ -60,19 +77,19 @@ function RegistInfo({ value, setValue, handleClickButton }: Props) {
       <Title>{TEXT.title}</Title>
       <InputWrapper>
         <Input
-          value={value.location}
+          value={info.location}
           onChange={handleChangeLocationInput}
           label={TEXT.question.location.inputLabel}
           placeholder={TEXT.question.location.placeholder}
         />
         <Input
-          value={value.height}
+          value={info.height}
           onChange={handleChangeHeightInput}
           label={TEXT.question.height.inputLabel}
           placeholder={TEXT.question.height.placeholder}
         />
         <Input
-          value={value.job}
+          value={info.job}
           onChange={handleChangeJobInput}
           label={TEXT.question.job.inputLabel}
           placeholder={TEXT.question.job.placeholder}
@@ -81,7 +98,7 @@ function RegistInfo({ value, setValue, handleClickButton }: Props) {
 
       <BottomWrapper>
         <GuideLink>{TEXT.guide}</GuideLink>
-        <MainButton value={TEXT.button} onClick={handleClickButton} />
+        <MainButton value={TEXT.button} onClick={handleSubmit} />
       </BottomWrapper>
     </Root>
   );

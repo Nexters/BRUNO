@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import MainButton from '@src/components/shared/MainButton';
+import { useState } from 'react';
 import Input from '../shared/Input';
 
 import { LoginType } from './type';
@@ -35,21 +36,40 @@ const GuideLink = styled.a`
 
 interface Props {
   type: LoginType;
-  value: string;
-  handleClickButton: () => void;
-  onChangeInput: (value: string) => void;
+  setStep: (step: number) => void;
 }
 
-function RegistId({ type, value, handleClickButton, onChangeInput }: Props) {
+function RegistId({ type, setStep }: Props) {
   const TEXT = REGIST_TEXT_MAP[type];
+
+  const [nickname, setNickname] = useState<string>('');
+
+  const handleSubmit = () => {
+    if (nickname.length === 0) return; // to do : Input invalid 표시
+
+    console.log('post');
+    // POST /user
+    // try {
+
+    //   setStep(1);
+    // } catch (error) {
+
+    // }
+  };
 
   return (
     <Root>
       <Title>{TEXT.title}</Title>
-      <Input value={value} onChange={onChangeInput} label={TEXT.inputLabel} placeholder={TEXT.placeholder} limit={15} />
+      <Input
+        value={nickname}
+        onChange={setNickname}
+        label={TEXT.inputLabel}
+        placeholder={TEXT.placeholder}
+        limit={15}
+      />
       <BottomWrapper>
         <GuideLink>{TEXT.guide}</GuideLink>
-        <MainButton value={TEXT.button} onClick={handleClickButton} />
+        <MainButton value={TEXT.button} onClick={handleSubmit} />
       </BottomWrapper>
     </Root>
   );
