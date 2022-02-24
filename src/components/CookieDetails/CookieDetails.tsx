@@ -8,6 +8,7 @@ import { ProfileImage01, ProfileImage02 } from '@src/assets/images';
 import { CookieDetail, CookieStatus } from '@src/queries/types';
 import CookieHistorySection from '@src/components/CookieHistorySection';
 import NFTCookie from '@src/components/shared/NFTCookie';
+import ContentCard from '@src/components/ContentCard';
 import MainButton from '@src/components/shared/MainButton';
 import Modal from '@src/components/shared/Modal';
 import { deleteCookie as _deleteCookie, updateCookieStatus, UpdateCookieStatusArgs } from '@src/queries/cookies';
@@ -45,11 +46,13 @@ function CookieDetails({ data }: Props) {
   const {
     cookieId,
     question,
+    answer,
     price,
     histories,
+    creatorId,
     collectorId,
     collectorName,
-    creatorId,
+    category,
     creatorName,
     nftTokenId,
     contractAddress,
@@ -92,7 +95,11 @@ function CookieDetails({ data }: Props) {
           <Icon color={theme.colors.basic.gray60} style={{ marginBottom: 'auto' }}>
             <Comment24 />
           </Icon>
-          <NFTCookie cookieId={1} categoryId={1} />
+          {myCookie ? (
+            <ContentCard content={answer} categoryColor={category.color} />
+          ) : (
+            <NFTCookie categoryColor={category.color} />
+          )}
         </AnswerWrapper>
 
         <HammerWrapper>

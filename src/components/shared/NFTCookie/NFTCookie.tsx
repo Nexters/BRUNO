@@ -1,9 +1,6 @@
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { NFTPink, NFTLime, NFTBlue, NFTPurple } from '@src/assets/images';
 import { CategoryColor } from '@src/queries/types';
-import { useRecoilValue } from 'recoil';
-import { categoryColorSelector } from '@src/recoil/category';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -16,8 +13,7 @@ const CookieImage = styled.img<{ width?: string }>`
 `;
 
 type Props = {
-  cookieId: number;
-  categoryId: number;
+  categoryColor: CategoryColor;
   width?: string;
 };
 
@@ -28,18 +24,12 @@ const NFT_COOKIE_MAP = {
   [CategoryColor.PURPLE]: NFTPurple,
 };
 
-export default function FeedContent({ cookieId, categoryId, width }: Props) {
-  const navigate = useNavigate();
-  const color = useRecoilValue(categoryColorSelector(categoryId)) || CategoryColor.BLUE;
-  const cookieImage = NFT_COOKIE_MAP[color];
-
-  const handleAnswerClick = () => {
-    navigate(`/cookie/${cookieId}`);
-  };
+export default function NFTCookie({ categoryColor, width }: Props) {
+  const cookieImage = NFT_COOKIE_MAP[categoryColor];
 
   return (
     <Wrapper>
-      <CookieImage src={cookieImage} onClick={handleAnswerClick} width={width} />
+      <CookieImage src={cookieImage} width={width} />
     </Wrapper>
   );
 }

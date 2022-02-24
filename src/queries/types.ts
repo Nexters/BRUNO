@@ -84,7 +84,7 @@ export type CookieFeed = {
 export type CookieDetail = {
   cookieId: number;
   question: string;
-  answer?: string;
+  answer: string;
   collectorId: number;
   collectorName: string;
   collectorProfileUrl?: string;
