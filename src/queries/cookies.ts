@@ -37,8 +37,8 @@ export const postCookie = async ({ title, contents, hammer, txHash, category, au
       categoryId: category,
     });
     return cookieData;
-  } catch {
-    return false; // request 실패
+  } catch (error) {
+    throw getErrorStatus(error);
   }
 };
 
