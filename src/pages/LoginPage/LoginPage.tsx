@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import QRCode from 'react-qr-code';
 
 import MainButton from '@src/components/shared/MainButton';
 import Modal from '@src/components/shared/Modal';
+import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
 import { MainLogo, MainLogoImage } from '@src/assets/images';
 import { useKlipPrepare, useKlipLogin, openDeepLink } from '@src/klip';
-import { getKlipQrcodeSelector } from '@src/recoil/klip';
 import { useLogin } from '@src/hooks';
 
 import { Root, BottomWrapper, LogoWrapper, LogoImage, Logo, SubText } from './styled';
@@ -15,13 +12,12 @@ import { LoginStage } from './types';
 import { LOGIN_MODAL_LABEL } from './const';
 
 function LoginPage() {
-  const navigate = useNavigate();
   const { isMobile } = useLogin();
   const { isFetched, requestKey } = useKlipPrepare();
   const { refetch: klipLogin, isRequestFail } = useKlipLogin();
+  const { isOpen, setOpen } = useQRcodeModal();
 
   const [loginStage, setLoginStage] = useState(LoginStage.INITIAL);
-  const qrcode = useRecoilValue(getKlipQrcodeSelector);
 
   useEffect(() => {
     if (isFetched) setLoginStage(LoginStage.PREPARE);
@@ -36,14 +32,16 @@ function LoginPage() {
     else klipLogin();
   };
 
+  useEffect(() => {
+    if (!isOpen && loginStage === LoginStage.PREPARE) {
+      requestKlipLogin();
+      setLoginStage(LoginStage.REQUEST);
+    }
+  }, [isOpen]);
+
   const handleClickButton = () => {
-    if (isMobile) {
-      if (loginStage === LoginStage.PREPARE) {
-        requestKlipLogin();
-        setLoginStage(LoginStage.REQUEST);
-      }
-    } else {
-      navigate('/join');
+    if (!isMobile) {
+      setOpen();
     }
   };
 
@@ -55,7 +53,6 @@ function LoginPage() {
         <SubText>{'세상 모든 아이덴티티를\n사고 파는 NFT 플랫폼'}</SubText>
       </LogoWrapper>
       <BottomWrapper>
-        {/* {isFetched && !isMobile && <QRCode value={qrcode} size={100} />} */}
         <MainButton onClick={handleClickButton} value="카카오 Klip 으로 연동하기" buttonStyle={{ margin: 0 }} />
       </BottomWrapper>
       <Modal
