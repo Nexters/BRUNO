@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { NFTError } from '@src/assets/images';
 import MainButton from '@src/components/shared/MainButton';
-import PageLayout from '@src/components/shared/PageLayout';
 import { useNavigate } from 'react-router-dom';
 import { ErrorType } from './types';
 import { ERROR_TEXT } from './const';

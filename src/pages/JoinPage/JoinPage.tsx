@@ -18,7 +18,7 @@ function JoinPage() {
     height: '',
     job: '',
   });
-  const [category, setCategory] = useState([
+  const [category, _setCategory] = useState([
     {
       id: 0,
       name: '자유',

@@ -10,6 +10,7 @@ type Props = {
   svgStyle?: CSSProperties;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const IconWrapper = styled.div<{ svgStyle?: any }>`
   line-height: 0;
   display: flex;
