@@ -16,6 +16,7 @@ const Profile = styled.img`
   height: 40px;
   border: 100%;
   cursor: pointer;
+  border-radius: 100%;
 `;
 
 const InfoWrapper = styled.div`
