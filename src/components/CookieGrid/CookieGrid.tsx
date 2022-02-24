@@ -32,7 +32,7 @@ function CookieGrid({ cookies = [] }: { cookies: CookieType[] }) {
           key={cookie.cookieId}
           id={cookie.cookieId}
           category={cookie.category}
-          status={cookie.status}
+          cookieStatus={cookie.cookieStatus}
           myCookie={userId === cookie.ownedUserId}
           onClickForbidden={() => setModalOpen(true)}
         />

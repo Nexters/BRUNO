@@ -39,7 +39,7 @@ export type CookieType = {
   authorUserId: number;
   ownedUserId: number;
   createdAt: string;
-  status: CookieStatus;
+  cookieStatus: CookieStatus;
   txHash?: string;
   nftTokenId: number;
   fromBlockAddress?: number;
