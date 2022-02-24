@@ -36,7 +36,7 @@ function CookieDetailPage() {
   const { userId } = useLogin();
   const { cookieId } = useParams<CookieDetailParams>() as CookieDetailParams;
 
-  const { data, error } = useQuery<CookieDetail, number>(['cookie', 'detail'], () =>
+  const { data, error, refetch } = useQuery<CookieDetail, number>(['cookie', 'detail'], () =>
     getCookieDetail({ userId, cookieId: +cookieId }),
   );
 
@@ -55,7 +55,7 @@ function CookieDetailPage() {
           <ViewCountText>{data?.viewCount}</ViewCountText>
         </ViewCountWrapper>
       </CategoryWrapper>
-      <CookieDetails data={data} />
+      <CookieDetails data={data} refetch={refetch} />
     </>
   );
 }

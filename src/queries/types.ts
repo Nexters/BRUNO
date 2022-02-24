@@ -39,7 +39,7 @@ export type CookieType = {
   authorUserId: number;
   ownedUserId: number;
   createdAt: string;
-  status: CookieStatus;
+  cookieStatus: CookieStatus;
   txHash?: string;
   nftTokenId: number;
   fromBlockAddress?: number;
@@ -71,6 +71,7 @@ export type CookieFeedItem = {
   price: number;
   createdAt: string;
   myCookie: boolean;
+  category: Category;
 };
 
 export type CookieFeed = {
@@ -83,7 +84,7 @@ export type CookieFeed = {
 export type CookieDetail = {
   cookieId: number;
   question: string;
-  answer?: string;
+  answer: string;
   collectorId: number;
   collectorName: string;
   collectorProfileUrl?: string;

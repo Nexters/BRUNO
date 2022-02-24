@@ -49,8 +49,8 @@ export const getCookieFee = async () => {
 
 export const getUserHammer = async (userId: string | number) => {
   try {
-    const { data } = await axios.get(`/contract/k/users/${userId}/amount`);
-    return data?.amount;
+    const { data } = await axios.get(`/contract/hammers/users/${userId}/balance`);
+    return data?.balance || 0;
   } catch {
     return false;
   }

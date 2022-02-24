@@ -7,6 +7,7 @@ import { ACTIVE_COLOR_MAP, HIDDEN_COLOR_MAP, BOX_COLOR_MAP } from './const';
 
 const CookieWrapper = styled.div`
   width: 33.3%;
+  cursor: pointer;
   svg {
     width: 100%;
     height: 100%;
@@ -20,19 +21,20 @@ const CookieWrapper = styled.div`
 interface Props {
   id: number;
   category: Category;
-  status: CookieStatus;
+  cookieStatus: CookieStatus;
   myCookie: boolean;
   onClickForbidden: () => void;
 }
 
-function CookieItem({ id, category, status, myCookie, onClickForbidden }: Props) {
+function CookieItem({ id, category, cookieStatus, myCookie, onClickForbidden }: Props) {
   const navigate = useNavigate();
   const categoryColor = category?.color || CategoryColor.BLUE;
 
   const BoxIcon = BOX_COLOR_MAP[categoryColor];
-  const CookieIcon = status === CookieStatus.ACTIVE ? ACTIVE_COLOR_MAP[categoryColor] : HIDDEN_COLOR_MAP[categoryColor];
+  const CookieIcon =
+    cookieStatus === CookieStatus.ACTIVE ? ACTIVE_COLOR_MAP[categoryColor] : HIDDEN_COLOR_MAP[categoryColor];
   const handleClick = () => {
-    if (myCookie || status === CookieStatus.ACTIVE) navigate(`/cookie/${id}`);
+    if (myCookie || cookieStatus === CookieStatus.ACTIVE) navigate(`/cookie/${id}`);
     else onClickForbidden?.();
   };
 

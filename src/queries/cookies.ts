@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { CookieInfo } from '@src/pages/CreateCookiePage';
 import { getErrorStatus } from './utils';
-import { UserCookieType } from './types';
+import { CookieStatus, UserCookieType } from './types';
 
 type GetCookieListArgs = { userId: number; page?: number };
 
@@ -37,8 +37,8 @@ export const postCookie = async ({ title, contents, hammer, txHash, category, au
       categoryId: category,
     });
     return cookieData;
-  } catch {
-    return false; // request 실패
+  } catch (error) {
+    throw getErrorStatus(error);
   }
 };
 
@@ -87,5 +87,29 @@ export const getUserCookies = async ({ userId, page, size, target }: GetUserCook
     return userCookieData;
   } catch (error) {
     getErrorStatus(error);
+  }
+};
+
+export const deleteCookie = async (cookieId: number | string) => {
+  try {
+    const { status } = await axios.delete(`/cookies/${cookieId}`);
+    return status;
+  } catch (error) {
+    throw getErrorStatus(error);
+  }
+};
+
+export type UpdateCookieStatusArgs = { cookieId: number; status: CookieStatus };
+
+export const updateCookieStatus = async ({ cookieId, status }: UpdateCookieStatusArgs) => {
+  try {
+    const { status: resultStatus } = await axios.put(`/cookies/${cookieId}`, null, {
+      params: {
+        status,
+      },
+    });
+    return resultStatus;
+  } catch (error) {
+    throw getErrorStatus(error);
   }
 };
