@@ -4,7 +4,7 @@ import { AskStatus } from './types';
 
 export const updateAskStatus = async (askId: number, status: AskStatus) => {
   try {
-    const { status: resultStatus } = await axios.put(`/asks/${askId}`, null, { params: { status } });
+    const { status: resultStatus } = await axios.put(`/asks/${askId}`, { status });
     if (resultStatus === 200) return true;
     return false;
   } catch (error) {

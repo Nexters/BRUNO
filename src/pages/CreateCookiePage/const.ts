@@ -1,5 +1,6 @@
 import { Stage } from '@src/klip';
 import { ModalLabel } from '@src/components/shared/Modal';
+import { ContractError } from '@src/recoil/klip';
 
 export const TEXT_MAP = {
   question: '질문',
@@ -22,6 +23,30 @@ export const MODAL_LABEL_MAP: { [key in string]: ModalLabel } = {
     no: '피드로 돌아가기',
   },
   [Stage.REQUEST_FAIL]: {
+    title: '쿠키 굽기를 실패했습니다.',
+    description: '쿠키 정상적으로 굽지 못했습니다.\n다시 시도해주세요.',
+    yes: '다시 시도하기',
+    no: '피드로 돌아가기',
+  },
+  [Stage.NOT_YET_APPROVE]: {
+    title: '지갑 권한 허가가 필요합니다.',
+    description: '쿠키 거래를 위해서 최초 1회\n지갑 권한 허가가 필요해요.',
+    yes: '권한 허가하기',
+    no: '취소하기',
+  },
+  [ContractError.INSUFFICIENT_HAMMER]: {
+    title: '쿠키를 구울 수 없습니다.',
+    description: '망치가 부족해 쿠키를 구울 수 없어요.\n망치를 구매하고 다시 시도해주세요.',
+    yes: '망치 구매하기',
+    no: '피드로 돌아가기',
+  },
+  [ContractError.REQUEST_FAIL]: {
+    title: '쿠키 굽기를 실패했습니다.',
+    description: '권한을 얻지 못했습니다.\n다시 시도해주세요.',
+    yes: '다시 시도하기',
+    no: '피드로 돌아가기',
+  },
+  [ContractError.APPROVAL_ERROR]: {
     title: '쿠키 굽기를 실패했습니다.',
     description: '쿠키 정상적으로 굽지 못했습니다.\n다시 시도해주세요.',
     yes: '다시 시도하기',

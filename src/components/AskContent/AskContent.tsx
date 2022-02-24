@@ -8,7 +8,7 @@ const Wrapper = styled.div`
 
 interface Props {
   isMy?: boolean;
-  askItems: UserAsk[];
+  askItems: UserAsk['contents'];
   refetch: () => void;
 }
 

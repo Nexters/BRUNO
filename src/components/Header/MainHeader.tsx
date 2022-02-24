@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-import Icon, { AlarmOn24, Setting24 } from '@src/assets/Icon';
-
-import IconButton from '../shared/IconButton';
+import Icon, { AlarmOn24, Setting24, MainLogo } from '@src/assets/Icon';
+import IconButton from '@src/components/shared/IconButton';
+import Modal from '@src/components/shared/Modal';
+import { UNIMPLEMENT_MODAL_LABEL } from '../shared/const';
 
 export const HeaderContainer = styled.header`
   display: flex;
@@ -33,13 +35,16 @@ const ButtonWrapper = styled.div`
 
 function MainHeader() {
   const navigate = useNavigate();
+  const [alarmOpen, setAlarmOpen] = useState(false);
 
-  const handleClickAlarm = () => navigate('/alarm');
+  const handleClickAlarm = () => setAlarmOpen(true);
   const handleClickSetting = () => navigate('/settings');
 
   return (
     <Container>
-      <AppTitle>Cookie Pang</AppTitle>
+      <Icon>
+        <MainLogo />
+      </Icon>
       <ButtonWrapper>
         <IconButton onClick={handleClickAlarm}>
           <Icon>
@@ -52,6 +57,7 @@ function MainHeader() {
           </Icon>
         </IconButton>
       </ButtonWrapper>
+      <Modal open={alarmOpen} label={UNIMPLEMENT_MODAL_LABEL('알람')} onlyYes onClickYes={() => setAlarmOpen(false)} />
     </Container>
   );
 }

@@ -28,3 +28,30 @@ export const getKlipResult = async (reqKey: string) =>
       'Content-Type': 'application/json',
     },
   });
+
+export const getApproval = async (userId: string | number) => {
+  try {
+    const { data } = await axios.get(`/contract/hammers/users/${userId}/approve`);
+    return data?.answer || false;
+  } catch {
+    return false;
+  }
+};
+
+export const getCookieFee = async () => {
+  try {
+    const { data } = await axios.get('/contract/cookies/prices/hammer');
+    return data?.price || 5;
+  } catch {
+    return 5;
+  }
+};
+
+export const getUserHammer = async (userId: string | number) => {
+  try {
+    const { data } = await axios.get(`/contract/hammers/users/${userId}/balance`);
+    return data?.balance || 0;
+  } catch {
+    return false;
+  }
+};

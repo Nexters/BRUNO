@@ -16,7 +16,7 @@ function CookieHistorySection({ historyList }: Props) {
   return (
     <CardWrapper>
       {historyList.map(({ action, content, createdAt }) => (
-        <HistoryCard>
+        <HistoryCard key={`${createdAt}_${action}`}>
           <Title>{HISTORY_TITLE_TEXT[action]}</Title>
           {content}
           <Time>{formatTime(createdAt)}</Time>

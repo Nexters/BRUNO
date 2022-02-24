@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CookieFeed } from '@src/queries/types';
+import { CookieFeedItem } from '@src/queries/types';
 import UserInfo from './UserInfo';
 import FeedContent from './FeedContent';
 
@@ -15,7 +15,7 @@ const Container = styled.div`
 `;
 
 interface Props {
-  cookie: CookieFeed;
+  cookie: CookieFeedItem;
 }
 
 export default function FeedCard({ cookie }: Props) {

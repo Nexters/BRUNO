@@ -11,10 +11,11 @@ const Container = styled(HeaderContainer)`
   padding: 8px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 `;
 
-const RightWrapper = styled.div``;
+const RightWrapper = styled.div`
+  margin-left: auto;
+`;
 
 const HeaderTitle = styled.div`
   font-weight: bold;
@@ -50,19 +51,17 @@ function SubHeader({ pageType }: Props) {
 
   return (
     <Container>
-      <div>
-        {left && (
-          <IconButton onClick={handleClickBack}>
-            <Icon color={theme.colors.basic.gray100}>
-              <Right24 />
-            </Icon>
-          </IconButton>
-        )}
-        <HeaderTitle>{center}</HeaderTitle>
-      </div>
+      {left && (
+        <IconButton onClick={handleClickBack}>
+          <Icon color={theme.colors.basic.gray100}>
+            <Right24 />
+          </Icon>
+        </IconButton>
+      )}
+      <HeaderTitle>{center}</HeaderTitle>
 
       <RightWrapper>
-        {right && pageType === HeaderPage.TUTORIAL && <SkipButton onClick={handleClickSkip}>Skip</SkipButton>}
+        {right && pageType === HeaderPage.TUTORIAL && <SkipButton onClick={handleClickSkip}>건너뛰기</SkipButton>}
       </RightWrapper>
     </Container>
   );

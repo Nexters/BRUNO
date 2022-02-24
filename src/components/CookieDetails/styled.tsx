@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from '../shared/MainButton';
 
 export const Title = styled.p`
   margin: 0 0 8px 0;
@@ -135,4 +136,19 @@ export const Time = styled.p`
   margin: 4px 0 0 0;
   font-size: ${(props) => props.theme.fontSize.caption};
   color: ${(props) => props.theme.colors.basic.gray50};
+`;
+
+export const MyButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 16px;
+  button {
+    margin: 0;
+  }
+`;
+
+export const DeleteButton = styled(Button)`
+  background: 'none';
+  border: 1px solid #ea4d4d;
 `;

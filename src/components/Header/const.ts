@@ -3,6 +3,7 @@ export enum HeaderPage {
   MAIN = 'main',
   JOIN = 'join',
   TUTORIAL = 'tutorial',
+  SETTING = 'setting',
 }
 
 type HeaderValues = {
@@ -15,7 +16,7 @@ type HeaderValues = {
 export const HEADER_VALUES: HeaderValues = {
   [HeaderPage.ASK]: {
     left: true,
-    center: 'Ask',
+    center: '질문',
   },
   [HeaderPage.JOIN]: {
     left: true,
@@ -24,6 +25,11 @@ export const HEADER_VALUES: HeaderValues = {
   [HeaderPage.TUTORIAL]: {
     left: true,
     center: '',
+    right: true,
+  },
+  [HeaderPage.SETTING]: {
+    left: true,
+    center: '설정',
     right: true,
   },
 };

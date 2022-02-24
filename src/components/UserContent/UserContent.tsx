@@ -23,8 +23,8 @@ function UserContent({ isMy = false, userId }: Props) {
 
   const getTabCotent = useMemo(
     () => ({
-      [TabType.COLLECT]: <CookieGrid cookies={collectedCookies?.cookies} />,
-      [TabType.CREATE]: <CookieGrid cookies={createdCookies?.cookies} />,
+      [TabType.COLLECT]: <CookieGrid cookies={collectedCookies?.contents} />,
+      [TabType.CREATE]: <CookieGrid cookies={createdCookies?.contents} />,
       [TabType.REQUEST]: <AskContent isMy={isMy} askItems={askItems} refetch={refetchAsk} />,
     }),
     [collectedCookies, createdCookies, askItems, isMy],

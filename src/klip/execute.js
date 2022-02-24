@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { prepare, getResult } from 'klip-sdk';
 
-import { klipRequestKeyAtom } from '@src/recoil/klip';
-import { getAbiString } from './abi';
+import { contractErrorAtom, klipRequestKeyAtom } from '@src/recoil/klip';
+import { getAbiString, isHammerContractMethod } from './abi';
 import { openDeepLink as _openDeepLink } from './utils';
-import { CookieMethod, CoinMethod } from './types';
+import { CookieMethod } from './types';
+import { getMintCookieParams, isAvailableCreating } from './mintCookie';
 
 const bappName = 'COOKIEPANG';
 // const successLink = '';
@@ -27,15 +28,30 @@ const bappName = 'COOKIEPANG';
 const COOKIE_CONTRACT_ADDR = '0xC0b8FC7fE268Ae1e874e009F86D74010C3385D59';
 const HAMMER_CONTRACT_ADDR = '0xD6E679cf1c9980203604a57603e79e0660757C8a';
 
-const prepareExcution = async (data, methodName, isHammerContract) => {
-  const method = isHammerContract ? CoinMethod : CookieMethod;
-  const abi = await getAbiString(method[methodName], isHammerContract);
-  if (!abi) return false;
+const PRE_EXECUTION = {
+  [CookieMethod.MINT_COOKIE_BY_HAMMER]: isAvailableCreating,
+};
 
-  const { title, contents, category, hammer } = data;
+const GET_PARAM_FUNC = {
+  [CookieMethod.MINT_COOKIE_BY_HAMMER]: getMintCookieParams,
+};
+
+const prepareExcution = async ({ userId, setError, ...data }, methodName) => {
+  const isHammerContract = isHammerContractMethod(methodName);
+  const abi = await getAbiString(methodName, isHammerContract);
+  const preExecution = PRE_EXECUTION[methodName];
+  const getParamsFunc = GET_PARAM_FUNC[methodName];
+
+  let preResult = true;
+  if (preExecution) {
+    preResult = await preExecution(userId, setError);
+  }
+
+  if (!abi || !preResult) return false;
+
   const to = isHammerContract ? HAMMER_CONTRACT_ADDR : COOKIE_CONTRACT_ADDR;
   const value = '0'; // TODO : 추후 수정
-  const params = `["${title}","${contents}","null","${category}",${hammer}]`;
+  const params = getParamsFunc ? getParamsFunc(data) : '[]';
   const result = await prepare.executeContract({
     bappName,
     to,
@@ -47,15 +63,16 @@ const prepareExcution = async (data, methodName, isHammerContract) => {
   return result;
 };
 
-export const useExecuteContract = ({ method }) => {
+export const useExecuteContract = ({ method, userId }) => {
   const [requestData, setRequestKey] = useRecoilState(klipRequestKeyAtom);
+  const setError = useSetRecoilState(contractErrorAtom);
   const [state, setState] = useState({
     loading: true,
     error: false,
   });
 
   const fetchPrepare = async (data) => {
-    const result = await prepareExcution(data, method);
+    const result = await prepareExcution({ ...data, userId, setError }, method);
     if (!result || result.err) setState({ error: true, loading: false });
     else if (result.request_key) {
       setState({
@@ -72,9 +89,7 @@ export const useExecuteContract = ({ method }) => {
     const resultData = await getResult(requestData.requestKey);
     if (!resultData?.result) return false;
     if (callbackFunc) {
-      return callbackFunc({
-        txHash: resultData?.result?.tx_hash,
-      });
+      return callbackFunc(resultData?.result?.tx_hash);
     }
     return true;
   };

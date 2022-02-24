@@ -1,8 +1,10 @@
+import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+
+import { Tutorial04 } from '@src/assets/images';
 import { theme } from '@src/assets/styles';
 import MainButton from '@src/components/shared/MainButton';
 import PageLayout from '@src/components/shared/PageLayout';
-import styled from 'styled-components';
 import { TEXT_MAP } from './const';
 
 const Root = styled.div`
@@ -32,30 +34,40 @@ const ButtonWrapper = styled.div`
   gap: 16px;
 `;
 
+const ImageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 29px;
+
+  img {
+    width: 100%;
+    max-width: 477px;
+  }
+`;
+
 export default function CompletedMakePage() {
   const navigate = useNavigate();
-  const handleClickHome = () => {
-    navigate('/');
-  };
-
   return (
     <PageLayout padding="20px" onlyContents>
       <Root>
         <div>
           <Title>{TEXT_MAP.title}</Title>
           <Guide>{TEXT_MAP.guide}</Guide>
-          <div>이미지</div>
+          <ImageWrapper>
+            <img src={Tutorial04} alt="tutorail_completed" />
+          </ImageWrapper>
         </div>
 
         <ButtonWrapper>
           <MainButton
             value={TEXT_MAP.buttonHome}
-            onClick={handleClickHome}
+            onClick={() => navigate('/')}
             buttonStyle={{
               background: theme.colors.basic.gray30,
             }}
           />
-          <MainButton value={TEXT_MAP.buttonOpen} onClick={handleClickHome} />
+          <MainButton value={TEXT_MAP.buttonOpen} onClick={() => navigate('/users/my')} />
         </ButtonWrapper>
       </Root>
     </PageLayout>

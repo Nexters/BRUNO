@@ -15,6 +15,7 @@ const Profile = styled.img`
   width: 40px;
   height: 40px;
   border: 100%;
+  cursor: pointer;
 `;
 
 const InfoWrapper = styled.div`

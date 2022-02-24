@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { CookieInfo } from '@src/pages/CreateCookiePage';
 import { getErrorStatus } from './utils';
-import { UserCookieType } from './types';
+import { CookieStatus, UserCookieType } from './types';
 
 type GetCookieListArgs = { userId: number; page?: number };
 
@@ -23,22 +23,22 @@ export const getCookieList = async ({ page, userId }: GetCookieListArgs) => {
   }
 };
 
-type PostCookieArgs = CookieInfo & { txHash: string };
+type PostCookieArgs = CookieInfo & { txHash: string; authorUserId: number };
 
-export const postCookie = async ({ title, contents, hammer, txHash }: PostCookieArgs) => {
+export const postCookie = async ({ title, contents, hammer, txHash, category, authorUserId }: PostCookieArgs) => {
   try {
     const { data: cookieData } = await axios.post('/cookies', {
       question: title,
       answer: contents,
       price: hammer,
-      authorUserId: 1,
-      ownedUserId: 1,
+      authorUserId,
+      ownedUserId: authorUserId,
       txHash,
-      categoryId: 1,
+      categoryId: category,
     });
     return cookieData;
-  } catch {
-    return false; // request 실패
+  } catch (error) {
+    throw getErrorStatus(error);
   }
 };
 
@@ -50,7 +50,8 @@ export const getCookieDetail = async ({ userId, cookieId }: GetCookieArgs) => {
     return cookieData;
   } catch (error) {
     // TODO : 나중에 status에 따라 error page 보여주어야
-    getErrorStatus(error);
+    const status = getErrorStatus(error);
+    throw status;
   }
 };
 
@@ -86,5 +87,29 @@ export const getUserCookies = async ({ userId, page, size, target }: GetUserCook
     return userCookieData;
   } catch (error) {
     getErrorStatus(error);
+  }
+};
+
+export const deleteCookie = async (cookieId: number | string) => {
+  try {
+    const { status } = await axios.delete(`/cookies/${cookieId}`);
+    return status;
+  } catch (error) {
+    throw getErrorStatus(error);
+  }
+};
+
+export type UpdateCookieStatusArgs = { cookieId: number; status: CookieStatus };
+
+export const updateCookieStatus = async ({ cookieId, status }: UpdateCookieStatusArgs) => {
+  try {
+    const { status: resultStatus } = await axios.put(`/cookies/${cookieId}`, null, {
+      params: {
+        status,
+      },
+    });
+    return resultStatus;
+  } catch (error) {
+    throw getErrorStatus(error);
   }
 };

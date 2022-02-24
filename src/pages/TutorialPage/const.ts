@@ -1,3 +1,5 @@
+import { Tutorial01, Tutorial02, Tutorial03, Tutorial04 } from '@src/assets/images';
+
 export const TEXT_MAP = [
   {
     title: '당신의 아이덴티티로\nNFT를 만들어보세요',
@@ -15,3 +17,5 @@ export const TEXT_MAP = [
     guide: '관심있는 유저의 프로필에서 질문을 요청하고\n요청에 대한 응답은 쿠키로 만들 수 있습니다.',
   },
 ];
+
+export const IMAGE_MAP = [Tutorial01, Tutorial02, Tutorial03, Tutorial04];

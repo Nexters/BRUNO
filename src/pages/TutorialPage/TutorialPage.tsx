@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { HeaderPage } from '@src/components/Header/const';
 import MainButton from '@src/components/shared/MainButton';
 import PageLayout from '@src/components/shared/PageLayout';
-import { TEXT_MAP } from './const';
+import { TEXT_MAP, IMAGE_MAP } from './const';
 
 const Root = styled.div`
   height: 100%;
@@ -27,6 +27,32 @@ const Guide = styled.div`
   color: ${(props) => props.theme.colors.basic.gray60};
 `;
 
+const ImageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 29px;
+
+  img {
+    width: 100%;
+    max-width: 477px;
+  }
+`;
+
+const ButtonWrapper = styled.div`
+  position: fixed;
+  left: 0;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  div {
+    max-width: 700px;
+    padding: 20px;
+  }
+`;
+
 function TutorialPage() {
   const navigate = useNavigate();
   const [step, setStep] = useState<number>(0);
@@ -45,12 +71,14 @@ function TutorialPage() {
         <div>
           <Title>{TEXT_MAP[step].title}</Title>
           <Guide>{TEXT_MAP[step].guide}</Guide>
-          <div>이미지</div>
+          <ImageWrapper>
+            <img src={IMAGE_MAP[step]} alt={`tutorail_step${step}_image`} />
+          </ImageWrapper>
         </div>
 
-        <div>
+        <ButtonWrapper>
           <MainButton value={TEXT_MAP[step].button} onClick={handleClickButton} />
-        </div>
+        </ButtonWrapper>
       </Root>
     </PageLayout>
   );

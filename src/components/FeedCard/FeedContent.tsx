@@ -2,8 +2,10 @@ import styled from 'styled-components';
 
 import Icon, { Comment24, Hammer24, View24 } from '@src/assets/Icon';
 import { theme } from '@src/assets/styles';
-import { CookieFeed } from '@src/queries/types';
+import { CookieFeedItem } from '@src/queries/types';
 import NFTCookie from '@src/components/shared/NFTCookie';
+import { useNavigate } from 'react-router-dom';
+import ContentCard from '../ContentCard';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -50,11 +52,12 @@ const InfoText = styled.span`
 `;
 
 type Props = {
-  cookie: CookieFeed;
+  cookie: CookieFeedItem;
 };
 
 export default function FeedContent({ cookie }: Props) {
-  const { cookieId, question, price, viewCount } = cookie;
+  const navigate = useNavigate();
+  const { cookieId, question, price, viewCount, category, myCookie, answer } = cookie;
 
   return (
     <Wrapper>
@@ -62,11 +65,15 @@ export default function FeedContent({ cookie }: Props) {
         <QuestionWrapper>
           <div>Q. {question}</div>
         </QuestionWrapper>
-        <AnswerWrapper>
+        <AnswerWrapper onClick={() => navigate(`/cookie/${cookieId}`)}>
           <Icon color={theme.colors.basic.gray60} style={{ marginBottom: 'auto' }}>
             <Comment24 />
           </Icon>
-          <NFTCookie cookieId={cookieId} categoryId={1} width="160px" />
+          {myCookie ? (
+            <ContentCard content={answer} categoryColor={category.color} />
+          ) : (
+            <NFTCookie categoryColor={category.color} width="160px" />
+          )}
         </AnswerWrapper>
       </BoxWrapper>
 

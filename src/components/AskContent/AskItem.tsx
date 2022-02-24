@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { theme } from '@src/assets/styles';
-import { AskStatus, UserAsk } from '@src/queries/types';
+import { Ask, AskStatus } from '@src/queries/types';
 import { useNavigate } from 'react-router-dom';
 import { updateAskStatus } from '@src/queries/ask';
 import ResponseButton from './ResponseButton';
@@ -32,7 +32,7 @@ const Question = styled.div`
 `;
 
 interface Props {
-  item: UserAsk;
+  item: Ask;
   isMy: boolean;
   refetch: () => void;
 }

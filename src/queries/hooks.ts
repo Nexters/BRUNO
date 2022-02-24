@@ -12,19 +12,19 @@ export const useGetCookies = ({ categoryId }: { categoryId: string }) => {
     data: allCookies,
     isLoading,
     isError,
-  } = useQuery<CookieFeed[]>(['categories', 'all', 'cookies'], () => getCookieList({ userId }));
+  } = useQuery<CookieFeed>(['categories', 'all', 'cookies'], () => getCookieList({ userId }));
   const {
     data: categoryCookies,
     isLoading: categoryIsLoading,
     isError: categoryIsError,
-  } = useQuery<CookieFeed[]>(
+  } = useQuery<CookieFeed>(
     ['categories', categoryId, 'cookies'],
     () => getCookieListByCategory({ userId, categoryId }),
     { enabled: !!categoryId },
   );
 
   return {
-    cookieList: (categoryId ? categoryCookies : allCookies) || [],
+    cookieList: (categoryId ? categoryCookies?.contents : allCookies?.contents) || [],
     isLoading: isLoading || categoryIsLoading,
     isError: isError || categoryIsError,
   };
@@ -35,22 +35,23 @@ export const useUserInfo = ({ userId }: { userId: string }) => {
 
   // TODO : infinite scroll
   const { data: collectedCookies } = useQuery<UserCookieList>(['users', 'collected', userId], () =>
-    getUserCookies({ userId, target: UserCookieType.COLLECTED }),
+    getUserCookies({ userId, target: UserCookieType.OWNED }),
   );
   const { data: createdCookies } = useQuery<UserCookieList>(['users', 'created', userId], () =>
-    getUserCookies({ userId, target: UserCookieType.COOKIES }),
+    getUserCookies({ userId, target: UserCookieType.AUTHOR }),
   );
 
-  const { data: askItems, refetch: refetchAsk } = useQuery<UserAsk[]>(['user', 'ask', userId], () =>
-    getUserAsk(userId),
-  );
+  const { data: askItems, refetch: refetchAsk } = useQuery<UserAsk>(['user', 'ask', userId], () => getUserAsk(userId));
 
-  const filteredAskList = useMemo(() => askItems?.filter((ask) => ask.status === AskStatus.PENDING) ?? [], [askItems]);
+  const filteredAskList = useMemo(
+    () => askItems?.contents?.filter((ask) => ask.status === AskStatus.PENDING) ?? [],
+    [askItems],
+  );
 
   return {
     userProfile: userProfile ?? null,
-    collectedCookies: collectedCookies ?? { cookies: [] },
-    createdCookies: createdCookies ?? { cookies: [] },
+    collectedCookies: collectedCookies ?? { contents: [] },
+    createdCookies: createdCookies ?? { contents: [] },
     askItems: filteredAskList,
     refetchAsk,
     count: {

@@ -1,5 +1,5 @@
 import { CookieInfo } from '@src/pages/CreateCookiePage';
-import { CookieMethod, CoinMethod } from './types';
+import { CookieMethod, HammerMethod } from './types';
 import { COOKIE_IMAGE_URLS } from './const';
 
 const getMintCookieParams = (data: CookieInfo) => {
@@ -14,7 +14,7 @@ const FUNC_METHODNAME_MAP: {
   [CookieMethod.MINT_COOKIE_BY_HAMMER]: getMintCookieParams,
 };
 
-export const getParams = (data: any, methodName: CookieMethod | CoinMethod) => {
+export const getParams = (data: any, methodName: CookieMethod | HammerMethod) => {
   const getParamFunc = FUNC_METHODNAME_MAP[methodName];
   if (!getParamFunc) return null;
   return getParamFunc(data);

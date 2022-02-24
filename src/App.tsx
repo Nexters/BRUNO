@@ -14,6 +14,7 @@ import PrivateRoute from '@src/routes/PrivateRoute';
 import LoginPage from '@src/pages/LoginPage';
 import JoinPage from '@src/pages/JoinPage';
 import QRcodeModal from '@src/components/shared/QRcodeModal';
+import Loading from '@src/components/shared/Loading';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,7 +29,7 @@ function App() {
     <CookiesProvider>
       <QueryClientProvider client={queryClient}>
         <RecoilRoot>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loading />}>
             <BrowserRouter>
               <QRcodeModal />
               <Routes>
