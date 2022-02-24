@@ -71,6 +71,7 @@ export type CookieFeedItem = {
   price: number;
   createdAt: string;
   myCookie: boolean;
+  category: Category;
 };
 
 export type CookieFeed = {

@@ -54,7 +54,7 @@ type Props = {
 };
 
 export default function FeedContent({ cookie }: Props) {
-  const { cookieId, question, price, viewCount } = cookie;
+  const { cookieId, question, price, viewCount, category } = cookie;
 
   return (
     <Wrapper>
@@ -66,7 +66,7 @@ export default function FeedContent({ cookie }: Props) {
           <Icon color={theme.colors.basic.gray60} style={{ marginBottom: 'auto' }}>
             <Comment24 />
           </Icon>
-          <NFTCookie cookieId={cookieId} categoryId={1} width="160px" />
+          <NFTCookie cookieId={cookieId} categoryId={category.id} width="160px" />
         </AnswerWrapper>
       </BoxWrapper>
 
