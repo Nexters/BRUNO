@@ -35,6 +35,7 @@ import {
 
 type Props = {
   data: CookieDetail;
+  refetch: () => void;
 };
 
 const getButtonText = (myCookie: boolean, status: CookieStatus) => {
@@ -42,7 +43,7 @@ const getButtonText = (myCookie: boolean, status: CookieStatus) => {
   return myCookie ? '가격 정보 수정하기' : '쿠키 구매하기';
 };
 
-function CookieDetails({ data }: Props) {
+function CookieDetails({ data, refetch }: Props) {
   const {
     cookieId,
     question,
@@ -79,7 +80,10 @@ function CookieDetails({ data }: Props) {
     await updateStatusMutation.mutate(
       { cookieId, status: isActive ? CookieStatus.HIDDEN : CookieStatus.ACTIVE },
       {
-        onSuccess: () => setModalState(DetailModalState.NONE),
+        onSuccess: () => {
+          setModalState(DetailModalState.NONE);
+          refetch();
+        },
       },
     );
   };
@@ -153,7 +157,6 @@ function CookieDetails({ data }: Props) {
         <Title style={{ marginTop: '20px' }}>쿠키 히스토리</Title>
         <CookieHistorySection historyList={histories} />
       </CookieInfoArea>
-      {/* TODO : 쿠키 삭제 숨기기 */}
       {myCookie && (
         <MyButtonWrapper>
           <MainButton
