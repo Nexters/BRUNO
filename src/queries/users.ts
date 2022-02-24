@@ -1,6 +1,21 @@
 import axios from 'axios';
 import { getErrorStatus } from './utils';
 
+export type PostUserArgs = {
+  walletAddress: string;
+  nickname: string;
+};
+
+export const postUser = async (obj: PostUserArgs) => {
+  try {
+    const { status: resultStatus } = await axios.post('/users', obj);
+    if (resultStatus === 200) return true;
+    return false;
+  } catch (error) {
+    getErrorStatus(error);
+  }
+};
+
 export const getUser = async (userId: string) => {
   if (!userId) return false;
   try {

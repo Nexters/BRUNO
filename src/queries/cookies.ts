@@ -42,6 +42,23 @@ export const postCookie = async ({ title, contents, hammer, txHash, category, au
   }
 };
 
+export type PostDefaultCookieArgs = {
+  creatorId: number;
+  defaultCookies: Array<{
+    question: string;
+    answer: string;
+  }>;
+};
+export const postDefaultCookie = async (obj: PostDefaultCookieArgs) => {
+  try {
+    const { status: resultStatus } = await axios.post('/cookies/default', obj);
+    if (resultStatus === 200) return true;
+    return false;
+  } catch (error) {
+    getErrorStatus(error);
+  }
+};
+
 type GetCookieArgs = { userId: number; cookieId: number };
 
 export const getCookieDetail = async ({ userId, cookieId }: GetCookieArgs) => {

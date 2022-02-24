@@ -109,6 +109,7 @@ export type UserProfileType = {
   profileUrl: string;
   backgroundUrl: string;
   status: 'ACTIVE';
+  finishOnboard: boolean;
 };
 
 export enum UserCookieType {
