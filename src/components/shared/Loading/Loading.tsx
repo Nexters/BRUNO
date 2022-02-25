@@ -26,7 +26,7 @@ function Loading() {
   return (
     <Wrapper>
       <Content>
-        <Title>로딩중</Title>
+        <Title>로딩중...</Title>
         <Text>열심히 로딩중이에요. 조금만 기다려주세요!</Text>
       </Content>
     </Wrapper>

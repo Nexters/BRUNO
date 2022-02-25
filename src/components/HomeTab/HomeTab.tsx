@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   width: 100%;
   padding: 16px 20px;
   overflow-x: scroll;
+  border-bottom: 8px solid ${(props) => props.theme.colors.basic.gray20};
 `;
 
 export default function HomeTab() {

@@ -8,7 +8,6 @@ import { CookieFeedType, useGetCookies } from '@src/queries/hooks';
 import Loading from '@src/components/shared/Loading';
 
 const ContentsWrapper = styled.main`
-  border-top: 8px solid ${(props) => props.theme.colors.basic.gray20};
   ${(props) => props.theme.media.large} {
     display: flex;
     flex: 50%;
@@ -32,7 +31,7 @@ function HomeFeed() {
         hasMore={hasNextPage}
         next={fetchNextPage}
         loader={<div>loading</div>}
-        dataLength={cookiePages?.[0].totalCount || 0}
+        dataLength={cookiePages?.[0]?.totalCount || 0}
       >
         {cookiePages.map((page) => page.contents?.map((cookie) => <FeedCard key={cookie.cookieId} cookie={cookie} />))}
       </InfiniteScroll>
