@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { ProfileImage01, ProfileImage02 } from '@src/assets/images';
 import { Button } from '@src/components/shared/MainButton';
@@ -57,10 +58,13 @@ function UserPhoto({ isMy, imageUrl }: Props) {
   const defaultImageUrl = isMy ? ProfileImage01 : ProfileImage02;
   const handleClickAskButton = () => navigate(`/ask/${userId}`);
 
+  // eslint-disable-next-line no-return-assign
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => (e.currentTarget.src = ProfileImage01);
+
   return (
     <Wrapper>
       <PhotoWrapper>
-        <Photo src={imageUrl || defaultImageUrl} />
+        <Photo src={imageUrl || defaultImageUrl} onError={handleImageError} />
         {isMy && <AddButton>+</AddButton>}
       </PhotoWrapper>
       {!isMy && <RequestButton onClick={handleClickAskButton}>질문 요청하기</RequestButton>}

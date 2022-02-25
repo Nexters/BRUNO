@@ -1,3 +1,4 @@
+import React from 'react';
 import { ProfileImage01 } from '@src/assets/images';
 import styled from 'styled-components';
 
@@ -43,9 +44,16 @@ export default function UserInfo({ userId, profile, name = '익명의 사용자'
   const navigate = useNavigate();
   const created = formatTime(_createdAt);
 
+  // eslint-disable-next-line no-return-assign
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => (e.currentTarget.src = ProfileImage01);
+
   return (
     <Wrapper>
-      <Profile src={profile || ProfileImage01} onClick={() => navigate(`/users/${userId}`)} />
+      <Profile
+        src={profile || ProfileImage01}
+        onClick={() => navigate(`/users/${userId}`)}
+        onError={handleImageError}
+      />
       <InfoWrapper>
         <UserName>{name}</UserName>
         <Time>{created}</Time>

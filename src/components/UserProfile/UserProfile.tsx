@@ -1,5 +1,7 @@
-import { UserProfileType } from '@src/queries/types';
+import React from 'react';
 import styled from 'styled-components';
+
+import { UserProfileType } from '@src/queries/types';
 import { BackgroundImage01, BackgroundImage02 } from '@src/assets/images';
 import UserPhoto from './UserPhoto';
 import BioSection from './BioSection';
@@ -35,9 +37,13 @@ function UserProfile({ isMy, profile }: Props) {
   const bgDefaultImage = Math.random() > 0.5 ? BackgroundImage01 : BackgroundImage02;
   const { nickname, introduction, profileUrl, backgroundUrl } = profile;
 
+  // eslint-disable-next-line no-return-assign
+  const handleBgImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) =>
+    (e.currentTarget.src = bgDefaultImage);
+
   return (
     <Wrapper>
-      <BackgroundImage src={backgroundUrl || bgDefaultImage} />
+      <BackgroundImage src={backgroundUrl || bgDefaultImage} onError={handleBgImageError} />
       <BackgroundImageShadow />
       <UserPhoto isMy={isMy} imageUrl={profileUrl} />
       <BioSection nickname={nickname} introduction={introduction} />
