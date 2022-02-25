@@ -8,9 +8,9 @@ interface Props {
 }
 
 function Auth({ component: Component }: Props) {
-  const { isLoggedIn } = useLogin();
+  const { isLoggedIn, userId } = useLogin();
 
-  if (isLoggedIn) return <Navigate to="/" />;
+  if (isLoggedIn && userId !== -1) return <Navigate to="/" />;
 
   return Component;
 }
