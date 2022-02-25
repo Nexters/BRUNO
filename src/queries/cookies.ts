@@ -4,9 +4,11 @@ import { CookieInfo } from '@src/pages/CreateCookiePage';
 import { getErrorStatus } from './utils';
 import { CookieStatus, UserCookieType } from './types';
 
-type GetCookieListArgs = { userId: number; page?: number };
+type GetCookieListArgs = { userId: number | null; page?: number };
 
 export const getCookieList = async ({ page, userId }: GetCookieListArgs) => {
+  if (!userId) return false;
+
   try {
     const { data: cookieData } = await axios.get(`/users/${userId}/categories/all/cookies`, {
       params: {
@@ -23,7 +25,7 @@ export const getCookieList = async ({ page, userId }: GetCookieListArgs) => {
   }
 };
 
-type PostCookieArgs = CookieInfo & { txHash: string; authorUserId: number };
+type PostCookieArgs = CookieInfo & { txHash: string; authorUserId: number | null };
 
 export const postCookie = async ({ title, contents, hammer, txHash, category, authorUserId }: PostCookieArgs) => {
   try {
@@ -42,9 +44,28 @@ export const postCookie = async ({ title, contents, hammer, txHash, category, au
   }
 };
 
-type GetCookieArgs = { userId: number; cookieId: number };
+export type PostDefaultCookieArgs = {
+  creatorId: number;
+  defaultCookies: Array<{
+    question: string;
+    answer: string;
+  }>;
+};
+export const postDefaultCookie = async (obj: PostDefaultCookieArgs) => {
+  try {
+    const { status: resultStatus } = await axios.post('/cookies/default', obj);
+    if (resultStatus === 200) return true;
+    return false;
+  } catch (error) {
+    getErrorStatus(error);
+  }
+};
+
+type GetCookieArgs = { userId: number | null; cookieId: number };
 
 export const getCookieDetail = async ({ userId, cookieId }: GetCookieArgs) => {
+  if (!userId) return;
+
   try {
     const { data: cookieData } = await axios.get(`/users/${userId}/cookies/${cookieId}/detail`);
     return cookieData;

@@ -13,8 +13,7 @@ export const useKlipPrepare = () => {
   const setKlip = useSetRecoilState(klipRequestKeyAtom);
   const { isFetched, data } = useQuery(['klip/prepare'], postKlipAuth, {
     onSuccess: (data) => {
-      const { request_key: requestKey, expiration_time: expirationTime } =
-        data.data;
+      const { request_key: requestKey, expiration_time: expirationTime } = data.data;
       setKlip({ requestKey, expirationTime });
     },
   });
@@ -27,20 +26,16 @@ export const useKlipLogin = () => {
   const navigate = useNavigate();
   const klip = useRecoilValue(klipRequestKeyAtom);
 
-  const { isFetched, refetch, data } = useQuery(
-    ['klip/result'],
-    () => getKlipResult(klip.requestKey),
-    {
-      onSuccess: ({ data }) => {
-        const { status, result } = data;
-        if (status === KlipApiStatus.COMPLETED && result?.klaytn_address) {
-          setCookie(CookieName.KLIP_ADDRESS, result.klaytn_address);
-          navigate('/');
-        }
-      },
-      enabled: false,
+  const { isFetched, refetch, data } = useQuery(['klip/result'], () => getKlipResult(klip.requestKey), {
+    onSuccess: ({ data }) => {
+      const { status, result } = data;
+      if (status === KlipApiStatus.COMPLETED && result?.klaytn_address) {
+        setCookie(CookieName.KLIP_ADDRESS, result.klaytn_address);
+        navigate('/join');
+      }
     },
-  );
+    enabled: false,
+  });
 
   return {
     isFetched,

@@ -1,4 +1,7 @@
-import React from 'react';
+import { useLogin } from '@src/hooks';
+import { postDefaultCookie, PostDefaultCookieArgs } from '@src/queries/cookies';
+import { useState } from 'react';
+import { useMutation } from 'react-query';
 import styled from 'styled-components';
 import Input from '../shared/Input';
 import MainButton from '../shared/MainButton';
@@ -34,25 +37,58 @@ const BottomWrapper = styled.div`
 `;
 
 const GuideLink = styled.a`
-  margin-bottom: 20px;
   color: ${(props) => props.theme.colors.basic.gray50};
+  text-align: center;
+  white-space: pre-wrap;
 `;
 
 interface Props {
-  value: Record<string, string>;
-  setValue: (value: Record<string, string>) => void;
-  handleClickButton: () => void;
+  setStep: (step: number) => void;
 }
 
-function RegistInfo({ value, setValue, handleClickButton }: Props) {
+function RegistInfo({ setStep }: Props) {
+  const { userId } = useLogin();
+  const mutation = useMutation((obj: PostDefaultCookieArgs) => postDefaultCookie(obj));
+
+  const [info, setInfo] = useState<Record<string, string>>({
+    location: '',
+    height: '',
+    job: '',
+  });
+
   const handleChangeLocationInput = (input: string) => {
-    setValue({ ...value, location: input });
+    setInfo({ ...info, location: input });
   };
   const handleChangeHeightInput = (input: string) => {
-    setValue({ ...value, height: input });
+    setInfo({ ...info, height: input });
   };
   const handleChangeJobInput = (input: string) => {
-    setValue({ ...value, job: input });
+    setInfo({ ...info, job: input });
+  };
+
+  const disabled = info.location.length === 0 || info.height.length === 0 || info.job.length === 0;
+
+  const handleSubmit = async () => {
+    if (disabled || !userId) return;
+
+    const data = {
+      creatorId: userId,
+      defaultCookies: [
+        {
+          question: TEXT.question.location.inputLabel,
+          answer: info.location,
+        },
+        {
+          question: TEXT.question.height.inputLabel,
+          answer: info.height,
+        },
+        {
+          question: TEXT.question.job.inputLabel,
+          answer: info.job,
+        },
+      ],
+    };
+    await mutation.mutate(data, { onSuccess: () => setStep(2) });
   };
 
   return (
@@ -60,19 +96,19 @@ function RegistInfo({ value, setValue, handleClickButton }: Props) {
       <Title>{TEXT.title}</Title>
       <InputWrapper>
         <Input
-          value={value.location}
+          value={info.location}
           onChange={handleChangeLocationInput}
           label={TEXT.question.location.inputLabel}
           placeholder={TEXT.question.location.placeholder}
         />
         <Input
-          value={value.height}
+          value={info.height}
           onChange={handleChangeHeightInput}
           label={TEXT.question.height.inputLabel}
           placeholder={TEXT.question.height.placeholder}
         />
         <Input
-          value={value.job}
+          value={info.job}
           onChange={handleChangeJobInput}
           label={TEXT.question.job.inputLabel}
           placeholder={TEXT.question.job.placeholder}
@@ -81,7 +117,7 @@ function RegistInfo({ value, setValue, handleClickButton }: Props) {
 
       <BottomWrapper>
         <GuideLink>{TEXT.guide}</GuideLink>
-        <MainButton value={TEXT.button} onClick={handleClickButton} />
+        <MainButton value={TEXT.button} onClick={handleSubmit} disabled={disabled} />
       </BottomWrapper>
     </Root>
   );

@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
 import MainButton from '@src/components/shared/MainButton';
+import { useState } from 'react';
+import { useLogin } from '@src/hooks';
+import { useMutation } from 'react-query';
+import { postUser, PostUserArgs } from '@src/queries/users';
+import { useRecoilState } from 'recoil';
+import { userAtom } from '@src/recoil/user';
 import Input from '../shared/Input';
 
 import { LoginType } from './type';
@@ -30,27 +36,59 @@ const BottomWrapper = styled.div`
 `;
 
 const GuideLink = styled.a`
-  margin-bottom: 20px;
   color: ${(props) => props.theme.colors.basic.gray50};
 `;
 
 interface Props {
   type: LoginType;
-  value: string;
-  handleClickButton: () => void;
-  onChangeInput: (value: string) => void;
+  setStep: (step: number) => void;
 }
 
-function RegistId({ type, value, handleClickButton, onChangeInput }: Props) {
+function RegistId({ type, setStep }: Props) {
   const TEXT = REGIST_TEXT_MAP[type];
+
+  const [nickname, setNickname] = useState<string>('');
+  const [_, setUser] = useRecoilState(userAtom);
+
+  const { address } = useLogin();
+  const mutation = useMutation((obj: PostUserArgs) => postUser(obj));
+
+  const registUser = (id: number) => {
+    setUser({ userId: id, finishOnboard: false });
+    setStep(1);
+  };
+
+  const disabled = nickname.length === 0;
+  const handleSubmit = async () => {
+    if (disabled) return; // to do : Input invalid 표시
+
+    await mutation.mutate(
+      {
+        walletAddress: address,
+        nickname: nickname.trim(),
+      },
+      {
+        onSuccess: (data) => {
+          if (!data.id) return;
+          registUser(data.id);
+        },
+      },
+    );
+  };
 
   return (
     <Root>
       <Title>{TEXT.title}</Title>
-      <Input value={value} onChange={onChangeInput} label={TEXT.inputLabel} placeholder={TEXT.placeholder} limit={15} />
+      <Input
+        value={nickname}
+        onChange={setNickname}
+        label={TEXT.inputLabel}
+        placeholder={TEXT.placeholder}
+        limit={15}
+      />
       <BottomWrapper>
         <GuideLink>{TEXT.guide}</GuideLink>
-        <MainButton value={TEXT.button} onClick={handleClickButton} />
+        <MainButton value={TEXT.button} onClick={handleSubmit} disabled={disabled} />
       </BottomWrapper>
     </Root>
   );
