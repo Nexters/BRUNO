@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { prepare, getResult } from 'klip-sdk';
 
-import { contractErrorAtom, klipRequestKeyAtom } from '@src/recoil/klip';
+import { ContractError, contractErrorAtom, klipRequestKeyAtom } from '@src/recoil/klip';
 import { getAbiString, isHammerContractMethod } from './abi';
 import { openDeepLink as _openDeepLink } from './utils';
 import { CookieMethod } from './types';
 import { getMintCookieParams, isAvailableCreating } from './mintCookie';
+import { getBuyCookieParams, isAvailableBuying } from './buyCookie';
 
 const bappName = 'COOKIEPANG';
 // const successLink = '';
@@ -30,10 +31,12 @@ const HAMMER_CONTRACT_ADDR = '0xD6E679cf1c9980203604a57603e79e0660757C8a';
 
 const PRE_EXECUTION = {
   [CookieMethod.MINT_COOKIE_BY_HAMMER]: isAvailableCreating,
+  [CookieMethod.BUY_COOKIE]: isAvailableBuying,
 };
 
 const GET_PARAM_FUNC = {
   [CookieMethod.MINT_COOKIE_BY_HAMMER]: getMintCookieParams,
+  [CookieMethod.BUY_COOKIE]: getBuyCookieParams,
 };
 
 const prepareExcution = async ({ userId, setError, ...data }, methodName) => {
@@ -44,7 +47,7 @@ const prepareExcution = async ({ userId, setError, ...data }, methodName) => {
 
   let preResult = true;
   if (preExecution) {
-    preResult = await preExecution(userId, setError);
+    preResult = await preExecution({ userId, ...data }, setError);
   }
 
   if (!abi || !preResult) return false;
@@ -73,8 +76,12 @@ export const useExecuteContract = ({ method, userId }) => {
 
   const fetchPrepare = async (data) => {
     const result = await prepareExcution({ ...data, userId, setError }, method);
-    if (!result || result.err) setState({ error: true, loading: false });
-    else if (result.request_key) {
+    console.log(result);
+    if (!result || result.err) {
+      setError(ContractError.REQUEST_FAIL);
+      return false;
+    }
+    if (result.request_key) {
       setState({
         ...state,
         error: false,
