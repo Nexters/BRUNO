@@ -135,12 +135,13 @@ export const updateCookieStatus = async ({ cookieId, status }: UpdateCookieStatu
   }
 };
 
-export type BuyCookieArgs = { cookieId: number; purchaserUserId: number };
+export type BuyCookieArgs = { cookieId: number; purchaserUserId: number; txHash: string };
 
-export const buyCookie = async ({ cookieId, purchaserUserId }: BuyCookieArgs) => {
+export const buyCookie = async ({ cookieId, purchaserUserId, txHash }: BuyCookieArgs) => {
   try {
     const { status: resultStatus } = await axios.put(`/cookies/${cookieId}`, null, {
       params: {
+        txHash,
         purchaserUserId,
       },
     });

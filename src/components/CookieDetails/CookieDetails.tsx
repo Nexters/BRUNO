@@ -78,6 +78,7 @@ function CookieDetails({ data, refetch }: Props) {
   const updateStatusMutation = useMutation((data: UpdateCookieStatusArgs) => updateCookieStatus(data));
 
   const [modalState, setModalState] = useState<DetailModalState>(DetailModalState.NONE);
+  const [txHash, setTxHash] = useState<string>();
   const [contractError, setError] = useRecoilState(contractErrorAtom);
   const reqKey = useRecoilValue(klipRequestKeyAtom);
   const { isOpen, setOpen, setClose } = useQRcodeModal();
@@ -115,14 +116,15 @@ function CookieDetails({ data, refetch }: Props) {
   };
 
   const fetchBuyResult = async () => {
-    const isSuccess = await fetchResult();
+    const resultCb = (txHash: string) => setTxHash(txHash);
+    const isSuccess = await fetchResult(resultCb);
     if (!isSuccess) {
       setError(ContractError.REQUEST_FAIL);
       return;
     }
 
     buyMutation.mutate(
-      { cookieId, purchaserUserId: userId as number },
+      { cookieId, purchaserUserId: userId as number, txHash: txHash ?? '' },
       {
         onSuccess: () => setModalState(DetailModalState.BUY_RESULT),
       },
