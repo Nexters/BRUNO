@@ -214,7 +214,7 @@ function CookieDetails({ data, refetch }: Props) {
         </HammerWrapper>
         <MainButton
           value={buttonText}
-          disabled={cookieStatus !== CookieStatus.ACTIVE}
+          disabled={!isAvailableBuy}
           onClick={() => {
             if (isAvailableBuy) buyCookieReady();
           }}
