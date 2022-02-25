@@ -9,6 +9,8 @@ import BioSection from './BioSection';
 const Wrapper = styled.div`
   position: fixed;
   padding-top: 12px;
+  width: 100%;
+  max-width: 700px;
 `;
 
 const BackgroundImage = styled.img`
