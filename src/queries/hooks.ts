@@ -23,7 +23,7 @@ export const useGetCookies = ({ categoryId, type }: { categoryId: string; type: 
     ['categories', 'all', 'cookies'],
     ({ pageParam = 0 }) => getCookieList({ userId, page: pageParam }),
     {
-      getNextPageParam: (lastPage) => (lastPage.isLastPage ? undefined : lastPage.nowPageIndex + 1),
+      getNextPageParam: (lastPage) => (lastPage?.isLastPage ? undefined : (lastPage?.nowPageIndex || 0) + 1),
       enabled: type === CookieFeedType.ALL,
     },
   );
@@ -37,7 +37,7 @@ export const useGetCookies = ({ categoryId, type }: { categoryId: string; type: 
     ['categories', categoryId, 'cookies'],
     ({ pageParam = 0 }) => getCookieListByCategory({ userId, categoryId, page: pageParam }),
     {
-      getNextPageParam: (lastPage) => (lastPage.isLastPage ? undefined : lastPage.nowPageIndex + 1),
+      getNextPageParam: (lastPage) => (lastPage?.isLastPage ? undefined : (lastPage?.nowPageIndex || 0) + 1),
       enabled: type === CookieFeedType.CATEGORY,
     },
   );
