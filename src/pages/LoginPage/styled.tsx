@@ -29,10 +29,6 @@ export const LogoImage = styled.img`
   width: 190px;
   margin-bottom: 24px;
 `;
-export const Logo = styled.img`
-  width: 120px;
-  margin-bottom: 8px;
-`;
 
 export const SubText = styled.div`
   margin-top: 8px;

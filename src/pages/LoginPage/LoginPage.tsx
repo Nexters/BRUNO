@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react';
 import MainButton from '@src/components/shared/MainButton';
 import Modal from '@src/components/shared/Modal';
 import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
-import { MainLogo, MainLogoImage } from '@src/assets/images';
+import { MainLogoImage } from '@src/assets/images';
 import { useKlipPrepare, useKlipLogin, openDeepLink } from '@src/klip';
 import { useLogin } from '@src/hooks';
 
-import { Root, BottomWrapper, LogoWrapper, LogoImage, Logo, SubText } from './styled';
+import Icon, { MainLogo } from '@src/assets/Icon';
+import { Root, BottomWrapper, LogoWrapper, LogoImage, SubText } from './styled';
 import { LoginStage } from './types';
 import { LOGIN_MODAL_LABEL } from './const';
 
@@ -49,7 +50,10 @@ function LoginPage() {
     <Root>
       <LogoWrapper>
         <LogoImage src={MainLogoImage} />
-        <Logo src={MainLogo} />
+        <Icon isOn>
+          <MainLogo />
+        </Icon>
+
         <SubText>{'세상 모든 아이덴티티를\n사고 파는 NFT 플랫폼'}</SubText>
       </LogoWrapper>
       <BottomWrapper>
