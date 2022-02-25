@@ -2,6 +2,9 @@ import styled from 'styled-components';
 
 import MainButton from '@src/components/shared/MainButton';
 import { useState } from 'react';
+import { useLogin } from '@src/hooks';
+import { useMutation } from 'react-query';
+import { postUser, PostUserArgs } from '@src/queries/users';
 import Input from '../shared/Input';
 
 import { LoginType } from './type';
@@ -43,18 +46,19 @@ function RegistId({ type, setStep }: Props) {
   const TEXT = REGIST_TEXT_MAP[type];
 
   const [nickname, setNickname] = useState<string>('');
+  const { address } = useLogin();
+  const mutation = useMutation((obj: PostUserArgs) => postUser(obj));
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (nickname.length === 0) return; // to do : Input invalid 표시
 
-    console.log('post');
-    // POST /user
-    // try {
+    const data = {
+      walletAddress: address,
+      nickname,
+    };
 
-    //   setStep(1);
-    // } catch (error) {
-
-    // }
+    // to do : Return 값으로 온 user Id 등록하기
+    await mutation.mutate(data, { onSuccess: () => setStep(1) });
   };
 
   return (

@@ -1,4 +1,7 @@
+import { useLogin } from '@src/hooks';
+import { postDefaultCookie, PostDefaultCookieArgs } from '@src/queries/cookies';
 import { useState } from 'react';
+import { useMutation } from 'react-query';
 import styled from 'styled-components';
 import Input from '../shared/Input';
 import MainButton from '../shared/MainButton';
@@ -44,6 +47,9 @@ interface Props {
 }
 
 function RegistInfo({ setStep }: Props) {
+  const { userId } = useLogin();
+  const mutation = useMutation((obj: PostDefaultCookieArgs) => postDefaultCookie(obj));
+
   const [info, setInfo] = useState<Record<string, string>>({
     location: '',
     height: '',
@@ -60,16 +66,27 @@ function RegistInfo({ setStep }: Props) {
     setInfo({ ...info, job: input });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (info.location.length === 0 || info.height.length === 0 || info.job.length === 0) return;
-    setStep(2);
-    // POST /user
-    // try {
 
-    //   setStep(1);
-    // } catch (error) {
-
-    // }
+    const data = {
+      creatorId: userId,
+      defaultCookies: [
+        {
+          question: TEXT.question.location.inputLabel,
+          answer: info.location,
+        },
+        {
+          question: TEXT.question.height.inputLabel,
+          answer: info.height,
+        },
+        {
+          question: TEXT.question.job.inputLabel,
+          answer: info.job,
+        },
+      ],
+    };
+    await mutation.mutate(data, { onSuccess: () => setStep(2) });
   };
 
   return (

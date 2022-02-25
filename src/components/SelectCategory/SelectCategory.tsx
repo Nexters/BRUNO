@@ -4,8 +4,11 @@ import MainButton from '@src/components/shared/MainButton';
 import { useRecoilValue } from 'recoil';
 import { categoryListSelector } from '@src/recoil/category';
 import { useNavigate } from 'react-router-dom';
-import CategoryButton from './CategoryButton';
+import { useLogin } from '@src/hooks';
+import { useMutation } from 'react-query';
+import { postUserCategory, PostUserCategoryArgs } from '@src/queries/categories';
 import { REGIST_TEXT_MAP as TEXT } from './const';
+import CategoryButton from './CategoryButton';
 
 const Root = styled.div`
   display: flex;
@@ -50,29 +53,17 @@ function SelectCategory() {
   const category: CategoryType[] = useRecoilValue(categoryListSelector);
   const [selectedCategory, setSelectedCategory] = useState<number[]>([]);
   const navigate = useNavigate();
+  const { userId } = useLogin();
+  const mutation = useMutation((obj: PostUserCategoryArgs) => postUserCategory(obj));
 
-  const regist = () => {
-    // to do : 회원 regist api 연동
-    // const { data: userProfile } = useQuery<UserProfileType>(['walletAddress', 'nickname', 'introduction', 'profileUrl', 'backgroundUrl'], () => postUser(), {
-    //   onSuccess: (data) => {
-    //     const { request_key: requestKey, expiration_time: expirationTime } =
-    //       data.data;
-    //     // setKlip({ requestKey, expirationTime });
-    //   },);
-    // navigate('/tutorial');
-  };
-
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (selectedCategory.length <= 3) return;
-    regist();
 
-    // POST /user
-    // try {
-
-    //   setStep(1);
-    // } catch (error) {
-
-    // }
+    const data = {
+      userId,
+      categoryIdList: selectedCategory,
+    };
+    await mutation.mutate(data, { onSuccess: () => navigate('/tutorial') });
   };
 
   const handleClickCategory = (id: number) => {
