@@ -66,8 +66,10 @@ function RegistInfo({ setStep }: Props) {
     setInfo({ ...info, job: input });
   };
 
+  const disabled = info.location.length === 0 || info.height.length === 0 || info.job.length === 0;
+
   const handleSubmit = async () => {
-    if (info.location.length === 0 || info.height.length === 0 || info.job.length === 0) return;
+    if (disabled) return;
 
     const data = {
       creatorId: userId,
@@ -115,7 +117,7 @@ function RegistInfo({ setStep }: Props) {
 
       <BottomWrapper>
         <GuideLink>{TEXT.guide}</GuideLink>
-        <MainButton value={TEXT.button} onClick={handleSubmit} />
+        <MainButton value={TEXT.button} onClick={handleSubmit} disabled={disabled} />
       </BottomWrapper>
     </Root>
   );

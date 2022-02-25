@@ -43,21 +43,16 @@ const BottomWrapper = styled.div`
   margin-top: auto;
 `;
 
-type CategoryType = {
-  id: number;
-  name: string;
-  color: string;
-};
-
 function SelectCategory() {
-  const category: CategoryType[] = useRecoilValue(categoryListSelector);
+  const category = useRecoilValue(categoryListSelector);
   const [selectedCategory, setSelectedCategory] = useState<number[]>([]);
   const navigate = useNavigate();
   const { userId } = useLogin();
   const mutation = useMutation((obj: PostUserCategoryArgs) => postUserCategory(obj));
 
+  const disabled = selectedCategory.length < 3;
   const handleSubmit = async () => {
-    if (selectedCategory.length <= 3) return;
+    if (disabled) return;
 
     const data = {
       userId,
@@ -96,7 +91,7 @@ function SelectCategory() {
         })}
       </CategoryList>
       <BottomWrapper>
-        <MainButton value={TEXT.button} onClick={handleSubmit} />
+        <MainButton value={TEXT.button} onClick={handleSubmit} disabled={disabled} />
       </BottomWrapper>
     </Root>
   );

@@ -58,8 +58,9 @@ function RegistId({ type, setStep }: Props) {
     setStep(1);
   };
 
+  const disabled = nickname.length === 0;
   const handleSubmit = () => {
-    if (nickname.length === 0) return; // to do : Input invalid 표시
+    if (disabled) return; // to do : Input invalid 표시
 
     mutation.mutate(
       {
@@ -87,7 +88,7 @@ function RegistId({ type, setStep }: Props) {
       />
       <BottomWrapper>
         <GuideLink>{TEXT.guide}</GuideLink>
-        <MainButton value={TEXT.button} onClick={handleSubmit} />
+        <MainButton value={TEXT.button} onClick={handleSubmit} disabled={disabled} />
       </BottomWrapper>
     </Root>
   );

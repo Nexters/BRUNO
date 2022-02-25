@@ -1,7 +1,7 @@
 import { userAtom } from '@src/recoil/user';
 import { useCookies } from 'react-cookie';
 import { isMobile } from 'react-device-detect';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 export enum CookieName {
   KLIP_ADDRESS = 'kad',
@@ -10,7 +10,7 @@ export enum CookieName {
 
 export const useLogin = () => {
   const [cookies] = useCookies([CookieName.KLIP_ADDRESS, CookieName.IS_APPROVAL]);
-  const [userId] = useRecoilState(userAtom);
+  const userId = useRecoilValue(userAtom);
 
   const klipAddressCookie = cookies[CookieName.KLIP_ADDRESS];
   const isApproval = cookies[CookieName.IS_APPROVAL];
@@ -20,7 +20,7 @@ export const useLogin = () => {
     address: klipAddressCookie ?? '',
     isLoggedIn: !!klipAddressCookie,
     isMobile,
-    userId: userId || -1,
+    userId,
     isApproval: !!isApproval,
   };
 };
