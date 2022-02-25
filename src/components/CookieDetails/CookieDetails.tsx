@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
+import { isMobile } from 'react-device-detect';
 
 import { theme } from '@src/assets/styles';
 import Icon, { Comment24, Hammer24 } from '@src/assets/Icon';
@@ -11,9 +13,19 @@ import NFTCookie from '@src/components/shared/NFTCookie';
 import ContentCard from '@src/components/ContentCard';
 import MainButton from '@src/components/shared/MainButton';
 import Modal from '@src/components/shared/Modal';
-import { deleteCookie as _deleteCookie, updateCookieStatus, UpdateCookieStatusArgs } from '@src/queries/cookies';
+import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
 
-import { DetailModalState, DETAIL_MODAL_LABEL } from './const';
+import {
+  deleteCookie as _deleteCookie,
+  updateCookieStatus,
+  UpdateCookieStatusArgs,
+  buyCookie as _buyCookie,
+  BuyCookieArgs,
+} from '@src/queries/cookies';
+import { ContractError, contractErrorAtom, klipRequestKeyAtom } from '@src/recoil/klip';
+import { useLogin } from '@src/hooks';
+import { CookieMethod, useExecuteContract } from '@src/klip';
+import { DetailModalState, DETAIL_MODAL_LABEL, ERROR_MODAL_LABEL } from './const';
 import {
   AnswerWrapper,
   CookieArea,
@@ -61,16 +73,67 @@ function CookieDetails({ data, refetch }: Props) {
     myCookie,
   } = data;
   const navigate = useNavigate();
+  const buyMutation = useMutation((data: BuyCookieArgs) => _buyCookie(data));
   const deleteMutation = useMutation((cookieId: number | string) => _deleteCookie(cookieId));
   const updateStatusMutation = useMutation((data: UpdateCookieStatusArgs) => updateCookieStatus(data));
-  const [modalState, setModalState] = useState<DetailModalState>(DetailModalState.NONE);
 
+  const [modalState, setModalState] = useState<DetailModalState>(DetailModalState.NONE);
+  const [contractError, setError] = useRecoilState(contractErrorAtom);
+  const reqKey = useRecoilValue(klipRequestKeyAtom);
+  const { isOpen, setOpen, setClose } = useQRcodeModal();
+
+  const { userId } = useLogin();
   const isActive = cookieStatus === CookieStatus.ACTIVE;
   const isAvailableBuy = !myCookie && isActive;
   const buttonText = getButtonText(myCookie, cookieStatus);
   const handleClickButton = (nextState: DetailModalState) => setModalState(nextState);
+  const { fetchPrepare, fetchResult, openDeepLink } = useExecuteContract({
+    method: CookieMethod.BUY_COOKIE,
+    userId,
+  });
+
+  const buyCookieReady = async () => {
+    // 처음 클릭
+    if (modalState === DetailModalState.NONE) {
+      const reqKey = await fetchPrepare({ cookieId, nftTokenId });
+      if (!reqKey) {
+        setError(ContractError.REQUEST_FAIL);
+        return;
+      }
+      setModalState(DetailModalState.BUY);
+    }
+  };
+
+  const buyCookie = async () => {
+    if (isMobile) {
+      openDeepLink(reqKey);
+      setModalState(DetailModalState.BUY_REQUEST);
+    } else {
+      setModalState(DetailModalState.BUY_PREPARE);
+      setOpen();
+    }
+  };
+
+  const fetchBuyResult = async () => {
+    const isSuccess = await fetchResult();
+    if (!isSuccess) {
+      setError(ContractError.REQUEST_FAIL);
+      return;
+    }
+
+    buyMutation.mutate(
+      { cookieId, purchaserUserId: userId },
+      {
+        onSuccess: () => {
+          setModalState(DetailModalState.NONE);
+          refetch();
+        },
+      },
+    );
+  };
 
   const deleteCookie = async () => {
+    // TODO burnCookie
     await deleteMutation.mutate(cookieId, {
       onSuccess: () => navigate('/'),
     });
@@ -87,6 +150,33 @@ function CookieDetails({ data, refetch }: Props) {
       },
     );
   };
+
+  const handleClickErrorModalYes = () => {
+    setModalState(DetailModalState.NONE);
+    setError(ContractError.NONE);
+    if (contractAddress === ContractError.INSUFFICIENT_HAMMER || contractAddress === ContractError.APPROVAL_ERROR)
+      navigate('/settings');
+  };
+
+  useEffect(() => {
+    if (modalState === DetailModalState.BUY_PREPARE && !isOpen) {
+      setModalState(DetailModalState.BUY_REQUEST);
+    }
+  }, [isOpen]);
+
+  useEffect(
+    () => () => {
+      setError(ContractError.NONE);
+      setClose();
+    },
+    [],
+  );
+
+  useEffect(() => {
+    if (modalState === DetailModalState.BUY_REQUEST) {
+      fetchBuyResult();
+    }
+  }, [modalState]);
 
   return (
     <>
@@ -120,7 +210,7 @@ function CookieDetails({ data, refetch }: Props) {
           value={buttonText}
           disabled={cookieStatus !== CookieStatus.ACTIVE}
           onClick={() => {
-            if (isAvailableBuy) handleClickButton(DetailModalState.BUY);
+            if (isAvailableBuy) buyCookieReady();
           }}
         />
       </CookieArea>
@@ -176,9 +266,17 @@ function CookieDetails({ data, refetch }: Props) {
         </MyButtonWrapper>
       )}
       <Modal
-        open={modalState !== DetailModalState.NONE}
+        open={contractError === ContractError.NONE && !!DETAIL_MODAL_LABEL(price)[modalState]}
         label={DETAIL_MODAL_LABEL(price)[modalState]}
-        onClickYes={modalState === DetailModalState.DELETE ? deleteCookie : undefined}
+        onClickYes={modalState === DetailModalState.DELETE ? deleteCookie : buyCookie}
+        onClickNo={() => setModalState(DetailModalState.NONE)}
+      />
+      {/* for contract error */}
+      <Modal
+        open={contractError !== ContractError.NONE}
+        label={ERROR_MODAL_LABEL[contractError]}
+        onClickYes={handleClickErrorModalYes}
+        onClickNo={() => navigate('/')}
       />
     </>
   );
