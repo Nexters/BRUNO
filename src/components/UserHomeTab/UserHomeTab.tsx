@@ -6,10 +6,12 @@ import TabItem from './TabItem';
 import { TabType } from './types';
 
 const Wrapper = styled.div`
+  position: fixed;
   display: flex;
   gap: 20px;
   width: 100%;
-  margin-top: 12px;
+  max-width: 700px;
+  margin-top: 189px;
   padding: 0 20px;
   border-bottom: 2px solid ${(props) => props.theme.colors.basic.gray20};
 `;

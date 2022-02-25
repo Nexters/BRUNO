@@ -7,6 +7,7 @@ import UserPhoto from './UserPhoto';
 import BioSection from './BioSection';
 
 const Wrapper = styled.div`
+  position: fixed;
   padding-top: 12px;
 `;
 
