@@ -37,26 +37,6 @@ function CookieGrid({ cookies = [] }: { cookies: CookieType[] }) {
           onClickForbidden={() => setModalOpen(true)}
         />
       ))}
-      {cookies.map((cookie) => (
-        <CookieItem
-          key={cookie.cookieId}
-          id={cookie.cookieId}
-          category={cookie.category}
-          cookieStatus={cookie.cookieStatus}
-          myCookie={userId === cookie.ownedUserId}
-          onClickForbidden={() => setModalOpen(true)}
-        />
-      ))}
-      {cookies.map((cookie) => (
-        <CookieItem
-          key={cookie.cookieId}
-          id={cookie.cookieId}
-          category={cookie.category}
-          cookieStatus={cookie.cookieStatus}
-          myCookie={userId === cookie.ownedUserId}
-          onClickForbidden={() => setModalOpen(true)}
-        />
-      ))}
       <Modal label={HIDDEN_COOKIE_LABEL} onlyYes open={modalOpen} onClickYes={() => setModalOpen(false)} />
     </Wrapper>
   );
