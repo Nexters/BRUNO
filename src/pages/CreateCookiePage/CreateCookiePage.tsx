@@ -104,7 +104,7 @@ function CreateCookiePage({ isEdit = false }: Props) {
   };
 
   const isValidInfo = useMemo(
-    () => cookieInfo.title.length > 0 && cookieInfo.category && cookieInfo.contents.length > 1,
+    () => cookieInfo.title.trim().length > 0 && cookieInfo.category && cookieInfo.contents.trim().length > 0,
     [cookieInfo.title, cookieInfo.category, cookieInfo.contents],
   );
 

@@ -47,11 +47,20 @@ export const getCookieFee = async () => {
   }
 };
 
+export const getCookiePrice = async (nftTokenId: number) => {
+  try {
+    const { data } = await axios.get(`/contract/cookies/${nftTokenId}/price`);
+    return data?.price;
+  } catch {
+    return false;
+  }
+};
+
 export const getUserHammer = async (userId: string | number) => {
   try {
     const { data } = await axios.get(`/contract/hammers/users/${userId}/balance`);
-    return data?.balance || 0;
+    return (data?.balance || 0) / 10 ** 18;
   } catch {
-    return false;
+    return 0;
   }
 };

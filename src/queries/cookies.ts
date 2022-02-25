@@ -113,3 +113,18 @@ export const updateCookieStatus = async ({ cookieId, status }: UpdateCookieStatu
     throw getErrorStatus(error);
   }
 };
+
+export type BuyCookieArgs = { cookieId: number; purchaserUserId: number };
+
+export const buyCookie = async ({ cookieId, purchaserUserId }: BuyCookieArgs) => {
+  try {
+    const { status: resultStatus } = await axios.put(`/cookies/${cookieId}`, null, {
+      params: {
+        purchaserUserId,
+      },
+    });
+    return resultStatus;
+  } catch (error) {
+    throw getErrorStatus(error);
+  }
+};

@@ -131,8 +131,8 @@ export type Ask = {
   id: number;
   title: string;
   status: AskStatus;
-  senderUserId: number;
-  receiverUserId: number;
+  senderId: number;
+  receiverId: number;
 };
 
 export type UserAsk = Page & {
