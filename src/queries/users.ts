@@ -34,3 +34,21 @@ export const getUserAsk = async (userId: string) => {
     getErrorStatus(error);
   }
 };
+
+export const checkJoin = async (walletAddress: string) => {
+  try {
+    const { data } = await axios.post('/login', { walletAddress });
+    return data?.userId;
+  } catch {
+    return null;
+  }
+};
+
+export const checkOnboard = async (userId: number) => {
+  try {
+    const { data } = await axios.get(`/users/${userId}/onboard`);
+    return data?.isFinish;
+  } catch {
+    return false;
+  }
+};
