@@ -6,6 +6,7 @@ export enum DetailModalState {
   BUY = 'BUY',
   BUY_PREPARE = 'BUY_PREPARE',
   BUY_REQUEST = 'BUY_REQUEST',
+  BUY_RESULT = 'BUY_RESULT',
   NONE = 'NONE',
 }
 
@@ -25,6 +26,11 @@ export const DETAIL_MODAL_LABEL = (price: number): { [key in string]: ModalLabel
     description: `로열티가 포함된 망치 ${price}톤으로\n쿠키의 답변을 열 수 있어요.`,
     yes: '구매하기',
     no: '취소하기',
+  },
+  [DetailModalState.BUY_RESULT]: {
+    title: '쿠키가 성공적으로 구매되었습니다.',
+    description: '구매한 쿠키의 답변을 확인하시겠어요?',
+    yes: '확인하러 가기',
   },
 });
 

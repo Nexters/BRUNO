@@ -124,10 +124,7 @@ function CookieDetails({ data, refetch }: Props) {
     buyMutation.mutate(
       { cookieId, purchaserUserId: userId },
       {
-        onSuccess: () => {
-          setModalState(DetailModalState.NONE);
-          refetch();
-        },
+        onSuccess: () => setModalState(DetailModalState.BUY_RESULT),
       },
     );
   };
@@ -156,6 +153,15 @@ function CookieDetails({ data, refetch }: Props) {
     setError(ContractError.NONE);
     if (contractAddress === ContractError.INSUFFICIENT_HAMMER || contractAddress === ContractError.APPROVAL_ERROR)
       navigate('/settings');
+  };
+
+  const MODAL_YES_FUNC: { [key in string]: () => void } = {
+    [DetailModalState.DELETE]: deleteCookie,
+    [DetailModalState.BUY]: buyCookie,
+    [DetailModalState.BUY_RESULT]: () => {
+      setModalState(DetailModalState.NONE);
+      refetch();
+    },
   };
 
   useEffect(() => {
@@ -268,8 +274,9 @@ function CookieDetails({ data, refetch }: Props) {
       <Modal
         open={contractError === ContractError.NONE && !!DETAIL_MODAL_LABEL(price)[modalState]}
         label={DETAIL_MODAL_LABEL(price)[modalState]}
-        onClickYes={modalState === DetailModalState.DELETE ? deleteCookie : buyCookie}
+        onClickYes={MODAL_YES_FUNC[modalState]}
         onClickNo={() => setModalState(DetailModalState.NONE)}
+        onlyYes={modalState === DetailModalState.BUY_RESULT}
       />
       {/* for contract error */}
       <Modal
