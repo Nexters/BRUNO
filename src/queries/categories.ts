@@ -4,7 +4,7 @@ import { getErrorStatus } from './utils';
 export const getCategoryist = () => axios.get('/categories');
 
 export type PostUserCategoryArgs = {
-  userId: number;
+  userId: number | null;
   categoryIdList: number[];
 };
 export const postUserCategory = async ({ userId, categoryIdList }: PostUserCategoryArgs) => {

@@ -69,7 +69,7 @@ function RegistInfo({ setStep }: Props) {
   const disabled = info.location.length === 0 || info.height.length === 0 || info.job.length === 0;
 
   const handleSubmit = async () => {
-    if (disabled) return;
+    if (disabled || !userId) return;
 
     const data = {
       creatorId: userId,

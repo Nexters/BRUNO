@@ -59,10 +59,10 @@ function RegistId({ type, setStep }: Props) {
   };
 
   const disabled = nickname.length === 0;
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (disabled) return; // to do : Input invalid 표시
 
-    mutation.mutate(
+    await mutation.mutate(
       {
         walletAddress: address,
         nickname,
@@ -70,6 +70,7 @@ function RegistId({ type, setStep }: Props) {
       {
         onSuccess: ({ data }) => {
           const { result } = data;
+          if (!result.id) return;
           registUser(result.id);
         },
       },

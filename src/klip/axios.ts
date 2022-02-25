@@ -29,7 +29,9 @@ export const getKlipResult = async (reqKey: string) =>
     },
   });
 
-export const getApproval = async (userId: string | number) => {
+export const getApproval = async (userId: string | number | null) => {
+  if (!userId) return false;
+
   try {
     const { data } = await axios.get(`/contract/hammers/users/${userId}/approve`);
     return data?.answer || false;
