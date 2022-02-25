@@ -46,7 +46,7 @@ function MainHeader() {
 
   return (
     <Container>
-      <Icon>
+      <Icon isOn>
         <MainLogo />
       </Icon>
       <ButtonWrapper>
