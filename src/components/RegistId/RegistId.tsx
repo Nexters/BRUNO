@@ -1,12 +1,11 @@
 import styled from 'styled-components';
+import { useCookies } from 'react-cookie';
 
 import MainButton from '@src/components/shared/MainButton';
 import { useState } from 'react';
-import { useLogin } from '@src/hooks';
+import { CookieName, useLogin } from '@src/hooks';
 import { useMutation } from 'react-query';
 import { postUser, PostUserArgs } from '@src/queries/users';
-import { useRecoilState } from 'recoil';
-import { userAtom } from '@src/recoil/user';
 import Input from '../shared/Input';
 
 import { LoginType } from './type';
@@ -48,15 +47,10 @@ function RegistId({ type, setStep }: Props) {
   const TEXT = REGIST_TEXT_MAP[type];
 
   const [nickname, setNickname] = useState<string>('');
-  const [_, setUser] = useRecoilState(userAtom);
+  const [_, setCookie] = useCookies([CookieName.USER_ID]);
 
   const { address } = useLogin();
   const mutation = useMutation((obj: PostUserArgs) => postUser(obj));
-
-  const registUser = (id: number) => {
-    setUser({ userId: id, finishOnboard: false });
-    setStep(1);
-  };
 
   const disabled = nickname.length === 0;
   const handleSubmit = async () => {
@@ -69,8 +63,9 @@ function RegistId({ type, setStep }: Props) {
       },
       {
         onSuccess: (data) => {
-          if (!data.id) return;
-          registUser(data.id);
+          if (!data?.id) return;
+          setCookie(CookieName.USER_ID, data.id);
+          setStep(1);
         },
       },
     );

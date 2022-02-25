@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useInfiniteQuery, useQuery } from 'react-query';
 
 import { useLogin } from '@src/hooks';
 import { useMemo } from 'react';
@@ -6,27 +6,50 @@ import { CookieFeed, UserCookieList, UserCookieType, UserProfileType, UserAsk, A
 import { getCookieList, getUserCookies, getCookieListByCategory } from './cookies';
 import { getUser, getUserAsk } from './users';
 
-export const useGetCookies = ({ categoryId }: { categoryId: string }) => {
+export enum CookieFeedType {
+  ALL = 'ALL',
+  CATEGORY = 'CATEGORY',
+}
+
+export const useGetCookies = ({ categoryId, type }: { categoryId: string; type: CookieFeedType }) => {
   const { userId } = useLogin();
   const {
     data: allCookies,
     isLoading,
     isError,
-  } = useQuery<CookieFeed>(['categories', 'all', 'cookies'], () => getCookieList({ userId }));
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery<CookieFeed>(
+    ['categories', 'all', 'cookies'],
+    ({ pageParam = 0 }) => getCookieList({ userId, page: pageParam }),
+    {
+      getNextPageParam: (lastPage) => (lastPage?.isLastPage ? undefined : (lastPage?.nowPageIndex || 0) + 1),
+      enabled: type === CookieFeedType.ALL,
+    },
+  );
   const {
     data: categoryCookies,
     isLoading: categoryIsLoading,
     isError: categoryIsError,
-  } = useQuery<CookieFeed>(
+    fetchNextPage: categoryFetchNextPage,
+    hasNextPage: categoryHasNextPage,
+  } = useInfiniteQuery<CookieFeed>(
     ['categories', categoryId, 'cookies'],
-    () => getCookieListByCategory({ userId, categoryId }),
-    { enabled: !!categoryId },
+    ({ pageParam = 0 }) => getCookieListByCategory({ userId, categoryId, page: pageParam }),
+    {
+      getNextPageParam: (lastPage) => (lastPage?.isLastPage ? undefined : (lastPage?.nowPageIndex || 0) + 1),
+      enabled: type === CookieFeedType.CATEGORY,
+    },
   );
 
+  const isAll = type === CookieFeedType.ALL;
+
   return {
-    cookieList: (categoryId ? categoryCookies?.contents : allCookies?.contents) || [],
-    isLoading: isLoading || categoryIsLoading,
-    isError: isError || categoryIsError,
+    cookiePages: (isAll ? allCookies?.pages : categoryCookies?.pages) || [],
+    isLoading: isAll ? isLoading : categoryIsLoading,
+    isError: isAll ? isError : categoryIsError,
+    fetchNextPage: isAll ? fetchNextPage : categoryFetchNextPage,
+    hasNextPage: (isAll ? hasNextPage : categoryHasNextPage) || false,
   };
 };
 

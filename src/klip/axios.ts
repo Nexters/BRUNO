@@ -66,3 +66,12 @@ export const getUserHammer = async (userId: string | number) => {
     return 0;
   }
 };
+
+export const getUserKlay = async (userId: string | number) => {
+  try {
+    const { data } = await axios.get(`/contract/klay/users/${userId}/balance`);
+    return (data?.balance || 0) / 10 ** 18;
+  } catch {
+    return 0;
+  }
+};

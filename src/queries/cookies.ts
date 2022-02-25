@@ -20,8 +20,8 @@ export const getCookieList = async ({ page, userId }: GetCookieListArgs) => {
       },
     });
     return cookieData;
-  } catch {
-    return false;
+  } catch (error) {
+    throw getErrorStatus(error);
   }
 };
 
@@ -90,7 +90,7 @@ export const getCookieListByCategory = async ({
     });
     return cookieData;
   } catch (error) {
-    getErrorStatus(error);
+    throw getErrorStatus(error);
   }
 };
 

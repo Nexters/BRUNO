@@ -6,6 +6,7 @@ import { theme } from '@src/assets/styles';
 import { HeaderPage, HEADER_VALUES } from '@src/components/Header/const';
 import { HeaderContainer } from '@src/components/Header/MainHeader';
 import IconButton from '@src/components/shared/IconButton';
+import { useQRcodeModal } from '../shared/QRcodeModal';
 
 const Container = styled(HeaderContainer)`
   padding: 8px;
@@ -42,12 +43,12 @@ function SubHeader({ pageType }: Props) {
   const navigate = useNavigate();
   const header = HEADER_VALUES[pageType];
   const { left, center, right } = header;
+  const { isOpen } = useQRcodeModal();
 
   const handleClickBack = () => navigate(-1);
+  const handleClickSkip = () => navigate('/tutorial/completed');
 
-  const handleClickSkip = () => {
-    navigate('/tutorial/completed');
-  };
+  if (isOpen) return null;
 
   return (
     <Container>

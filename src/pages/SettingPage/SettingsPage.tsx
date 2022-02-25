@@ -12,6 +12,8 @@ import MainButton from '@src/components/shared/MainButton';
 import { useLogin, CookieName } from '@src/hooks';
 import Modal from '@src/components/shared/Modal';
 import { getApproval } from '@src/klip/axios';
+import { useRecoilValue } from 'recoil';
+import { userBalanceSelector } from '@src/recoil/balance';
 import { ApprovalStage, MODAL_LABEL_MAP } from './const';
 
 const CoinWrapper = styled.div`
@@ -51,7 +53,7 @@ const getAccessButtonText = (stage: ApprovalStage) => {
 
 function SettingPage() {
   const navigate = useNavigate();
-  const { isApproval, userId, address } = useLogin();
+  const { isApproval, userId, address, logout } = useLogin();
   const { isOpen, setOpen, setClose } = useQRcodeModal();
   const [_, setCookie] = useCookies([CookieName.IS_APPROVAL]);
 
@@ -60,6 +62,7 @@ function SettingPage() {
     method: HammerMethod.MAX_APPROVE,
     userId,
   });
+  const balance = useRecoilValue(userBalanceSelector(userId as number));
 
   const isModalOpen = stage === ApprovalStage.REQUEST_FAIL || stage === ApprovalStage.SUCCESS;
 
@@ -117,11 +120,11 @@ function SettingPage() {
       {/* TODO : API 적용 */}
       <CoinWrapper>
         클레이튼
-        <Amount>234 클레이</Amount>
+        <Amount>{balance.klay} 클레이</Amount>
       </CoinWrapper>
       <CoinWrapper>
         망치
-        <Amount>234 톤</Amount>
+        <Amount>{balance.hammer} 톤</Amount>
       </CoinWrapper>
       <MainButton
         value={getAccessButtonText(stage)}
@@ -133,7 +136,14 @@ function SettingPage() {
       {/* TODO 연동해제  */}
       <LogoutWrapper>
         <span>{`${address.slice(0, 18)}..`}</span>
-        <LogoutButton>연동 해제</LogoutButton>
+        <LogoutButton
+          onClick={() => {
+            logout();
+            navigate('/login');
+          }}
+        >
+          연동 해제
+        </LogoutButton>
       </LogoutWrapper>
       {/* 지갑 연동을 위한 Modal */}
       <Modal

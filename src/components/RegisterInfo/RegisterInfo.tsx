@@ -1,8 +1,9 @@
-import { useLogin } from '@src/hooks';
-import { postDefaultCookie, PostDefaultCookieArgs } from '@src/queries/cookies';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import styled from 'styled-components';
+import { useCookies } from 'react-cookie';
+import { CookieName, useLogin } from '@src/hooks';
+import { postDefaultCookie, PostDefaultCookieArgs } from '@src/queries/cookies';
 import Input from '../shared/Input';
 import MainButton from '../shared/MainButton';
 import { REGIST_TEXT_MAP as TEXT } from './const';
@@ -48,6 +49,7 @@ interface Props {
 
 function RegistInfo({ setStep }: Props) {
   const { userId } = useLogin();
+  const [_, setCookie] = useCookies([CookieName.FINISH_ONBOARD]);
   const mutation = useMutation((obj: PostDefaultCookieArgs) => postDefaultCookie(obj));
 
   const [info, setInfo] = useState<Record<string, string>>({
@@ -88,7 +90,12 @@ function RegistInfo({ setStep }: Props) {
         },
       ],
     };
-    await mutation.mutate(data, { onSuccess: () => setStep(2) });
+    await mutation.mutate(data, {
+      onSuccess: () => {
+        setCookie(CookieName.FINISH_ONBOARD, 1);
+        setStep(2);
+      },
+    });
   };
 
   return (

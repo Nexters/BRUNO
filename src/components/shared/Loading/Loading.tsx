@@ -4,7 +4,7 @@ const Wrapper = styled.main`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100vh;
+  height: 100%;
 `;
 
 const Content = styled.div`
@@ -13,7 +13,7 @@ const Content = styled.div`
 `;
 
 const Title = styled.div`
-  margin: 16px 0 6px 0;
+  margin-bottom: 6px;
   font-weight: 700;
   font-size: ${(props) => props.theme.fontSize.large};
 `;
@@ -26,7 +26,7 @@ function Loading() {
   return (
     <Wrapper>
       <Content>
-        <Title>로딩중</Title>
+        <Title>로딩중...</Title>
         <Text>열심히 로딩중이에요. 조금만 기다려주세요!</Text>
       </Content>
     </Wrapper>

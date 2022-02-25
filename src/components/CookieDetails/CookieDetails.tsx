@@ -122,7 +122,7 @@ function CookieDetails({ data, refetch }: Props) {
     }
 
     buyMutation.mutate(
-      { cookieId, purchaserUserId: userId },
+      { cookieId, purchaserUserId: userId as number },
       {
         onSuccess: () => setModalState(DetailModalState.BUY_RESULT),
       },
@@ -214,7 +214,7 @@ function CookieDetails({ data, refetch }: Props) {
         </HammerWrapper>
         <MainButton
           value={buttonText}
-          disabled={cookieStatus !== CookieStatus.ACTIVE}
+          disabled={!isAvailableBuy}
           onClick={() => {
             if (isAvailableBuy) buyCookieReady();
           }}
@@ -243,7 +243,7 @@ function CookieDetails({ data, refetch }: Props) {
         <Title>쿠키 정보</Title>
         <CookieInfoWrapper>
           <span>계약 주소</span>
-          <span>{contractAddress}</span>
+          <span>{`${contractAddress.slice(0, 20)}...`}</span>
         </CookieInfoWrapper>
         <CookieInfoWrapper>
           <span>토큰 주소</span>

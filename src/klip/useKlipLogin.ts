@@ -5,6 +5,7 @@ import { useCookies } from 'react-cookie';
 
 import { klipRequestKeyAtom } from '@src/recoil/klip';
 import { CookieName } from '@src/hooks';
+import { checkJoin } from '@src/queries/users';
 import { postKlipAuth, getKlipResult } from './axios';
 import { KlipApiStatus } from './types';
 import { openDeepLink } from './utils';
@@ -22,16 +23,22 @@ export const useKlipPrepare = () => {
 };
 
 export const useKlipLogin = () => {
-  const [_, setCookie] = useCookies([CookieName.KLIP_ADDRESS]);
+  const [_, setCookie] = useCookies([CookieName.KLIP_ADDRESS, CookieName.USER_ID]);
   const navigate = useNavigate();
   const klip = useRecoilValue(klipRequestKeyAtom);
 
   const { isFetched, refetch, data } = useQuery(['klip/result'], () => getKlipResult(klip.requestKey), {
-    onSuccess: ({ data }) => {
+    onSuccess: async ({ data }) => {
       const { status, result } = data;
       if (status === KlipApiStatus.COMPLETED && result?.klaytn_address) {
-        setCookie(CookieName.KLIP_ADDRESS, result.klaytn_address);
-        navigate('/join');
+        const address = result?.klaytn_address;
+        setCookie(CookieName.KLIP_ADDRESS, address);
+        const userId = await checkJoin(address);
+        if (!userId) navigate('/join');
+        else {
+          setCookie(CookieName.USER_ID, userId);
+          navigate('/');
+        }
       }
     },
     enabled: false,

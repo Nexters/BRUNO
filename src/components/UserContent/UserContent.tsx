@@ -8,8 +8,9 @@ import AskContent from '@src/components/AskContent';
 import CookieGrid from '@src/components/CookieGrid/CookieGrid';
 
 const Container = styled.div`
+  height: calc(100vh - 372px);
+  margin-top: 268px;
   overflow-y: scroll;
-  height: calc(100vh - 270px);
 `;
 
 interface Props {

@@ -1,12 +1,13 @@
 import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import MainButton from '@src/components/shared/MainButton';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { categoryListSelector } from '@src/recoil/category';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
+
+import MainButton from '@src/components/shared/MainButton';
+import { categoryListSelector } from '@src/recoil/category';
 import { postUserCategory, PostUserCategoryArgs } from '@src/queries/categories';
-import { userAtom } from '@src/recoil/user';
+import { useLogin } from '@src/hooks';
 import { REGIST_TEXT_MAP as TEXT } from './const';
 import CategoryButton from './CategoryButton';
 
@@ -47,7 +48,7 @@ function SelectCategory() {
   const category = useRecoilValue(categoryListSelector);
   const [selectedCategory, setSelectedCategory] = useState<number[]>([]);
   const navigate = useNavigate();
-  const [user, setUser] = useRecoilState(userAtom);
+  const { userId } = useLogin();
   const mutation = useMutation((obj: PostUserCategoryArgs) => postUserCategory(obj));
 
   const disabled = selectedCategory.length < 3;
@@ -55,12 +56,11 @@ function SelectCategory() {
     if (disabled) return;
 
     const data = {
-      userId: user.userId,
+      userId,
       categoryIdList: selectedCategory,
     };
     await mutation.mutate(data, {
       onSuccess: () => {
-        setUser({ ...user, finishOnboard: true });
         navigate('/tutorial');
       },
     });
