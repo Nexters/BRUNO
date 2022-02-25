@@ -9,7 +9,7 @@ export enum CookieName {
 }
 
 export const useLogin = () => {
-  const [cookies, setCookie, removeCookie] = useCookies([
+  const [cookies, _, removeCookie] = useCookies([
     CookieName.KLIP_ADDRESS,
     CookieName.IS_APPROVAL,
     CookieName.USER_ID,
