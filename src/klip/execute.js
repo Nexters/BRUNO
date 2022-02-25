@@ -76,7 +76,6 @@ export const useExecuteContract = ({ method, userId }) => {
 
   const fetchPrepare = async (data) => {
     const result = await prepareExcution({ ...data, userId, setError }, method);
-    console.log(result);
     if (!result || result.err) {
       setError(ContractError.REQUEST_FAIL);
       return false;
