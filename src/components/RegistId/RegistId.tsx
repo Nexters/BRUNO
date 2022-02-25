@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { useLogin } from '@src/hooks';
 import { useMutation } from 'react-query';
 import { postUser, PostUserArgs } from '@src/queries/users';
+import { useRecoilState } from 'recoil';
+import { userAtom } from '@src/recoil/user';
 import Input from '../shared/Input';
 
 import { LoginType } from './type';
@@ -46,19 +48,31 @@ function RegistId({ type, setStep }: Props) {
   const TEXT = REGIST_TEXT_MAP[type];
 
   const [nickname, setNickname] = useState<string>('');
+  const [_, setUserId] = useRecoilState(userAtom);
+
   const { address } = useLogin();
   const mutation = useMutation((obj: PostUserArgs) => postUser(obj));
 
-  const handleSubmit = async () => {
+  const registUser = (id: number) => {
+    setUserId(id);
+    setStep(1);
+  };
+
+  const handleSubmit = () => {
     if (nickname.length === 0) return; // to do : Input invalid 표시
 
-    const data = {
-      walletAddress: address,
-      nickname,
-    };
-
-    // to do : Return 값으로 온 user Id 등록하기
-    await mutation.mutate(data, { onSuccess: () => setStep(1) });
+    mutation.mutate(
+      {
+        walletAddress: address,
+        nickname,
+      },
+      {
+        onSuccess: ({ data }) => {
+          const { result } = data;
+          registUser(result.id);
+        },
+      },
+    );
   };
 
   return (

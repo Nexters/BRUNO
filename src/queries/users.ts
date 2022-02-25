@@ -8,8 +8,8 @@ export type PostUserArgs = {
 
 export const postUser = async (obj: PostUserArgs) => {
   try {
-    const { status: resultStatus } = await axios.post('/users', obj);
-    if (resultStatus === 200) return true;
+    const { status: resultStatus, data } = await axios.post('/users', obj);
+    if (resultStatus === 200) return data;
     return false;
   } catch (error) {
     getErrorStatus(error);
