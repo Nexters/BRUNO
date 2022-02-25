@@ -18,7 +18,7 @@ export const useLogin = () => {
 
   const klipAddressCookie = cookies[CookieName.KLIP_ADDRESS];
   const isApproval = !!cookies[CookieName.IS_APPROVAL];
-  const userId = cookies[CookieName.USER_ID];
+  const userId = Number(cookies[CookieName.USER_ID]);
   const finishOnboard = !!cookies[CookieName.FINISH_ONBOARD];
 
   return {

@@ -25,6 +25,7 @@ const HIDDEN_COOKIE_LABEL = {
 function CookieGrid({ cookies = [] }: { cookies: CookieType[] }) {
   const [modalOpen, setModalOpen] = useState(false);
   const { userId } = useLogin();
+
   return (
     <Wrapper>
       {cookies.map((cookie) => (
