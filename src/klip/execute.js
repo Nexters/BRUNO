@@ -54,7 +54,7 @@ const prepareExcution = async ({ userId, setError, ...data }, methodName) => {
 
   const to = isHammerContract ? HAMMER_CONTRACT_ADDR : COOKIE_CONTRACT_ADDR;
   const value = '0'; // TODO : 추후 수정
-  const params = getParamsFunc ? getParamsFunc(data) : '[]';
+  const params = getParamsFunc?.(data) ?? '[]';
   const result = await prepare.executeContract({
     bappName,
     to,
