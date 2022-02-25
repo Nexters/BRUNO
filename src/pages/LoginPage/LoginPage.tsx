@@ -4,7 +4,7 @@ import MainButton from '@src/components/shared/MainButton';
 import Modal from '@src/components/shared/Modal';
 import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
 import { MainLogoImage } from '@src/assets/images';
-import { useKlipPrepare, useKlipLogin, openDeepLink } from '@src/klip';
+import { useKlipPrepare, useKlipLogin } from '@src/klip';
 import { useLogin } from '@src/hooks';
 
 import Icon, { MainLogo } from '@src/assets/Icon';
@@ -15,7 +15,7 @@ import { LOGIN_MODAL_LABEL } from './const';
 function LoginPage() {
   const { isMobile } = useLogin();
   const { isFetched, requestKey } = useKlipPrepare();
-  const { refetch: klipLogin, isRequestFail } = useKlipLogin();
+  const { refetch: klipLogin, isRequestFail, openDeepLink } = useKlipLogin();
   const { isOpen, setOpen } = useQRcodeModal();
 
   const [loginStage, setLoginStage] = useState(LoginStage.INITIAL);
@@ -43,6 +43,9 @@ function LoginPage() {
   const handleClickButton = () => {
     if (!isMobile) {
       setOpen();
+    } else {
+      openDeepLink(requestKey);
+      setLoginStage(LoginStage.REQUEST);
     }
   };
 
