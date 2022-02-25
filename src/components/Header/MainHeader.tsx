@@ -51,7 +51,7 @@ function MainHeader() {
   return (
     <Container>
       <Icon isOn>
-        <MainLogo />
+        <MainLogo style={{ cursor: 'pointer' }} onClick={() => navigate('/')} />
       </Icon>
       <ButtonWrapper>
         <IconButton onClick={handleClickAlarm}>
