@@ -1,4 +1,4 @@
-import MainLogo01 from './logo/Main_01.png';
+import MainLogoImage from './logo/main.png';
 import ProfileImage01 from './profile/Default_01.png';
 import ProfileImage02 from './profile/Default_02.png';
 import ProfileImage03 from './profile/Default_03.png';
@@ -18,7 +18,7 @@ import Tutorial03 from './tutorial/tutorial_03.png';
 import Tutorial04 from './tutorial/tutorial_04.png';
 
 export {
-  MainLogo01,
+  MainLogoImage,
   ProfileImage01,
   ProfileImage02,
   ProfileImage03,

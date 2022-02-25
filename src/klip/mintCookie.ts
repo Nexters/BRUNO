@@ -7,7 +7,10 @@ export const getMintCookieParams = (data: CookieInfo & { categoryImage: string }
   return `["${title}","${contents}","${categoryImage}","${category}",${hammer}]`;
 };
 
-export const isAvailableCreating = async (userId: string | number, setError: (err: ContractError) => void) => {
+export const isAvailableCreating = async (
+  { userId }: { userId: string | number },
+  setError: (err: ContractError) => void,
+) => {
   const approval = await getApproval(userId);
 
   if (!approval) {

@@ -1,7 +1,14 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import MainButton from '@src/components/shared/MainButton';
-import CategoryButton from './CategoryButton';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { categoryListSelector } from '@src/recoil/category';
+import { useNavigate } from 'react-router-dom';
+import { useMutation } from 'react-query';
+import { postUserCategory, PostUserCategoryArgs } from '@src/queries/categories';
+import { userAtom } from '@src/recoil/user';
 import { REGIST_TEXT_MAP as TEXT } from './const';
+import CategoryButton from './CategoryButton';
 
 const Root = styled.div`
   display: flex;
@@ -36,18 +43,37 @@ const BottomWrapper = styled.div`
   margin-top: auto;
 `;
 
-interface Props {
-  category: Array<{
-    id: number;
-    name: string;
-    color: string;
-  }>;
-  selected: number[];
-  handleClickCategory: (id: number) => void;
-  handleClickNext: () => void;
-}
+function SelectCategory() {
+  const category = useRecoilValue(categoryListSelector);
+  const [selectedCategory, setSelectedCategory] = useState<number[]>([]);
+  const navigate = useNavigate();
+  const [user, setUser] = useRecoilState(userAtom);
+  const mutation = useMutation((obj: PostUserCategoryArgs) => postUserCategory(obj));
 
-function SelectCategory({ category, selected, handleClickCategory, handleClickNext }: Props) {
+  const disabled = selectedCategory.length < 3;
+  const handleSubmit = async () => {
+    if (disabled) return;
+
+    const data = {
+      userId: user.userId,
+      categoryIdList: selectedCategory,
+    };
+    await mutation.mutate(data, {
+      onSuccess: () => {
+        setUser({ ...user, finishOnboard: true });
+        navigate('/tutorial');
+      },
+    });
+  };
+
+  const handleClickCategory = (id: number) => {
+    if (selectedCategory.some((categoryId) => categoryId === id)) {
+      setSelectedCategory(selectedCategory.filter((categoryId) => categoryId !== id));
+    } else {
+      setSelectedCategory(selectedCategory.concat(id));
+    }
+  };
+
   return (
     <Root>
       <Title>{TEXT.title}</Title>
@@ -56,7 +82,7 @@ function SelectCategory({ category, selected, handleClickCategory, handleClickNe
       <CategoryList>
         {category.map((categoryObj) => {
           const { id } = categoryObj;
-          const isActive = selected.some((categoryId) => categoryId === id);
+          const isActive = selectedCategory.some((categoryId) => categoryId === id);
           return (
             <CategoryButton
               key={id}
@@ -70,7 +96,7 @@ function SelectCategory({ category, selected, handleClickCategory, handleClickNe
         })}
       </CategoryList>
       <BottomWrapper>
-        <MainButton value={TEXT.button} onClick={handleClickNext} />
+        <MainButton value={TEXT.button} onClick={handleSubmit} disabled={disabled} />
       </BottomWrapper>
     </Root>
   );

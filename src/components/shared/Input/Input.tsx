@@ -42,12 +42,9 @@ const InputComponent = styled.input<{
   width: 100%;
   margin: 0;
   padding: 11px 16px;
-  border: 1px solid
-    ${({ error }) =>
-      error ? theme.colors.state.error : theme.colors.basic.gray40};
+  border: 1px solid ${({ error }) => (error ? theme.colors.state.error : theme.colors.basic.gray40)};
   border-radius: 10px;
-  background-color: ${(props) =>
-    props.disabled ? theme.colors.basic.gray30 : theme.colors.basic.gray10};
+  background-color: ${(props) => (props.disabled ? theme.colors.basic.gray30 : theme.colors.basic.gray10)};
   color: ${theme.colors.basic.gray100};
   &:focus {
     width: ${({ error }) => (error ? '100%' : 'calc(100% - 4px)')};
@@ -58,14 +55,7 @@ const InputComponent = styled.input<{
   }
 `;
 
-export default function Input({
-  value,
-  onChange,
-  label,
-  placeholder,
-  limit = 35,
-  disabled = false,
-}: Props) {
+export default function Input({ value, onChange, label, placeholder, limit = 35, disabled = false }: Props) {
   const [error, setError] = useState<boolean>(false);
   const isCloseLimit = !!(limit && value.length >= limit - 5);
 

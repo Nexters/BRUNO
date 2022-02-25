@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import Icon, { AlarmOn24, Setting24, MainLogo } from '@src/assets/Icon';
 import IconButton from '@src/components/shared/IconButton';
 import Modal from '@src/components/shared/Modal';
-import { UNIMPLEMENT_MODAL_LABEL } from '../shared/const';
+import { UNIMPLEMENT_MODAL_LABEL } from '@src/components/shared/const';
+import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
 
 export const HeaderContainer = styled.header`
   display: flex;
@@ -40,9 +41,12 @@ const ButtonWrapper = styled.div`
 function MainHeader() {
   const navigate = useNavigate();
   const [alarmOpen, setAlarmOpen] = useState(false);
+  const { isOpen } = useQRcodeModal();
 
   const handleClickAlarm = () => setAlarmOpen(true);
   const handleClickSetting = () => navigate('/settings');
+
+  if (isOpen) return null;
 
   return (
     <Container>
