@@ -65,7 +65,7 @@ function AskPage() {
   const handleClickCreate = async () => {
     if (!askData.title.trim() || !userId) return false;
     await mutation.mutate(
-      { title: askData.title, receiverUserId: userId, senderUserId: senderId },
+      { title: askData.title, receiverId: userId, senderId },
       { onSuccess: () => navigate(`/users/${userId}?tab=request`) },
     );
   };
