@@ -48,13 +48,13 @@ function RegistId({ type, setStep }: Props) {
   const TEXT = REGIST_TEXT_MAP[type];
 
   const [nickname, setNickname] = useState<string>('');
-  const [_, setUserId] = useRecoilState(userAtom);
+  const [_, setUser] = useRecoilState(userAtom);
 
   const { address } = useLogin();
   const mutation = useMutation((obj: PostUserArgs) => postUser(obj));
 
   const registUser = (id: number) => {
-    setUserId(id);
+    setUser({ userId: id, finishOnboard: false });
     setStep(1);
   };
 
@@ -68,10 +68,9 @@ function RegistId({ type, setStep }: Props) {
         nickname: nickname.trim(),
       },
       {
-        onSuccess: ({ data }) => {
-          const { result } = data;
-          if (!result.id) return;
-          registUser(result.id);
+        onSuccess: (data) => {
+          if (!data.id) return;
+          registUser(data.id);
         },
       },
     );

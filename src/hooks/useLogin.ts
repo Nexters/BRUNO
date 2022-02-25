@@ -10,7 +10,7 @@ export enum CookieName {
 
 export const useLogin = () => {
   const [cookies] = useCookies([CookieName.KLIP_ADDRESS, CookieName.IS_APPROVAL]);
-  const userId = useRecoilValue(userAtom);
+  const { userId, finishOnboard } = useRecoilValue(userAtom);
 
   const klipAddressCookie = cookies[CookieName.KLIP_ADDRESS];
   const isApproval = cookies[CookieName.IS_APPROVAL];
@@ -22,5 +22,6 @@ export const useLogin = () => {
     isMobile,
     userId,
     isApproval: !!isApproval,
+    finishOnboard,
   };
 };

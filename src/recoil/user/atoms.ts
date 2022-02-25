@@ -1,6 +1,13 @@
 import { atom } from 'recoil';
 
-export const userAtom = atom<number | null>({
+type User = {
+  userId: number | null;
+  finishOnboard: boolean;
+};
+export const userAtom = atom<User>({
   key: 'user/userAtom',
-  default: null,
+  default: {
+    userId: null,
+    finishOnboard: false,
+  },
 });
