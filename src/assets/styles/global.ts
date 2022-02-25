@@ -29,6 +29,11 @@ export const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
     box-sizing: border-box;
     line-height: 160%;
     letter-spacing: 0.002em;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera*/
+    }
   }
 
   button, input, textarea {

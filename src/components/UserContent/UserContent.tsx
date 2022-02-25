@@ -8,7 +8,7 @@ import AskContent from '@src/components/AskContent';
 import CookieGrid from '@src/components/CookieGrid/CookieGrid';
 
 const Container = styled.div`
-  height: calc(100vh - 372px);
+  height: calc(100vh - 400px);
   margin-top: 268px;
   overflow-y: scroll;
 `;
