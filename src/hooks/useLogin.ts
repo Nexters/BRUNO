@@ -9,7 +9,7 @@ export enum CookieName {
 }
 
 export const useLogin = () => {
-  const [cookies, setCookie] = useCookies([
+  const [cookies, setCookie, removeCookie] = useCookies([
     CookieName.KLIP_ADDRESS,
     CookieName.IS_APPROVAL,
     CookieName.USER_ID,
@@ -22,10 +22,10 @@ export const useLogin = () => {
   const finishOnboard = !!cookies[CookieName.FINISH_ONBOARD];
 
   const logout = () => {
-    setCookie(CookieName.KLIP_ADDRESS, null);
-    setCookie(CookieName.IS_APPROVAL, null);
-    setCookie(CookieName.USER_ID, null);
-    setCookie(CookieName.FINISH_ONBOARD, null);
+    removeCookie(CookieName.KLIP_ADDRESS);
+    removeCookie(CookieName.IS_APPROVAL);
+    removeCookie(CookieName.USER_ID);
+    removeCookie(CookieName.FINISH_ONBOARD);
   };
 
   return {
