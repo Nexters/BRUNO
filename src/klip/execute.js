@@ -26,7 +26,7 @@ const bappName = 'COOKIEPANG';
  * @params {string} failLink - 사용자 동의과정에서 문제가 발생 할 경우 돌아올 링크 (optional)
  */
 
-const COOKIE_CONTRACT_ADDR = '0x0BaFBcf80F872bC9b981B5b1a98B89F57F62057D';
+const COOKIE_CONTRACT_ADDR = '0x9DA2f829E17fE891048dD2b88C8Ab99aEBce17A9';
 const HAMMER_CONTRACT_ADDR = '0x6203f3F22951B46Dc48847338c2e26D9D2080D73';
 
 const PRE_EXECUTION = {
