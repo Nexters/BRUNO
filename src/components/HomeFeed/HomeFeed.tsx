@@ -23,19 +23,19 @@ function HomeFeed() {
     type: categoryId ? CookieFeedType.CATEGORY : CookieFeedType.ALL,
   });
 
-  if (!isLoading) return <Loading />;
+  if (isLoading) return <Loading />;
 
   return (
-    <ContentsWrapper>
-      <InfiniteScroll
-        hasMore={hasNextPage}
-        next={fetchNextPage}
-        loader={<div>loading</div>}
-        dataLength={cookiePages?.[0]?.totalCount || 0}
-      >
+    <InfiniteScroll
+      hasMore={hasNextPage}
+      next={fetchNextPage}
+      loader={<div>loading</div>}
+      dataLength={cookiePages?.[0]?.totalCount || 0}
+    >
+      <ContentsWrapper>
         {cookiePages.map((page) => page.contents?.map((cookie) => <FeedCard key={cookie.cookieId} cookie={cookie} />))}
-      </InfiniteScroll>
-    </ContentsWrapper>
+      </ContentsWrapper>
+    </InfiniteScroll>
   );
 }
 
