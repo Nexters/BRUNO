@@ -65,7 +65,7 @@ function RegistId({ type, setStep }: Props) {
     await mutation.mutate(
       {
         walletAddress: address,
-        nickname,
+        nickname: nickname.trim(),
       },
       {
         onSuccess: ({ data }) => {
