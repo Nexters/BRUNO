@@ -9,7 +9,7 @@ export enum CookieName {
 }
 
 export const useLogin = () => {
-  const [cookies] = useCookies([
+  const [cookies, setCookie] = useCookies([
     CookieName.KLIP_ADDRESS,
     CookieName.IS_APPROVAL,
     CookieName.USER_ID,
@@ -21,6 +21,13 @@ export const useLogin = () => {
   const userId = Number(cookies[CookieName.USER_ID]);
   const finishOnboard = !!cookies[CookieName.FINISH_ONBOARD];
 
+  const logout = () => {
+    setCookie(CookieName.KLIP_ADDRESS, null);
+    setCookie(CookieName.IS_APPROVAL, null);
+    setCookie(CookieName.USER_ID, null);
+    setCookie(CookieName.FINISH_ONBOARD, null);
+  };
+
   return {
     address: klipAddressCookie ?? '',
     isLoggedIn: !!klipAddressCookie && !!userId,
@@ -28,5 +35,6 @@ export const useLogin = () => {
     userId,
     isApproval,
     finishOnboard,
+    logout,
   };
 };

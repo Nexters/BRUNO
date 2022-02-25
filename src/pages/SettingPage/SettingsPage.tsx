@@ -53,7 +53,7 @@ const getAccessButtonText = (stage: ApprovalStage) => {
 
 function SettingPage() {
   const navigate = useNavigate();
-  const { isApproval, userId, address } = useLogin();
+  const { isApproval, userId, address, logout } = useLogin();
   const { isOpen, setOpen, setClose } = useQRcodeModal();
   const [_, setCookie] = useCookies([CookieName.IS_APPROVAL]);
 
@@ -136,7 +136,14 @@ function SettingPage() {
       {/* TODO 연동해제  */}
       <LogoutWrapper>
         <span>{`${address.slice(0, 18)}..`}</span>
-        <LogoutButton>연동 해제</LogoutButton>
+        <LogoutButton
+          onClick={() => {
+            logout();
+            navigate('/login');
+          }}
+        >
+          연동 해제
+        </LogoutButton>
       </LogoutWrapper>
       {/* 지갑 연동을 위한 Modal */}
       <Modal
