@@ -7,7 +7,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-top: 12px;
   padding: 0 20px;
 `;
 
@@ -16,7 +15,6 @@ const PhotoWrapper = styled.div`
   width: 100px;
   height: 100px;
   border-radius: 100%;
-  background-color: ${(props) => props.theme.colors.basic.gray10};
 `;
 
 const Photo = styled.img`
@@ -44,6 +42,7 @@ const RequestButton = styled(Button)`
   margin: 0 0 5px 58px;
   line-height: 120%;
   background: ${(props) => props.theme.colors.brand.main};
+  z-index: 5;
 `;
 
 interface Props {

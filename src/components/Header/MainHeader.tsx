@@ -13,6 +13,10 @@ export const HeaderContainer = styled.header`
   width: 100%;
   height: 56px;
   border-bottom: 1px solid ${(props) => props.theme.colors.basic.gray20};
+
+  * {
+    z-index: 5;
+  }
 `;
 
 const Container = styled(HeaderContainer)`
@@ -42,7 +46,7 @@ function MainHeader() {
 
   return (
     <Container>
-      <Icon>
+      <Icon isOn>
         <MainLogo />
       </Icon>
       <ButtonWrapper>

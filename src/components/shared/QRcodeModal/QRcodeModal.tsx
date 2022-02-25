@@ -12,7 +12,7 @@ import {
   Header,
   ContentWrapper,
   Title,
-  Timer,
+  // Timer,
   Guide,
   QRcodeWrapper,
   GuideIconWrapper,
