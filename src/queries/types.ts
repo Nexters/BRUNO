@@ -79,6 +79,7 @@ export type CookieFeed = {
   isLastPage: boolean;
   nowPageIndex: number;
   totalPageIndex: number;
+  totalCount: number;
 };
 
 export type CookieDetail = {

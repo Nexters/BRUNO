@@ -1,8 +1,9 @@
+import InfiniteScroll from 'react-infinite-scroll-component';
 import HomeTab from '@src/components/HomeTab';
 import FeedCard from '@src/components/FeedCard';
 
 import styled from 'styled-components';
-import { useGetCookies } from '@src/queries/hooks';
+import { CookieFeedType, useGetCookies } from '@src/queries/hooks';
 import { useSearchParams } from 'react-router-dom';
 import Loading from '@src/components/shared/Loading';
 
@@ -17,7 +18,11 @@ const ContentsWrapper = styled.main`
 
 function HomePage() {
   const [searchParams] = useSearchParams();
-  const { cookieList, isLoading } = useGetCookies({ categoryId: searchParams.get('category') || '' });
+  const categoryId = searchParams.get('category') || '';
+  const { cookiePages, isLoading, fetchNextPage, hasNextPage } = useGetCookies({
+    categoryId,
+    type: categoryId ? CookieFeedType.CATEGORY : CookieFeedType.ALL,
+  });
 
   if (isLoading) return <Loading />;
 
@@ -25,9 +30,16 @@ function HomePage() {
     <>
       <HomeTab />
       <ContentsWrapper>
-        {cookieList.map((cookie) => (
-          <FeedCard key={cookie.cookieId} cookie={cookie} />
-        ))}
+        <InfiniteScroll
+          hasMore={hasNextPage}
+          next={fetchNextPage}
+          loader={<div>loading</div>}
+          dataLength={cookiePages?.[0].totalCount}
+        >
+          {cookiePages.map((page) =>
+            page.contents?.map((cookie) => <FeedCard key={cookie.cookieId} cookie={cookie} />),
+          )}
+        </InfiniteScroll>
       </ContentsWrapper>
     </>
   );
