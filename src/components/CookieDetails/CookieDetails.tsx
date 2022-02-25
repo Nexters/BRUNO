@@ -122,7 +122,7 @@ function CookieDetails({ data, refetch }: Props) {
     }
 
     buyMutation.mutate(
-      { cookieId, purchaserUserId: userId },
+      { cookieId, purchaserUserId: userId as number },
       {
         onSuccess: () => setModalState(DetailModalState.BUY_RESULT),
       },

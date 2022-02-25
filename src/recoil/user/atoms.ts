@@ -7,7 +7,7 @@ type User = {
 export const userAtom = atom<User>({
   key: 'user/userAtom',
   default: {
-    userId: null,
+    userId: 50,
     finishOnboard: false,
   },
 });
