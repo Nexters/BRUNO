@@ -1,5 +1,9 @@
-import { UserAsk } from '@src/queries/types';
+import { useInfiniteQuery } from 'react-query';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import styled from 'styled-components';
+
+import { UserAsk } from '@src/queries/types';
+import { getUserAsk } from '@src/queries/users';
 import AskItem from './AskItem';
 
 const Wrapper = styled.div`
@@ -8,19 +12,34 @@ const Wrapper = styled.div`
 
 interface Props {
   isMy?: boolean;
-  askItems: UserAsk['contents'];
-  refetch: () => void;
+  userId: string;
 }
 
-function AskContent({ isMy = false, askItems, refetch }: Props) {
-  if (!askItems) return null;
+function AskContent({ isMy = false, userId }: Props) {
+  const {
+    data: askPages,
+    refetch,
+    hasNextPage,
+    fetchNextPage,
+  } = useInfiniteQuery<UserAsk>(['user', 'ask', userId], ({ pageParam }) => getUserAsk({ userId, page: pageParam }), {
+    getNextPageParam: (lastPage) => (lastPage?.isLastPage ? undefined : (lastPage?.nowPageIndex || 0) + 1),
+  });
+
+  if (!askPages) return null;
 
   return (
-    <Wrapper>
-      {askItems.map((ask) => (
-        <AskItem key={ask.id} item={ask} isMy={isMy} refetch={refetch} />
-      ))}
-    </Wrapper>
+    <InfiniteScroll
+      hasMore={hasNextPage || false}
+      next={fetchNextPage}
+      loader={null}
+      dataLength={askPages?.pages?.[0]?.totalCount || 0}
+    >
+      <Wrapper>
+        {askPages?.pages?.map((page) =>
+          page?.contents?.map((ask) => <AskItem key={ask.id} item={ask} isMy={isMy} refetch={refetch} />),
+        )}
+      </Wrapper>
+    </InfiniteScroll>
   );
 }
 

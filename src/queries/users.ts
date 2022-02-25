@@ -26,9 +26,13 @@ export const getUser = async (userId: string) => {
   }
 };
 
-export const getUserAsk = async (userId: string) => {
+export type GetUserAskArgs = { userId: string | number; page?: number };
+
+export const getUserAsk = async ({ userId, page }: GetUserAskArgs) => {
   try {
-    const { data: askData } = await axios.get(`/users/${userId}/asks`, { params: { target: 'RECEIVER' } });
+    const { data: askData } = await axios.get(`/users/${userId}/asks`, {
+      params: { target: 'RECEIVER', page: page ?? 0, size: 1 },
+    });
     return askData;
   } catch (error) {
     getErrorStatus(error);

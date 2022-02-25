@@ -1,7 +1,7 @@
 import { useInfiniteQuery, useQuery } from 'react-query';
 
 import { useLogin } from '@src/hooks';
-import { useMemo } from 'react';
+
 import { CookieFeed, UserCookieList, UserCookieType, UserProfileType, UserAsk, AskStatus } from './types';
 import { getCookieList, getUserCookies, getCookieListByCategory } from './cookies';
 import { getUser, getUserAsk } from './users';
@@ -64,23 +64,16 @@ export const useUserInfo = ({ userId }: { userId: string }) => {
     getUserCookies({ userId, target: UserCookieType.AUTHOR }),
   );
 
-  const { data: askItems, refetch: refetchAsk } = useQuery<UserAsk>(['user', 'ask', userId], () => getUserAsk(userId));
-
-  const filteredAskList = useMemo(
-    () => askItems?.contents?.filter((ask) => ask.status === AskStatus.PENDING) ?? [],
-    [askItems],
-  );
+  const { data: askItems } = useQuery<UserAsk>(['user', 'ask', userId], () => getUserAsk({ userId }));
 
   return {
     userProfile: userProfile ?? null,
     collectedCookies: collectedCookies ?? { contents: [] },
     createdCookies: createdCookies ?? { contents: [] },
-    askItems: filteredAskList,
-    refetchAsk,
     count: {
       collected: collectedCookies?.totalCount || 0,
       created: createdCookies?.totalCount || 0,
-      ask: filteredAskList.length || 0,
+      ask: askItems?.totalCount || 0,
     },
   };
 };
