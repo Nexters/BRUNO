@@ -1,8 +1,10 @@
-import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ProfileImage01, ProfileImage02 } from '@src/assets/images';
 import { Button } from '@src/components/shared/MainButton';
-import { useNavigate, useParams } from 'react-router-dom';
+import Modal from '@src/components/shared/Modal';
+import { UNIMPLEMENT_MODAL_LABEL } from '../shared/const';
 
 const Wrapper = styled.div`
   display: flex;
@@ -54,6 +56,7 @@ interface Props {
 function UserPhoto({ isMy, imageUrl }: Props) {
   const navigate = useNavigate();
   const { userId } = useParams();
+  const [modal, setModal] = useState('');
 
   const defaultImageUrl = isMy ? ProfileImage01 : ProfileImage02;
   const handleClickAskButton = () => navigate(`/ask/${userId}`);
@@ -65,9 +68,10 @@ function UserPhoto({ isMy, imageUrl }: Props) {
     <Wrapper>
       <PhotoWrapper>
         <Photo src={imageUrl || defaultImageUrl} onError={handleImageError} />
-        {isMy && <AddButton>+</AddButton>}
+        {isMy && <AddButton onClick={() => setModal('프로필 수정하기')}>+</AddButton>}
       </PhotoWrapper>
       {!isMy && <RequestButton onClick={handleClickAskButton}>질문 요청하기</RequestButton>}
+      <Modal open={!!modal} label={UNIMPLEMENT_MODAL_LABEL(modal)} onlyYes onClickYes={() => setModal('')} />
     </Wrapper>
   );
 }

@@ -92,28 +92,6 @@ function CookieDetails({ data, refetch }: Props) {
     userId,
   });
 
-  const buyCookieReady = async () => {
-    // 처음 클릭
-    if (modalState === DetailModalState.NONE) {
-      const reqKey = await fetchPrepare({ cookieId, nftTokenId });
-      if (!reqKey) {
-        setError(ContractError.REQUEST_FAIL);
-        return;
-      }
-      setModalState(DetailModalState.BUY);
-    }
-  };
-
-  const buyCookie = async () => {
-    if (isMobile) {
-      openDeepLink(reqKey);
-      setModalState(DetailModalState.BUY_REQUEST);
-    } else {
-      setModalState(DetailModalState.BUY_PREPARE);
-      setOpen();
-    }
-  };
-
   const fetchBuyResult = async () => {
     let txHash = '';
     const resultCb = (_txHash: string) => {
@@ -132,6 +110,30 @@ function CookieDetails({ data, refetch }: Props) {
         onSuccess: () => setModalState(DetailModalState.BUY_RESULT),
       },
     );
+  };
+
+  const buyCookieReady = async () => {
+    // 처음 클릭
+    if (modalState === DetailModalState.NONE) {
+      const reqKey = await fetchPrepare({ cookieId, nftTokenId });
+      if (!reqKey) {
+        setError(ContractError.REQUEST_FAIL);
+        return;
+      }
+      setModalState(DetailModalState.BUY);
+    } else if (modalState === DetailModalState.BUY_REQUEST) {
+      fetchBuyResult();
+    }
+  };
+
+  const buyCookie = async () => {
+    if (isMobile) {
+      openDeepLink(reqKey);
+      setModalState(DetailModalState.BUY_REQUEST);
+    } else {
+      setModalState(DetailModalState.BUY_PREPARE);
+      setOpen();
+    }
   };
 
   const deleteCookie = async () => {
@@ -184,7 +186,7 @@ function CookieDetails({ data, refetch }: Props) {
   );
 
   useEffect(() => {
-    if (modalState === DetailModalState.BUY_REQUEST) {
+    if (modalState === DetailModalState.BUY_REQUEST && !isMobile) {
       fetchBuyResult();
     }
   }, [modalState]);

@@ -28,8 +28,6 @@ export const useLogin = () => {
     removeCookie(CookieName.FINISH_ONBOARD);
   };
 
-  console.log(klipAddressCookie, userId);
-
   return {
     address: klipAddressCookie ?? '',
     isLoggedIn: !!klipAddressCookie && !!userId,

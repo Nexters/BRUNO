@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -8,7 +9,7 @@ import { CookieFeedType, useGetCookies } from '@src/queries/hooks';
 import Loading from '@src/components/shared/Loading';
 import Error, { ErrorType } from '../shared/Error';
 
-const ContentsWrapper = styled.main`
+const ContentsWrapper = styled.div`
   ${(props) => props.theme.media.large} {
     display: flex;
     flex: 50%;
@@ -24,6 +25,15 @@ function HomeFeed() {
     type: categoryId ? CookieFeedType.CATEGORY : CookieFeedType.ALL,
   });
 
+  useEffect(() => {
+    // TODO 수정 필요
+    const feedElement = document.getElementById('feed');
+    if (!feedElement) return;
+    if (!isLoading && hasNextPage && feedElement.scrollHeight <= feedElement.clientHeight) {
+      fetchNextPage();
+    }
+  }, [isLoading, hasNextPage]);
+
   if (isLoading) return <Loading />;
   if (isError) return <Error type={ErrorType.SERVER_ERROR} />;
 
@@ -34,7 +44,7 @@ function HomeFeed() {
       loader={null}
       dataLength={cookiePages?.[0]?.totalCount || 0}
     >
-      <ContentsWrapper>
+      <ContentsWrapper id="feed">
         {cookiePages.map((page) => page?.contents?.map((cookie) => <FeedCard key={cookie.cookieId} cookie={cookie} />))}
       </ContentsWrapper>
     </InfiniteScroll>
