@@ -15,6 +15,7 @@ import LoginPage from '@src/pages/LoginPage';
 import JoinPage from '@src/pages/JoinPage';
 import QRcodeModal from '@src/components/shared/QRcodeModal';
 import Loading from '@src/components/shared/Loading';
+import TodoModal from './components/shared/TodoModal';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -41,6 +42,7 @@ function App() {
                 <Route path="/users/*" element={<PrivateRoute component={<User />} />} />
                 <Route path="/tutorial/*" element={<PrivateRoute component={<Tutorial />} />} />
               </Routes>
+              <TodoModal />
             </BrowserRouter>
           </Suspense>
         </RecoilRoot>

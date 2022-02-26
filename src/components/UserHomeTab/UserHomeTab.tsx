@@ -6,7 +6,6 @@ import TabItem from './TabItem';
 import { TabType } from './types';
 
 const Wrapper = styled.div`
-  position: fixed;
   display: flex;
   gap: 20px;
   width: 100%;

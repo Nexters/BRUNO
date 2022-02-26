@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 
+import { unimplementedModalAtom } from '@src/recoil/ui';
 import Icon, { AlarmOn24, Setting24, MainLogo } from '@src/assets/Icon';
 import IconButton from '@src/components/shared/IconButton';
-import Modal from '@src/components/shared/Modal';
-import { UNIMPLEMENT_MODAL_LABEL } from '@src/components/shared/const';
 import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
 
 export const HeaderContainer = styled.header`
@@ -40,10 +39,10 @@ const ButtonWrapper = styled.div`
 
 function MainHeader() {
   const navigate = useNavigate();
-  const [alarmOpen, setAlarmOpen] = useState(false);
   const { isOpen } = useQRcodeModal();
+  const setTodoFeature = useSetRecoilState(unimplementedModalAtom);
 
-  const handleClickAlarm = () => setAlarmOpen(true);
+  const handleClickAlarm = () => setTodoFeature('알람');
   const handleClickSetting = () => navigate('/settings');
 
   if (isOpen) return null;
@@ -65,7 +64,6 @@ function MainHeader() {
           </Icon>
         </IconButton>
       </ButtonWrapper>
-      <Modal open={alarmOpen} label={UNIMPLEMENT_MODAL_LABEL('알람')} onlyYes onClickYes={() => setAlarmOpen(false)} />
     </Container>
   );
 }
