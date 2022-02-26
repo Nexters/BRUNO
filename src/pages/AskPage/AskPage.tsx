@@ -41,6 +41,7 @@ const Title = styled.div`
 
 const ButtonWrapper = styled.div`
   margin-top: auto;
+  margin-bottom: 90px;
 `;
 
 type AskPageParam = { userId: string };

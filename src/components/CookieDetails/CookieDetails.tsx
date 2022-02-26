@@ -63,8 +63,10 @@ function CookieDetails({ data, refetch }: Props) {
     price,
     histories,
     creatorId,
+    creatorProfileUrl,
     collectorId,
     collectorName,
+    collectorProfileUrl,
     category,
     creatorName,
     nftTokenId,
@@ -79,7 +81,7 @@ function CookieDetails({ data, refetch }: Props) {
 
   const [modalState, setModalState] = useState<DetailModalState>(DetailModalState.NONE);
   const [contractError, setError] = useRecoilState(contractErrorAtom);
-  const reqKey = useRecoilValue(klipRequestKeyAtom);
+  const klipData = useRecoilValue(klipRequestKeyAtom);
   const { isOpen, setOpen, setClose } = useQRcodeModal();
 
   const { userId } = useLogin();
@@ -128,7 +130,7 @@ function CookieDetails({ data, refetch }: Props) {
 
   const buyCookie = async () => {
     if (isMobile) {
-      openDeepLink(reqKey);
+      openDeepLink(klipData.requestKey);
       setModalState(DetailModalState.BUY_REQUEST);
     } else {
       setModalState(DetailModalState.BUY_PREPARE);
@@ -232,7 +234,7 @@ function CookieDetails({ data, refetch }: Props) {
         <ProfileWrapper onClick={() => navigate(`/users/${collectorId}`)}>
           <Title>쿠키 소유자</Title>
           <UserInfoWrapper>
-            <UserImage src={ProfileImage01} />
+            <UserImage src={collectorProfileUrl || ProfileImage01} />
             <UserName>{collectorName}</UserName>
           </UserInfoWrapper>
         </ProfileWrapper>
@@ -240,7 +242,7 @@ function CookieDetails({ data, refetch }: Props) {
         <ProfileWrapper onClick={() => navigate(`/users/${creatorId}`)}>
           <Title>쿠키 제작자</Title>
           <UserInfoWrapper>
-            <UserImage src={ProfileImage02} />
+            <UserImage src={creatorProfileUrl || ProfileImage02} />
             <UserName>{creatorName}</UserName>
           </UserInfoWrapper>
         </ProfileWrapper>

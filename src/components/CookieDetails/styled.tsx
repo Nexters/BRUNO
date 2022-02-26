@@ -142,6 +142,7 @@ export const MyButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin-bottom: 60px;
   padding: 0 16px;
   button {
     margin: 0;

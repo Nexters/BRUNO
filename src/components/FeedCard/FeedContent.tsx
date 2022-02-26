@@ -28,6 +28,10 @@ const QuestionWrapper = styled.div`
   overflow-x: hidden;
 `;
 
+const Question = styled.div`
+  ${theme.text.ellipsis(1)}
+`;
+
 const AnswerWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -63,7 +67,7 @@ export default function FeedContent({ cookie }: Props) {
     <Wrapper>
       <BoxWrapper>
         <QuestionWrapper>
-          <div>Q. {question}</div>
+          <Question>Q. {question}</Question>
         </QuestionWrapper>
         <AnswerWrapper onClick={() => navigate(`/cookie/${cookieId}`)}>
           <Icon color={theme.colors.basic.gray60} style={{ marginBottom: 'auto' }}>
