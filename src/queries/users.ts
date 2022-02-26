@@ -31,7 +31,7 @@ export type GetUserAskArgs = { userId: string | number; page?: number };
 export const getUserAsk = async ({ userId, page }: GetUserAskArgs) => {
   try {
     const { data: askData } = await axios.get(`/users/${userId}/asks`, {
-      params: { target: 'RECEIVER', page: page ?? 0, size: 1 },
+      params: { target: 'RECEIVER', page: page ?? 0, size: 3 },
     });
     return askData;
   } catch (error) {

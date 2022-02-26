@@ -67,7 +67,11 @@ function AskPage() {
     if (!askData.title.trim() || !userId || !senderId) return false;
     await mutation.mutate(
       { title: askData.title, receiverId: userId, senderId },
-      { onSuccess: () => navigate(`/users/${userId}?tab=request`) },
+      {
+        onSuccess: () => {
+          navigate(`/users/${userId}?tab=request`);
+        },
+      },
     );
   };
 
