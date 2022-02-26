@@ -21,9 +21,13 @@ function AskContent({ isMy = false, userId }: Props) {
     refetch,
     hasNextPage,
     fetchNextPage,
-  } = useInfiniteQuery<UserAsk>(['user', 'ask', userId], ({ pageParam }) => getUserAsk({ userId, page: pageParam }), {
-    getNextPageParam: (lastPage) => (lastPage?.isLastPage ? undefined : (lastPage?.nowPageIndex || 0) + 1),
-  });
+  } = useInfiniteQuery<UserAsk>(
+    ['user', 'ask', userId, 'infinite'],
+    ({ pageParam }) => getUserAsk({ userId, page: pageParam }),
+    {
+      getNextPageParam: (lastPage) => (lastPage?.isLastPage ? undefined : (lastPage?.nowPageIndex || 0) + 1),
+    },
+  );
 
   if (!askPages) return null;
 

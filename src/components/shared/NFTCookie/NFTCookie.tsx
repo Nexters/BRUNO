@@ -10,6 +10,7 @@ const Wrapper = styled.div`
 
 const CookieImage = styled.img<{ width?: string }>`
   width: ${({ width }) => width || '288px'};
+  height: ${({ width }) => (width ? '112px' : '176px')};
 `;
 
 type Props = {
