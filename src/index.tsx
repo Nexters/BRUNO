@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyle, theme } from '@src/assets/styles';
 import GlobalFonts from '@src/assets/fonts';
 
+import './i18n';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
