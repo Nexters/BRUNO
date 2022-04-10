@@ -23,10 +23,12 @@ interface LayoutProps {
 
 const Root = styled.div`
   width: 100%;
+  max-width: 700px;
 `;
 
 const Layout = styled.div<LayoutProps>`
   width: 100%;
+  max-width: 700px;
   height: calc(100vh - ${NAVIGATION_HEIGHT}px);
   overflow-y: scroll;
   padding: ${(props) => props.padding || ''};
