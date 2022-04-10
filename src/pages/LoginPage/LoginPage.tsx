@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 
 import MainButton from '@src/components/shared/MainButton';
 import Modal from '@src/components/shared/Modal';
 import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
 import { MainLogoImage } from '@src/assets/images';
 import { useKlipPrepare, useKlipLogin } from '@src/klip';
-import { useLogin } from '@src/hooks';
 
 import Icon, { MainLogo } from '@src/assets/Icon';
 import { Root, BottomWrapper, LogoWrapper, LogoImage, SubText } from './styled';
@@ -13,7 +13,6 @@ import { LoginStage } from './types';
 import { LOGIN_MODAL_LABEL } from './const';
 
 function LoginPage() {
-  const { isMobile } = useLogin();
   const { isFetched, requestKey } = useKlipPrepare();
   const { refetch: klipLogin, isRequestFail, openDeepLink } = useKlipLogin();
   const { isOpen, setOpen } = useQRcodeModal();
