@@ -38,7 +38,7 @@ type Props = {
   isEdit?: boolean;
 };
 
-const SHOW_MODAL_STAGES = [Stage.REQUEST_FAIL, Stage.RESULT, Stage.NOT_YET_APPROVE];
+const SHOW_MODAL_STAGES = [Stage.REQUEST_FAIL, Stage.RESULT, Stage.NOT_YET_APPROVE, Stage.NOTIFY];
 
 type CreateState = { title?: string; askId?: number };
 
@@ -134,8 +134,7 @@ function CreateCookiePage({ isEdit = false }: Props) {
         openDeepLink(reqKey);
         setStage(Stage.REQUEST);
       } else {
-        setOpen();
-        setStage(Stage.PREPARE);
+        setStage(Stage.NOTIFY);
         // PC : QRmodal close 시 REQUEST로 set
       }
     } else if (stage === Stage.REQUEST) {
@@ -146,13 +145,17 @@ function CreateCookiePage({ isEdit = false }: Props) {
   const handleClickModal = (yes: boolean) => {
     if (yes) {
       if (stage === Stage.NOT_YET_APPROVE) navigate('/settings');
-      else if (contractError === ContractError.INSUFFICIENT_HAMMER) navigate('/users/my');
+      else if (stage === Stage.NOTIFY) {
+        setOpen();
+        setStage(Stage.PREPARE);
+      } else if (contractError === ContractError.INSUFFICIENT_HAMMER) navigate('/users/my');
       else if (contractError === ContractError.NONE && stage === Stage.RESULT) navigate(`/cookie/${cookieInfo.id}`);
       else {
         setError(ContractError.NONE);
         setStage(Stage.INITIAL);
       }
     } else {
+      if (stage === Stage.NOTIFY) return setStage(Stage.INITIAL);
       navigate('/');
     }
   };
