@@ -22,7 +22,7 @@ function CategorySection({ isEdit = false, currentCategory, setCategory }: Props
   const categoryList = useRecoilValue(categoryListSelector);
 
   useEffect(() => {
-    if (!currentCategory) setCategory(categoryList[0]);
+    if (currentCategory === 0) setCategory(categoryList[0]);
   }, [categoryList]);
 
   return (
