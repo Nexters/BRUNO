@@ -8,6 +8,7 @@ export enum KlipApiStatus {
 
 export enum Stage {
   INITIAL = 'inital',
+  NOTIFY = 'notify',
   PREPARE = 'prepare',
   REQUEST = 'request',
   RESULT = 'result',

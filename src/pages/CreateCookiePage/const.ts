@@ -22,6 +22,12 @@ export const MODAL_LABEL_MAP: { [key in string]: ModalLabel } = {
     yes: '확인하러 가기',
     no: '피드로 돌아가기',
   },
+  [Stage.NOTIFY]: {
+    title: '쿠키를 구우시겠어요?',
+    description: '쿠키를 구우려면 망치 5톤이 필요해요.',
+    yes: '쿠키 굽기',
+    no: '취소하기',
+  },
   [Stage.REQUEST_FAIL]: {
     title: '쿠키 굽기를 실패했습니다.',
     description: '쿠키 정상적으로 굽지 못했습니다.\n다시 시도해주세요.',
