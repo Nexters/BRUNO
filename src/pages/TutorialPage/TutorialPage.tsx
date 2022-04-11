@@ -59,7 +59,7 @@ function TutorialPage() {
 
   const handleClickButton = () => {
     if (step === TEXT_MAP.length - 1) {
-      navigate('/tutorial/completed');
+      navigate('/');
     } else {
       setStep(step + 1);
     }
@@ -72,7 +72,7 @@ function TutorialPage() {
           <Title>{TEXT_MAP[step].title}</Title>
           <Guide>{TEXT_MAP[step].guide}</Guide>
           <ImageWrapper>
-            <img src={IMAGE_MAP[step]} alt={`tutorail_step${step}_image`} />
+            <img src={IMAGE_MAP[step]} alt={`tutorial_step${step}_image`} />
           </ImageWrapper>
         </div>
 

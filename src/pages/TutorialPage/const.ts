@@ -1,4 +1,4 @@
-import { Tutorial01, Tutorial02, Tutorial03, Tutorial04 } from '@src/assets/images';
+import { Tutorial01, Tutorial02, Tutorial03 } from '@src/assets/images';
 
 export const TEXT_MAP = [
   {
@@ -18,4 +18,4 @@ export const TEXT_MAP = [
   },
 ];
 
-export const IMAGE_MAP = [Tutorial01, Tutorial02, Tutorial03, Tutorial04];
+export const IMAGE_MAP = [Tutorial01, Tutorial02, Tutorial03];
