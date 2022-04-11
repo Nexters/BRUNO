@@ -40,10 +40,10 @@ const GuideLink = styled.a`
 
 interface Props {
   type: LoginType;
-  toNextPage: () => void;
+  handleSuccess: () => void;
 }
 
-function RegistId({ type, toNextPage }: Props) {
+function RegistId({ type, handleSuccess }: Props) {
   const TEXT = REGIST_TEXT_MAP[type];
 
   const [nickname, setNickname] = useState<string>('');
@@ -65,7 +65,7 @@ function RegistId({ type, toNextPage }: Props) {
         onSuccess: (data) => {
           if (!data?.id) return;
           setCookie(CookieName.USER_ID, data.id);
-          toNextPage();
+          handleSuccess();
         },
       },
     );

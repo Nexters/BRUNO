@@ -10,7 +10,7 @@ function JoinPage() {
 
   return (
     <PageLayout padding="20px" pageType={HeaderPage.JOIN} onlyContents>
-      {step === 0 && <RegistId type={LoginType.KLIP} toNextPage={() => setStep(1)} />}
+      {step === 0 && <RegistId type={LoginType.KLIP} handleSuccess={() => setStep(1)} />}
       {step === 1 && <SelectCategory />}
     </PageLayout>
   );
