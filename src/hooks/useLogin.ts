@@ -1,5 +1,4 @@
 import { useCookies } from 'react-cookie';
-import { isMobile } from 'react-device-detect';
 
 export enum CookieName {
   KLIP_ADDRESS = 'kad',
@@ -31,7 +30,6 @@ export const useLogin = () => {
   return {
     address: klipAddressCookie ?? '',
     isLoggedIn: !!klipAddressCookie && !!userId,
-    isMobile,
     userId,
     isApproval,
     finishOnboard,

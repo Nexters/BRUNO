@@ -5,12 +5,12 @@ import IconButton from '../shared/IconButton';
 
 const Root = styled.nav`
   bottom: 0;
-  position: absolute;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  position: fixed;
   width: 100%;
   max-width: 700px;
   height: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   background-color: ${(props) => props.theme.colors.basic.gray10};
 `;
 

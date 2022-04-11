@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 
-import HomePage from '@src/pages/HomePage/HomePage';
+import HomePage from '@src/pages/HomePage';
 import CreateCookiePage from '@src/pages/CreateCookiePage';
 import CookieDetailPage from '@src/pages/CookieDetailPage';
 import SettingPage from '@src/pages/SettingPage';
