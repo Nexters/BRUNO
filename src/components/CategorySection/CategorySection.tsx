@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
@@ -19,6 +20,10 @@ const CategoryWrapper = styled.div`
 
 function CategorySection({ isEdit = false, currentCategory, setCategory }: Props) {
   const categoryList = useRecoilValue(categoryListSelector);
+
+  useEffect(() => {
+    if (!currentCategory) setCategory(categoryList[0]);
+  }, [categoryList]);
 
   return (
     <CategoryWrapper>
