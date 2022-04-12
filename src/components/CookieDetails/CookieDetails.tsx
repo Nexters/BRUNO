@@ -5,7 +5,7 @@ import { useMutation } from 'react-query';
 import { isMobile } from 'react-device-detect';
 
 import { theme } from '@src/assets/styles';
-import Icon, { Comment24, Hammer24 } from '@src/assets/Icon';
+import Icon from '@src/assets/Icon';
 import { ProfileImage01, ProfileImage02 } from '@src/assets/images';
 import { CookieDetail, CookieStatus } from '@src/queries/types';
 import CookieHistorySection from '@src/components/CookieHistorySection';
@@ -201,9 +201,7 @@ function CookieDetails({ data, refetch }: Props) {
         </QuestionWrapper>
 
         <AnswerWrapper>
-          <Icon color={theme.colors.basic.gray60} style={{ marginBottom: 'auto' }}>
-            <Comment24 />
-          </Icon>
+          <Icon icon="comment" size={24} color={theme.colors.basic.gray60} noFill />
           {myCookie ? (
             <ContentCard content={answer} categoryColor={category.color} />
           ) : (
@@ -214,9 +212,7 @@ function CookieDetails({ data, refetch }: Props) {
         <HammerWrapper>
           <Hammer>망치</Hammer>
           <HammerCount>
-            <Icon color={theme.colors.basic.gray60}>
-              <Hammer24 />
-            </Icon>
+            <Icon icon="hammer" size={24} color={theme.colors.basic.gray60} noFill />
             {price}
             <HammerUnit>톤</HammerUnit>
           </HammerCount>

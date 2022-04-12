@@ -1,4 +1,5 @@
-import { ReactNode } from 'react';
+import Icon from '@src/assets/Icon';
+import { iconName } from '@src/assets/Icon/const';
 import styled from 'styled-components';
 
 const Button = styled.button`
@@ -10,12 +11,19 @@ const Button = styled.button`
 `;
 
 interface IconButtonProps {
-  children: ReactNode;
+  icon: iconName;
+  size: number;
+  color?: string;
+  noFill?: boolean;
   onClick: () => void;
 }
 
-function IconButton({ children, onClick }: IconButtonProps) {
-  return <Button onClick={onClick}>{children}</Button>;
+function IconButton({ icon, size, color, noFill, onClick }: IconButtonProps) {
+  return (
+    <Button onClick={onClick}>
+      <Icon icon={icon} size={size} color={color} noFill={noFill} />
+    </Button>
+  );
 }
 
 export default IconButton;

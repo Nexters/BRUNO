@@ -4,11 +4,10 @@ import { isMobile } from 'react-device-detect';
 import MainButton from '@src/components/shared/MainButton';
 import Modal from '@src/components/shared/Modal';
 import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
-import { MainLogoImage } from '@src/assets/images';
-import { useKlipPrepare, useKlipLogin } from '@src/klip';
 
-import Icon, { MainLogo } from '@src/assets/Icon';
-import { Root, BottomWrapper, LogoWrapper, LogoImage, SubText } from './styled';
+import { MainLogoImage as mainLogo, LogoImage as logo } from '@src/assets/images';
+import { useKlipPrepare, useKlipLogin } from '@src/klip';
+import { Root, BottomWrapper, LogoWrapper, MainLogoImage, LogoImage, SubText } from './styled';
 import { LoginStage } from './types';
 import { LOGIN_MODAL_LABEL } from './const';
 
@@ -51,11 +50,8 @@ function LoginPage() {
   return (
     <Root>
       <LogoWrapper>
-        <LogoImage src={MainLogoImage} />
-        <Icon isOn>
-          <MainLogo />
-        </Icon>
-
+        <MainLogoImage src={mainLogo} />
+        <LogoImage src={logo} />
         <SubText>{'세상 모든 아이덴티티를\n사고 파는 NFT 플랫폼'}</SubText>
       </LogoWrapper>
       <BottomWrapper>

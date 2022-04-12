@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Icon, { Home24, Plus24, Profile24 } from '@src/assets/Icon';
+import Icon from '@src/assets/Icon';
+import { theme } from '@src/assets/styles';
 import IconButton from '../shared/IconButton';
 
 const Root = styled.nav`
@@ -46,26 +47,28 @@ export default function Navigation() {
     <>
       <Root>
         <ButtonWrapper>
-          <IconButton onClick={handleClickHome}>
-            <Icon isOn={isHome}>
-              <Home24 />
-            </Icon>
-          </IconButton>
+          <IconButton
+            icon="home"
+            size={24}
+            color={theme.colors.basic.gray90}
+            noFill={!isHome}
+            onClick={handleClickHome}
+          />
         </ButtonWrapper>
 
         <ButtonWrapper>
-          <IconButton onClick={handleClickProfile}>
-            <Icon isOn={isProfile}>
-              <Profile24 />
-            </Icon>
-          </IconButton>
+          <IconButton
+            icon="profile"
+            size={24}
+            color={theme.colors.basic.gray90}
+            noFill={!isProfile}
+            onClick={handleClickProfile}
+          />
         </ButtonWrapper>
       </Root>
 
       <WriteButton onClick={handleClickWrite}>
-        <Icon>
-          <Plus24 />
-        </Icon>
+        <Icon icon="plus24" size={14} color={theme.colors.basic.gray90} />
       </WriteButton>
     </>
   );

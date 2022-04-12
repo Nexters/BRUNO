@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
-
 import { unimplementedModalAtom } from '@src/recoil/ui';
-import Icon, { AlarmOn24, Setting24, MainLogo } from '@src/assets/Icon';
 import IconButton from '@src/components/shared/IconButton';
 import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
+import { LogoImage as logo } from '@src/assets/images';
 
 export const HeaderContainer = styled.header`
   display: flex;
@@ -23,6 +22,12 @@ const Container = styled(HeaderContainer)`
   color: white;
   justify-content: space-between;
   padding: 12px 16px 12px 20px;
+`;
+
+const LogoImage = styled.img`
+  width: 120px;
+  height: 23px;
+  cursor: pointer;
 `;
 
 export const AppTitle = styled.div`
@@ -49,20 +54,10 @@ function MainHeader() {
 
   return (
     <Container>
-      <Icon isOn>
-        <MainLogo style={{ cursor: 'pointer' }} onClick={() => navigate('/')} />
-      </Icon>
+      <LogoImage src={logo} onClick={() => navigate('/')} />
       <ButtonWrapper>
-        <IconButton onClick={handleClickAlarm}>
-          <Icon>
-            <AlarmOn24 />
-          </Icon>
-        </IconButton>
-        <IconButton onClick={handleClickSetting}>
-          <Icon>
-            <Setting24 />
-          </Icon>
-        </IconButton>
+        <IconButton icon="alarm" size={24} noFill onClick={handleClickAlarm} />
+        <IconButton icon="setting" size={24} onClick={handleClickSetting} />
       </ButtonWrapper>
     </Container>
   );

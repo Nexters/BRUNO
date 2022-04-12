@@ -1,7 +1,8 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import QRCode from 'react-qr-code';
 
-import Icon, { QrFlow1, QrFlow2, QrFlow3, Right24, Left24 } from '@src/assets/Icon';
+import Icon from '@src/assets/Icon';
+import { QrFlow1, QrFlow2, QrFlow3 } from '@src/assets/images';
 import IconButton from '@src/components/shared/IconButton';
 import { klipRequestKeyAtom } from '@src/recoil/klip';
 import { QRcodeModalAtom } from '@src/recoil/ui';
@@ -30,11 +31,7 @@ function QRcodeModal() {
     <Wrapper>
       <Box>
         <Header>
-          <IconButton onClick={() => setOpen(false)}>
-            <Icon style={{ marginRight: '8px' }}>
-              <Right24 />
-            </Icon>
-          </IconButton>
+          <IconButton icon="right" size={24} color={theme.colors.basic.gray100} noFill onClick={() => setOpen(false)} />
           QR로그인
         </Header>
         <ContentWrapper>
@@ -46,27 +43,18 @@ function QRcodeModal() {
           <Guide>{`QR 코드 리더기 또는 카카오 앱을 통해\nQR 코드를 스캔해주세요.`}</Guide>
           <GuideIconWrapper>
             <IconWrapper>
-              <Icon isOn>
-                <QrFlow1 />
-              </Icon>
+              <QrFlow1 />
               <span>카카오톡 실행</span>
             </IconWrapper>
-            <Icon color={theme.colors.basic.gray50} style={{ marginBottom: '20px' }}>
-              <Left24 />
-            </Icon>
+
+            <Icon icon="left" size={24} color={theme.colors.basic.gray50} noFill />
             <IconWrapper>
-              <Icon isOn>
-                <QrFlow2 />
-              </Icon>
+              <QrFlow2 />
               <span>상단 검색창 클릭</span>
             </IconWrapper>
-            <Icon color={theme.colors.basic.gray50} style={{ marginBottom: '20px' }}>
-              <Left24 />
-            </Icon>
+            <Icon icon="left" size={24} color={theme.colors.basic.gray50} noFill />
             <IconWrapper>
-              <Icon isOn>
-                <QrFlow3 />
-              </Icon>
+              <QrFlow3 />
               <span>코드 스캔 후 로그인</span>
             </IconWrapper>
           </GuideIconWrapper>

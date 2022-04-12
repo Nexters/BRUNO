@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import Icon, { Comment24, Hammer24, View24 } from '@src/assets/Icon';
+import Icon from '@src/assets/Icon';
 import { theme } from '@src/assets/styles';
 import { CookieFeedItem } from '@src/queries/types';
 import NFTCookie from '@src/components/shared/NFTCookie';
@@ -70,9 +70,7 @@ export default function FeedContent({ cookie }: Props) {
           <Question>Q. {question}</Question>
         </QuestionWrapper>
         <AnswerWrapper onClick={() => navigate(`/cookie/${cookieId}`)}>
-          <Icon color={theme.colors.basic.gray60} style={{ marginBottom: 'auto' }}>
-            <Comment24 />
-          </Icon>
+          <Icon icon="comment" size={24} color={theme.colors.basic.gray60} noFill />
           {myCookie ? (
             <ContentCard content={answer} categoryColor={category.color} />
           ) : (
@@ -82,13 +80,9 @@ export default function FeedContent({ cookie }: Props) {
       </BoxWrapper>
 
       <NumericSection>
-        <Icon color={theme.colors.basic.gray60}>
-          <View24 />
-        </Icon>
+        <Icon icon="view" size={24} color={theme.colors.basic.gray60} noFill />
         <InfoText>{viewCount}</InfoText>
-        <Icon color={theme.colors.basic.gray60}>
-          <Hammer24 />
-        </Icon>
+        <Icon icon="hammer" size={24} color={theme.colors.basic.gray60} noFill />
         <InfoText>{price}</InfoText>
       </NumericSection>
     </Wrapper>

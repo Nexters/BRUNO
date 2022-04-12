@@ -1,4 +1,5 @@
 import MainLogoImage from './logo/main.png';
+import LogoImage from './logo/logo.png';
 import ProfileImage01 from './profile/Default_01.png';
 import ProfileImage02 from './profile/Default_02.png';
 import ProfileImage03 from './profile/Default_03.png';
@@ -16,9 +17,13 @@ import Tutorial01 from './tutorial/tutorial_01.png';
 import Tutorial02 from './tutorial/tutorial_02.png';
 import Tutorial03 from './tutorial/tutorial_03.png';
 import Tutorial04 from './tutorial/tutorial_04.png';
+import { ReactComponent as QrFlow1 } from './qr/qr-1.svg';
+import { ReactComponent as QrFlow2 } from './qr/qr-2.svg';
+import { ReactComponent as QrFlow3 } from './qr/qr-3.svg';
 
 export {
   MainLogoImage,
+  LogoImage,
   ProfileImage01,
   ProfileImage02,
   ProfileImage03,
@@ -36,4 +41,7 @@ export {
   Tutorial02,
   Tutorial03,
   Tutorial04,
+  QrFlow1,
+  QrFlow2,
+  QrFlow3,
 };
