@@ -6,8 +6,6 @@ import styled from 'styled-components';
 
 import { useExecuteContract, HammerMethod } from '@src/klip';
 import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
-import PageLayout from '@src/components/shared/PageLayout';
-import { HeaderPage } from '@src/components/Header/const';
 import MainButton from '@src/components/shared/MainButton';
 import { useLogin, CookieName } from '@src/hooks';
 import Modal from '@src/components/shared/Modal';
@@ -116,7 +114,7 @@ function SettingPage() {
   );
 
   return (
-    <PageLayout padding="20px" pageType={HeaderPage.SETTING} onlyContents>
+    <>
       {/* TODO : API 적용 */}
       <CoinWrapper>
         클레이튼
@@ -153,7 +151,7 @@ function SettingPage() {
         onClickYes={() => handleClickModal(true)}
         onClickNo={() => handleClickModal(false)}
       />
-    </PageLayout>
+    </>
   );
 }
 

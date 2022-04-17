@@ -1,6 +1,6 @@
 import { ReactNode, useMemo } from 'react';
 import styled from 'styled-components';
-import { NAVIGATION_HEIGHT } from '@src/assets/styles';
+import { NAVIGATION_HEIGHT, MEDIA_SIZE } from '@src/assets/styles';
 import Header from '@src/components/Header';
 import Navigation from '@src/components/Navigation';
 import { HeaderPage } from '@src/components/Header/const';
@@ -23,12 +23,16 @@ interface LayoutProps {
 
 const Root = styled.div`
   width: 100%;
-  max-width: 700px;
+  max-width: ${MEDIA_SIZE.mobile}px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
 `;
 
 const Layout = styled.div<LayoutProps>`
   width: 100%;
-  max-width: 700px;
+  max-width: ${MEDIA_SIZE.mobile}px;
   height: calc(100vh - ${NAVIGATION_HEIGHT}px);
   overflow-y: scroll;
   padding: ${(props) => props.padding || ''};

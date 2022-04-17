@@ -22,7 +22,7 @@ const ButtonWrapper = styled.div`
 `;
 
 const WriteButton = styled.button`
-  position: absolute;
+  position: fixed;
   bottom: 15px;
   left: calc(50% - 28px);
   width: 56px;
