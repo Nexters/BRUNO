@@ -1,13 +1,1 @@
 export { default } from './Icon';
-export { ReactComponent as PinkBox } from './box-pink.svg';
-export { ReactComponent as PurpleBox } from './box-purple.svg';
-export { ReactComponent as LimeBox } from './box-lime.svg';
-export { ReactComponent as BlueBox } from './box-blue.svg';
-export { ReactComponent as PinkClose } from './close-pink.svg';
-export { ReactComponent as PurpleClose } from './close-purple.svg';
-export { ReactComponent as LimeClose } from './close-lime.svg';
-export { ReactComponent as BlueClose } from './close-blue.svg';
-export { ReactComponent as PinkCookie } from './cookie-pink.svg';
-export { ReactComponent as PurpleCookie } from './cookie-purple.svg';
-export { ReactComponent as LimeCookie } from './cookie-lime.svg';
-export { ReactComponent as BlueCookie } from './cookie-blue.svg';

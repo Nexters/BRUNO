@@ -5,6 +5,14 @@ import ProfileImage02 from './profile/Default_02.png';
 import ProfileImage03 from './profile/Default_03.png';
 import BackgroundImage01 from './profile/Default_bg_01.png';
 import BackgroundImage02 from './profile/Default_bg_02.png';
+import CookieOpenPurple from './cookie/cookie-open-purple.png';
+import CookieOpenBlue from './cookie/cookie-open-blue.png';
+import CookieOpenPink from './cookie/cookie-open-pink.png';
+import CookieOpenLime from './cookie/cookie-open-lime.png';
+import CookieClosedPurple from './cookie/cookie-closed-purple.png';
+import CookieClosedBlue from './cookie/cookie-closed-blue.png';
+import CookieClosedPink from './cookie/cookie-closed-pink.png';
+import CookieClosedLime from './cookie/cookie-closed-lime.png';
 import NFTImage01 from './nft/Default_01.png';
 import NFTImage02 from './nft/Default_02.png';
 import NFTImage03 from './nft/Default_03.png';
@@ -28,6 +36,14 @@ export {
   ProfileImage03,
   BackgroundImage01,
   BackgroundImage02,
+  CookieOpenPurple,
+  CookieOpenBlue,
+  CookieOpenPink,
+  CookieOpenLime,
+  CookieClosedPurple,
+  CookieClosedBlue,
+  CookieClosedPink,
+  CookieClosedLime,
   NFTImage01,
   NFTImage02,
   NFTImage03,
