@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { categoryListSelector } from '@src/recoil/category';
 import { Category } from '@src/queries/types';
 import CategoryButton from '@src/components/shared/CategoryButton';
+import { ALL_CATEGORY } from '@src/components/HomeTab/const';
 
 type Props = {
   isEdit?: boolean;
@@ -22,7 +23,7 @@ function CategorySection({ isEdit = false, currentCategory, setCategory }: Props
   const categoryList = useRecoilValue(categoryListSelector);
 
   useEffect(() => {
-    if (currentCategory === 0) setCategory(categoryList[0]);
+    if (currentCategory === ALL_CATEGORY.id) setCategory(categoryList[0]);
   }, [categoryList]);
 
   return (
