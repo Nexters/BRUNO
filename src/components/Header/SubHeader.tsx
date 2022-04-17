@@ -44,7 +44,7 @@ function SubHeader({ pageType }: Props) {
   const { isOpen } = useQRcodeModal();
 
   const handleClickBack = () => navigate(-1);
-  const handleClickSkip = () => navigate('/tutorial/completed');
+  const handleClickSkip = () => navigate('/');
 
   if (isOpen) return null;
 

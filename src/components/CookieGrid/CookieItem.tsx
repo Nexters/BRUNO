@@ -40,12 +40,12 @@ function CookieItem({ id, category, cookieStatus, myCookie, onClickForbidden }: 
 
   return (
     <CookieWrapper onClick={handleClick}>
-      <Icon isOn style={{ position: 'relative' }}>
+      {/* <Icon isOn style={{ position: 'relative' }}>
         <BoxIcon />
         <Icon isOn style={{ position: 'absolute' }} svgStyle={{ width: '100%', height: '100%' }}>
           <CookieIcon />
         </Icon>
-      </Icon>
+      </Icon> */}
     </CookieWrapper>
   );
 }
