@@ -13,9 +13,6 @@ import CookieClosedPurple from './cookie/cookie-closed-purple.png';
 import CookieClosedBlue from './cookie/cookie-closed-blue.png';
 import CookieClosedPink from './cookie/cookie-closed-pink.png';
 import CookieClosedLime from './cookie/cookie-closed-lime.png';
-import NFTImage01 from './nft/Default_01.png';
-import NFTImage02 from './nft/Default_02.png';
-import NFTImage03 from './nft/Default_03.png';
 import NFTPink from './nft/Cookie_Pink.png';
 import NFTLime from './nft/Cookie_Lime.png';
 import NFTBlue from './nft/Cookie_Blue.png';
@@ -44,9 +41,6 @@ export {
   CookieClosedBlue,
   CookieClosedPink,
   CookieClosedLime,
-  NFTImage01,
-  NFTImage02,
-  NFTImage03,
   NFTPurple,
   NFTBlue,
   NFTLime,
