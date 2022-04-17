@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const Root = styled.div`
   position: fixed;
-  left: 0;
   top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   width: 100%;
+  height: 100vh;
 `;
 
 const Box = styled.div`
@@ -47,16 +48,17 @@ const Title = styled.div`
 const Timer = styled.div`
   font-size: 16px;
 `;
-const Guide = styled.div``;
 
 const QRcodeWrapper = styled.div`
   margin: 40px 0;
 `;
 
 const GuideIconWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 7px;
+  display: grid;
+  grid-template-columns: 1fr 24px 1fr;
+  grid-template-rows: 1fr 21px;
+  column-gap: 8px;
+  row-gap: 15px;
   margin-top: 30px;
 `;
 
@@ -67,4 +69,4 @@ const IconWrapper = styled.div`
   align-items: center;
 `;
 
-export { Wrapper, Box, Header, ContentWrapper, Title, Timer, Guide, QRcodeWrapper, GuideIconWrapper, IconWrapper };
+export { Root, Box, Header, ContentWrapper, Title, Timer, QRcodeWrapper, GuideIconWrapper, IconWrapper };
