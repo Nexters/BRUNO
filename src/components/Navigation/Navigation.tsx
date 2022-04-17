@@ -27,6 +27,9 @@ const WriteButton = styled.button`
   left: calc(50% - 28px);
   width: 56px;
   height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 100px;
   background: linear-gradient(90deg, #e44aeb -2.24%, #142bfc 100%);
   cursor: pointer;
@@ -68,7 +71,7 @@ export default function Navigation() {
       </Root>
 
       <WriteButton onClick={handleClickWrite}>
-        <Icon icon="plus24" size={14} color={theme.colors.basic.gray90} />
+        <Icon icon="plus18" size={24} color={theme.colors.basic.gray90} />
       </WriteButton>
     </>
   );

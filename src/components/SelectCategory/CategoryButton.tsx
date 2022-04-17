@@ -58,7 +58,7 @@ function CategoryButton({ info, isActive, handleClickButton }: Props) {
 
       <ButtonWrapper>
         <AddButton isActive={isActive} onClick={handleClickButton}>
-          <Icon icon="plus24" size={22} color={theme.colors.basic.gray90} />
+          <Icon icon="plus24" size={24} color={theme.colors.basic.gray90} />
         </AddButton>
       </ButtonWrapper>
     </Root>
