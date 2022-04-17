@@ -35,6 +35,7 @@ const AddButton = styled.button<{ isActive: boolean }>`
   align-items: center;
   width: 22px;
   height: 22px;
+  padding: 0;
   border-radius: 100px;
   background: ${({ isActive }) => (isActive ? theme.colors.brand.main : theme.colors.background.gradientBlack)};
 `;
@@ -58,7 +59,7 @@ function CategoryButton({ info, isActive, handleClickButton }: Props) {
 
       <ButtonWrapper>
         <AddButton isActive={isActive} onClick={handleClickButton}>
-          <Icon icon="plus24" size={24} color={theme.colors.basic.gray90} />
+          <Icon icon="plus18" size={18} color={theme.colors.basic.gray90} />
         </AddButton>
       </ButtonWrapper>
     </Root>
