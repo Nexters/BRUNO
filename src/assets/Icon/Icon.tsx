@@ -14,10 +14,16 @@ function Icon({ icon, size, color = theme.colors.basic.gray100, noFill }: IconPr
       width={size}
       height={size}
       viewBox={IconSet[icon].viewBox}
-      fill={noFill ? '' : color}
+      fill={noFill ? 'transparent' : color}
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d={IconSet[icon].path} stroke={color} strokeWidth={IconSet[icon].stroke} strokeLinecap="round" />
+      <path
+        d={IconSet[icon].path}
+        stroke={color}
+        strokeWidth={IconSet[icon].stroke}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }

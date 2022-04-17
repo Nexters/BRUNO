@@ -56,7 +56,7 @@ function MainHeader() {
     <Container>
       <LogoImage src={logo} onClick={() => navigate('/')} />
       <ButtonWrapper>
-        <IconButton icon="alarm" size={24} noFill onClick={handleClickAlarm} />
+        <IconButton icon="alarm" size={24} onClick={handleClickAlarm} noFill />
         <IconButton icon="setting" size={24} onClick={handleClickSetting} />
       </ButtonWrapper>
     </Container>
