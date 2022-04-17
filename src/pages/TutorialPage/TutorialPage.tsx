@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { HeaderPage } from '@src/components/Header/const';
 import MainButton from '@src/components/shared/MainButton';
 import PageLayout from '@src/components/shared/PageLayout';
+import { MEDIA_SIZE } from '@src/assets/styles';
 import { TEXT_MAP, IMAGE_MAP } from './const';
 
 const Root = styled.div`
@@ -48,7 +49,7 @@ const ButtonWrapper = styled.div`
   justify-content: center;
 
   div {
-    max-width: 700px;
+    max-width: ${MEDIA_SIZE.mobile}px;
     padding: 20px;
   }
 `;

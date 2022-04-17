@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { MEDIA_SIZE } from '@src/assets/styles';
 
 const Root = styled.div`
   position: fixed;
@@ -12,7 +13,7 @@ const Root = styled.div`
 
 const Box = styled.div`
   width: 100%;
-  max-width: 700px;
+  max-width: ${MEDIA_SIZE.mobile}px;
   height: 100vh;
   margin: auto;
   display: flex;

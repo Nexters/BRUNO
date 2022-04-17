@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { rgba } from 'polished';
 import { Button as button } from '@src/components/shared/MainButton';
-import { theme } from '@src/assets/styles';
+import { MEDIA_SIZE, theme } from '@src/assets/styles';
 
 export const Container = styled.div`
   position: fixed;
@@ -20,7 +20,7 @@ export const ModalWrapper = styled.div`
   position: relative;
   display: flex;
   width: 100%;
-  max-width: 700px;
+  max-width: ${MEDIA_SIZE.mobile}px;
   height: 100%;
   margin: 0 auto;
   padding: 0 20px;

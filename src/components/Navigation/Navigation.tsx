@@ -1,13 +1,14 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Icon, { Home24, Plus24, Profile24 } from '@src/assets/Icon';
+import { MEDIA_SIZE } from '@src/assets/styles';
 import IconButton from '../shared/IconButton';
 
 const Root = styled.nav`
   bottom: 0;
   position: fixed;
   width: 100%;
-  max-width: 700px;
+  max-width: ${MEDIA_SIZE.mobile}px;
   height: 48px;
   display: grid;
   grid-template-columns: 1fr 1fr;

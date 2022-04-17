@@ -1,4 +1,4 @@
-const MEDIA_SIZE = {
+export const MEDIA_SIZE = {
   large: 701,
   small: 319,
   mobile: 700,
