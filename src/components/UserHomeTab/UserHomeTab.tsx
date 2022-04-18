@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
-
+import { MEDIA_SIZE } from '@src/assets/styles';
 import TabItem from './TabItem';
 import { TabType } from './types';
 
@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   display: flex;
   gap: 20px;
   width: 100%;
-  max-width: 700px;
+  max-width: ${MEDIA_SIZE.mobile}px;
   margin-top: 189px;
   padding: 0 20px;
   border-bottom: 2px solid ${(props) => props.theme.colors.basic.gray20};

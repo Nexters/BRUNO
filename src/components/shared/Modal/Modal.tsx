@@ -1,14 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  Container,
-  ModalWrapper,
-  ModalBox,
-  AskLabel,
-  DescriptionLabel,
-  ButtonWrapper,
-  NoButton,
-  YesButton,
-} from './styled';
+import { Root, ModalBox, AskLabel, DescriptionLabel, ButtonWrapper, NoButton, YesButton } from './styled';
 
 export interface ModalLabel {
   title: string;
@@ -42,18 +33,16 @@ function Modal({ open, label, onClickYes, onClickNo, onlyYes }: Props) {
   };
 
   return (
-    <Container>
-      <ModalWrapper>
-        <ModalBox>
-          <AskLabel>{title}</AskLabel>
-          <DescriptionLabel>{description}</DescriptionLabel>
-          <ButtonWrapper>
-            {!onlyYes && <NoButton onClick={handleClickNo}>{no}</NoButton>}
-            <YesButton onClick={handleClickYes}>{yes}</YesButton>
-          </ButtonWrapper>
-        </ModalBox>
-      </ModalWrapper>
-    </Container>
+    <Root>
+      <ModalBox>
+        <AskLabel>{title}</AskLabel>
+        <DescriptionLabel>{description}</DescriptionLabel>
+        <ButtonWrapper>
+          {!onlyYes && <NoButton onClick={handleClickNo}>{no}</NoButton>}
+          <YesButton onClick={handleClickYes}>{yes}</YesButton>
+        </ButtonWrapper>
+      </ModalBox>
+    </Root>
   );
 }
 

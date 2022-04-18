@@ -1,23 +1,16 @@
 import styled from 'styled-components';
 import { rgba } from 'polished';
 import { Button as button } from '@src/components/shared/MainButton';
-import { theme } from '@src/assets/styles';
+import { MEDIA_SIZE, theme } from '@src/assets/styles';
 
-export const Container = styled.div`
+export const Root = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  display: flex;
   width: 100%;
+  max-width: ${MEDIA_SIZE.mobile}px;
   height: 100%;
-  background: none;
-`;
-
-export const ModalWrapper = styled.div`
   display: flex;
-  width: 100%;
-  max-width: 700px;
-  height: 100%;
   margin: 0 auto;
   padding: 0 20px;
   background-color: ${(props) => rgba(props.theme.colors.basic.gray00, 0.75)};
