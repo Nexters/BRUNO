@@ -2,7 +2,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import QRCode from 'react-qr-code';
 
 import Icon from '@src/assets/Icon';
-import { QrFlow1, QrFlow3 } from '@src/assets/images';
+import { CameraIcon, QRIcon } from '@src/assets/images';
 import IconButton from '@src/components/shared/IconButton';
 import { klipRequestKeyAtom } from '@src/recoil/klip';
 import { QRcodeModalAtom } from '@src/recoil/ui';
@@ -16,6 +16,7 @@ import {
   // Timer,
   QRcodeWrapper,
   GuideIconWrapper,
+  IconWrapper,
 } from './styled';
 
 function QRcodeModal() {
@@ -41,9 +42,13 @@ function QRcodeModal() {
           <div>{`카메라를 통해\nQR 코드를 스캔해주세요.`}</div>
 
           <GuideIconWrapper>
-            <QrFlow1 />
+            <IconWrapper>
+              <CameraIcon />
+            </IconWrapper>
             <Icon icon="left" size={24} color={theme.colors.basic.gray50} noFill />
-            <QrFlow3 />
+            <IconWrapper>
+              <QRIcon />
+            </IconWrapper>
 
             <span>카메라 실행</span>
             <div />

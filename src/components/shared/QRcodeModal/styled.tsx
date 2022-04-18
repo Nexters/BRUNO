@@ -65,4 +65,14 @@ const GuideIconWrapper = styled.div`
   margin-top: 30px;
 `;
 
-export { Root, Box, Header, ContentWrapper, Title, Timer, QRcodeWrapper, GuideIconWrapper };
+const IconWrapper = styled.div`
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background-color: ${(props) => props.theme.colors.brand.sub01};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export { Root, Box, Header, ContentWrapper, Title, Timer, QRcodeWrapper, GuideIconWrapper, IconWrapper };

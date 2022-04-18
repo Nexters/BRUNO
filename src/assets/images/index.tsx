@@ -21,9 +21,8 @@ import NFTError from './nft/Cookie_Error.png';
 import Tutorial01 from './tutorial/tutorial_01.png';
 import Tutorial02 from './tutorial/tutorial_02.png';
 import Tutorial03 from './tutorial/tutorial_03.png';
-import { ReactComponent as QrFlow1 } from './qr/qr-1.svg';
-import { ReactComponent as QrFlow2 } from './qr/qr-2.svg';
-import { ReactComponent as QrFlow3 } from './qr/qr-3.svg';
+import { ReactComponent as CameraIcon } from './svg/camera.svg';
+import { ReactComponent as QRIcon } from './svg/qr.svg';
 
 export {
   MainLogoImage,
@@ -49,7 +48,6 @@ export {
   Tutorial01,
   Tutorial02,
   Tutorial03,
-  QrFlow1,
-  QrFlow2,
-  QrFlow3,
+  CameraIcon,
+  QRIcon,
 };
