@@ -22,7 +22,7 @@ function Main() {
       <Route
         path="/settings"
         element={
-          <PageLayout pageType={HeaderPage.SETTING}>
+          <PageLayout pageType={HeaderPage.SETTING} padding="20px">
             <SettingPage />
           </PageLayout>
         }

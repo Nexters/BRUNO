@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { UserProfileType } from '@src/queries/types';
 import { BackgroundImage01, BackgroundImage02 } from '@src/assets/images';
+import { MEDIA_SIZE } from '@src/assets/styles';
 import UserPhoto from './UserPhoto';
 import BioSection from './BioSection';
 
@@ -10,14 +11,14 @@ const Wrapper = styled.div`
   position: fixed;
   padding-top: 12px;
   width: 100%;
-  max-width: 700px;
+  max-width: ${MEDIA_SIZE.mobile}px;
 `;
 
 const BackgroundImage = styled.img`
   position: fixed;
   top: 0;
   width: 100%;
-  max-width: 700px;
+  max-width: ${MEDIA_SIZE.mobile}px;
   height: 184px;
   object-fit: cover;
 `;
@@ -26,7 +27,7 @@ const BackgroundImageShadow = styled.div`
   position: fixed;
   top: 0;
   width: 100%;
-  max-width: 700px;
+  max-width: ${MEDIA_SIZE.mobile}px;
   height: 185px;
   background: linear-gradient(180deg, rgba(1, 1, 16, 0.1) 0%, #010112 100%);
 `;

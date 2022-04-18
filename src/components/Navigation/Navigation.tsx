@@ -1,14 +1,14 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Icon from '@src/assets/Icon';
-import { theme } from '@src/assets/styles';
+import { theme, MEDIA_SIZE } from '@src/assets/styles';
 import IconButton from '../shared/IconButton';
 
 const Root = styled.nav`
   bottom: 0;
   position: fixed;
   width: 100%;
-  max-width: 700px;
+  max-width: ${MEDIA_SIZE.mobile}px;
   height: 48px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -22,7 +22,7 @@ const ButtonWrapper = styled.div`
 `;
 
 const WriteButton = styled.button`
-  position: absolute;
+  position: fixed;
   bottom: 15px;
   left: calc(50% - 28px);
   width: 56px;

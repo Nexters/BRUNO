@@ -57,6 +57,7 @@ function LoginPage() {
       <BottomWrapper>
         <MainButton onClick={handleClickButton} value="카카오 Klip 으로 연동하기" buttonStyle={{ margin: 0 }} />
       </BottomWrapper>
+
       <Modal
         label={LOGIN_MODAL_LABEL[loginStage]}
         open={loginStage === LoginStage.REQUEST}

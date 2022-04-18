@@ -2,27 +2,22 @@ import styled from 'styled-components';
 
 export const Root = styled.div`
   width: 100%;
+
   padding: 40px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-rows: 1fr 48px;
 `;
 
 export const BottomWrapper = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: auto;
-  margin-bottom: 40px;
 `;
 
 export const LogoWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: auto;
 `;
 
 export const MainLogoImage = styled.img`

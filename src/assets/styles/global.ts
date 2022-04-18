@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 import normalize from 'styled-normalize';
 
 import { ThemeType } from './theme';
-import { MEDIA_QUERY } from './mixin';
+import { MEDIA_QUERY, MEDIA_SIZE } from './mixin';
 
 export const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
   ${normalize}
@@ -10,6 +10,10 @@ export const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
 
   html,
   body {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    bottom: 0;
     overflow: hidden;
     background-color: ${(props) => props.theme.colors.basic.gray20};
     color: ${(props) => props.theme.colors.basic.gray100};
@@ -18,7 +22,7 @@ export const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
 
   #root {
     display: flex;
-    max-width: 700px;
+    max-width: ${MEDIA_SIZE.mobile}px;
     min-height: 100vh;
     margin: 0 auto;
     background: ${(props) => props.theme.colors.background.gradientBlack};
