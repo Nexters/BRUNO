@@ -25,9 +25,6 @@ const Root = styled.div`
   width: 100%;
   max-width: ${MEDIA_SIZE.mobile}px;
   height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
 `;
 
 const Layout = styled.div<LayoutProps>`
