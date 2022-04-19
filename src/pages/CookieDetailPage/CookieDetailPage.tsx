@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useQuery } from 'react-query';
 
-import Icon, { View24 } from '@src/assets/Icon';
+import Icon from '@src/assets/Icon';
 import { theme } from '@src/assets/styles';
 import CookieDetails from '@src/components/CookieDetails';
 import CategoryButton from '@src/components/shared/CategoryButton';
@@ -49,9 +49,7 @@ function CookieDetailPage() {
       <CategoryWrapper>
         <CategoryButton isSelected category={data?.category} />
         <ViewCountWrapper>
-          <Icon color={theme.colors.basic.gray60}>
-            <View24 />
-          </Icon>
+          <Icon icon="view" size={24} color={theme.colors.basic.gray60} noFill />
           <ViewCountText>{data?.viewCount}</ViewCountText>
         </ViewCountWrapper>
       </CategoryWrapper>

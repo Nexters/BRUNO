@@ -6,6 +6,7 @@ import { useCookies } from 'react-cookie';
 
 import { useExecuteContract, Stage, CookieMethod } from '@src/klip';
 import { theme } from '@src/assets/styles';
+import Icon from '@src/assets/Icon';
 
 import MainButton from '@src/components/shared/MainButton';
 import Input from '@src/components/shared/Input';
@@ -13,7 +14,6 @@ import TextArea from '@src/components/shared/TextArea';
 import Modal from '@src/components/shared/Modal';
 import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
 import CategorySection from '@src/components/CategorySection';
-import Icon, { Minus24, Plus24 } from '@src/assets/Icon';
 import { postCookie } from '@src/queries/cookies';
 import { AskStatus, Category, CategoryColor } from '@src/queries/types';
 import { getApproval } from '@src/klip/axios';
@@ -199,15 +199,11 @@ function CreateCookiePage({ isEdit = false }: Props) {
         <Label>{TEXT_MAP.cost}</Label>
         <HammerPriceWrapper>
           <HammerControlButton onClick={() => handleHammerPrice(false)}>
-            <Icon color={theme.colors.basic.gray10}>
-              <Minus24 />
-            </Icon>
+            <Icon icon="minus18" size={18} color={theme.colors.basic.gray10} />
           </HammerControlButton>
           <HammerPrice>{cookieInfo.hammer}</HammerPrice>
           <HammerControlButton onClick={() => handleHammerPrice(true)}>
-            <Icon color={theme.colors.basic.gray10}>
-              <Plus24 />
-            </Icon>
+            <Icon icon="plus18" size={18} color={theme.colors.basic.gray10} />
           </HammerControlButton>
         </HammerPriceWrapper>
       </Wrapper>

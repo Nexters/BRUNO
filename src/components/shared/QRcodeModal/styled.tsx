@@ -60,13 +60,18 @@ const GuideIconWrapper = styled.div`
   grid-template-rows: 1fr 21px;
   column-gap: 8px;
   row-gap: 15px;
+  align-items: center;
+  justify-items: center;
   margin-top: 30px;
 `;
 
 const IconWrapper = styled.div`
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background-color: ${(props) => props.theme.colors.brand.sub01};
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-content: center;
   align-items: center;
 `;
 

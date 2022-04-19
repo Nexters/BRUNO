@@ -1,7 +1,8 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import QRCode from 'react-qr-code';
 
-import Icon, { QrFlow1, QrFlow3, Right24, Left24 } from '@src/assets/Icon';
+import Icon from '@src/assets/Icon';
+import { CameraIcon, QRIcon } from '@src/assets/images';
 import IconButton from '@src/components/shared/IconButton';
 import { klipRequestKeyAtom } from '@src/recoil/klip';
 import { QRcodeModalAtom } from '@src/recoil/ui';
@@ -29,11 +30,7 @@ function QRcodeModal() {
     <Root>
       <Box>
         <Header>
-          <IconButton onClick={() => setOpen(false)}>
-            <Icon style={{ marginRight: '8px' }}>
-              <Right24 />
-            </Icon>
-          </IconButton>
+          <IconButton icon="right" size={24} color={theme.colors.basic.gray100} noFill onClick={() => setOpen(false)} />
         </Header>
         <ContentWrapper>
           <Title>카카오 Klip QR 연결</Title>
@@ -46,17 +43,11 @@ function QRcodeModal() {
 
           <GuideIconWrapper>
             <IconWrapper>
-              <Icon isOn>
-                <QrFlow1 />
-              </Icon>
+              <CameraIcon />
             </IconWrapper>
-            <Icon color={theme.colors.basic.gray50}>
-              <Left24 />
-            </Icon>
+            <Icon icon="left" size={24} color={theme.colors.basic.gray50} noFill />
             <IconWrapper>
-              <Icon isOn>
-                <QrFlow3 />
-              </Icon>
+              <QRIcon />
             </IconWrapper>
 
             <span>카메라 실행</span>

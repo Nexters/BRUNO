@@ -1,4 +1,5 @@
-import Icon, { Plus24 } from '@src/assets/Icon';
+import Icon from '@src/assets/Icon';
+import { theme } from '@src/assets/styles';
 import styled from 'styled-components';
 
 const Root = styled.div`
@@ -14,8 +15,7 @@ const Root = styled.div`
 
 const Text = styled.p<{ isActive: boolean }>`
   padding: 11px 16px;
-  color: ${({ isActive, theme }) =>
-    isActive ? theme.colors.basic.gray90 : theme.colors.basic.gray40};
+  color: ${({ isActive }) => (isActive ? theme.colors.basic.gray90 : theme.colors.basic.gray40)};
 `;
 
 const ButtonWrapper = styled.div`
@@ -35,9 +35,9 @@ const AddButton = styled.button<{ isActive: boolean }>`
   align-items: center;
   width: 22px;
   height: 22px;
+  padding: 0;
   border-radius: 100px;
-  background: ${({ isActive, theme }) =>
-    isActive ? theme.colors.brand.main : theme.colors.background.gradientBlack};
+  background: ${({ isActive }) => (isActive ? theme.colors.brand.main : theme.colors.background.gradientBlack)};
 `;
 
 type Props = {
@@ -59,9 +59,7 @@ function CategoryButton({ info, isActive, handleClickButton }: Props) {
 
       <ButtonWrapper>
         <AddButton isActive={isActive} onClick={handleClickButton}>
-          <Icon style={{ width: '12px', height: '12px' }}>
-            <Plus24 />
-          </Icon>
+          <Icon icon="plus18" size={18} color={theme.colors.basic.gray90} />
         </AddButton>
       </ButtonWrapper>
     </Root>

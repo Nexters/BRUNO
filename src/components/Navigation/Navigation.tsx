@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Icon, { Home24, Plus24, Profile24 } from '@src/assets/Icon';
-import { MEDIA_SIZE } from '@src/assets/styles';
+import Icon from '@src/assets/Icon';
+import { theme, MEDIA_SIZE } from '@src/assets/styles';
 import IconButton from '../shared/IconButton';
 
 const Root = styled.nav`
@@ -27,6 +27,9 @@ const WriteButton = styled.button`
   left: calc(50% - 28px);
   width: 56px;
   height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 100px;
   background: linear-gradient(90deg, #e44aeb -2.24%, #142bfc 100%);
   cursor: pointer;
@@ -47,26 +50,28 @@ export default function Navigation() {
     <>
       <Root>
         <ButtonWrapper>
-          <IconButton onClick={handleClickHome}>
-            <Icon isOn={isHome}>
-              <Home24 />
-            </Icon>
-          </IconButton>
+          <IconButton
+            icon="home"
+            size={24}
+            color={theme.colors.basic.gray90}
+            noFill={!isHome}
+            onClick={handleClickHome}
+          />
         </ButtonWrapper>
 
         <ButtonWrapper>
-          <IconButton onClick={handleClickProfile}>
-            <Icon isOn={isProfile}>
-              <Profile24 />
-            </Icon>
-          </IconButton>
+          <IconButton
+            icon="profile"
+            size={24}
+            color={theme.colors.basic.gray90}
+            noFill={!isProfile}
+            onClick={handleClickProfile}
+          />
         </ButtonWrapper>
       </Root>
 
       <WriteButton onClick={handleClickWrite}>
-        <Icon>
-          <Plus24 />
-        </Icon>
+        <Icon icon="plus18" size={24} color={theme.colors.basic.gray90} />
       </WriteButton>
     </>
   );

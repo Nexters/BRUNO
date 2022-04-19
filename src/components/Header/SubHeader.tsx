@@ -1,8 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Icon, { Right24 } from '@src/assets/Icon';
-import { theme } from '@src/assets/styles';
 import { HeaderPage, HEADER_VALUES } from '@src/components/Header/const';
 import { HeaderContainer } from '@src/components/Header/MainHeader';
 import IconButton from '@src/components/shared/IconButton';
@@ -52,13 +50,7 @@ function SubHeader({ pageType }: Props) {
 
   return (
     <Container>
-      {left && (
-        <IconButton onClick={handleClickBack}>
-          <Icon color={theme.colors.basic.gray100}>
-            <Right24 />
-          </Icon>
-        </IconButton>
-      )}
+      {left && <IconButton icon="right" size={24} noFill onClick={handleClickBack} />}
       <HeaderTitle>{center}</HeaderTitle>
 
       <RightWrapper>

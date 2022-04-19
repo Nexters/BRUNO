@@ -33,6 +33,10 @@ export const HammerPriceWrapper = styled.div`
 export const HammerControlButton = styled.button`
   width: 32px;
   height: 32px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 100%;
   background-color: ${theme.colors.basic.gray80};
   color: ${theme.colors.basic.gray40};

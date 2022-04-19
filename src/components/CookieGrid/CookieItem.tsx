@@ -1,18 +1,11 @@
-import styled from 'styled-components';
-
-import Icon from '@src/assets/Icon';
-import { CookieStatus, CategoryColor, Category } from '@src/queries/types';
 import { useNavigate } from 'react-router-dom';
-import { ACTIVE_COLOR_MAP, HIDDEN_COLOR_MAP, BOX_COLOR_MAP } from './const';
+import styled from 'styled-components';
+import { CookieStatus, CategoryColor, Category } from '@src/queries/types';
+import { ACTIVE_COLOR_MAP, HIDDEN_COLOR_MAP } from './const';
 
-const CookieWrapper = styled.div`
+const CookieWrapper = styled.img`
   width: 33.3%;
   cursor: pointer;
-  svg {
-    width: 100%;
-    height: 100%;
-  }
-
   ${(props) => props.theme.media.large} {
     width: 20%;
   }
@@ -30,24 +23,14 @@ function CookieItem({ id, category, cookieStatus, myCookie, onClickForbidden }: 
   const navigate = useNavigate();
   const categoryColor = category?.color || CategoryColor.BLUE;
 
-  const BoxIcon = BOX_COLOR_MAP[categoryColor];
-  const CookieIcon =
+  const CookieImg =
     cookieStatus === CookieStatus.ACTIVE ? ACTIVE_COLOR_MAP[categoryColor] : HIDDEN_COLOR_MAP[categoryColor];
   const handleClick = () => {
     if (myCookie || cookieStatus === CookieStatus.ACTIVE) navigate(`/cookie/${id}`);
     else onClickForbidden?.();
   };
 
-  return (
-    <CookieWrapper onClick={handleClick}>
-      <Icon isOn style={{ position: 'relative' }}>
-        <BoxIcon />
-        <Icon isOn style={{ position: 'absolute' }} svgStyle={{ width: '100%', height: '100%' }}>
-          <CookieIcon />
-        </Icon>
-      </Icon>
-    </CookieWrapper>
-  );
+  return <CookieWrapper src={CookieImg} onClick={handleClick} />;
 }
 
 export default CookieItem;

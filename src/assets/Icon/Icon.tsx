@@ -1,31 +1,30 @@
-import { ReactNode, CSSProperties } from 'react';
-import styled from 'styled-components';
+import { iconName, IconSet } from './const';
 import { theme } from '../styles';
 
-type Props = {
-  children: ReactNode;
+interface IconProps {
+  icon: iconName;
+  size: number;
   color?: string;
-  isOn?: boolean;
-  style?: CSSProperties;
-  svgStyle?: CSSProperties;
-};
+  noFill?: boolean;
+}
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const IconWrapper = styled.div<{ svgStyle?: any }>`
-  line-height: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  svg {
-    ${(props) => props.svgStyle}
-  }
-`;
-
-function Icon({ children, color = theme.colors.basic.gray100, isOn = false, style, svgStyle }: Props) {
+function Icon({ icon, size, color = theme.colors.basic.gray100, noFill }: IconProps) {
   return (
-    <IconWrapper style={{ stroke: isOn ? '' : color, fill: isOn ? color : '', ...style }} svgStyle={svgStyle}>
-      {children}
-    </IconWrapper>
+    <svg
+      width={size}
+      height={size}
+      viewBox={IconSet[icon].viewBox}
+      fill={noFill ? 'transparent' : color}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d={IconSet[icon].path}
+        stroke={color}
+        strokeWidth={IconSet[icon].stroke}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 
