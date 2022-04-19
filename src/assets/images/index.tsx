@@ -23,6 +23,7 @@ import Tutorial02 from './tutorial/tutorial_02.png';
 import Tutorial03 from './tutorial/tutorial_03.png';
 import { ReactComponent as CameraIcon } from './svg/camera.svg';
 import { ReactComponent as QRIcon } from './svg/qr.svg';
+import { ReactComponent as NotificationIcon } from './svg/notification.svg';
 
 export {
   MainLogoImage,
@@ -50,4 +51,5 @@ export {
   Tutorial03,
   CameraIcon,
   QRIcon,
+  NotificationIcon,
 };
