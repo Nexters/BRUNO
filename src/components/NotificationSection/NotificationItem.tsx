@@ -1,12 +1,18 @@
 import styled from 'styled-components';
 
-import Icon from '@src/assets/Icon';
+import { NotificationIcon } from '@src/assets/images';
 
 const Wrapper = styled.div`
   padding: 16px;
   display: flex;
-  color: ${(props) => props.theme.colors.basic.gray90};
   border-bottom: 1px solid ${(props) => props.theme.colors.basic.gray30};
+`;
+
+const Icon = styled.div`
+  svg {
+    width: 32px;
+    height: 32px;
+  }
 `;
 
 const Category = styled.span`
@@ -33,7 +39,9 @@ const Date = styled.span`
 function NotificationItem() {
   return (
     <Wrapper>
-      <Icon icon="notification" size={24} />
+      <Icon>
+        <NotificationIcon />
+      </Icon>
       <Content>
         <Category>요청</Category>
         <Detail>호평동 치타님이 ‘집 주소 어디일까어디일까요..’를 망치 3톤으로 구매했어요.</Detail>
