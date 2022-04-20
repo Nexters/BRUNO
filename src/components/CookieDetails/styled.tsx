@@ -24,8 +24,10 @@ export const QuestionWrapper = styled.div`
 `;
 
 export const AnswerWrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  grid-column-gap: 8px;
+  width: 100%;
   margin-top: 16px;
 `;
 

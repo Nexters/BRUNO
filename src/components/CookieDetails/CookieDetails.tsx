@@ -205,7 +205,7 @@ function CookieDetails({ data, refetch }: Props) {
           {myCookie ? (
             <ContentCard content={answer} categoryColor={category.color} />
           ) : (
-            <NFTCookie categoryColor={category.color} />
+            <NFTCookie categoryColor={category.color} width="100%" />
           )}
         </AnswerWrapper>
 
