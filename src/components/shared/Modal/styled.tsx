@@ -6,7 +6,6 @@ import { MEDIA_SIZE, theme } from '@src/assets/styles';
 export const Root = styled.div`
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
   max-width: ${MEDIA_SIZE.mobile}px;
   height: 100%;
