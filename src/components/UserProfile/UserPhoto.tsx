@@ -5,6 +5,8 @@ import { ProfileImage01, ProfileImage02 } from '@src/assets/images';
 import { Button } from '@src/components/shared/MainButton';
 import { useSetRecoilState } from 'recoil';
 import { unimplementedModalAtom } from '@src/recoil/ui';
+import Icon from '@src/assets/Icon';
+import { theme } from '@src/assets/styles';
 
 const Wrapper = styled.div`
   display: flex;
@@ -32,10 +34,12 @@ const AddButton = styled.button`
   bottom: -4px;
   width: 32px;
   height: 32px;
+  padding: 0;
   border-radius: 100%;
-  font-size: 16px;
-  border: 1px solid #e4e5e9;
-  color: ${(props) => props.theme.colors.basic.gray80};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid ${(props) => props.theme.colors.basic.gray80};
   background-color: ${(props) => props.theme.colors.basic.gray10};
 `;
 
@@ -68,7 +72,11 @@ function UserPhoto({ isMy, imageUrl }: Props) {
     <Wrapper>
       <PhotoWrapper>
         <Photo src={imageUrl || defaultImageUrl} onError={handleImageError} />
-        {isMy && <AddButton onClick={() => setTodoFeature('프로필 수정하기')}>+</AddButton>}
+        {isMy && (
+          <AddButton onClick={() => setTodoFeature('프로필 수정하기')}>
+            <Icon icon="plus18" size={18} color={theme.colors.basic.gray80} />
+          </AddButton>
+        )}
       </PhotoWrapper>
       {!isMy && <RequestButton onClick={handleClickAskButton}>질문 요청하기</RequestButton>}
     </Wrapper>
