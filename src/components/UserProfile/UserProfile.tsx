@@ -9,7 +9,7 @@ import BioSection from './BioSection';
 
 const Wrapper = styled.div`
   position: fixed;
-  padding-top: 12px;
+  padding-top: 16px;
   width: 100%;
   max-width: ${MEDIA_SIZE.mobile}px;
 `;

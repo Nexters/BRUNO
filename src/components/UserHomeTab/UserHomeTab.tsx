@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   gap: 20px;
   width: 100%;
   max-width: ${MEDIA_SIZE.mobile}px;
-  margin-top: 189px;
+  margin-top: 192px; // 개선 필요
   padding: 0 20px;
   border-bottom: 2px solid ${(props) => props.theme.colors.basic.gray20};
 `;
@@ -27,9 +27,9 @@ function UserHomeTab({ count }: Props) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const TABS = [
-    { type: TabType.COLLECT, name: '수집한 쿠키', count: count.collected },
-    { type: TabType.CREATE, name: '만든 쿠키', count: count.created },
-    { type: TabType.REQUEST, name: '대기 중인 요청', count: count.ask },
+    { type: TabType.COLLECT, name: '소유한 쿠키', count: count.collected },
+    { type: TabType.CREATE, name: '제작한 쿠키', count: count.created },
+    { type: TabType.REQUEST, name: '받은 요청', count: count.ask },
   ];
 
   const currentTab = searchParams.get('tab') as TabType;

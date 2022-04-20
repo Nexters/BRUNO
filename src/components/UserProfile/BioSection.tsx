@@ -16,8 +16,8 @@ const Nickname = styled.div`
 `;
 
 const Bio = styled.div`
-  font-size: ${(props) => props.theme.fontSize.body01};
-  color: ${(props) => props.theme.colors.basic.gray60};
+  font-size: ${(props) => props.theme.fontSize.body02};
+  color: ${(props) => props.theme.colors.basic.gray50};
 `;
 
 function BioSection({ nickname, introduction }: Props) {
