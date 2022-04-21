@@ -4,6 +4,7 @@ export enum HeaderPage {
   JOIN = 'join',
   TUTORIAL = 'tutorial',
   SETTING = 'setting',
+  NOTIFICATION = 'notification',
 }
 
 type HeaderValues = {
@@ -30,6 +31,11 @@ export const HEADER_VALUES: HeaderValues = {
   [HeaderPage.SETTING]: {
     left: true,
     center: '설정',
+    right: true,
+  },
+  [HeaderPage.NOTIFICATION]: {
+    left: true,
+    center: '알림',
     right: true,
   },
 };
