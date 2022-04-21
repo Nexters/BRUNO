@@ -34,10 +34,11 @@ const BackgroundImageShadow = styled.div`
 
 interface Props {
   isMy: boolean;
+  isModify?: boolean;
   profile: UserProfileType;
 }
 
-function UserProfile({ isMy, profile }: Props) {
+function UserProfile({ isMy = false, isModify = false, profile }: Props) {
   const bgDefaultImage = Math.random() > 0.5 ? BackgroundImage01 : BackgroundImage02;
   const { nickname, introduction, profileUrl, backgroundUrl } = profile;
 
@@ -49,8 +50,8 @@ function UserProfile({ isMy, profile }: Props) {
     <Wrapper>
       <BackgroundImage src={backgroundUrl || bgDefaultImage} onError={handleBgImageError} />
       <BackgroundImageShadow />
-      <UserPhoto isMy={isMy} imageUrl={profileUrl} />
-      <BioSection nickname={nickname} introduction={introduction} />
+      <UserPhoto isMy={isMy} isModify={isModify} imageUrl={profileUrl} />
+      {!isModify && <BioSection nickname={nickname} introduction={introduction} />}
     </Wrapper>
   );
 }

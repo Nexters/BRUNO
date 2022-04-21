@@ -2,7 +2,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useLogin } from '@src/hooks';
 import { useUserInfo } from '@src/queries/hooks';
-import PageLayout from '@src/components/shared/PageLayout';
 import UserHomeTab from '@src/components/UserHomeTab';
 import UserProfile from '@src/components/UserProfile';
 import UserContent from '@src/components/UserContent';
@@ -27,11 +26,11 @@ function UserPage({ isMy = false }: Props) {
   }, [id, myId]);
 
   return (
-    <PageLayout>
+    <>
       {userProfile && <UserProfile isMy={isMy} profile={userProfile} />}
       <UserHomeTab count={count} />
       <UserContent isMy={isMy} userId={userId} />
-    </PageLayout>
+    </>
   );
 }
 

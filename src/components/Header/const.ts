@@ -4,6 +4,7 @@ export enum HeaderPage {
   JOIN = 'join',
   TUTORIAL = 'tutorial',
   SETTING = 'setting',
+  MODIFY = 'modify',
 }
 
 type HeaderValues = {
@@ -31,5 +32,9 @@ export const HEADER_VALUES: HeaderValues = {
     left: true,
     center: '설정',
     right: true,
+  },
+  [HeaderPage.MODIFY]: {
+    left: true,
+    center: '프로필 변경',
   },
 };
