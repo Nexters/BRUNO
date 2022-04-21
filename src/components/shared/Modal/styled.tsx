@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { rgba } from 'polished';
 import { Button as button } from '@src/components/shared/MainButton';
-import { MEDIA_SIZE, theme } from '@src/assets/styles';
+import { MEDIA_SIZE, MEDIA_QUERY, theme } from '@src/assets/styles';
 
 export const Root = styled.div`
   position: fixed;
@@ -13,6 +13,13 @@ export const Root = styled.div`
   margin: 0 auto;
   padding: 0 20px;
   background-color: ${(props) => rgba(props.theme.colors.basic.gray00, 0.75)};
+
+  ${MEDIA_QUERY.mobile} {
+    left: 0;
+  }
+  ${MEDIA_QUERY.small} {
+    left: 0;
+  }
 `;
 
 export const ModalBox = styled.div`
