@@ -31,7 +31,7 @@ function Main() {
       <Route
         path="/notifications"
         element={
-          <PageLayout pageType={HeaderPage.SETTING}>
+          <PageLayout pageType={HeaderPage.NOTIFICATION}>
             <NotificationPage />
           </PageLayout>
         }

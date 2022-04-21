@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { formatTime } from '@src/utils/format';
+import { Notification } from '@src/queries/types';
 import { NotificationIcon } from '@src/assets/images';
 
 const Wrapper = styled.div`
@@ -36,16 +38,17 @@ const Date = styled.span`
   color: ${(props) => props.theme.colors.basic.gray50};
 `;
 
-function NotificationItem() {
+function NotificationItem({ data }: { data: Notification }) {
+  const category = data.type === 'Ask' ? '요청' : '판매';
   return (
     <Wrapper>
       <Icon>
         <NotificationIcon />
       </Icon>
       <Content>
-        <Category>요청</Category>
-        <Detail>호평동 치타님이 ‘집 주소 어디일까어디일까요..’를 망치 3톤으로 구매했어요.</Detail>
-        <Date>3분 전</Date>
+        <Category>{category}</Category>
+        <Detail>{data?.content}</Detail>
+        <Date>{formatTime(data.createdAt)}</Date>
       </Content>
     </Wrapper>
   );

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import { Notification } from '@src/queries/types';
 import NotificationItem from './NotificationItem';
 
 const SectionWrapper = styled.div`
@@ -13,12 +14,18 @@ const Date = styled.div`
   font-size: 16px;
 `;
 
-function NotificationSection() {
+interface Props {
+  date: string;
+  notifications: Notification[];
+}
+
+function NotificationSection({ date, notifications }: Props) {
   return (
     <SectionWrapper>
-      <Date>2022-04-19</Date>
-      <NotificationItem />
-      <NotificationItem />
+      <Date>{date}</Date>
+      {notifications.map((notification) => (
+        <NotificationItem key={notification.id} data={notification} />
+      ))}
     </SectionWrapper>
   );
 }
