@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Icon from '@src/assets/Icon';
 import { theme } from '@src/assets/styles';
 import { ProfileImage01, ProfileImage02 } from '@src/assets/images';
 import { Button } from '@src/components/shared/MainButton';
-import Modal from '../shared/Modal';
 
 const Wrapper = styled.div`
   display: flex;
@@ -57,22 +56,31 @@ interface Props {
   imageUrl: string;
 }
 
-const label = {
-  title: '이미지를 변경하시겠어요?',
-  description: '새로 촬영하거나 앨범에서 선택할 수 있어요.',
-  yes: '새로 촬영',
-  no: '앨범에서 선택',
-};
 function UserPhoto({ isMy, isModify = false, imageUrl }: Props) {
   const navigate = useNavigate();
   const { userId } = useParams();
-  const [openModifyModal, setOpenModifyModal] = useState<boolean>(false);
 
   const setModifyMode = () => {
     navigate('/users/modify');
   };
 
   const defaultImageUrl = !isModify && isMy ? ProfileImage01 : ProfileImage02;
+  const [profile, setProfile] = useState(imageUrl || defaultImageUrl);
+
+  const inputFile = useRef<HTMLInputElement>(null);
+  const onClickModifyButton = () => {
+    inputFile?.current?.click();
+  };
+
+  const onChangeFile = (e: any) => {
+    const file = e.target.files[0];
+
+    const maxAllowedSize = 10 * 1024 * 1024; // 10MB
+    if (file.size > maxAllowedSize) return;
+
+    setProfile(URL.createObjectURL(file));
+  };
+
   const handleClickAskButton = () => navigate(`/ask/${userId}`);
 
   // eslint-disable-next-line no-return-assign
@@ -81,28 +89,27 @@ function UserPhoto({ isMy, isModify = false, imageUrl }: Props) {
   return (
     <Wrapper>
       <PhotoWrapper>
-        <Photo src={imageUrl || defaultImageUrl} onError={handleImageError} />
+        <Photo src={profile} onError={handleImageError} />
         {isMy && !isModify && (
           <ActionButton onClick={setModifyMode}>
             <Icon icon="plus18" size={18} color={theme.colors.basic.gray90} />
           </ActionButton>
         )}
         {isModify && (
-          <>
-            <ActionButton onClick={() => setOpenModifyModal(true)}>
-              <Icon icon="edit18" size={14} color={theme.colors.basic.gray90} noFill />
-            </ActionButton>
-
-            <Modal
-              open={openModifyModal}
-              label={label}
-              onClickYes={() => console.log('yes')}
-              onClickNo={() => console.log('no')}
-            />
-          </>
+          <ActionButton onClick={onClickModifyButton}>
+            <Icon icon="edit18" size={14} color={theme.colors.basic.gray90} noFill />
+          </ActionButton>
         )}
       </PhotoWrapper>
       {!isMy && <RequestButton onClick={handleClickAskButton}>질문 요청하기</RequestButton>}
+      <input
+        type="file"
+        accept=".jpg,.png"
+        id="file"
+        ref={inputFile}
+        style={{ display: 'none' }}
+        onChange={onChangeFile}
+      />
     </Wrapper>
   );
 }
