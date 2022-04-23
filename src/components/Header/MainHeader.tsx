@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
-import { unimplementedModalAtom } from '@src/recoil/ui';
+
 import IconButton from '@src/components/shared/IconButton';
 import { useQRcodeModal } from '@src/components/shared/QRcodeModal';
 import { LogoImage as logo } from '@src/assets/images';
@@ -45,9 +44,8 @@ const ButtonWrapper = styled.div`
 function MainHeader() {
   const navigate = useNavigate();
   const { isOpen } = useQRcodeModal();
-  const setTodoFeature = useSetRecoilState(unimplementedModalAtom);
 
-  const handleClickAlarm = () => setTodoFeature('알람');
+  const handleClickAlarm = () => navigate('/notifications');
   const handleClickSetting = () => navigate('/settings');
 
   if (isOpen) return null;

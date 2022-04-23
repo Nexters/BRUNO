@@ -5,6 +5,7 @@ export enum HeaderPage {
   TUTORIAL = 'tutorial',
   SETTING = 'setting',
   MODIFY = 'modify',
+  NOTIFICATION = 'notification',
 }
 
 type HeaderValues = {
@@ -36,5 +37,10 @@ export const HEADER_VALUES: HeaderValues = {
   [HeaderPage.MODIFY]: {
     left: true,
     center: '프로필 변경',
+  },
+  [HeaderPage.NOTIFICATION]: {
+    left: true,
+    center: '알림',
+    right: true,
   },
 };
