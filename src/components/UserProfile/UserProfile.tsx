@@ -23,6 +23,7 @@ const BackgroundImage = styled.img`
   max-width: ${MEDIA_SIZE.mobile}px;
   height: 184px;
   object-fit: cover;
+  z-index: 1;
 `;
 
 const BackgroundImageShadow = styled.div`
@@ -32,6 +33,7 @@ const BackgroundImageShadow = styled.div`
   max-width: ${MEDIA_SIZE.mobile}px;
   height: 185px;
   background: linear-gradient(180deg, rgba(1, 1, 16, 0.1) 0%, #010112 100%);
+  z-index: 1;
 `;
 
 const ActionButton = styled.button`
@@ -47,7 +49,7 @@ const ActionButton = styled.button`
   align-items: center;
   border: 1px solid ${(props) => props.theme.colors.basic.gray80};
   background-color: ${(props) => props.theme.colors.basic.gray10};
-  z-index: 1;
+  z-index: 5;
 `;
 
 interface Props {

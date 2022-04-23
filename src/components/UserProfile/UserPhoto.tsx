@@ -20,6 +20,7 @@ const PhotoWrapper = styled.div`
   width: 100px;
   height: 100px;
   border-radius: 100%;
+  z-index: 5;
 `;
 
 const Photo = styled.img`
@@ -49,7 +50,7 @@ const RequestButton = styled(Button)`
   margin: 0 0 5px 58px;
   line-height: 120%;
   background: ${(props) => props.theme.colors.brand.main};
-  z-index: 5;
+  z-index: 3;
 `;
 
 interface Props {
