@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
+
 import styled from 'styled-components';
 import { useLogin } from '@src/hooks';
 import { useUserInfo } from '@src/queries/hooks';
+import { modifyUserInfo, UserInfoArgs } from '@src/queries/users';
 import { userInfoAtom } from '@src/recoil/user';
 import UserProfile from '@src/components/UserProfile';
 import TextArea from '@src/components/shared/TextArea';
@@ -25,6 +28,7 @@ const Nickname = styled.div`
 `;
 
 function UserModifyPage() {
+  const navigate = useNavigate();
   const { userId } = useLogin();
   const { userProfile } = useUserInfo({ userId: String(userId) });
 
@@ -35,6 +39,17 @@ function UserModifyPage() {
   const handleChangeIntroduction = (value: string) => {
     setIntroduction(value);
     setUserInfo((prevUserInfo) => ({ ...prevUserInfo, introduction: value }));
+  };
+
+  const onClickModify = async () => {
+    const obj: UserInfoArgs = {
+      introduction: introduction || '',
+      profilePicture: userInfo[0].profileUrl,
+      backgroundPicture: userInfo[0].backgroundUrl,
+    };
+    const res = await modifyUserInfo(userId, obj);
+
+    if (res) navigate(`/users/${userId}`);
   };
 
   useEffect(() => {
@@ -57,7 +72,7 @@ function UserModifyPage() {
               limit={25}
             />
           </div>
-          <MainButton value="수정하기" onClick={() => console.log('api호출')} />
+          <MainButton value="수정하기" onClick={onClickModify} />
         </Wrapper>
       </>
     )

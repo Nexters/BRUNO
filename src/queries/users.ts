@@ -67,3 +67,20 @@ export const getUserNotifications = async (userId: number, page?: number) => {
     getErrorStatus(error);
   }
 };
+
+export type UserInfoArgs = {
+  introduction: string;
+  profilePicture: string;
+  backgroundPicture: string;
+};
+
+export const modifyUserInfo = async (userId: number, userInfo: UserInfoArgs) => {
+  try {
+    const { status: resultStatus } = await axios.put(`/users/${userId}`, userInfo, {
+      headers: { 'content-type': 'multipart/form-data' },
+    });
+    if (resultStatus === 200) return true;
+  } catch (error) {
+    getErrorStatus(error);
+  }
+};

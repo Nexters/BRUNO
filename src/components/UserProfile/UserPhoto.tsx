@@ -81,8 +81,9 @@ function UserPhoto({ isMy, isModify = false, imageUrl }: Props) {
     const maxAllowedSize = 10 * 1024 * 1024; // 10MB
     if (file.size > maxAllowedSize) return;
 
-    setProfile(URL.createObjectURL(file));
-    setUserInfo((prevUserInfo) => ({ ...prevUserInfo, profileUrl: file }));
+    const url = URL.createObjectURL(file);
+    setProfile(url);
+    setUserInfo((prevUserInfo) => ({ ...prevUserInfo, profileUrl: url }));
   };
 
   const handleClickAskButton = () => navigate(`/ask/${userId}`);

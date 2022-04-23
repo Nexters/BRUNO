@@ -79,8 +79,9 @@ function UserProfile({ isMy = false, isModify = false, profile }: Props) {
     const maxAllowedSize = 10 * 1024 * 1024; // 10MB
     if (file.size > maxAllowedSize) return;
 
-    setBackgroundImage(URL.createObjectURL(file));
-    setUserInfo((prevUserInfo) => ({ ...prevUserInfo, backgroundUrl: file }));
+    const url = URL.createObjectURL(file);
+    setBackgroundImage(url);
+    setUserInfo((prevUserInfo) => ({ ...prevUserInfo, backgroundUrl: url }));
   };
 
   return (
