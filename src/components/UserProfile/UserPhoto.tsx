@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { userInfoAtom } from '@src/recoil/user';
@@ -59,6 +59,7 @@ interface Props {
 }
 
 function UserPhoto({ isMy, isModify = false, imageUrl }: Props) {
+  const setUserInfo = useSetRecoilState(userInfoAtom);
   const navigate = useNavigate();
   const { userId } = useParams();
 
@@ -68,8 +69,6 @@ function UserPhoto({ isMy, isModify = false, imageUrl }: Props) {
 
   const defaultImageUrl = !isModify && isMy ? ProfileImage01 : ProfileImage02;
   const [profile, setProfile] = useState(imageUrl || defaultImageUrl);
-
-  const setUserInfo = useSetRecoilState(userInfoAtom);
 
   const inputFile = useRef<HTMLInputElement>(null);
   const onClickModifyButton = () => {
@@ -83,16 +82,13 @@ function UserPhoto({ isMy, isModify = false, imageUrl }: Props) {
     if (file.size > maxAllowedSize) return;
 
     setProfile(URL.createObjectURL(file));
+    setUserInfo((prevUserInfo) => ({ ...prevUserInfo, profileUrl: file }));
   };
 
   const handleClickAskButton = () => navigate(`/ask/${userId}`);
 
   // eslint-disable-next-line no-return-assign
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => (e.currentTarget.src = ProfileImage01);
-
-  useEffect(() => {
-    setUserInfo((prevUserInfo) => ({ ...prevUserInfo, profileUrl: profile }));
-  }, [profile]);
 
   return (
     <Wrapper>
@@ -106,18 +102,18 @@ function UserPhoto({ isMy, isModify = false, imageUrl }: Props) {
         {isModify && (
           <ActionButton onClick={onClickModifyButton}>
             <Icon icon="edit18" size={14} color={theme.colors.basic.gray90} noFill />
+            <input
+              type="file"
+              accept=".jpg,.png"
+              id="file"
+              ref={inputFile}
+              style={{ display: 'none' }}
+              onChange={onChangeFile}
+            />
           </ActionButton>
         )}
       </PhotoWrapper>
       {!isMy && <RequestButton onClick={handleClickAskButton}>질문 요청하기</RequestButton>}
-      <input
-        type="file"
-        accept=".jpg,.png"
-        id="file"
-        ref={inputFile}
-        style={{ display: 'none' }}
-        onChange={onChangeFile}
-      />
     </Wrapper>
   );
 }
