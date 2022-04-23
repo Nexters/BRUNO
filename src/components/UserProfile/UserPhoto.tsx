@@ -1,5 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { userInfoAtom } from '@src/recoil/user';
 import styled from 'styled-components';
 import Icon from '@src/assets/Icon';
 import { theme } from '@src/assets/styles';
@@ -67,6 +69,8 @@ function UserPhoto({ isMy, isModify = false, imageUrl }: Props) {
   const defaultImageUrl = !isModify && isMy ? ProfileImage01 : ProfileImage02;
   const [profile, setProfile] = useState(imageUrl || defaultImageUrl);
 
+  const setUserInfo = useSetRecoilState(userInfoAtom);
+
   const inputFile = useRef<HTMLInputElement>(null);
   const onClickModifyButton = () => {
     inputFile?.current?.click();
@@ -85,6 +89,10 @@ function UserPhoto({ isMy, isModify = false, imageUrl }: Props) {
 
   // eslint-disable-next-line no-return-assign
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => (e.currentTarget.src = ProfileImage01);
+
+  useEffect(() => {
+    setUserInfo((prevUserInfo) => ({ ...prevUserInfo, profileUrl: profile }));
+  }, [profile]);
 
   return (
     <Wrapper>
