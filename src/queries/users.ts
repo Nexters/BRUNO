@@ -56,3 +56,14 @@ export const checkOnboard = async (userId: number) => {
     return false;
   }
 };
+
+export const getUserNotifications = async (userId: number, page?: number) => {
+  try {
+    const { data: notifications } = await axios.get(`/users/${userId}/notifications`, {
+      params: { page: page ?? 0, size: 20 },
+    });
+    return notifications;
+  } catch (error) {
+    getErrorStatus(error);
+  }
+};

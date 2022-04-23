@@ -140,3 +140,19 @@ export type Ask = {
 export type UserAsk = Page & {
   contents: Ask[];
 };
+
+export type Notification = {
+  id: number;
+  type: 'Ask' | 'Transaction';
+  title: string;
+  content: string;
+  receiverUserId: number;
+  senderUserId?: number;
+  createdAt: string;
+  askId?: number;
+  cookieId?: number;
+};
+
+export type UserNotification = Page & {
+  data?: Notification[];
+};
