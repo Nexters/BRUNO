@@ -55,11 +55,11 @@ const RequestButton = styled(Button)`
 
 interface Props {
   isMy: boolean;
-  isModify?: boolean;
+  isEdit?: boolean;
   imageUrl: string;
 }
 
-function UserPhoto({ isMy, isModify = false, imageUrl }: Props) {
+function UserPhoto({ isMy, isEdit = false, imageUrl }: Props) {
   const setUserInfo = useSetRecoilState(userInfoAtom);
   const navigate = useNavigate();
   const { userId } = useParams();
@@ -68,7 +68,7 @@ function UserPhoto({ isMy, isModify = false, imageUrl }: Props) {
     navigate('/users/modify');
   };
 
-  const defaultMyProfileStatus = isMy && !isModify;
+  const defaultMyProfileStatus = isMy && !isEdit;
   const defaultImageUrl = defaultMyProfileStatus ? ProfileImage01 : ProfileImage02;
   const [profile, setProfile] = useState(imageUrl || defaultImageUrl);
 
@@ -102,7 +102,7 @@ function UserPhoto({ isMy, isModify = false, imageUrl }: Props) {
             <Icon icon="plus18" size={18} color={theme.colors.basic.gray90} />
           </ActionButton>
         )}
-        {isModify && (
+        {isEdit && (
           <ActionButton onClick={onClickModifyButton}>
             <Icon icon="edit18" size={14} color={theme.colors.basic.gray90} noFill />
             <input

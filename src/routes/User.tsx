@@ -26,9 +26,9 @@ function Auth() {
         }
       />
       <Route
-        path="/modify"
+        path="/edit"
         element={
-          <PageLayout pageType={HeaderPage.MODIFY}>
+          <PageLayout pageType={HeaderPage.EDIT}>
             <UserModifyPage />
           </PageLayout>
         }

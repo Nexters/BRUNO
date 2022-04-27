@@ -4,7 +4,7 @@ export enum HeaderPage {
   JOIN = 'join',
   TUTORIAL = 'tutorial',
   SETTING = 'setting',
-  MODIFY = 'modify',
+  EDIT = 'edit',
   NOTIFICATION = 'notification',
 }
 
@@ -34,7 +34,7 @@ export const HEADER_VALUES: HeaderValues = {
     center: '설정',
     right: true,
   },
-  [HeaderPage.MODIFY]: {
+  [HeaderPage.EDIT]: {
     left: true,
     center: '프로필 변경',
   },

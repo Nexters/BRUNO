@@ -60,7 +60,7 @@ function UserModifyPage() {
   return (
     userProfile && (
       <>
-        <UserProfile profile={userProfile} isMy isModify />
+        <UserProfile profile={userProfile} isMy isEdit />
         <Wrapper>
           <div>
             <Nickname>{userProfile?.nickname}</Nickname>

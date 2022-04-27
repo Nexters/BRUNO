@@ -54,11 +54,11 @@ const ActionButton = styled.button`
 
 interface Props {
   isMy: boolean;
-  isModify?: boolean;
+  isEdit?: boolean;
   profile: UserProfileType;
 }
 
-function UserProfile({ isMy = false, isModify = false, profile }: Props) {
+function UserProfile({ isMy = false, isEdit = false, profile }: Props) {
   const setUserInfo = useSetRecoilState(userInfoAtom);
 
   const bgDefaultImage = Math.random() > 0.5 ? BackgroundImage01 : BackgroundImage02;
@@ -89,7 +89,7 @@ function UserProfile({ isMy = false, isModify = false, profile }: Props) {
   return (
     <Wrapper>
       <BackgroundImage src={backgroundImage} onError={handleBgImageError} />
-      {isModify && (
+      {isEdit && (
         <ActionButton onClick={onClickModifyButton}>
           <Icon icon="edit18" size={14} color={theme.colors.basic.gray90} noFill />
           <input
@@ -104,8 +104,8 @@ function UserProfile({ isMy = false, isModify = false, profile }: Props) {
       )}
       <BackgroundImageShadow />
 
-      <UserPhoto isMy={isMy} isModify={isModify} imageUrl={profileUrl} />
-      {!isModify && <BioSection nickname={nickname} introduction={introduction} />}
+      <UserPhoto isMy={isMy} isEdit={isEdit} imageUrl={profileUrl} />
+      {!isEdit && <BioSection nickname={nickname} introduction={introduction} />}
     </Wrapper>
   );
 }
