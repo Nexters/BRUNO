@@ -66,7 +66,7 @@ function UserPhoto({ isMy, isEdit = false, imageUrl }: Props) {
   const { userId } = useParams();
 
   const setModifyMode = () => {
-    navigate('/users/modify');
+    navigate('/users/edit');
   };
 
   const defaultMyProfileStatus = isMy && !isEdit;
