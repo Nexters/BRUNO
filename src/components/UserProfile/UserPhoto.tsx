@@ -53,6 +53,7 @@ const RequestButton = styled(Button)`
   z-index: 3;
 `;
 
+const MAX_ALLOWED_SIZE = 10 * 1024 * 1024; // 10MB
 interface Props {
   isMy: boolean;
   isEdit?: boolean;
@@ -80,8 +81,7 @@ function UserPhoto({ isMy, isEdit = false, imageUrl }: Props) {
   const onChangeFile = (e: any) => {
     const file = e.target.files[0];
 
-    const maxAllowedSize = 10 * 1024 * 1024; // 10MB
-    if (file.size > maxAllowedSize) return;
+    if (file.size > MAX_ALLOWED_SIZE) return;
 
     const url = URL.createObjectURL(file);
     setProfile(url);
