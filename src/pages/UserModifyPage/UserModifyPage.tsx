@@ -27,6 +27,8 @@ const Nickname = styled.div`
   color: ${(props) => props.theme.colors.basic.gray90};
 `;
 
+const INTRODUCTION_MAX_LENGTH = 25;
+
 function UserModifyPage() {
   const navigate = useNavigate();
   const { userId } = useLogin();
@@ -35,6 +37,7 @@ function UserModifyPage() {
   const userInfo = useRecoilState(userInfoAtom);
   const setUserInfo = useSetRecoilState(userInfoAtom);
   const [introduction, setIntroduction] = useState(userProfile?.introduction);
+  const [editDisabled, setEditDisabled] = useState(true);
 
   const handleChangeIntroduction = (value: string) => {
     setIntroduction(value);
@@ -53,6 +56,14 @@ function UserModifyPage() {
   };
 
   useEffect(() => {
+    if (introduction && introduction?.length > INTRODUCTION_MAX_LENGTH) {
+      setEditDisabled(true);
+    } else {
+      setEditDisabled(false);
+    }
+  }, [introduction]);
+
+  useEffect(() => {
     if (!userProfile) return;
     setUserInfo(() => userProfile);
   }, []);
@@ -69,10 +80,10 @@ function UserModifyPage() {
               onChange={(value) => handleChangeIntroduction(value)}
               label="소개"
               placeholder="소개글을 입력해주세요."
-              limit={25}
+              limit={INTRODUCTION_MAX_LENGTH}
             />
           </div>
-          <MainButton value="수정하기" onClick={onClickModify} />
+          <MainButton value="수정하기" onClick={onClickModify} disabled={editDisabled} />
         </Wrapper>
       </>
     )
