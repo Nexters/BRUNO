@@ -68,7 +68,8 @@ function UserPhoto({ isMy, isModify = false, imageUrl }: Props) {
     navigate('/users/modify');
   };
 
-  const defaultImageUrl = !isModify && isMy ? ProfileImage01 : ProfileImage02;
+  const defaultMyProfileStatus = isMy && !isModify;
+  const defaultImageUrl = defaultMyProfileStatus ? ProfileImage01 : ProfileImage02;
   const [profile, setProfile] = useState(imageUrl || defaultImageUrl);
 
   const inputFile = useRef<HTMLInputElement>(null);
@@ -96,7 +97,7 @@ function UserPhoto({ isMy, isModify = false, imageUrl }: Props) {
     <Wrapper>
       <PhotoWrapper>
         <Photo src={profile} onError={handleImageError} />
-        {isMy && !isModify && (
+        {defaultMyProfileStatus && (
           <ActionButton onClick={setModifyMode}>
             <Icon icon="plus18" size={18} color={theme.colors.basic.gray90} />
           </ActionButton>
