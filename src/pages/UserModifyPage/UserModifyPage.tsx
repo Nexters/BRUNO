@@ -5,7 +5,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { useLogin } from '@src/hooks';
 import { useUserInfo } from '@src/queries/hooks';
-import { modifyUserInfo, UserInfoArgs } from '@src/queries/users';
+import { modifyUserInfo } from '@src/queries/users';
 import { userInfoAtom } from '@src/recoil/user';
 import UserProfile from '@src/components/UserProfile';
 import TextArea from '@src/components/shared/TextArea';
@@ -45,13 +45,12 @@ function UserModifyPage() {
   };
 
   const onClickModify = async () => {
-    const obj: UserInfoArgs = {
-      introduction: introduction || '',
-      profilePicture: userInfo[0].profileUrl,
-      backgroundPicture: userInfo[0].backgroundUrl,
-    };
-    const res = await modifyUserInfo(userId, obj);
+    const formData = new FormData();
+    formData.append('introduction', introduction || '');
+    formData.append('profilePicture', userInfo[0].profileUrl);
+    formData.append('backgroundPicture', userInfo[0].backgroundUrl);
 
+    const res = await modifyUserInfo(userId, formData);
     if (res) navigate(`/users/${userId}`);
   };
 

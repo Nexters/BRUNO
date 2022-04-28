@@ -83,7 +83,7 @@ function UserProfile({ isMy = false, isEdit = false, profile }: Props) {
 
     const url = URL.createObjectURL(file);
     setBackgroundImage(url);
-    setUserInfo((prevUserInfo) => ({ ...prevUserInfo, backgroundUrl: url }));
+    setUserInfo((prevUserInfo) => ({ ...prevUserInfo, backgroundUrl: file }));
   };
 
   return (

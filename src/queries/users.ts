@@ -68,13 +68,8 @@ export const getUserNotifications = async (userId: number, page?: number) => {
   }
 };
 
-export type UserInfoArgs = {
-  introduction: string;
-  profilePicture: string;
-  backgroundPicture: string;
-};
-
-export const modifyUserInfo = async (userId: number, userInfo: UserInfoArgs) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const modifyUserInfo = async (userId: number, userInfo: any) => {
   try {
     const { status: resultStatus } = await axios.put(`/users/${userId}`, userInfo, {
       headers: { 'content-type': 'multipart/form-data' },

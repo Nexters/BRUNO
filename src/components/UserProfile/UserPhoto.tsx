@@ -85,7 +85,7 @@ function UserPhoto({ isMy, isEdit = false, imageUrl }: Props) {
 
     const url = URL.createObjectURL(file);
     setProfile(url);
-    setUserInfo((prevUserInfo) => ({ ...prevUserInfo, profileUrl: url }));
+    setUserInfo((prevUserInfo) => ({ ...prevUserInfo, profileUrl: file }));
   };
 
   const handleClickAskButton = () => navigate(`/ask/${userId}`);
