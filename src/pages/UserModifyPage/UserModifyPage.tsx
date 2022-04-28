@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
@@ -38,6 +38,7 @@ function UserModifyPage() {
   const setUserInfo = useSetRecoilState(userInfoAtom);
   const [introduction, setIntroduction] = useState(userProfile?.introduction);
   const [editDisabled, setEditDisabled] = useState(true);
+  const initialUserInfo = useRef(userInfo);
 
   const handleChangeIntroduction = (value: string) => {
     setIntroduction(value);
@@ -47,8 +48,12 @@ function UserModifyPage() {
   const onClickModify = async () => {
     const formData = new FormData();
     formData.append('introduction', introduction || '');
-    formData.append('profilePicture', userInfo[0].profileUrl);
-    formData.append('backgroundPicture', userInfo[0].backgroundUrl);
+    if (userInfo[0].profileUrl !== initialUserInfo.current[0].profileUrl) {
+      formData.append('profilePicture', userInfo[0].profileUrl);
+    }
+    if (userInfo[0].backgroundUrl !== initialUserInfo.current[0].backgroundUrl) {
+      formData.append('backgroundPicture', userInfo[0].backgroundUrl);
+    }
 
     const res = await modifyUserInfo(userId, formData);
     if (res) navigate(`/users/${userId}`);
