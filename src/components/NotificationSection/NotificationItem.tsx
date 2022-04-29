@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { formatTime } from '@src/utils/format';
 import { Notification } from '@src/queries/types';
-import { NotificationIcon } from '@src/assets/images';
+import { NotificationIcon, SellIcon } from '@src/assets/images';
 
 const Wrapper = styled.div`
   padding: 16px;
@@ -39,14 +39,13 @@ const Date = styled.span`
 `;
 
 function NotificationItem({ data }: { data: Notification }) {
-  const category = data.type === 'Ask' ? '요청' : '판매';
+  const isAsk = data.type === 'Ask';
+
   return (
     <Wrapper>
-      <Icon>
-        <NotificationIcon />
-      </Icon>
+      <Icon>{isAsk ? <NotificationIcon /> : <SellIcon />}</Icon>
       <Content>
-        <Category>{category}</Category>
+        <Category>{isAsk ? '요청' : '판매'}</Category>
         <Detail>{data?.content}</Detail>
         <Date>{formatTime(data.createdAt)}</Date>
       </Content>

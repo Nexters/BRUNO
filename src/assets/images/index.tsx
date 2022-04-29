@@ -24,6 +24,7 @@ import Tutorial03 from './tutorial/tutorial_03.png';
 import { ReactComponent as CameraIcon } from './svg/camera.svg';
 import { ReactComponent as QRIcon } from './svg/qr.svg';
 import { ReactComponent as NotificationIcon } from './svg/notification.svg';
+import { ReactComponent as SellIcon } from './svg/sell.svg';
 
 export {
   MainLogoImage,
@@ -52,4 +53,5 @@ export {
   CameraIcon,
   QRIcon,
   NotificationIcon,
+  SellIcon,
 };
