@@ -67,3 +67,15 @@ export const getUserNotifications = async (userId: number, page?: number) => {
     getErrorStatus(error);
   }
 };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const modifyUserInfo = async (userId: number, userInfo: any) => {
+  try {
+    const { status: resultStatus } = await axios.put(`/users/${userId}`, userInfo, {
+      headers: { 'content-type': 'multipart/form-data' },
+    });
+    if (resultStatus === 200) return true;
+  } catch (error) {
+    getErrorStatus(error);
+  }
+};

@@ -10,10 +10,22 @@ const Container = styled(HeaderContainer)`
   padding: 8px;
   display: flex;
   flex-direction: row;
+  z-index: 10;
 `;
 
 const RightWrapper = styled.div`
   margin-left: auto;
+`;
+
+const LeftWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  -webkit-transform: translateZ(1px);
+  -moz-transform: translateZ(1px);
+  -o-transform: translateZ(1px);
+  transform: translateZ(1px);
 `;
 
 const HeaderTitle = styled.div`
@@ -50,8 +62,10 @@ function SubHeader({ pageType }: Props) {
 
   return (
     <Container>
-      {left && <IconButton icon="right" size={24} noFill onClick={handleClickBack} />}
-      <HeaderTitle>{center}</HeaderTitle>
+      <LeftWrapper>
+        {left && <IconButton icon="right" size={24} noFill onClick={handleClickBack} />}
+        <HeaderTitle>{center}</HeaderTitle>
+      </LeftWrapper>
 
       <RightWrapper>
         {right && pageType === HeaderPage.TUTORIAL && <SkipButton onClick={handleClickSkip}>건너뛰기</SkipButton>}
